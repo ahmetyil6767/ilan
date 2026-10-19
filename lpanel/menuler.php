@@ -605,7 +605,7 @@ if ($panel_sablon=="fullwidth") {
 						<div class="panel-body">
 						<a id="tumunu_sec" style="cursor:pointer;"><?php echo _LANG('p_tumunu_sec'); ?></a>
 						<a id="secimleri_kaldir" style="cursor:pointer;"><?php echo _LANG('p_secimleri_kaldir'); ?></a>
-						<?php form_buton("buton_toplu_update","<?php echo _LANG('p_update_all'); ?>","primary pull-right"); ?></div>
+						<?php form_buton("buton_toplu_update","" . _LANG('p_update_all') . "","primary pull-right"); ?></div>
 						<?php } ?>
 				</div>
 				</form>

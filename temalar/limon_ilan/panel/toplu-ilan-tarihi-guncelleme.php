@@ -41,7 +41,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	$uyeler_seciniz[]=array("deger"=>$id,"baslik"=>$ad_soyad);
 }
 form_group(array("tip"=>"select","id"=>"uye_id","baslik"=>_LANG('p_uye'),"secenekler"=>$uyeler_seciniz,"gerekli"=>1)); 
-form_buton("uye_buton"," . _LANG('tx_uyeye_ait_tum_ilanlarin_tarihini_guncelle') . ");
+form_buton("uye_buton",_LANG('tx_uyeye_ait_tum_ilanlarin_tarihini_guncelle'));
 ?>
 </form>
 
@@ -57,6 +57,6 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	$magaza_seciniz[]=array("deger"=>$id,"baslik"=>$baslik);
 }
 form_group(array("tip"=>"select","id"=>"magaza_id","baslik"=>_LANG('pn_magaza_seciniz'),"secenekler"=>$magaza_seciniz,"gerekli"=>1)); 
-form_buton("magaza_buton"," . _LANG('tx_magazaya_ait_tum_ilanlarin_tarihini_guncelle') . ");
+form_buton("magaza_buton",_LANG('tx_magazaya_ait_tum_ilanlarin_tarihini_guncelle'));
 ?>
 </form>

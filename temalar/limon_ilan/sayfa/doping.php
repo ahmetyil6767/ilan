@@ -313,7 +313,7 @@ tema_header();
 						<?php 
 						$doping_kurallari_sayfasi=link_getir(tema_ayar("doping_kurallari"));
 						form_group(array("tip"=>"checkbox","id"=>"onay","baslik"=>"<a href='$doping_kurallari_sayfasi' target='_blank' style='color:#fff;'>Doping kurallarını</a> okudum, onaylıyorum.","gerekli"=>1));
-						form_buton("buton"," . _LANG('tx_siparis_olustur') . ","primary"); ?>
+						form_buton("buton",_LANG('tx_siparis_olustur'),"primary"); ?>
 					</div>
 				</div>
 			</div>

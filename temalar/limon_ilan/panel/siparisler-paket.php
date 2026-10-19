@@ -49,7 +49,7 @@ if ($onay) {
 	$siparis_uye_email_adresi=getir("uyeler","email_adresi",$siparis_uye_id);
 	$ileti="
 	<p>Merhaba <strong>$siparis_uye_ad_soyad</strong></p>
-	<p><?php echo _LANG('hb_bu_e_posta_uyelik_paketi_siparisinizin_onaylan'); ?></p>
+	<p>" . _LANG('hb_bu_e_posta_uyelik_paketi_siparisinizin_onaylan') . "</p>
 	<p>Siteye giriş yapmak için <a href=\"$site_url/sayfa/giris-yap\">buraya</a> tıklayın.</p>";
 	auto_mail_add($siparis_uye_ad_soyad,$siparis_uye_email_adresi,"Siparişiniz onaylandı! - $mail_baslik",$ileti);	
 	// E-posta gönderimi bitti
@@ -200,9 +200,9 @@ while ($dizi=mysqli_fetch_array($sql)) {
 				$adet=ekstra_bilgi_getir("adet",$guncelle,"siparis");
 				
 				if ($tip=="doping") {
-					$durum_secenekler=options(" . _LANG('tx_pasif_0_onaylandi_1') . ","|",":");
+					$durum_secenekler=options(_LANG('tx_pasif_0_onaylandi_1'),"|",":");
 				} else if ($tip=="get") {
-					$durum_secenekler=options(" . _LANG('tx_pasif_0_tamamlandi_1_odeme_onaylandi_2') . ","|",":");
+					$durum_secenekler=options(_LANG('tx_pasif_0_tamamlandi_1_odeme_onaylandi_2'),"|",":");
 				}
 				
 				
@@ -215,7 +215,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 				<?php form_group(array("tip"=>"text","id"=>"tip","baslik"=>_LANG('pn_siparis_tipi'),"deger"=>$tip,"pasif"=>1)); ?>
 				<?php form_group(array("tip"=>"text","id"=>"tip","baslik"=>"Adet","deger"=>$adet,"pasif"=>1)); ?>
 				<?php form_group(array("tip"=>"select","id"=>"durum","baslik"=>"Durum","deger"=>$durum,"secenekler"=>$durum_secenekler)); ?>
-				<?php form_buton("buton"," . _LANG('tx_guncelle') . ","primary"); ?>
+				<?php form_buton("buton",_LANG('tx_guncelle'),"primary"); ?>
 			
 			
 			</form>

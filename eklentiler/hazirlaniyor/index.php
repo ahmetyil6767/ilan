@@ -1,11 +1,11 @@
 <?php
 $bilgi=array(
-"baslik"=>" . _LANG('tx_hazirlaniyor') . ",
+"baslik"=>_LANG('tx_hazirlaniyor'),
 "versiyon"=>"1.1",
-"aciklama"=>" . _LANG('tx_yapim_asamasinda_sayfasi_olusturur') . ",
+"aciklama"=>_LANG('tx_yapim_asamasinda_sayfasi_olusturur'),
 "fonksiyon"=>"eklenti.php",
 "dokuman"=>"benioku.txt",
-"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici"=>_LANG('tx_goksel_toprak'),
 "gelistirici_url"=>"http://www.limontasarim.com",
 "ayar"=>1,
 );

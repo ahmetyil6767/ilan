@@ -223,7 +223,7 @@ tema_header(); ?>
 							$magaza_kurallari_sayfasi=link_getir(tema_ayar("magaza_kurallari"));
 							form_group(array("tip"=>"checkbox","id"=>"onay","baslik"=>"<a href='$magaza_kurallari_sayfasi' target='_blank'>Mağaza oluşturma ve ilan verme kurallarını</a> okudum, onaylıyorum.","gerekli"=>1));
 							?>
-							<?php form_buton("buton"," . _LANG('tx_magaza_olustur') . ","primary"); ?>
+							<?php form_buton("buton",_LANG('tx_magaza_olustur'),"primary"); ?>
 							</form>
 						</div>
 						<div class="col-md-17">

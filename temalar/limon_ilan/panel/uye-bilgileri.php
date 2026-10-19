@@ -10,7 +10,7 @@ if ($buton) {
 			$email_adresi=$dizi["email_adresi"];
 			$cikti.="$email_adresi\n";
 		}
-	} else if ($bilgi==" . _LANG('tx_telefon_numarasi') . ") {
+	} else if ($bilgi==_LANG('tx_telefon_numarasi')) {
 		$uyeler_sql=mysqli_query($baglan,"select id from uyeler");
 		while ($dizi=mysqli_fetch_array($uyeler_sql)) {
 			$uye_id=$dizi["id"];
@@ -28,11 +28,11 @@ if ($buton) {
 <p><?php echo _LANG('hb_tum_uyelere_ait_e_posta_ve_telefon_numarasi_ka'); ?></p>
 <form action="" method="post" style="margin-bottom:20px;">
 <?php
-form_group(array("id"=>"bilgi","tip"=>"select","baslik"=>"Listelenecek bilgi","secenekler"=>options(" . _LANG('tx_e_posta_adresi_telefon_numarasi') . "),"deger"=>$bilgi));
+form_group(array("id"=>"bilgi","tip"=>"select","baslik"=>"Listelenecek bilgi","secenekler"=>options(_LANG('tx_e_posta_adresi_telefon_numarasi')),"deger"=>$bilgi));
 form_buton("buton","Listele");
 ?>
 </form>
 
 <?php if ($buton and $cikti) {
 form_group(array("id"=>"cikti","tip"=>"textarea","baslik"=>_LANG('pn_cikti'),"satir"=>30,"deger"=>$cikti));
-} else {echo " . _LANG('tx_sonuc_bulunamadi_2') . ";} ?>
+} else {echo _LANG('tx_sonuc_bulunamadi_2');} ?>

@@ -55,7 +55,7 @@ if ($islem=="ilan_ekle_alt_kategoriler") {
 			}
 			echo "<div class='kategori_sec tamam' id='kat-$ust_kat_sayisi'>
 			<i class='ion-android-checkmark-circle'></i>
-			<h3><?php echo _LANG('hb_kategori_secimi_tamamlandi'); ?></h3>
+			<h3>" . _LANG('hb_kategori_secimi_tamamlandi') . "</h3>
 			$devam_url
 			</div>";
 		}
@@ -64,7 +64,7 @@ if ($islem=="ilan_ekle_alt_kategoriler") {
 		echo "<div class='kategori_sec tamam limit' id='kat-$ust_kat_sayisi'>
 		<i class='ion-alert'></i>
 		<h3>Bir sorun var!</h3>
-		<p><?php echo _LANG('hb_bu_kategori_icin_belirlenen_ilan_limitine_ulas'); ?></p>
+		<p>" . _LANG('hb_bu_kategori_icin_belirlenen_ilan_limitine_ulas') . "</p>
 		<p><a href='$profil_url' style='color:#c62828;margin-top:16px;'>Detaylı bilgi</a></p>
 		</div>";		
 	}
@@ -74,7 +74,7 @@ if ($islem=="vitrin_degistir") {
 	$resim_url=$_POST["resim_url"];
 	bilgi_guncelle("gorsel",$resim_url,$icerik_id);
 	galeri_sira_update($resim_url,$icerik_id);
-	echo " . _LANG('tx_vitrin_gorseli_basariyla_guncellenmistir') . ";
+	echo _LANG('tx_vitrin_gorseli_basariyla_guncellenmistir');
 }
 if ($islem=="ornek_breadcrumb") {
 	$kategori=$_POST["id"];
@@ -226,7 +226,7 @@ if ($islem=="iletisim_numaralari") {
 	</div>
 	<form id='iletisim_guncelle_form' action='' method='post' style='margin-top:15px;'>
 		<div class='panel panel-default limon'>
-		<div><?php echo _LANG('hb_iletisim_numaralarini_guncelle'); ?></div>
+		<div>" . _LANG('hb_iletisim_numaralarini_guncelle') . "</div>
 		<div class='panel-body'>
 
 		<div class='form-group'>
@@ -235,17 +235,17 @@ if ($islem=="iletisim_numaralari") {
 				<span class='input-group-addon' style='border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;'>0</span>
 				<input type='text' class='form-control cannot_start_with_zero' id='cep_tel' name='cep_tel' placeholder='Cep Telefonu' value='$cep_tel' style='border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;' required>
 			</div>
-			<p><?php echo _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl'); ?></p>
+			<p>" . _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl') . "</p>
 		</div>
 
 
 		<div class='form-group'>
-			<label><?php echo _LANG('hb_is_telefonu'); ?></label>
+			<label>" . _LANG('hb_is_telefonu') . "</label>
 			<div class='input-group'>
 				<span class='input-group-addon' style='border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;'>0</span>
 				<input type='text' class='form-control cannot_start_with_zero' id='is_tel' name='is_tel' placeholder='İş Telefonu' value='$is_tel' style='border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;'>
 			</div>
-			<p><?php echo _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl'); ?></p>
+			<p>" . _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl') . "</p>
 		</div>
 		
 
@@ -255,7 +255,7 @@ if ($islem=="iletisim_numaralari") {
 				<span class='input-group-addon' style='border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;'>0</span>
 				<input type='text' class='form-control cannot_start_with_zero' id='ev_tel' name='ev_tel' placeholder='Ev Telefonu' value='$ev_tel' style='border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;'>
 			</div>
-			<p><?php echo _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl'); ?></p>
+			<p>" . _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl') . "</p>
 		</div>
 		
 		</div>		
@@ -544,9 +544,9 @@ if ($islem=="sikayet_gonder") {
 		";
 	} else {
 		if ($ad_soyad and !$mesaj) {
-			$mesaj_yaz=" . _LANG('tx_lutfen_sikayet_sebebinizi_belirtiniz') . ";
+			$mesaj_yaz=_LANG('tx_lutfen_sikayet_sebebinizi_belirtiniz');
 		} else if (!$ad_soyad and !$mesaj) {
-			$mesaj_yaz=" . _LANG('tx_lutfen_ad_soyad_ve_mesaj_alanlarini_doldurunuz') . ";
+			$mesaj_yaz=_LANG('tx_lutfen_ad_soyad_ve_mesaj_alanlarini_doldurunuz');
 		}
 		echo "
 		<div class='alert alert-danger autoclose'>
@@ -813,7 +813,7 @@ if ($islem=="odeme_bildirimi") {
 	$site_url=site_url();
 	$lp_uye_ad_soyad=getir("uyeler","ad_soyad",$uye_id);
 	$lp_link=site_url()."/$admin_dizini/temalar.php?tema=ilan&sayfa=panel&islem=odemeler";
-	if (!$mesaj) {$ileti_mesaj=" . _LANG('tx_not_yazilmadi') . ";} else {
+	if (!$mesaj) {$ileti_mesaj=_LANG('tx_not_yazilmadi');} else {
 		$ileti_mesaj=$mesaj;
 	}
 	$ileti_admin="
@@ -839,13 +839,13 @@ if ($islem=="video_onizleme") {
 		$video_id=youtube_video_id($video_url);
 		if ($video_id) {
 		echo "
-		<label><?php echo _LANG('hb_video_onizleme'); ?></label>
+		<label>" . _LANG('hb_video_onizleme') . "</label>
 		<div class='embed-responsive embed-responsive-16by9 player mb15' itemprop='trailer'>
 			<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/$video_id?showinfo=0&amp;autoplay=0&amp;loop=1' frameborder='0' allowfullscreen></iframe>
 		</div>
 		";
 		} else {
-			echo " . _LANG('tx_gecerli_bir_video_url_si_giriniz') . ";
+			echo _LANG('tx_gecerli_bir_video_url_si_giriniz');
 		}
 	}
 }
@@ -1313,14 +1313,14 @@ if ($islem=="galeri_sira_update") {
 			if ($x==1) {
 				bilgi_guncelle("gorsel",$tek_resim_full_url,$icerik_id);
 			}		
-			if ($guncelle) {echo " . _LANG('tx_sira_guncellendi') . ";}
+			if ($guncelle) {echo _LANG('tx_sira_guncellendi');}
 		} else {
 			if ($x==1) {
 				$guncelle=mysqli_query($baglan,"update ajax_upload set sira='$tek_resim_sira', vitrin='1' where url='$tek_resim_full_url' and uye_id='$uye_id' and kat='$kat'");
 			} else {
 				$guncelle=mysqli_query($baglan,"update ajax_upload set sira='$tek_resim_sira', vitrin='0' where url='$tek_resim_full_url' and uye_id='$uye_id' and kat='$kat'");
 			}
-			if ($guncelle) {echo " . _LANG('tx_sira_guncellendi') . ";}
+			if ($guncelle) {echo _LANG('tx_sira_guncellendi');}
 		}
 	$x++;}
 

@@ -156,7 +156,7 @@ foreach ($kategoriler as $kat) {
 								$m2_fiyati=fiyat_donustur($fiyat_toplam/$deger);
 								echo "
 								<tr>
-									<th><?php echo _LANG('hb_metrekare_fiyati'); ?></th>
+									<th>" . _LANG('hb_metrekare_fiyati') . "</th>
 									<td>$m2_fiyati <i class='fa fa-try'></i></td>
 								</tr>";										
 							}

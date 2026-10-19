@@ -1,6 +1,6 @@
 <?php
 if(count(get_included_files())==1) {die();}
-$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_site_tasima_araci') . ","url"=>"eklentiler.php?eklenti=site_tasima_araci&sayfa=islem","ikon"=>"refresh","sira"=>1000);
+$limonpanel_menu[]=array("baslik"=>_LANG('tx_site_tasima_araci'),"url"=>"eklentiler.php?eklenti=site_tasima_araci&sayfa=islem","ikon"=>"refresh","sira"=>1000);
 
 
 function site_tasima_araci_gorsel() {

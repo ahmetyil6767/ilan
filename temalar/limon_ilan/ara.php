@@ -297,7 +297,7 @@ tema_header(); ?>
 					<div class="panel-heading">Adres</div>
 					<div class="panel-body">
 						<?php $bolgesel=tema_ayar("bolgesel"); if ($bolgesel=="Hayır") { ?>
-						<div id="il_sec" style="margin-bottom:10px;"><?php no_flash_select(" . _LANG('tx_il_seciniz') . "); ?></div>
+						<div id="il_sec" style="margin-bottom:10px;"><?php no_flash_select(_LANG('tx_il_seciniz')); ?></div>
 						<?php } ?>
 						<div id="ilce_sec" style="margin-bottom:10px;"></div>
 						<div id="mahalle_sec"></div>

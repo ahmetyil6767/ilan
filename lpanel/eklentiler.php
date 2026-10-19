@@ -219,10 +219,10 @@ $panel_sablon=ayar_getir("panel_sablon");
 						$eklenti_durum=eklenti_durum($eklenti);
 						$hata="";
 						if (!file_exists("../$eklentiler_dizini/$eklenti/$fonksiyon")) {
-							$hata="<?php echo _LANG('p_plugin_function_not_found'); ?>";
+							$hata="" . _LANG('p_plugin_function_not_found') . "";
 						}
 					} else {
-						$hata="<?php echo _LANG('p_plugin_info_not_found'); ?>";
+						$hata="" . _LANG('p_plugin_info_not_found') . "";
 					}
 					?>
 						<tr <?php if ($hata!="") {echo "class='warning'";} ?>> 
@@ -389,7 +389,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 						echo $grup_kapat_kod;
 						} 
 						echo "</div>";
-						form_buton("buton","<?php echo _LANG('p_ayarlar_kaydet'); ?>","primary");
+						form_buton("buton","" . _LANG('p_ayarlar_kaydet') . "","primary");
 						} else {echo _LANG('p_eklenti_ayar_yok');}?>			
 						<?php form_elemani("hidden","aktif_tab","Aktif Tab"); ?>
 						</form>

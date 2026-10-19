@@ -88,7 +88,7 @@ tema_header(); ?>
 				if ($magaza_uye_sayisi-$magaza_temsilci_limiti==0) {
 					echo "<div class='alert alert-info'>
 					<p>Mağaza paketiniz için belirlenmiş satış danışmanı limiti: $magaza_temsilci_limiti</p>
-					<p><?php echo _LANG('hb_satis_danismani_ekleyebilmek_icin_lutfen_magaz'); ?></p>
+					<p>" . _LANG('hb_satis_danismani_ekleyebilmek_icin_lutfen_magaz') . "</p>
 					</div>";
 				}
 			
@@ -143,7 +143,7 @@ tema_header(); ?>
 			<?php if ($magaza_uye_sayisi-$magaza_temsilci_limiti==0) {
 				echo "<div class='alert alert-info'>
 				<p>Mağaza paketiniz için belirlenmiş satış danışmanı limiti: $magaza_temsilci_limiti</p>
-				<p><?php echo _LANG('hb_satis_danismani_ekleyebilmek_icin_lutfen_magaz'); ?></p>
+				<p>" . _LANG('hb_satis_danismani_ekleyebilmek_icin_lutfen_magaz') . "</p>
 				</div>";
 			} else { ?>
 			<div class="panel panel-default limon">
@@ -155,7 +155,7 @@ tema_header(); ?>
 							<form action="" method="post">
 							<?php form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"E-posta Adresi","gerekli"=>1,"aciklama"=>_LANG('s_temsilci_eposta'))); ?>
 							<?php form_group(array("tip"=>"password","id"=>"parola","baslik"=>"Parola","gerekli"=>1,"aciklama"=>_LANG('s_danisman_sifre'))); ?>
-							<?php form_buton("buton"," . _LANG('tx_danisman_ekle') . ","primary"); ?>
+							<?php form_buton("buton",_LANG('tx_danisman_ekle'),"primary"); ?>
 							</form>
 						</div>
 					</div>

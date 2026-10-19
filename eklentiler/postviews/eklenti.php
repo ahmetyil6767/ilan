@@ -1,6 +1,6 @@
 <?php
 if(count(get_included_files())==1) {die();}
-$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_postviews_raporlari') . ","url"=>"eklentiler.php?eklenti=postviews&sayfa=rapor","ikon"=>"eye","sira"=>51);
+$limonpanel_menu[]=array("baslik"=>_LANG('tx_postviews_raporlari'),"url"=>"eklentiler.php?eklenti=postviews&sayfa=rapor","ikon"=>"eye","sira"=>51);
 
 if (mysqli_num_rows(mysqli_query($baglan,"SHOW TABLES LIKE '%postviews%'"))==0) {
 	mysqli_query($baglan,"

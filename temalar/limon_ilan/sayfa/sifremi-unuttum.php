@@ -55,7 +55,7 @@ tema_header(); ?>
 							$mail_ad_soyad=getir("uyeler","ad_soyad",$uye_id);
 							$ileti="
 							<p>Merhaba <strong>$mail_ad_soyad</strong></p>
-							<p><?php echo _LANG('hb_sifrenizi_sifirlamak_icin_lutfen_asagidaki_lin'); ?></p>
+							<p>" . _LANG('hb_sifrenizi_sifirlamak_icin_lutfen_asagidaki_lin') . "</p>
 							<p>Doğrulama anahtarı: $gecici_dogrulama_kodu</p>
 							<p><a href=\"$site_url/sayfa/sifremi-unuttum/?email=$email_adresi&dogrulama=$gecici_dogrulama_kodu\">Yeni Şifre Oluştur</a></p>";
 							auto_mail_add($mail_baslik,$email_adresi,"Şifre Sıfırlama Onayı - $mail_baslik",$ileti);	
@@ -104,7 +104,7 @@ tema_header(); ?>
 							$mail_ad_soyad=getir("uyeler","ad_soyad",$uye_id);
 							$ileti="
 							<p>Merhaba <strong>$mail_ad_soyad</strong></p>
-							<p><?php echo _LANG('hb_sifrenizi_sifirlamak_icin_lutfen_asagidaki_lin'); ?></p>
+							<p>" . _LANG('hb_sifrenizi_sifirlamak_icin_lutfen_asagidaki_lin') . "</p>
 							<p>Doğrulama anahtarı: $gecici_dogrulama_kodu</p>
 							<p><a href=\"$site_url/sayfa/sifremi-unuttum/?email=$email_adresi&dogrulama=$gecici_dogrulama_kodu\">Yeni Şifre Oluştur</a></p>";
 	auto_mail_add($ad_soyad,$email_adresi,_LANG("su_sifre_sifirlama_onayi", array($mail_baslik)),$ileti);

@@ -39,6 +39,6 @@ if ($_POST["buton"]) {
 form_group(array("id"=>"ilan_baslik","tip"=>"text","baslik"=>_LANG('listing_title'),"deger"=>getir("icerik","baslik",$ilan_id),"pasif"=>1));
 form_group(array("id"=>"uye_adi","tip"=>"text","baslik"=>_LANG('listing_owner'),"deger"=>getir("uyeler","ad_soyad",getir("icerik","yazar",$ilan_id)),"pasif"=>1));
 form_group(array("id"=>"sebep","tip"=>"textarea","baslik"=>"Sebep"));
-form_buton("buton"," . _LANG('tx_ilani_reddet') . ");
+form_buton("buton",_LANG('tx_ilani_reddet'));
 ?>
 </form>

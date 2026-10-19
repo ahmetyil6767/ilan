@@ -78,7 +78,7 @@ tema_header(); ?>
 			<?php 
 			$magaza_hakkinda=magaza_bilgi("hakkinda",$id); 
 			if (!$magaza_hakkinda) {
-				$magaza_hakkinda=" . _LANG('tx_magaza_hakkinda_bilgi_girilmemis') . ";
+				$magaza_hakkinda=_LANG('tx_magaza_hakkinda_bilgi_girilmemis');
 			}
 			
 			$magaza_tel=magaza_bilgi("magaza_tel",$id); 

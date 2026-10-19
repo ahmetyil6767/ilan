@@ -238,7 +238,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 				$tip=getir("siparisler","tip",$guncelle);
 				$durum=getir("siparisler","durum",$guncelle);
 				$adet=ekstra_bilgi_getir("adet",$guncelle,"siparis");
-				$durum_secenekler=options(" . _LANG('tx_odeme_bekleniyor_0_odeme_onaylandi_2_tamamland') . ","|",":");
+				$durum_secenekler=options(_LANG('tx_odeme_bekleniyor_0_odeme_onaylandi_2_tamamland'),"|",":");
 				?>
 			
 				<?php form_group(array("tip"=>"text","id"=>"id","baslik"=>_LANG('pn_siparis_id'),"deger"=>$guncelle,"pasif"=>1)); ?>
@@ -247,7 +247,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 				<?php form_group(array("tip"=>"text","id"=>"ilan","baslik"=>_LANG('search_found_ads'),"deger"=>getir("icerik","baslik",$ilan_id),"pasif"=>1)); ?>
 				<?php form_group(array("tip"=>"text","id"=>"adet","baslik"=>"Adet","deger"=>$adet,"pasif"=>1)); ?>
 				<?php form_group(array("tip"=>"select","id"=>"durum","baslik"=>"Durum","deger"=>$durum,"secenekler"=>$durum_secenekler)); ?>
-				<?php form_buton("buton"," . _LANG('tx_guncelle') . ","primary"); ?>
+				<?php form_buton("buton",_LANG('tx_guncelle'),"primary"); ?>
 			
 			
 			</form>

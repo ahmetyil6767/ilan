@@ -91,7 +91,7 @@ tema_header(); ?>
 							form_group(array("tip"=>"select","id"=>"paket","baslik"=>_LANG('s_paket_seciniz'),"secenekler"=>$paket_seciniz,"deger"=>$paket));
 							
 							form_group(array("tip"=>"checkbox","id"=>"onay","baslik"=>_LANG('s_magaza_paket_onay'),"gerekli"=>1));
-							form_buton("buton"," . _LANG('tx_siparis_olustur') . ","primary");							
+							form_buton("buton",_LANG('tx_siparis_olustur'),"primary");							
 							?>
 							</form>
 						</div>

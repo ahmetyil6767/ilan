@@ -1,7 +1,7 @@
 <?php if(count(get_included_files())==1) {die();} ?>
 <div class="btn-group btn-group-justified mb15" role="group" aria-label="...">
 	<a href="<?php echo ozel_url("ilan-ekle"); ?>?ilan=<?php echo $id; ?>" class="btn btn-primary" title="İlanı güncelle"><i class="ion-refresh mr0"></i><br /><?php echo _LANG("general_update"); ?></a>
-	<a href="<?php echo ozel_url("doping"); ?>?ilan_id=<?php echo $id; ?>" class="btn btn-default" title=" . _LANG('tx_doping_satin_al') . "><i class="fa fa-rocket mr0"></i><br />Doping</a>
+	<a href="<?php echo ozel_url("doping"); ?>?ilan_id=<?php echo $id; ?>" class="btn btn-default" title="<?php echo _LANG('tx_doping_satin_al'); ?>"><i class="fa fa-rocket mr0"></i><br />Doping</a>
 	<?php if ($durum==1) { ?>
 		<div class="btn-group" role="group">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret ml0"></span><br /><?php echo _LANG("pn_diger"); ?></button>

@@ -243,22 +243,22 @@ $panel_sablon=ayar_getir("panel_sablon");
 			"lengthMenu": [ 15, 25, 50, 100 ],
 			"language": {
 				"decimal":        "",
-				"emptyTable":     " . _LANG("p_no_result") . ",
+				"emptyTable":     "<?php echo _LANG("p_no_result"); ?>",
 				"info":           "Toplam _TOTAL_ tema bulundu",
-				"infoEmpty":      " . _LANG("p_gosterilecek_yok") . ",
+				"infoEmpty":      "<?php echo _LANG("p_gosterilecek_yok"); ?>",
 				"infoFiltered":   "(_MAX_ toplam temadan)",
 				"infoPostFix":    "",
 				"thousands":      ",",
-				"lengthMenu":     " . _LANG("p_gosterilecek_kayit") . ",
-				"loadingRecords": " . _LANG("p_yukleniyor") . ",
-				"processing":     " . _LANG("p_isleniyor") . ",
+				"lengthMenu":     "<?php echo _LANG("p_gosterilecek_kayit"); ?>",
+				"loadingRecords": "<?php echo _LANG("p_yukleniyor"); ?>",
+				"processing":     "<?php echo _LANG("p_isleniyor"); ?>",
 				"search":         "<?php echo _LANG("search"); ?>:",
-				"zeroRecords":    " . _LANG("p_no_theme_matching") . ",
+				"zeroRecords":    "<?php echo _LANG("p_no_theme_matching"); ?>",
 				"paginate": {
-					"first":      " . _LANG("p_ilk") . ",
+					"first":      "<?php echo _LANG("p_ilk"); ?>",
 					"last":       "<?php echo _LANG("p_son"); ?>",
 					"next":       "<?php echo _LANG("p_sonraki"); ?>",
-					"previous":   " . _LANG("p_onceki") . "			
+					"previous":   "<?php echo _LANG("p_onceki"); ?>"			
 			}
 			}
 		});

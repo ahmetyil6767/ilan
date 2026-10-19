@@ -64,7 +64,7 @@ function resimsiz_listeleme($id) {
 	<?php } ?>
 	</ul>
 	<?php } else {
-		echo " . _LANG('tx_ilan_bulunamadi') . ";
+		echo _LANG('tx_ilan_bulunamadi');
 	}
 	?>
 	</div>

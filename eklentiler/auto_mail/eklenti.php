@@ -1,6 +1,6 @@
 <?php
 if(count(get_included_files())==1) {die();}
-$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_gonderilen_mailler') . ","url"=>"eklentiler.php?eklenti=auto_mail&sayfa=rapor","ikon"=>"send","sira"=>100);
+$limonpanel_menu[]=array("baslik"=>_LANG('tx_gonderilen_mailler'),"url"=>"eklentiler.php?eklenti=auto_mail&sayfa=rapor","ikon"=>"send","sira"=>100);
 
 $auto_mail_tablo=mysqli_num_rows(mysqli_query($baglan,"SHOW TABLES LIKE '%auto_mail%'"));
 if ($auto_mail_tablo==0) {

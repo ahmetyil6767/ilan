@@ -90,7 +90,7 @@ if ($buton) {
 		}			
 		form_group(array("tip"=>"text","id"=>"sayfa_cache_sure","baslik"=>_LANG('pn_diger_acil_acil_son_24_saat_vs_cache_suresi_dakika_onerilen_120_dakika'),"deger"=>$sayfa_cache_sure));
 
-		form_buton("buton"," . _LANG('tx_guncelle') . ","primary");
+		form_buton("buton",_LANG('tx_guncelle'),"primary");
 		?>
 		</form>	
 	</div>

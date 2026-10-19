@@ -5,7 +5,7 @@ $bilgi=array(
 "aciklama"=>"Sahibinden konsept gelişmiş ilan sistemi",
 "fonksiyon"=>"fonksiyonlar.php",
 "dokuman"=>"benioku.txt",
-"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici"=>_LANG('tx_goksel_toprak'),
 "gelistirici_url"=>"http://www.limontasarim.com",
 "ayar"=>1,
 );

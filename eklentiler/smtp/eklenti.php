@@ -37,7 +37,7 @@ function mail_gonder($ad_soyad,$email_adresi,$baslik,$mesaj,$debug=null) {
 	}
 }
 
-$hizli_linkler[]=array("baslik"=>" . _LANG('tx_e_posta_gonder') . ","url"=>"eklentiler.php?eklenti=smtp&sayfa=mail","ikon"=>"send-o","sira"=>150);
-$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_smtp_mail_ayarlari') . ","url"=>"eklentiler.php?eklenti=smtp&islem=ayar","ikon"=>"envelope-o","sira"=>51);
+$hizli_linkler[]=array("baslik"=>_LANG('tx_e_posta_gonder'),"url"=>"eklentiler.php?eklenti=smtp&sayfa=mail","ikon"=>"send-o","sira"=>150);
+$limonpanel_menu[]=array("baslik"=>_LANG('tx_smtp_mail_ayarlari'),"url"=>"eklentiler.php?eklenti=smtp&islem=ayar","ikon"=>"envelope-o","sira"=>51);
 
 ?>

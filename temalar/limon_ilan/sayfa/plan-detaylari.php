@@ -136,7 +136,7 @@ tema_header(); ?>
 							form_group(array("tip"=>"text","id"=>"paket_bitis_tarihi","baslik"=>_LANG('s_paket_bitis'),"deger"=>uye_bilgi("paket_bitis_tarihi",$oturum_id),"pasif"=>1));
 							form_group(array("tip"=>"select","id"=>"paket","baslik"=>"Paket","secenekler"=>$paket_seciniz,"deger"=>uye_bilgi("paket",$oturum_id)));
 							form_group(array("tip"=>"checkbox","id"=>"onay","baslik"=>_LANG('s_uyelik_paket_onay'),"gerekli"=>1));
-							form_buton("buton"," . _LANG('tx_siparis_olustur') . ","primary");
+							form_buton("buton",_LANG('tx_siparis_olustur'),"primary");
 							?>
 							</form>
 						</div>

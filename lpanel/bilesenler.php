@@ -286,7 +286,7 @@ if ($panel_sablon=="fullwidth") {
 								<tr <?php if ($id==$l_id) {echo "class='success'";} ?>>
 									<th><?php echo $l_id; ?></th>
 									<td><?php echo $l_bilesen; ?></td>
-									<td><?php if ($l_baslik) {echo $l_baslik;} else {echo "<span class='text-muted'><?php echo _LANG('p_unnamed'); ?></span>";} ?></td>
+									<td><?php if ($l_baslik) {echo $l_baslik;} else {echo "<span class='text-muted'>" . _LANG('p_unnamed') . "</span>";} ?></td>
 									<td><?php echo $l_sira; ?></td>
 									<td>
 										<!-- Split button -->
@@ -340,7 +340,7 @@ if ($panel_sablon=="fullwidth") {
 								echo "</ul>";
 								?>
 								<div class="panel panel-default" style="border-top:0;border-radius:0;box-shadow:none;">
-								<?php if ($tab_sayisi==0) {echo "<div class='panel-heading'><?php echo _LANG('p_component_settings'); ?></div>"; } ?>
+								<?php if ($tab_sayisi==0) {echo "<div class='panel-heading'>" . _LANG('p_component_settings') . "</div>"; } ?>
 								<div class="panel-body">
 								<?php
 								echo "<div class='tab-content'>";
@@ -464,7 +464,7 @@ if ($panel_sablon=="fullwidth") {
 							</div>
 							<?php } ?>	
 							<button type="submit" name="guncelle_buton" class="btn btn-primary" value="<?php echo _LANG('general_update'); ?>"><i class="fa fa-pencil"></i><?php echo _LANG('p_guncelle'); ?></button>						
-							<button type="submit" name="sil_buton" class="btn btn-danger pull-right" value="<?php echo _LANG('gen_delete'); ?>" onclick="return confirm(_LANG('p_component_remove_confirm'))"><i class="fa fa-trash"></i><?php echo _LANG('p_sil'); ?></button>
+							<button type="submit" name="sil_buton" class="btn btn-danger pull-right" value="<?php echo _LANG('gen_delete'); ?>" onclick="return confirm('<?php echo _LANG('p_component_remove_confirm'); ?>')"><i class="fa fa-trash"></i><?php echo _LANG('p_sil'); ?></button>
 						</div>
 					</div>
 				</form>
@@ -510,7 +510,7 @@ if ($panel_sablon=="fullwidth") {
 								<tr <?php if (isset($id) and $id==$l_id) {echo "class='success'";} ?>>
 									<th><?php echo $l_id; ?></th>
 									<td><?php echo $l_bilesen; ?></td>
-									<td><?php if ($l_baslik) {echo $l_baslik;} else {echo "<span class='text-muted'><?php echo _LANG('p_unnamed'); ?></span>";} ?></td>
+									<td><?php if ($l_baslik) {echo $l_baslik;} else {echo "<span class='text-muted'>" . _LANG('p_unnamed') . "</span>";} ?></td>
 									<td><?php echo $l_sira; ?></td>
 									<td>
 										<!-- Split button -->
@@ -543,7 +543,7 @@ if ($panel_sablon=="fullwidth") {
 							</div>
 							<?php if ($bilesen_aciklama) { ?><p><?php echo $bilesen_aciklama; ?> </p><?php } ?>
 							</div>
-					<?php } } else {echo "<div class='alert alert-danger'><?php echo _LANG('p_no_component_to_add'); ?></div>";} ?>
+					<?php } } else {echo "<div class='alert alert-danger'>" . _LANG('p_no_component_to_add') . "</div>";} ?>
 				</div>
 			</div>
 			<?php } ?>

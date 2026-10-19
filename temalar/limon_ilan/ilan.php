@@ -407,7 +407,7 @@ tema_header(); ?>
 											$m2_fiyati=fiyat_donustur($fiyat_toplam/$deger);
 											echo "
 											<tr>
-												<th><?php echo _LANG('hb_metrekare_fiyati'); ?></th>
+												<th>" . _LANG('hb_metrekare_fiyati') . "</th>
 												<td>$m2_fiyati <i class='fa fa-try'></i></td>
 											</tr>";										
 										}
@@ -519,7 +519,7 @@ tema_header(); ?>
 							</div>
 							<?php } ?>
 							</div>
-							<?php } else {echo " . _LANG('tx_benzer_ilan_bulunamadi') . ";} } else {echo " . _LANG('tx_benzer_ilan_bulunamadi') . ";} ?>
+							<?php } else {echo _LANG('tx_benzer_ilan_bulunamadi');} } else {echo _LANG('tx_benzer_ilan_bulunamadi');} ?>
 							</div>
 						</div>
 					</div>
@@ -806,11 +806,11 @@ tema_header(); ?>
 		<div id="mesaj_gizle">
 			 <div class="form-group">
 				<label><?php echo _LANG('hb_ilan_basligi'); ?></label>
-				<input type="text" class="form-control" id="gonderilecek" name="gonderilecek" placeholder=" . _LANG('tx_gonderilecek_kisi') . " value="<?php echo getir("icerik","baslik"); ?>" disabled>
+				<input type="text" class="form-control" id="gonderilecek" name="gonderilecek" placeholder="<?php echo _LANG('tx_gonderilecek_kisi'); ?>" value="<?php echo getir("icerik","baslik"); ?>" disabled>
 			 </div>
 			 <div class="form-group">
 				<label for="kime">Gönderilecek Kişi <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-				<input type="text" class="form-control" id="gonderilecek" name="gonderilecek" placeholder=" . _LANG('tx_gonderilecek_kisi') . " value="<?php echo getir("uyeler","ad_soyad",$yazar); ?>" disabled>
+				<input type="text" class="form-control" id="gonderilecek" name="gonderilecek" placeholder="<?php echo _LANG('tx_gonderilecek_kisi'); ?>" value="<?php echo getir("uyeler","ad_soyad",$yazar); ?>" disabled>
 			 </div>
 			 <div class="form-group">
 				<label for="mesaj">Mesajınız <span style="color:#e74c3c;margin-left:3px;">*</span></label>
@@ -896,14 +896,14 @@ $video_id=youtube_video_id($video_url);
         <h4><?php echo _LANG('hb_siparis_formu'); ?></h4>
       </div>
       <div class="modal-body">
-		<?php form_group(array("tip"=>"text","id"=>"urun","baslik"=>" . _LANG('tx_ilan_basligi') . ","deger"=>getir("icerik","baslik",$id),"pasif"=>1)); ?>
+		<?php form_group(array("tip"=>"text","id"=>"urun","baslik"=>_LANG('tx_ilan_basligi'),"deger"=>getir("icerik","baslik",$id),"pasif"=>1)); ?>
 
 		<div id="form_adet" class="form-group">
 			<label for="adet">Adet <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 			<input type="number" class="form-control" id="adet" name="adet" placeholder="Adet" value="1" max="<?php echo $stok; ?>" required="">
 		</div>
 		  
-		<?php form_group(array("tip"=>"textarea","id"=>"not","baslik"=>" . _LANG('tx_siparis_notu') . ","satir"=>3)); ?>
+		<?php form_group(array("tip"=>"textarea","id"=>"not","baslik"=>_LANG('tx_siparis_notu'),"satir"=>3)); ?>
 		<?php 
 		$cep_tel=uye_bilgi("cep_tel",$oturum_id);
 		$is_tel=uye_bilgi("is_tel",$oturum_id);

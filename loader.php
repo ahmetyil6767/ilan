@@ -76,7 +76,7 @@ if (!strstr($_SERVER["REQUEST_URI"], "/kurulum.php") and ayar_getir("site_url")=
     if (!strstr($script_name, "/kurulum.php") and browser_url()!=$kurulum_url and file_exists(ROOT_DIR."/kurulum.php")) {
 		yonlendir($kurulum_url);
 	} else {
-		hata(" . _LANG('tx_mysql_sunucusu_ulasilabilir_degil_lutfen_birka') . ");
+		hata(_LANG('tx_mysql_sunucusu_ulasilabilir_degil_lutfen_birka'));
 		exit();
 	}
 }
@@ -165,13 +165,13 @@ if (strstr(browser_url(), "/$admin_dizini/")) {
 	yetki_kontrol();
 	$tema_menu_sayisi=count($tema_menuleri);
 	if ($tema_menu_sayisi>0) {
-		$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_menuler') . ","url"=>"menuler.php","ikon"=>"link","sira"=>35,"yetki"=>"admin");
+		$limonpanel_menu[]=array("baslik"=>_LANG('tx_menuler'),"url"=>"menuler.php","ikon"=>"link","sira"=>35,"yetki"=>"admin");
 	}
 	if ($tema_destegi==1) {
 		$limonpanel_menu[]=array("baslik"=>"Temalar","url"=>"temalar.php","ikon"=>"tv","sira"=>45,"yetki"=>"admin");
 	}
 	if (count($bilesen_alani)) {
-		$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_bilesenler') . ","url"=>"bilesenler.php","ikon"=>"window-restore","sira"=>40,"yetki"=>"admin");
+		$limonpanel_menu[]=array("baslik"=>_LANG('tx_bilesenler'),"url"=>"bilesenler.php","ikon"=>"window-restore","sira"=>40,"yetki"=>"admin");
 	}
 	if (count($liste)) {
 		$limonpanel_menu[]=array("baslik"=>"Listeler","url"=>"listeler.php","ikon"=>"list-ul","sira"=>42,"yetki"=>"admin");
@@ -181,14 +181,14 @@ if (strstr(browser_url(), "/$admin_dizini/")) {
 		$hizli_linkler[]=array("baslik"=>"Hata Raporları <div class='badge'>$sistem_hata_sayisi</div>","url"=>"bildirimler.php?tip=hata","ikon"=>"code","sira"=>1000,"yetki"=>"admin");
 	}
 	if (ayar("sistem_guncellemeleri")!="0") {
-		$limonpanel_menu[]=array("baslik"=>" . _LANG('tx_sistem_guncellemeleri') . ","url"=>"guncellemeler.php","ikon"=>"refresh","sira"=>5000,"yetki"=>"admin");
+		$limonpanel_menu[]=array("baslik"=>_LANG('tx_sistem_guncellemeleri'),"url"=>"guncellemeler.php","ikon"=>"refresh","sira"=>5000,"yetki"=>"admin");
 	}
 	if (ayar("bakim_modu")==1) {
 		$panel_header_alt_kod[]="<div class='alert alert-danger' style='border-radius:0 !important;margin-bottom:0 !important;'><i class='fa fa-exclamation'></i>Dikkat! Bakım modu açık olduğu için sitenize erişilemez. Bakım modunu kapatmak için <a href='ayarlar.php' class='alert-link' style='color:#fff;'>Ayarlar</a> sayfasına göz atın.</div>";
 	}
 } else {
 	if (ayar("bakim_modu")==1) {
-		die(" . _LANG('tx_daha_iyi_bir_kullanici_deneyimi_icin_sistemimi') . ");
+		die(_LANG('tx_daha_iyi_bir_kullanici_deneyimi_icin_sistemimi'));
 	}
 }
 

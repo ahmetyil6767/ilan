@@ -192,7 +192,7 @@ $(function(){
 	});
 	
 	$("body").on("click","#gorusme_sil",function(){
-		var onay=confirm(" . _LANG('tx_gorusmeyi_sonlandirmak_istediginizden_emin_mis') . ");
+		var onay=confirm("<?php echo _LANG('tx_gorusmeyi_sonlandirmak_istediginizden_emin_mis'); ?>");
 		if (onay==true) {
 			var gorusme_id=$(this).val();
 			$.ajax({
@@ -206,7 +206,7 @@ $(function(){
 		}
 	});
 	$("body").on("click","#gorusme_sil_detay",function(){
-		var onay=confirm(" . _LANG('tx_gorusmeyi_sonlandirmak_istediginizden_emin_mis') . ");
+		var onay=confirm("<?php echo _LANG('tx_gorusmeyi_sonlandirmak_istediginizden_emin_mis'); ?>");
 		if (onay==true) {
 			var gorusme_id=$(this).val();
 			$.ajax({

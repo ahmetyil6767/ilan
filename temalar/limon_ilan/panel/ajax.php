@@ -163,7 +163,7 @@ if ($islem=="vitrin_degistir") {
 	$icerik_id=$_POST["icerik_id"];
 	$resim_url=$_POST["resim_url"];
 	bilgi_guncelle("gorsel",$resim_url,$icerik_id);
-	echo " . _LANG('tx_vitrin_gorseli_basariyla_guncellenmistir') . ";
+	echo _LANG('tx_vitrin_gorseli_basariyla_guncellenmistir');
 }
 
 ?>

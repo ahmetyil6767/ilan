@@ -68,7 +68,7 @@ tema_header(); ?>
 						$site_url=site_url();		
 						$ileti="
 						<p>Merhaba <strong>$ad_soyad</strong></p>
-						<p><?php echo _LANG('hb_web_sitemize_hos_geldiniz_sonraki_ziyaretlerin'); ?></p>
+						<p>" . _LANG('hb_web_sitemize_hos_geldiniz_sonraki_ziyaretlerin') . "</p>
 						<p>E-posta adresi: $email_adresi<br />Parola: $parola</p>
 						<p>Siteye giriş yapmak için <a href=\"$site_url/sayfa/giris-yap\">buraya</a> tıklayın.</p>";
 						auto_mail_add($ad_soyad,$email_adresi,"$mail_baslik - Hoşgeldiniz, $ad_soyad",$ileti);	
@@ -96,9 +96,9 @@ tema_header(); ?>
 								
 							$ileti="
 							<p>Merhaba <strong>$ad_soyad</strong></p>
-							<p><?php echo _LANG('hb_web_sitemizin_tum_islevlerinden_faydalanmak_ic'); ?></p>
+							<p>" . _LANG('hb_web_sitemizin_tum_islevlerinden_faydalanmak_ic') . "</p>
 							<p><a href=\'$email_dogrulama_url\' target=\'_blank\'>E-posta adresinizi doğrulamak için tıklayın.</a></p>
-							<p><?php echo _LANG('hb_baglanti_acilmiyorsa_lutfen_asagidaki_url_yi_k'); ?></p>
+							<p>" . _LANG('hb_baglanti_acilmiyorsa_lutfen_asagidaki_url_yi_k') . "</p>
 							<p>$email_dogrulama_url</p>
 							";
 							auto_mail_add($ad_soyad,$email_adresi,"E-posta adresinizi doğrulayın - $mail_baslik",$ileti);	

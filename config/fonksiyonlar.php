@@ -682,9 +682,9 @@ function alt_kategori_listele($kategori_id, $padding = 10, $tip = null, $sinif_n
 			echo $sinif_name;
 			echo '&islem=guncelle&id=';
 			echo $id;
-			echo '" class="btn btn-xs btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo _LANG("f_guncelle"); ?></a>' . "\n\t\t\t\t" . '  <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . "\n\t\t\t\t\t" . '<span class="caret"></span>' . "\n\t\t\t\t\t" . '<span class="sr-only">Toggle Dropdown</span>' . "\n\t\t\t\t" . '  </button>' . "\n\t\t\t\t" . '  <ul class="dropdown-menu">' . "\n\t\t\t\t\t" . '<li><a href="';
+			echo '" class="btn btn-xs btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i>' . _LANG("f_guncelle") . '</a>' . "\n\t\t\t\t" . '  <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' . "\n\t\t\t\t\t" . '<span class="caret"></span>' . "\n\t\t\t\t\t" . '<span class="sr-only">Toggle Dropdown</span>' . "\n\t\t\t\t" . '  </button>' . "\n\t\t\t\t" . '  <ul class="dropdown-menu">' . "\n\t\t\t\t\t" . '<li><a href="';
 			echo kategori_link_getir($id);
-			echo '" target="_blank"><i class="fa fa-external-link fa-fw" aria-hidden="true"></i><?php echo _LANG("f_goruntule"); ?></a></li>' . "\n\t\t\t\t\t" . '<li><a href="kategoriler.php?tip=';
+			echo '" target="_blank"><i class="fa fa-external-link fa-fw" aria-hidden="true"></i>' . _LANG("f_goruntule") . '</a></li>' . "\n\t\t\t\t\t" . '<li><a href="kategoriler.php?tip=';
 			echo $tip;
 			echo '&sinif=';
 			echo $sinif_name;
@@ -692,7 +692,7 @@ function alt_kategori_listele($kategori_id, $padding = 10, $tip = null, $sinif_n
 			echo $id;
 			echo '" onclick="return confirm(\'';
 			echo $baslik;
-			echo ''. _LANG('f_kategori_sil_onay') . '\')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG("f_sil"); ?></a></li>' . "\n\t\t\t\t" . '  </ul>' . "\n\t\t\t\t" . '</div>' . "\n\t\t\t\t" . '</td>' . "\n\t\t\t" . '</tr>' . "\n\t\t\t";
+			echo ''. _LANG('f_kategori_sil_onay') . '\')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i>' . _LANG("f_sil") . '</a></li>' . "\n\t\t\t\t" . '  </ul>' . "\n\t\t\t\t" . '</div>' . "\n\t\t\t\t" . '</td>' . "\n\t\t\t" . '</tr>' . "\n\t\t\t";
 			alt_kategori_listele($id, $padding + 30, $tip);
 		}
 	}

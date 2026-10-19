@@ -171,7 +171,7 @@ if ($buton) {
 			}
 			form_group(array("tip"=>"select","id"=>"paket","baslik"=>"Paket","secenekler"=>$paket_seciniz,"gerekli"=>1,"deger"=>magaza_bilgi("paket",$id)));							
 			form_group(array("tip"=>"date_time","id"=>"paket_bitis_tarihi","baslik"=>_LANG('pn_bitis_tarihi'),"gerekli"=>1,"deger"=>magaza_bilgi("paket_bitis_tarihi",$id)));			
-			form_group(array("tip"=>"select","id"=>"durum","baslik"=>"Durum","secenekler"=>options(" . _LANG('tx_pasif_0_onayli_1_suresi_doldu_2') . ","|",":"),"gerekli"=>1,"deger"=>getir("magazalar","durum",$id)));
+			form_group(array("tip"=>"select","id"=>"durum","baslik"=>"Durum","secenekler"=>options(_LANG('tx_pasif_0_onayli_1_suresi_doldu_2'),"|",":"),"gerekli"=>1,"deger"=>getir("magazalar","durum",$id)));
 			
             echo "<h4>Mağaza Limitleri</h4>";
             $limit_politikasi=limit_politikasi();
@@ -190,14 +190,14 @@ if ($buton) {
                 form_group(array("tip"=>"select","id"=>"azalan_aninda_onay","baslik"=>_LANG('s_aninda_onay'),"secenekler"=>options("Hayır:0|Evet:1","|",":"),"deger"=>magaza_bilgi("azalan_aninda_onay",$id)));                
             }
             
-			upload_olustur("profil_gorseli"," . _LANG('tx_profil_gorseli') . ",magaza_bilgi("profil_gorseli",$id)," . _LANG('tx_en_az_150px_x_150px_kare_formatta_bir_gorsel_y') . ");
+			upload_olustur("profil_gorseli",_LANG('tx_profil_gorseli'),magaza_bilgi("profil_gorseli",$id),_LANG('tx_en_az_150px_x_150px_kare_formatta_bir_gorsel_y'));
 			
-			upload_olustur("kapak_gorseli"," . _LANG('tx_kapak_gorseli') . ",magaza_bilgi("kapak_gorseli",$id)," . _LANG('tx_1140x200_px_boyutunda_bir_gorsel_yukleyin_bu_b') . ");
+			upload_olustur("kapak_gorseli",_LANG('tx_kapak_gorseli'),magaza_bilgi("kapak_gorseli",$id),_LANG('tx_1140x200_px_boyutunda_bir_gorsel_yukleyin_bu_b'));
 			?>
 			
 			
 			
-			<?php form_buton("buton"," . _LANG('tx_magaza_guncelle') . ","primary"); ?>
+			<?php form_buton("buton",_LANG('tx_magaza_guncelle'),"primary"); ?>
 		</form>
 	</div>
 </div>

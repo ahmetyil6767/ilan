@@ -71,9 +71,9 @@ if ($guncelleme_buton) {
 					$z++;
 					}
 					?>
-					<?php form_elemani("text","dosya_adi"," . _LANG('tx_sitemap_dosyasi_adi') . ","sitemap.xml"); ?>
-					<?php multiple_checkbox_olustur("tip"," . _LANG('tx_icerik_tipleri') . ",$icerik_tipleri_options,null," . _LANG('tx_site_haritanizda_bulunmasini_istemediginiz_ice') . "); ?>
-					<?php form_buton("buton"," . _LANG('tx_olustur') . ","primary"); ?>
+					<?php form_elemani("text","dosya_adi",_LANG('tx_sitemap_dosyasi_adi'),"sitemap.xml"); ?>
+					<?php multiple_checkbox_olustur("tip",_LANG('tx_icerik_tipleri'),$icerik_tipleri_options,null,_LANG('tx_site_haritanizda_bulunmasini_istemediginiz_ice')); ?>
+					<?php form_buton("buton",_LANG('tx_olustur'),"primary"); ?>
 					<script type="text/javascript">
 					$(function(){
 						$("input[type=checkbox]").attr("checked","checked");
@@ -97,8 +97,8 @@ if ($guncelleme_buton) {
 				<p><?php echo _LANG('e_sitemap_tarih_sonra'); ?></p>
 				
 				<form action="" method="post">
-					<?php form_elemani("hidden","dosya_adi"," . _LANG('tx_sitemap_dosyasi_adi') . ",eklenti_ayar_getir("sitemap_url","xml_sitemap")); ?>
-					<?php form_buton("buton"," . _LANG('tx_sitemap_guncelle') . ","primary"); ?>
+					<?php form_elemani("hidden","dosya_adi",_LANG('tx_sitemap_dosyasi_adi'),eklenti_ayar_getir("sitemap_url","xml_sitemap")); ?>
+					<?php form_buton("buton",_LANG('tx_sitemap_guncelle'),"primary"); ?>
 					<a href="http://www.google.com/webmasters/tools/ping?sitemap=<?php echo site_url()."/".eklenti_ayar_getir("sitemap_url","xml_sitemap"); ?>" class="btn btn-default" target="_blank">Ping</a>
 				</form>
 				<div class="clearfix mb20"></div>

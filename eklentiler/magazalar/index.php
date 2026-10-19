@@ -1,10 +1,10 @@
 <?php
 $bilgi=array(
-"baslik"=>" . _LANG('tx_magazalar') . ",
+"baslik"=>_LANG('tx_magazalar'),
 "versiyon"=>"1.0",
-"aciklama"=>" . _LANG('tx_ilan_yazilimlarindaki_magaza_sistemi_icin_gere') . ",
+"aciklama"=>_LANG('tx_ilan_yazilimlarindaki_magaza_sistemi_icin_gere'),
 "fonksiyon"=>"eklenti.php",
-"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici"=>_LANG('tx_goksel_toprak'),
 "gelistirici_url"=>"http://www.limontasarim.com",
 "ayar"=>0,
 );

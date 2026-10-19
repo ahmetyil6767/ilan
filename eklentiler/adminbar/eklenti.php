@@ -4,7 +4,7 @@ if (!eklenti_ayar_kontrol("renk","adminbar")) {
 	eklenti_ayar_ekle("renk","#333333","adminbar");
 }
 if (!eklenti_ayar_kontrol("ekle_tip","adminbar")) {
-	eklenti_ayar_ekle("ekle_tip"," . _LANG('tx_yazi_yazi_sayfa_sayfa') . ","adminbar");
+	eklenti_ayar_ekle("ekle_tip",_LANG('tx_yazi_yazi_sayfa_sayfa'),"adminbar");
 }
 function admin_bar() {
 	global $_GET;

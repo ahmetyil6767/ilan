@@ -16,9 +16,9 @@ if ($oturum_id==$id) { ?>
 			$email_dogrulama=tema_ayar("email_dogrulama");
 			if ($email_dogrulama==1) {
 				if (getir("uyeler","durum",$oturum_id)==0) {
-					echo "<span class='label label-danger' style='margin-left:10px;'><?php echo _LANG('pp_dogrulanmadi'); ?></span>";
+					echo "<span class='label label-danger' style='margin-left:10px;'>" . _LANG('pp_dogrulanmadi') . "</span>";
 				} else {
-					echo "<span class='label label-success' style='margin-left:10px;'><?php echo _LANG('pp_dogrulandi'); ?></span>";
+					echo "<span class='label label-success' style='margin-left:10px;'>" . _LANG('pp_dogrulandi') . "</span>";
 				}
 			}
 			?></td>

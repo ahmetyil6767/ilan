@@ -57,7 +57,7 @@ if ($guncelle) {
 				<div><?php echo _LANG('hb_mahalleyi_guncelle'); ?></div>
 				<div class="panel-body">
 				<?php form_group(array("tip"=>"text","id"=>"guncelle_adi","baslik"=>_LANG('pn_mahalle_adi'),"deger"=>$guncelle_adi)); ?>
-				<?php form_buton("guncelle_buton"," . _LANG('tx_guncelle') . ","primary"); ?>
+				<?php form_buton("guncelle_buton",_LANG('tx_guncelle'),"primary"); ?>
 				</div>
 			</div>
 		</form>			

@@ -145,7 +145,7 @@ if ($limit_politikasi==1) {
         array("tip"=>"tab_ac","id"=>"bilgiler","baslik"=>"Genel Bilgiler"),
         array("tip"=>"select","id"=>"ozel_limitler","baslik"=>_LANG('pn_uyeye_ozel_limitler'),"secenekler"=>options("Evet:1|Hayır:0","|",":"),"standart"=>0),
         array("tip"=>"text","id"=>"uye_ilan_limit","baslik"=>_LANG('s_toplam_ilan_limiti'),"kosul"=>"ozel_limitler:==(1)"),
-        array("tip"=>"text","id"=>"uye_kategori_limit","baslik"=>"Toplam Kategori Limiti","kosul"=>"ozel_limitler:==(1)","aciklama"=>" . _LANG('tx_azalan_limit_politikasinda_islevsizdir') . "),
+        array("tip"=>"text","id"=>"uye_kategori_limit","baslik"=>"Toplam Kategori Limiti","kosul"=>"ozel_limitler:==(1)","aciklama"=>_LANG('tx_azalan_limit_politikasinda_islevsizdir')),
         array("tip"=>"text","id"=>"uye_foto_limit","baslik"=>_LANG('pn_toplam_fotograf_limiti'),"kosul"=>"ozel_limitler:==(1)"),
         array("tip"=>"select","id"=>"uye_aninda_onay","baslik"=>_LANG('s_aninda_onay'),"secenekler"=>options("Hayır:0|Evet:1","|",":"),"kosul"=>"ozel_limitler:==(1)"),	
         array("tip"=>"select","id"=>"paket","baslik"=>"Paket","secenekler"=>$paket_seciniz),
@@ -173,7 +173,7 @@ if ($limit_politikasi==1) {
         array("tip"=>"text","id"=>"tc_no","baslik"=>"TC Kimlik No","kosul"=>"tip:==(Kurumsal)"),
         array("tip"=>"text","id"=>"vergi_no","baslik"=>_LANG('pn_vergi_numarasi'),"kosul"=>"tip:==(Kurumsal)"),
         array("tip"=>"text","id"=>"vergi_dairesi","baslik"=>"Vergi Dairesi","kosul"=>"tip:==(Kurumsal)"),
-        array("tip"=>"baslik","id"=>"firma_aciklama","baslik"=>"Bilgi","aciklama"=>" . _LANG('tx_bireysel_uyelerde_kullanilamaz') . "),
+        array("tip"=>"baslik","id"=>"firma_aciklama","baslik"=>"Bilgi","aciklama"=>_LANG('tx_bireysel_uyelerde_kullanilamaz')),
         array("tip"=>"tab_kapat"),
         array("tip"=>"tab_ac","id"=>"foto","baslik"=>_LANG('pn_fotograflar')),
         array("tip"=>"upload","id"=>"profil_gorseli","dizin"=>"profil","baslik"=>_LANG('pn_profil_fotografi'),"boyutlar"=>array("50_50","150_150")),
@@ -184,7 +184,7 @@ if ($limit_politikasi==1) {
     $uye_ekstra_bilgiler=array(
         array("tip"=>"tab_ac","id"=>"bilgiler","baslik"=>"Genel Bilgiler"),
         array("tip"=>"text","id"=>"azalan_ilan_limit","baslik"=>_LANG('pn_azalan_kalan_ilan_limiti'),"aciklama"=>"Üyenin kalan ilan hakkıdır. Azalan limitlerde geçerlidir."),
-        array("tip"=>"text","id"=>"azalan_kategori_limit","baslik"=>"Azalan Kategori Limiti","aciklama"=>" . _LANG('tx_uyenin_bir_kategoriye_ekleyebilecegi_maksimum') . "),
+        array("tip"=>"text","id"=>"azalan_kategori_limit","baslik"=>"Azalan Kategori Limiti","aciklama"=>_LANG('tx_uyenin_bir_kategoriye_ekleyebilecegi_maksimum')),
         array("tip"=>"text","id"=>"azalan_foto_limit","baslik"=>_LANG('pn_azalan_fotograf_limiti'),"aciklama"=>"Üyenin bir ilanına ekleyebileceği maksimum fotoğraf adedidir. Azalan limitlerde geçerlidir."),
         array("tip"=>"select","id"=>"azalan_aninda_onay","baslik"=>_LANG('pn_azalan_aninda_onay'),"secenekler"=>options("Hayır:0|Evet:1","|",":"),"aciklama"=>"Üyenin ilanını doğrudan yayınlama yetkisidir. Azalan limitlerde geçerlidir."),	
         array("tip"=>"select","id"=>"guvenilir","baslik"=>_LANG('pn_guvenilir'),"secenekler"=>options("Seçiniz,Evet,Hayır"),"kosul"=>"tip:==(Kurumsal)"),
@@ -210,7 +210,7 @@ if ($limit_politikasi==1) {
         array("tip"=>"text","id"=>"tc_no","baslik"=>"TC Kimlik No","kosul"=>"tip:==(Kurumsal)"),
         array("tip"=>"text","id"=>"vergi_no","baslik"=>_LANG('pn_vergi_numarasi'),"kosul"=>"tip:==(Kurumsal)"),
         array("tip"=>"text","id"=>"vergi_dairesi","baslik"=>"Vergi Dairesi","kosul"=>"tip:==(Kurumsal)"),
-        array("tip"=>"baslik","id"=>"firma_aciklama","baslik"=>"Bilgi","aciklama"=>" . _LANG('tx_bireysel_uyelerde_kullanilamaz') . "),
+        array("tip"=>"baslik","id"=>"firma_aciklama","baslik"=>"Bilgi","aciklama"=>_LANG('tx_bireysel_uyelerde_kullanilamaz')),
         array("tip"=>"tab_kapat"),
         array("tip"=>"tab_ac","id"=>"foto","baslik"=>_LANG('pn_fotograflar')),
         array("tip"=>"upload","id"=>"profil_gorseli","dizin"=>"profil","baslik"=>_LANG('pn_profil_fotografi'),"boyutlar"=>array("50_50","150_150")),
@@ -243,7 +243,7 @@ $ilan_kategori_ekstra_bilgiler=array(
 	array("tip"=>"text","id"=>"ikon","baslik"=>_LANG('p_ikon'),"aciklama"=>"FontAwesome, Glyphicons ve IonIcons sınıfları kullanılabilir."),
 	array("tip"=>"upload","id"=>"ust_gorsel","baslik"=>_LANG('pn_kategori_ust_gorsel'),"aciklama"=>"Kategori sayfasının üst kısımda gösterebileceğiniz özel bir resim. Genişlik: 1040px;"),
 	array("tip"=>"text","id"=>"ust_gorsel_url","baslik"=>_LANG('pn_kategori_ust_gorsel_url'),"aciklama"=>"İsteğe bağlı kategori üst görseline link verebilirsiniz."),
-	array("tip"=>"select","id"=>"fiyat_zorunlu","baslik"=>"Bu kategorideki ilanlarda fiyat belirtmek zorunlu olsun mu?","secenekler"=>options(" . _LANG('tx_hayir_0_evet_1') . ","|",":")),
+	array("tip"=>"select","id"=>"fiyat_zorunlu","baslik"=>"Bu kategorideki ilanlarda fiyat belirtmek zorunlu olsun mu?","secenekler"=>options(_LANG('tx_hayir_0_evet_1'),"|",":")),
 	array("tip"=>"select","id"=>"marka_model","baslik"=>_LANG('pn_marka_model_gosterilsin'),"secenekler"=>options("Hayır:0|Evet:1","|",":"),"aciklama"=>"Otomobil, Motosiklet gibi ilan kategorilerinde kategori başlıklarını otomatik olarak marka, serii, model şeklinde gösterebilirsiniz."),
 	array("tip"=>"select","id"=>"metrekare_fiyati","baslik"=>_LANG('pn_metrekare_fiyati_gosterilsin_mi'),"secenekler"=>options("Hayır:0|Evet:1","|",":"),"aciklama"=>"Arsa, Konut gibi ilan kategoriler için opsiyonel olarak metrekare fiyatı gösterebilirsiniz."),	
 	array("tip"=>"select","id"=>"get","baslik"=>_LANG('pn_bu_kategoride_get_guvenilir_e_ticaret_ilanlari_acilabilir_mi'),"secenekler"=>options("Hayır:0|Evet:1","|",":")),	
@@ -303,7 +303,7 @@ $ilan_durumlari[]=array("deger"=>"4","baslik"=>_LANG('e_suresi_doldu'),"renk"=>"
 $icerik_tipleri["ilan"]=array(
 	"id"=>"ilan",
 	"baslik"=>_LANG('search_found_ads'),
-	"baslik_cogul"=>" . _LANG('tx_ilanlar') . ",
+	"baslik_cogul"=>_LANG('tx_ilanlar'),
 	"baslik_isaret"=>"İlanı",
 	"ikon"=>"calendar-check-o",
 	"gorsel"=>"0",
@@ -596,7 +596,7 @@ function onay_bildirimi_gonder() {
 
 		$ileti="
 		<p>Merhaba <strong>$ilan_sahibi_ad_soyad</strong></p>
-		p' . _LANG('hb_bu_e_posta_ilaninizin_onaylandigini_bildirmek') . '</p>
+		p" . _LANG('hb_bu_e_posta_ilaninizin_onaylandigini_bildirmek') . "</p>
 		<p>İlanınızı ziyaretçi gözüyle görüntülemek için <a href=\"$ilan_url\">buraya</a> tıklayın.</p>";
 		auto_mail_add($ilan_sahibi_ad_soyad,$ilan_sahibi_email_adresi,"İlanınız onaylandı! - $mail_baslik",$ileti);				
 	}
@@ -623,9 +623,9 @@ $slider_options=array(
 	array("tip"=>"upload","id"=>"gorsel","baslik"=>_LANG('p_gorsel'),"aciklama"=>"Görsel boyutları bileşen tercihlerine göre değişiklik göstermektedir. Bileşenler bölümünden tam boyutları kontrol edebilirsiniz."),
 	array("tip"=>"text","id"=>"url","baslik"=>"URL"),
 );	
-$liste["slider"]=array("id"=>"slider","baslik"=>"Slider","baslik_cogul"=>" . _LANG('tx_slider_gorselleri') . ","ayarlar"=>$slider_options);
+$liste["slider"]=array("id"=>"slider","baslik"=>"Slider","baslik_cogul"=>_LANG('tx_slider_gorselleri'),"ayarlar"=>$slider_options);
 
-$liste["mobil_slider"]=array("id"=>"mobil_slider","baslik"=>"Mobil Slider","baslik_cogul"=>" . _LANG('tx_mobil_slider_gorselleri') . ","ayarlar"=>$slider_options);
+$liste["mobil_slider"]=array("id"=>"mobil_slider","baslik"=>"Mobil Slider","baslik_cogul"=>_LANG('tx_mobil_slider_gorselleri'),"ayarlar"=>$slider_options);
 
 $uyelik_paketleri_options=array(
 	array("tip"=>"text","id"=>"paket_adi","baslik"=>_LANG('pn_paket_adi')),
@@ -633,10 +633,10 @@ $uyelik_paketleri_options=array(
 	array("tip"=>"text","id"=>"kategori_limit","baslik"=>_LANG('s_kategori_ilan_limit'),"aciklama"=>"Vasıta, Emlak gibi ana kategorilerde aynı anda yayında olabilecek ilan sayısı."),
 	array("tip"=>"text","id"=>"foto_limit","baslik"=>_LANG('s_fotograf_limiti'),"Üyelerin ilanlarına yükleyebilecekleri toplam resim sayısı."),
 	array("tip"=>"select","id"=>"aninda_onay","baslik"=>_LANG('s_aninda_onay'),"secenekler"=>options("Hayır:0|Evet:1","|",":")),
-	array("tip"=>"text","id"=>"ucret","baslik"=>" . _LANG('tx_yillik_paket_ucreti_tl') . "),
+	array("tip"=>"text","id"=>"ucret","baslik"=>_LANG('tx_yillik_paket_ucreti_tl')),
 	array("tip"=>"textarea","id"=>"avantajlar","baslik"=>_LANG('pn_paket_avantajlari'),"aciklama"=>"Her satıra bir avantaj yazınız. Paket seçim sayfalarında görüntülenir.","satir"=>7),
 );	
-$liste["uyelik_paketleri"]=array("id"=>"uyelik_paketleri","baslik"=>"Paket","baslik_cogul"=>" . _LANG('tx_uyelik_paketleri') . ","ayarlar"=>$uyelik_paketleri_options);
+$liste["uyelik_paketleri"]=array("id"=>"uyelik_paketleri","baslik"=>"Paket","baslik_cogul"=>_LANG('tx_uyelik_paketleri'),"ayarlar"=>$uyelik_paketleri_options);
 
 $magaza_paketleri_options=array(
 	array("tip"=>"text","id"=>"paket_adi","baslik"=>_LANG('pn_paket_adi')),
@@ -644,17 +644,17 @@ $magaza_paketleri_options=array(
 	array("tip"=>"text","id"=>"foto_limit","baslik"=>_LANG('s_fotograf_limiti')),
 	array("tip"=>"text","id"=>"danisman_limit","baslik"=>_LANG('pn_danisman_temsilci_limiti')),
 	array("tip"=>"select","id"=>"aninda_onay","baslik"=>_LANG('s_aninda_onay'),"secenekler"=>options("Hayır:0|Evet:1","|",":")),
-	array("tip"=>"text","id"=>"ucret","baslik"=>" . _LANG('tx_yillik_paket_ucreti_tl') . "),
+	array("tip"=>"text","id"=>"ucret","baslik"=>_LANG('tx_yillik_paket_ucreti_tl')),
 	array("tip"=>"textarea","id"=>"avantajlar","baslik"=>_LANG('pn_paket_avantajlari'),"aciklama"=>"Her satıra bir avantaj yazınız. Paket seçim sayfalarında görüntülenir.","satir"=>7),
 );	
-$liste["magaza_paketleri"]=array("id"=>"magaza_paketleri","baslik"=>"Paket","baslik_cogul"=>" . _LANG('tx_magaza_paketleri') . ","ayarlar"=>$magaza_paketleri_options);
+$liste["magaza_paketleri"]=array("id"=>"magaza_paketleri","baslik"=>"Paket","baslik_cogul"=>_LANG('tx_magaza_paketleri'),"ayarlar"=>$magaza_paketleri_options);
 
 $hesaplar_options=array(
 	array("tip"=>"text","id"=>"banka_adi","baslik"=>_LANG('pn_banka_adi')),
 	array("tip"=>"text","id"=>"ad_soyad","baslik"=>"Ad Soyad"),
 	array("tip"=>"text","id"=>"iban","baslik"=>_LANG('pn_iban_numarasi')),
 );	
-$liste["hesaplar"]=array("id"=>"hesaplar","baslik"=>"Hesap","baslik_cogul"=>" . _LANG('tx_banka_hesaplari') . ","ayarlar"=>$hesaplar_options);
+$liste["hesaplar"]=array("id"=>"hesaplar","baslik"=>"Hesap","baslik_cogul"=>_LANG('tx_banka_hesaplari'),"ayarlar"=>$hesaplar_options);
 
 if (mysqli_num_rows(mysqli_query($baglan,"SHOW TABLES LIKE '%odemeler%'"))==0) {
 	mysqli_query($baglan,"
@@ -758,7 +758,7 @@ function resim_getir($boyut=null,$icerik_id=null) {
 	return $resim_url;
 }
 
-$bilesen_alani[]=array("id"=>"anasayfa_sidebar","baslik"=>"Anasayfa Sidebar","aciklama"=>" . _LANG('tx_anasayfa_sol_menu_alani_menu_ve_reklam_alanlar') . ","resim"=>tema_dizini()."/img/bilesen/anasayfa_sidebar.png");
+$bilesen_alani[]=array("id"=>"anasayfa_sidebar","baslik"=>"Anasayfa Sidebar","aciklama"=>_LANG('tx_anasayfa_sol_menu_alani_menu_ve_reklam_alanlar'),"resim"=>tema_dizini()."/img/bilesen/anasayfa_sidebar.png");
 $bilesen_alani[]=array("id"=>"anasayfa","baslik"=>_LANG('pn_anasayfa_genis'),"aciklama"=>"Slider, 6 ve 7 sütunlu ilan listelemeleri için uygun bileşen alanı.","resim"=>tema_dizini()."/img/bilesen/anasayfa.png");
 $bilesen_alani[]=array("id"=>"anasayfa_sol","baslik"=>_LANG('pn_anasayfa_sol_bolum'),"aciklama"=>"2 veya 3 sütunlu ilan listelemeleri için uygun bileşen alanı. Opsiyoneldir.","resim"=>tema_dizini()."/img/bilesen/anasayfa_sol.png");
 $bilesen_alani[]=array("id"=>"anasayfa_sag","baslik"=>_LANG('pn_anasayfa_sag_bolum'),"aciklama"=>"Sağ sidebar olarak tanımlayabiliriz. Reklam alanları için uygundur. Opsiyoneldir.","resim"=>tema_dizini()."/img/bilesen/anasayfa_sag.png");
