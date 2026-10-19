@@ -13,6 +13,21 @@ SQL/*.sql
 !SQL/.gitkeep
 
 # ---------------------------------------------------------------------------
+# LISANS
+# lisans.php icinde urunun lisans anahtari var. Anahtar commit edilirse
+# herkese acik olur; sifirlanamaz. Repoya alinmamalidir.
+# ---------------------------------------------------------------------------
+lisans.php
+
+# ---------------------------------------------------------------------------
+# PROJE RAPORU
+# Guvenlik denetim raporu. Urunun aciklarini (SQLi, MD5 parola, XSS) tek tek
+# listeler. Ticari script icin repoda tutulmamali; AGENTS.md ve
+# opencode.jsonc yerel kopyaya referans verir.
+# ---------------------------------------------------------------------------
+PROJE_RAPORU.md
+
+# ---------------------------------------------------------------------------
 # KULLANICI YUKLEMLERI (calisma aninda uretilen icerik)
 # Tema varliklari (uploads/images) ve koruyucu index.html dosyalari repoda
 # kalir; kullaniciya ait gorseller tutulmaz.
