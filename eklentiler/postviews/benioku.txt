@@ -1,0 +1,40 @@
+Postviews 2.1
+
+// Güncelleme: 03.11.2017
+
+<?php echo postviews($id,$tip="toplam",$tarih=null); ?>
+
+---
+
+** Içerigin toplam hiti.
+
+<?php echo postviews(1); ?>
+
+** Içerigin o gün aldigi ziyaret.
+
+<?php echo postviews(1,"gun"); ?>
+
+** Içerigin o hafta aldigi ziyaret.
+
+<?php echo postviews(1,"hafta"); ?>
+
+** Içerigin o ay aldigi ziyaret.
+
+<?php echo postviews(1,"ay"); ?>
+
+** Içerigin belli bir gün aldigi ziyaret.
+
+<?php echo postviews(1,"gün","01-09-2017"); ?>
+
+** Içerigin o hafta aldigi ziyaret.
+
+<?php echo postviews(1,"hafta","43"); ?> *date("W")
+
+** Içerigin belli bir ay aldigi ziyaret.
+
+<?php echo postviews(1,"ay","09-2017"); ?>
+
+
+v 2.1 güncellemeleri
+
+Detayli raporlama sayfasi eklendi.

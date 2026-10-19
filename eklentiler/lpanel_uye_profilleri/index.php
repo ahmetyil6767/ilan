@@ -1,0 +1,12 @@
+<?php
+$bilgi=array(
+"baslik"=>" . _LANG('tx_uye_profilleri') . ",
+"versiyon"=>"1.0",
+"aciklama"=>" . _LANG('tx_yonetim_paneline_uye_profil_sayfalari_ve_bu_sa') . ",
+"dokuman"=>"benioku.txt",
+"fonksiyon"=>"eklenti.php",
+"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici_url"=>"http://www.limontasarim.com",
+"ayar"=>0,
+);
+?>

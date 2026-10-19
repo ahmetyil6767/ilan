@@ -1,0 +1,106 @@
+# ---------------------------------------------------------------------------
+# VERITABANI BILGILERI - ASLA COMMIT ETMEYIN
+# ---------------------------------------------------------------------------
+config/db.php
+config/*.local.php
+
+# ---------------------------------------------------------------------------
+# VERITABANI DUMP'LARI
+# SQL/localhost.sql icinde gercek kullanici kayitlari, e-posta adresleri ve
+# parola ozetleri bulunuyor. Repoya alinmamalidir.
+# ---------------------------------------------------------------------------
+SQL/*.sql
+!SQL/.gitkeep
+
+# ---------------------------------------------------------------------------
+# KULLANICI YUKLEMLERI (calisma aninda uretilen icerik)
+# Tema varliklari (uploads/images) ve koruyucu index.html dosyalari repoda
+# kalir; kullaniciya ait gorseller tutulmaz.
+# ---------------------------------------------------------------------------
+uploads/foto/*
+uploads/ajax/*
+uploads/files/*
+uploads/uye_kapak/*
+uploads/uye_profil/*
+uploads/magaza_kapak/*
+uploads/magaza_profil/*
+uploads/.thumbs/
+
+# Yuklenen dosya adlari hash/tarih icerdigi icin, repoya girmemis olsa bile
+# asagidaki desenleri de engelle
+uploads/images/*/
+!**/index.html
+
+# ---------------------------------------------------------------------------
+# ISLETIM SISTEMI / EDITOR ARACLARI
+# ---------------------------------------------------------------------------
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+
+# ---------------------------------------------------------------------------
+# LOG / CACHE / GECICI DOSYALAR
+# ---------------------------------------------------------------------------
+*.log
+*.sql.gz
+cache/
+tmp/
+temp/
+.gecici/
+yedek/
+*.cache
+
+# ---------------------------------------------------------------------------
+# BAGIMLILIKLAR / PAKET YONETIMI
+# ---------------------------------------------------------------------------
+/vendor/
+/node_modules/
+composer.json
+composer.lock
+package.json
+package-lock.json
+yarn.lock
+npm-debug.log*
+
+# ---------------------------------------------------------------------------
+# SUNUCU / YEREL ORTAM AYARLARI
+# ---------------------------------------------------------------------------
+.env
+.env.*
+*.local
+*.bak
+*.backup
+*.old
+*.orig
+*.swp
+
+.htpasswd
+*.pem
+*.key
+
+# ---------------------------------------------------------------------------
+# CI / CIKTI
+# ---------------------------------------------------------------------------
+.phpunit.result.cache
+/build/
+/dist/

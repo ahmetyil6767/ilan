@@ -1,0 +1,15 @@
+<?php
+/*
+ * Veritabani baglanti ayarlari.
+ *
+ * Kullanim:
+ *   1. Bu dosyayi "db.php" adıyla kopyalayin.
+ *   2. Asagidaki degerleri kendi sunucunuza gore duzenleyin.
+ *
+ * NOT: db.php dosyasi .gitignore icinde yer alir ve repoya ASLA eklenmez.
+ */
+$host='localhost';
+$veritabani='VERITABANI_ADI';
+$kullanici='KULLANICI_ADI';
+$parola='PAROLA';
+?>

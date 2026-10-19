@@ -1,0 +1,3 @@
+# Bu klasor veritabani sema/aktarim dosyalari icindir.
+# Gercek .sql dosyalari .gitignore ile dislanir (kullanici verisi icerir).
+# Klasorun repoda tamamen kaybolmamasi icin bu dosya tutulur.

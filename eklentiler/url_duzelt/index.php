@@ -1,0 +1,11 @@
+<?php
+$bilgi=array(
+"baslik"=>" . _LANG('tx_url_duzelt') . ",
+"versiyon"=>"1.0",
+"aciklama"=>" . _LANG('tx_citroen_kategorilerindeki_url_problemini_gider') . ",
+"fonksiyon"=>"eklenti.php",
+"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici_url"=>"http://www.limontasarim.com",
+"ayar"=>0,
+);
+?>

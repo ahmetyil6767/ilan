@@ -1,0 +1,30 @@
+Options -MultiViews
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)-([0-9]+)/([^/]+)-([0-9]+) icerik.php?id=$2&g=$4 [QSA,L]
+RewriteRule ^([^/]+)-([0-9]+)/([^/]+) icerik.php?id=$2&sayfa=$3 [QSA,L]
+RewriteRule ^([^/]+)-([0-9]+) icerik.php?id=$2 [QSA,L]
+RewriteRule ^sayfa/([^/]+) index.php?p=$1 [QSA,L]
+RewriteRule ^magaza/([^/]+)-([0-9]+) magaza.php?id=$2 [QSA,L]
+RewriteRule ^([0-9]+)/([^/]+)/([0-9]+) kategori.php?id=$1&sayfa=$3 [QSA,L]
+RewriteRule ^([0-9]+)/([^/]+) kategori.php?id=$1 [QSA,L]
+RewriteRule ^uye/([0-9]+)/([^/]+)/([0-9]+) profil.php?id=$1&sayfa=$3 [QSA,L]
+RewriteRule ^uye/([0-9]+)/([^/]+) profil.php?id=$1 [QSA,L]
+RewriteRule ^ara/([^/]+)/([0-9]+) ara.php?s=$1&sayfa=$2 [QSA,L]
+RewriteRule ^ara/([^/]+) ara.php?s=$1 [QSA,L]
+RewriteRule ^ara ara.php [QSA,L]
+RewriteRule ^404 404.php [L]
+
+<FilesMatch ".(ttf|otf|eot|woff)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+
+# PHP 7.2 handler satiri kaldirildi. Bu yazilim shared hosting icin
+# yazilmis bir paket; satir orijinalde sunucudaki PHP surumunu sabitliyordu.
+# Localde WAMP PHP'si mod_php ile yuklendigi icin (httpd.conf ->
+# LoadModule php_module) .htaccess'ta bir handler tanimlamak gerekmiyor ve
+# php72 handler'i tanimli olmadigi icin PHP dosyalari islenemez hale geliyordu.
+# Vhost kendi <FilesMatch "\.php$"> SetHandler satiri ile islemeyi sagliyor.

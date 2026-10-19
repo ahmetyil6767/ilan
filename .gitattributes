@@ -1,0 +1,22 @@
+# Satir sonu normalizasyonu
+# Web (PHP) projesi oldugu icin depoda LF, yerelde CRLF kullanilir.
+* text=auto eol=lf
+
+# Ikili dosyalar - satir sonu isleme uygulanmaz
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.mp4   binary
+*.pdf   binary
+*.zip   binary
+
+# Sunucu yapilandirmasi - satir sonu degistirilmez
+.htaccess text eol=lf

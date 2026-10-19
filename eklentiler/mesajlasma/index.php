@@ -1,0 +1,12 @@
+<?php
+$bilgi=array(
+"baslik"=>" . _LANG('tx_mesajlasma') . ",
+"versiyon"=>"1.1",
+"aciklama"=>" . _LANG('tx_uyelerin_arasi_mesajlasma_eklentisi') . ",
+"fonksiyon"=>"eklenti.php",
+"dokuman"=>"benioku.txt",
+"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici_url"=>"http://www.limontasarim.com",
+"ayar"=>0,
+);
+?>

@@ -1,0 +1,11 @@
+<?php
+$bilgi=array(
+"baslik"=>" . _LANG('tx_site_tasima_araci') . ",
+"versiyon"=>"1.1",
+"aciklama"=>" . _LANG('tx_bir_web_sitesi_tasindiktan_sonra_gorsel_ve_men') . ",
+"fonksiyon"=>"eklenti.php",
+"gelistirici"=>" . _LANG('tx_goksel_toprak') . ",
+"gelistirici_url"=>"http://www.limontasarim.com",
+"ayar"=>0,
+);
+?>

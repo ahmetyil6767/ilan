@@ -1,0 +1,10 @@
+// Tarih: 29.08.2017
+// Son Güncelleme: 10.04.2018
+
+SMTP eklentisi ile tekli mail gönderimleri yapýlabiliyor fakat bir tetiklemede birden fazla mail gönderimi yapmak çeþitli sorunlara sebep olabiliyor. Ýþte bu eklenti bu soruna çözüm olarak yazýldý.
+Auto Mail eklentisi mailleri göndermeden önce mail kuyruðuna ekler ve sýrayla her sayfa yenilemesinde tek mail gönderimi saðlar.
+
+Kullaným
+
+Eklentiyi etkinleþtirdikten sonra mail_gonder() fonksiyonlarýný auto_mail_add() fonksiyonu ile deðiþtirmeniz yeterlidir. Sistem otomatik olarak çalýþacaktýr. 
+Ayrýca yönetim panelinde Auto Mail baðlantýsýna týklayarak gönderilen mailleri ve bekleyen mailleri görebilirsiniz.

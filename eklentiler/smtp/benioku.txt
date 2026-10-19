@@ -1,0 +1,10 @@
+SMTP
+
+// Güncelleme: 21.12.2017
+
+Kullaným
+---------
+
+Eklentiyi etkinleþtirdikten sonra Eklentiler > SMTP > Ayarlar bölümünden eklenti ayarlarýný yapýnýz. Ardýndan temanýzda mail_gonder() fonksiyonunu kullanabilirsiniz.
+
+<?php mail_gonder($ad_soyad,$email_adresi,$baslik,$mesaj);  ?>

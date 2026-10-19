@@ -1,0 +1,3 @@
+Mesajlaþma 1.0
+
+Üyeler arasý mesajlaþma altyapýsýný hazýrlar.

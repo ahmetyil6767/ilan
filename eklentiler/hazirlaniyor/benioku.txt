@@ -1,0 +1,5 @@
+Hazırlanıyor 1.0
+
+Web sitenizin sayfalarında bir yapım aşamasında sayfası göstermenizi sağlar. Üye girişi yapan yöneticiler ise web sitesini görüntüleyebilirler.
+
+Sol menüdeki "Yapım Aşamasında" linkine tıklayarak ayar yapabilirsiniz.

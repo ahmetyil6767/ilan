@@ -1,0 +1,14 @@
+Favori Ýçerikler 1.2
+
+Bu eklenti ile üyeleriniz içerikleri favorilerine ekleyebilirler.
+
+Kullanýlabilir fonksiyonlar
+
+favori_ekle($icerik_id,$uye_id)
+favori_sil($icerik_id,$uye_id)
+favori_mi($icerik_id,$uye_id)
+favori_sayisi($uye_id)
+kac_kisinin_favorisi($icerik_id)
+
+$uye_id parametresi tüm fonksiyonlarda isteðe baðlýdýr. Kullanýlmadýðý taktirde $oturum_id geçerli sayýlýr.
+$icerik_id parametresi tüm isteðe baðlýdýr. Kullanýlmadýðý taktirde $_GET["id"] geçerli sayýlýr.

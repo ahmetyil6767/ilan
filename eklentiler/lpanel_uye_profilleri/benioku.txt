@@ -1,0 +1,2 @@
+Bu eklenti yönetim paneline üye detay sayfalarý oluþturur ve tüm yönetim paneli genelinde üye adý geçen her metne bu sayfalara giden baðlantýlar verir. 
+Eklentinin profil.php dosyasýný dilediðiniz gibi özelleþtirerek kullanabilirsiniz.
