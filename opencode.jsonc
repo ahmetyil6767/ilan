@@ -1,0 +1,43 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // PROJE_RAPORU.md her oturumda yuklenir: bu kod tabaninda bilinen
+  // SQL injection / MD5 parola / XSS riskleri var. Yeni kod yazarken
+  // bu raporu bilerek ihlal etme.
+  "instructions": ["PROJE_RAPORU.md"],
+
+  // Global ayarlarin uzerine yazar (dizi birlesmez, degistirilir).
+  // Globaldeki ogeler de tekrar listelendi.
+  "watcher": {
+    "ignore": [
+      "dist/**",
+      "coverage/**",
+      "node_modules/**",
+      ".git/**",
+      "build/**",
+      ".next/**",
+      "target/**",
+      // 24 MB kullanici gorseli - kod calismasi icin izlemeye gerek yok
+      "uploads/**",
+      // Veritabani dumplari; icerik degismez ve cok buyuk
+      "SQL/*.sql"
+    ]
+  },
+
+  // Politikalar "once gelen kazanir" yerine "son gecen kazanir" seklinde
+  // degerlendirilir ve global confige gore ONCELIKLIDIR. Bu yuzden izin
+  // kurallarindan (permissions) farkli olarak globaldeki genis "allow *"
+  // kurali bunlari gecersiz kilamaz.
+  //
+  // Not: config/db.php icinde gercek MySQL parolasi, SQL/*.sql icinde uye
+  // parola ozetleri ve e-posta adresleri, lisans.php icinde lisans anahtari
+  // var. Bunlar repoya hic alinmadi; modelin de okumamasi icin engellendi.
+  // Ilgili dosyaya bakman gerekiyorsa once config/db.php.example'a bak.
+  "policies": [
+    { "action": "tool.use", "resource": "read:config/db.php", "effect": "deny" },
+    { "action": "tool.use", "resource": "edit:config/db.php", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:*.sql", "effect": "deny" },
+    { "action": "tool.use", "resource": "edit:*.sql", "effect": "deny" },
+    { "action": "tool.use", "resource": "read:lisans.php", "effect": "deny" }
+  ]
+}
