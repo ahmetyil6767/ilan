@@ -60,9 +60,9 @@ tema_header(); ?>
 							<tr>
 								<th width="110"></th>
 								<th class="baslik_th" width="280"><?php echo _LANG("listing_title"); ?></th>
-								<th class="visible-sm visible-md visible-lg">Fiyat</th>
+								<th class="visible-sm visible-md visible-lg"><?php echo _LANG('listing_price'); ?></th>
 								<th class="visible-md visible-lg"><?php echo _LANG("listing_date"); ?></th>
-								<th class="visible-sm visible-md visible-lg">Adres</th>
+								<th class="visible-sm visible-md visible-lg"><?php echo _LANG('listing_location'); ?></th>
 								<th><?php echo _LANG("general_options"); ?></th>
 							</tr>
 						</thead>
@@ -97,10 +97,10 @@ tema_header(); ?>
 										}
 									} else {
 										if ($sahiplendirme==1) {
-											echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
+											echo "<span class='s_mesaj_tablo'><?php echo _LANG('ilan_sahiplendirme'); ?></span>";
 										}
 										if ($gorusulur==1) {
-											echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+											echo "<span class='s_mesaj_tablo'><?php echo _LANG('ilan_gorusulur'); ?></span>";
 										}
 									}
 									?>
@@ -136,10 +136,10 @@ tema_header(); ?>
 								}
 							} else {
 								if ($sahiplendirme==1) {
-									echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
+									echo "<span class='s_mesaj_tablo'><?php echo _LANG('ilan_sahiplendirme'); ?></span>";
 								}
 								if ($gorusulur==1) {
-									echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+									echo "<span class='s_mesaj_tablo'><?php echo _LANG('ilan_gorusulur'); ?></span>";
 								}
 							}
 							?>
@@ -152,7 +152,7 @@ tema_header(); ?>
 								</div>
 							</td>
 							<td class="nolink">
-								<button type="button" value="<?php echo $ilan_id; ?>" class="favorilerden_kaldir btn btn-danger btn-xs"><i class="fa fa-trash"></i>Sil</button>
+								<button type="button" value="<?php echo $ilan_id; ?>" class="favorilerden_kaldir btn btn-danger btn-xs"><i class="fa fa-trash"></i><?php echo _LANG('general_delete'); ?></button>
 							</td>
 						</tr>
 						<?php }  ?>
@@ -167,7 +167,7 @@ tema_header(); ?>
 				$sayfa_url=ozel_url("favori-ilanlarim");
 				if ($sayfa>1) {
 					$onceki_sayfa=$sayfa-1;
-					echo "<li><a href='$sayfa_url?sayfa=$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+					echo "<li><a href='$sayfa_url?sayfa=$onceki_sayfa' aria-label='<?php echo _LANG('f_onceki'); ?>'><i class='ion-chevron-left'></i></a></li>";
 				}		
 				for ($x=1;$x<=$kac_sayfa;$x++) {
 					if ($x==$sayfa) {$active="class='active'";$link_yaz="";} else {$active="";$link_yaz="href='$sayfa_url?sayfa=$x'";}
@@ -175,7 +175,7 @@ tema_header(); ?>
 				}
 				if ($sayfa<$kac_sayfa) {
 					$sonraki_sayfa=$sayfa+1; 
-					echo "<li><a href='$sayfa_url?sayfa=$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+					echo "<li><a href='$sayfa_url?sayfa=$sonraki_sayfa' aria-label='<?php echo _LANG('f_sonraki'); ?>'><i class='ion-chevron-right'></i></a></li>";
 				}
 				echo "</ul></div>";
 			}

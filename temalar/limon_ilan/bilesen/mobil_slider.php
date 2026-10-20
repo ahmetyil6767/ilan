@@ -72,8 +72,8 @@ $("#mobil_slides").slidesjs({
 		loaded: function() {
 			var slider_buton_top=($("#mobil_slides").height()-$("#mobil_slides .slidesjs-navigation").height())/2;
 			$("#mobil_slides .slidesjs-navigation").css({"top":slider_buton_top});
-			$("#mobil_slides .slidesjs-previous").attr("title","Önceki").html("<i class=\"fa fa-angle-left mr0\"></i>");
-			$("#mobil_slides .slidesjs-next").attr("title","Sonraki").html("<i class=\"fa fa-angle-right mr0\"></i>");
+			$("#mobil_slides .slidesjs-previous").attr("title","'._LANG('f_onceki').'").html("<i class=\"fa fa-angle-left mr0\"></i>");
+			$("#mobil_slides .slidesjs-next").attr("title","'._LANG('f_sonraki').'").html("<i class=\"fa fa-angle-right mr0\"></i>");
 		}
 	}
 }).show();

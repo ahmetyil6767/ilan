@@ -163,7 +163,7 @@ function ikili_listeleme($id) {
 		<?php 
 		if ($a%2==0) {echo "<div class='visible-md visible-lg clearfix'></div>";}
 		
-		$a++;} } else {echo "<div class='col-md-42'>İlan bulunamadı</div>";} } ?>
+		$a++;} } else {echo "<div class='col-md-42'>" . _LANG('listing_not_found') . "</div>";} } ?>
 		<div class='visible-xs clearfix'></div>
 	</div>
 </div>

@@ -200,7 +200,7 @@ function klasik_listeleme($id) {
 		if ($a%$md_sutun==0) {echo "<div class='visible-md visible-lg clearfix'></div>";}
 		if ($a%$sm_sutun==0) {echo "<div class='visible-sm clearfix'></div>";}
 		if ($a%$xs_sutun==0) {echo "<div class='visible-xs clearfix'></div>";}
-		$a++;} } else {echo "<div class='col-md-42'>İlan bulunamadı</div>";} } ?>
+		$a++;} } else {echo "<div class='col-md-42'>" . _LANG('listing_not_found') . "</div>";} } ?>
 	</div>
 </div>
 <?php

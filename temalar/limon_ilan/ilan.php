@@ -132,14 +132,14 @@ tema_header(); ?>
 		if ($sebep) {
 			echo "<div class='alert alert-danger'>İncelediğiniz ilan yayından kaldırılmıştır. Yayıncı notu: $sebep</div>";	
 		} else {
-			echo "<div class='alert alert-danger'>İncelediğiniz ilan yayından kaldırılmıştır.</div>";	
+			echo "<div class='alert alert-danger'>" . _LANG('ilan_yayindan_kaldirildi2') . "</div>";	
 		}
 	} else if ($durum==4) {
 		$ilanlarim_url=ozel_url("ilanlarim");
 		if ($oturum_id==$yazar) {
-			echo "<div class='alert alert-danger'>İncelediğiniz ilanın süresi dolmuştur. İlanı tekrardan yayınlamak için lütfen <span class='fw600'><a href='$ilanlarim_url' style='color:#fff;'>İlanlarım</a></span> sayfasına gidiniz.</div>";	
+			echo "<div class='alert alert-danger'>" . _LANG('ilan_suresi_doldu', array($ilanlarim_url)) . "</div>";
 		} else {
-			echo "<div class='alert alert-danger'>İncelediğiniz ilanın yayınlanma süresi dolmuştur. İlandaki bilgiler güncelliğini yitirmiş veya ilandaki ürün satılmış olabilir.</div>";	
+			echo "<div class='alert alert-danger'>" . _LANG('ilan_suresi_doldu2') . "</div>";	
 		}
 	}
 	?>
@@ -152,11 +152,11 @@ tema_header(); ?>
 			<div class="col-md-11 col-sm-16">
 				<div class="buton">
 				<?php if (favori_mi($id,$oturum_id)) {$favori=1;} else {$favori=0;} ?>
-				<a id="favorilerden_kaldir" class="c_pointer" <?php if ($favori!=1) {echo "style='display:none;'";} ?>><i class="ion-android-star-outline"></i>Favorilerden kaldır</a>
-				<a id="favorilere_ekle" class="c_pointer" <?php if ($favori==1) {echo "style='display:none;'";} ?>><i class="ion-android-star"></i>Favorilere ekle</a>
+				<a id="favorilerden_kaldir" class="c_pointer" <?php if ($favori!=1) {echo "style='display:none;'";} ?>><i class="ion-android-star-outline"></i><?php echo _LANG('favori_cikar'); ?></a>
+				<a id="favorilere_ekle" class="c_pointer" <?php if ($favori==1) {echo "style='display:none;'";} ?>><i class="ion-android-star"></i><?php echo _LANG('favori_ekle'); ?></a>
 				</div>
 				<div class="buton">
-					<a onclick="frames['frame'].print()" class="c_pointer"><i class="ion-printer"></i>Yazdır</a>
+					<a onclick="frames['frame'].print()" class="c_pointer"><i class="ion-printer"></i><?php echo _LANG('general_print'); ?></a>
 				</div>
 				<div class="buton sosyal pull-right">
 					<?php $icerik_link=link_getir($id); ?>

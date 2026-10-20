@@ -569,12 +569,12 @@ tema_header(); ?>
 							echo "<a href='$ust_link'>$ust_baslik</a>";
 						$x++;}
 					} ?><a href="<?php echo kategori_link_getir($id); ?>"><?php echo getir("kategoriler","baslik"); ?></a>
-					</span> kategorisinde 
-					<?php if (@$uygulanan_filtre_sayisi>0) {echo "kriterlerinize uygun";} ?>
+					</span> <?php echo _LANG('search_kategorisinde'); ?>
+					<?php if (@$uygulanan_filtre_sayisi>0) {echo _LANG('kriterlere_uygun_kisa');} ?>
 					<?php if ($toplam_gosterilen_icerik>0) { ?>
-					<span class="sayi"><?php echo $toplam_gosterilen_icerik; ?></span> ilan bulundu.
+					<span class="sayi"><?php echo $toplam_gosterilen_icerik; ?></span> <?php echo _LANG('cat_ads_found'); ?>
 					<?php } else { ?>
-					</span> ilan bulunamadı.
+					</span> <?php echo _LANG('listing_not_found'); ?>
 					<?php } ?>
 				</div>
 			</div>
@@ -677,7 +677,7 @@ tema_header(); ?>
 					$sayfa_url=kategori_link_getir($_GET["id"]);
 					if ($sayfa>1) {
 						$onceki_sayfa=$sayfa-1;
-						echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+						echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='<?php echo _LANG('f_onceki'); ?>'><i class='ion-chevron-left'></i></a></li>";
 					}		
 					for ($x=1;$x<=$kac_sayfa;$x++) {
 						$bosluk=ceil($kac_sayfa/20)*2.2;
@@ -688,7 +688,7 @@ tema_header(); ?>
 					}
 					if ($sayfa<$kac_sayfa) {
 						$sonraki_sayfa=$sayfa+1; 
-						echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+						echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='<?php echo _LANG('f_sonraki'); ?>'><i class='ion-chevron-right'></i></a></li>";
 					}
 					echo "</ul></div>";
 				}
@@ -696,9 +696,9 @@ tema_header(); ?>
 
 				<?php if ($toplam_ilan==0) {
 					if (@$uygulanan_filtreler) { 
-						echo "<div class='alert alert-danger mt20'>Kriterlerinize uygun ilan bulunamadı.</div>";
+						echo "<div class='alert alert-danger mt20'>" . _LANG('kriterlere_uygun_ilan_bulunamadi') . "</div>";
 					} else {
-						echo "<div class='alert alert-danger mt15'>İlan bulunamadı.</div>";
+						echo "<div class='alert alert-danger mt15'>" . _LANG('listing_not_found') . "</div>";
 					}
 				} ?>
 			</div>

@@ -98,23 +98,21 @@ if ($islem=="favorilere_ekle") {
 	$icerik_id=$_POST["id"];
 	$uye_id=$_SESSION["oturum_id"];
 	if (!$uye_id) {
-		echo "<div class='alert alert-danger autoclose'>
-		Bu işlemi yapabilmek için üye girişi yapmanız gerekmektedir.
+		echo "<div class='alert alert-danger autoclose'>" . _LANG('gy_uye_girisi_gerekli') . "
 		<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 		  <span aria-hidden='true'>&times;</span>
 		</button>
 		</div>";
 	} else {
 		if (favori_mi($icerik_id,$uye_id)) {
-			echo "<div class='alert alert-danger autoclose'>
-			Bu ilanı zaten favorilerinize eklemişsiniz.
+			echo "<div class='alert alert-danger autoclose'>" . _LANG('favori_zaten_ekli') . "
 			<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 			  <span aria-hidden='true'>&times;</span>
 			</button>
 			</div>";
 		} else {
 			favori_ekle($icerik_id,$uye_id);
-			echo "<div class='alert alert-success autoclose'>İlanı favorilerinize eklediniz.
+			echo "<div class='alert alert-success autoclose'>" . _LANG('favori_basarili') . "
 			<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 			  <span aria-hidden='true'>&times;</span>
 			</button>
@@ -134,8 +132,7 @@ if ($islem=="favorilerden_kaldir") {
 	$icerik_id=$_POST["id"];
 	$uye_id=$_SESSION["oturum_id"];
 	if (!$uye_id) {
-		echo "<div class='alert alert-danger autoclose'>
-		Bu işlemi yapabilmek için üye girişi yapmanız gerekmektedir.
+		echo "<div class='alert alert-danger autoclose'>" . _LANG('gy_uye_girisi_gerekli') . "
 		<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 		  <span aria-hidden='true'>&times;</span>
 		</button>
@@ -143,8 +140,7 @@ if ($islem=="favorilerden_kaldir") {
 	} else {
 		if (favori_mi($icerik_id,$uye_id)) {
 			favori_sil($icerik_id,$uye_id);
-			echo "<div class='alert alert-success autoclose'>
-			İlanı favorilerinizden kaldırdınız.
+			echo "<div class='alert alert-success autoclose'>" . _LANG('favori_cikarildi') . "
 			<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 			  <span aria-hidden='true'>&times;</span>
 			</button>
@@ -157,8 +153,7 @@ if ($islem=="favorilerden_kaldir") {
 			});
 			</script>";			
 		} else {
-			echo "<div class='alert alert-danger autoclose'>
-			Bir sorun mu var? Bu ilanı favorilerinizde bulamadık!
+			echo "<div class='alert alert-danger autoclose'>" . _LANG('favori_bulunamadi') . "
 			<button type='button' class='close' data-dismiss='alert' aria-label='Close'>
 			  <span aria-hidden='true'>&times;</span>
 			</button>

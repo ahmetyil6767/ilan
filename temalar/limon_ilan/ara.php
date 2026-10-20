@@ -323,13 +323,13 @@ tema_header(); ?>
 		<div class="col-md-33">
 			<div class="panel panel-default beyaz sonuc visible-md visible-lg">
 				<div class="panel-body">
-					<span class="kategori fw500">"<?php echo $s; ?>"</span> aramasına uygun 
+					<span class="kategori fw500">"<?php echo $s; ?>"</span> <?php echo _LANG('search_matching'); ?>
 					<?php if ($toplam_icerik>0) { ?>
-					<span class="sayi"><?php echo $toplam_icerik; ?></span> ilan <?php if ($toplam_magaza>0) {echo "ve <span class='sayi'>$toplam_magaza</span> mağaza";} ?> bulundu.
+					<span class="sayi"><?php echo $toplam_icerik; ?></span> <?php echo _LANG('search_found_ads'); ?> <?php if ($toplam_magaza>0) {echo _LANG('p_ve') . " <span class='sayi'>$toplam_magaza</span> " . _LANG('search_found_stores');} ?> <?php echo _LANG('search_bulundu'); ?>
 					<?php } else if ($toplam_icerik==0 and $toplam_magaza>0) {
-						echo "<span class='sayi'>$toplam_magaza</span> mağaza bulundu.";
+						echo "<span class='sayi'>$toplam_magaza</span> " . _LANG('search_store_found');
 					} else { ?>
-					</span> ilan bulunamadı.
+					</span> <?php echo _LANG('listing_not_found'); ?>
 					<?php } ?>
 				</div>
 			</div>
@@ -369,8 +369,8 @@ tema_header(); ?>
 			<div class="panel panel-default beyaz tab mt15">
 				<div class="panel-heading">
 				  <ul class="nav nav-tabs ozel noselect visible-sm visible-md visible-lg" role="tablist">
-					<li role="presentation" <?php if ($toplam_magaza==0 or $toplam_icerik>0) {echo "class='active'";} ?>><a href="#tumu" role="tab" data-toggle="tab">Tüm Sonuçlar <?php if ($toplam_icerik>0) {echo "<span class='badge'>$toplam_icerik</span>";} ?></a></li>
-					<li role="presentation" <?php if ($toplam_icerik==0 and $toplam_magaza>0) {echo "class='active'";} ?>><a href="#magazalar" aria-controls="magazalar" role="tab" data-toggle="tab">Tüm Mağazalar <?php if ($toplam_magaza>0) {echo "<span class='badge'>$toplam_magaza</span>";} ?></a></li>
+					<li role="presentation" <?php if ($toplam_magaza==0 or $toplam_icerik>0) {echo "class='active'";} ?>><a href="#tumu" role="tab" data-toggle="tab"><?php echo _LANG('search_all_results'); ?> <?php if ($toplam_icerik>0) {echo "<span class='badge'>$toplam_icerik</span>";} ?></a></li>
+					<li role="presentation" <?php if ($toplam_icerik==0 and $toplam_magaza>0) {echo "class='active'";} ?>><a href="#magazalar" aria-controls="magazalar" role="tab" data-toggle="tab"><?php echo _LANG('search_all_stores'); ?> <?php if ($toplam_magaza>0) {echo "<span class='badge'>$toplam_magaza</span>";} ?></a></li>
 				  </ul>
 				  <div class="sag">
 					<ul class="listeleme noselect visible-sm visible-md visible-lg">
@@ -401,7 +401,7 @@ tema_header(); ?>
 						$sayfa_url=search_link_getir($s);
 						if ($sayfa>1) {
 							$onceki_sayfa=$sayfa-1;
-							echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+							echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='<?php echo _LANG('f_onceki'); ?>'><i class='ion-chevron-left'></i></a></li>";
 						}		
 						for ($x=1;$x<=$kac_sayfa;$x++) {
 							$bosluk=ceil($kac_sayfa/20)*2.2;
@@ -412,15 +412,15 @@ tema_header(); ?>
 						}
 						if ($sayfa<$kac_sayfa) {
 							$sonraki_sayfa=$sayfa+1; 
-							echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+							echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='<?php echo _LANG('f_sonraki'); ?>'><i class='ion-chevron-right'></i></a></li>";
 						}
 						echo "</ul></div>";
 					}
 					} else { 
 						if (@$uygulanan_filtreler) { 
-							echo "<div class='alert alert-danger'>Kriterlerinize uygun ilan bulunamadı.</div>";
+							echo "<div class='alert alert-danger'>" . _LANG('kriterlere_uygun_ilan_bulunamadi') . "</div>";
 						} else {
-							echo "<div class='alert alert-danger'>İlan bulunamadı.</div>";
+							echo "<div class='alert alert-danger'>" . _LANG('listing_not_found') . "</div>";
 						}
 					} ?>
 					</div>
@@ -468,7 +468,7 @@ tema_header(); ?>
 							</div>
 						</div>
 						<?php } else {
-							echo "<div class='alert alert-danger'>Mağaza bulunamadı.</div>";
+							echo "<div class='alert alert-danger'>" . _LANG('store_not_found') . "</div>";
 						} ?>
 					</div>
 				</div>

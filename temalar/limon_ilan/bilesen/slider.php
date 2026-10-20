@@ -117,8 +117,8 @@ $("#slides").slidesjs({
 		loaded: function() {
 			var slider_buton_top=($("#slides").height()-$(".slidesjs-navigation").height())/2;
 			$(".slidesjs-navigation").css({"top":slider_buton_top});
-			$(".slidesjs-previous").attr("title","Önceki").html("<i class=\"fa fa-angle-left mr0\"></i>");
-			$(".slidesjs-next").attr("title","Sonraki").html("<i class=\"fa fa-angle-right mr0\"></i>");
+			$(".slidesjs-previous").attr("title","'._LANG('f_onceki').'").html("<i class=\"fa fa-angle-left mr0\"></i>");
+			$(".slidesjs-next").attr("title","'._LANG('f_sonraki').'").html("<i class=\"fa fa-angle-right mr0\"></i>");
 		}
 	}
 });

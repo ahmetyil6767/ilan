@@ -134,7 +134,7 @@ $("ul li.dropdown ul").each(function(){
       .hide()
       .end()
       .append(
-        $("<li class=\"c_pointer kategori_more\">Tümünü göster</li>"));
+        $("<li class=\"c_pointer kategori_more\">'._LANG('tumunu_goster').'</li>"));
 	}
 	$("body").on("click","li.kategori_more",function(){
 	  $(this).siblings(":hidden").show().end().remove();
@@ -190,7 +190,7 @@ $("ul li.list-group-item ul").each(function(){
       .hide()
       .end()
       .append(
-        $("<li class=\"c_pointer kategori_more\">Tümünü göster</li>"));
+        $("<li class=\"c_pointer kategori_more\">'._LANG('tumunu_goster').'</li>"));
 	}
 	$("body").on("click","li.kategori_more",function(){
 	  $(this).siblings(":hidden").show().end().remove();
