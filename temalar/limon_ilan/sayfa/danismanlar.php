@@ -28,7 +28,7 @@ if ($islem=="ekle") {
 		
 		$uye_parola=getir("uyeler","parola",$oturum_id);
 		$uye_email_adresi=getir("uyeler","email_adresi",$oturum_id);
-		if (md5($parola)==$uye_parola) {
+		if (parola_dogrula($oturum_id, $parola)) {
 			$email_kontrol=uye_mevcut_mu($email_adresi);
 			if ($email_kontrol and $email_adresi!=$uye_email_adresi) {
 				$temsilci_uye_id=uye_id_getir($email_adresi);

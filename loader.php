@@ -193,8 +193,16 @@ if (strstr(browser_url(), "/$admin_dizini/")) {
 }
 
 if (isset($_COOKIE["auto_login"]) and !@$_SESSION["oturum_id"]) {
+	// otomatik giris anahtari cookie'den gelir; sorguya dogrudan
+	// yapistirmak SQL injection acigi olur - prepared statement kullanilir
 	$auto_login_key=$_COOKIE["auto_login"];
-	$uye_id=mysqli_fetch_array(mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='auto_login_key' and deger='$auto_login_key' and tip='uye'"))[0] ?? null;
+	$oto_giris_sorgu=mysqli_prepare($baglan,"select id from ekstra_bilgi where anahtar='auto_login_key' and deger=? and tip='uye'");
+	mysqli_stmt_bind_param($oto_giris_sorgu,"s",$auto_login_key);
+	mysqli_stmt_execute($oto_giris_sorgu);
+	mysqli_stmt_bind_result($oto_giris_sorgu,$uye_id);
+	mysqli_stmt_fetch($oto_giris_sorgu);
+	mysqli_stmt_close($oto_giris_sorgu);
+	$uye_id=$uye_id ?? null;
 	if ($uye_id) {
 		$_SESSION["oturum_id"]=$uye_id;
 		if (yonetici_mi($uye_id)==true) {

@@ -1255,12 +1255,68 @@ function telefon_format($tel)
 function uye_sorgula($login, $parola)
 {
 	global $baglan;
-	$parola_kripto = md5($parola);
-	$login = mysqli_real_escape_string($baglan, $login);
+	// girdi dogrudan sorguya yapistirilmaz; prepared statement kullanilir
 	if (strpos($login, '@') !== false) {
-		return mysqli_num_rows(mysqli_query($baglan, "select * from uyeler where email_adresi='$login' and parola='$parola_kripto'"));
+		$sorgu = mysqli_prepare($baglan, "select id, parola from uyeler where email_adresi=?");
+	} else {
+		$sorgu = mysqli_prepare($baglan, "select u.id, u.parola from uyeler u inner join ekstra_bilgi eb on eb.id=u.id where eb.anahtar='cep_tel' and eb.tip='uye' and eb.deger=?");
 	}
-	return mysqli_num_rows(mysqli_query($baglan, "select u.* from uyeler u inner join ekstra_bilgi eb on eb.id=u.id where eb.anahtar='cep_tel' and eb.tip='uye' and eb.deger='$login' and u.parola='$parola_kripto'"));
+	mysqli_stmt_bind_param($sorgu, 's', $login);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_bind_result($sorgu, $kayit_id, $kayit_hash);
+	$var = mysqli_stmt_fetch($sorgu);
+	mysqli_stmt_close($sorgu);
+	if (!$var) {
+		return 0;
+	}
+	return parola_dogrula($kayit_id, $parola) ? 1 : 0;
+}
+
+function parola_sakla($parola)
+{
+	// yeni parolalar password_hash ile saklanir (eski md5 yerine)
+	return password_hash($parola, PASSWORD_DEFAULT);
+}
+
+function parola_guncelle_hash($uye_id, $parola)
+{
+	global $baglan;
+	$yeni_hash = parola_sakla($parola);
+	$sorgu = mysqli_prepare($baglan, "update uyeler set parola=? where id=?");
+	mysqli_stmt_bind_param($sorgu, 'si', $yeni_hash, $uye_id);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_close($sorgu);
+}
+
+function parola_dogrula($uye_id, $parola)
+{
+	global $baglan;
+	if (!$uye_id) {
+		return false;
+	}
+	$sorgu = mysqli_prepare($baglan, "select parola from uyeler where id=?");
+	mysqli_stmt_bind_param($sorgu, 'i', $uye_id);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_bind_result($sorgu, $kayit_hash);
+	$var = mysqli_stmt_fetch($sorgu);
+	mysqli_stmt_close($sorgu);
+	if (!$var or !$kayit_hash) {
+		return false;
+	}
+	// once modern ozet; kademeli gecis icin rehash yapilir
+	if (password_verify($parola, $kayit_hash)) {
+		if (password_needs_rehash($kayit_hash, PASSWORD_DEFAULT)) {
+			parola_guncelle_hash($uye_id, $parola);
+		}
+		return true;
+	}
+	// eski md5 ozetlerine geriye donuk uyum; dogru girilirse
+	// sizintiye direncli ozege gecirilir, md5 kayitlari zamanla azalir
+	if (hash_equals((string) $kayit_hash, md5($parola))) {
+		parola_guncelle_hash($uye_id, $parola);
+		return true;
+	}
+	return false;
 }
 function uye_id_getir($login)
 {
@@ -2280,6 +2336,12 @@ function resim_yukle($file, $klasor, $boyutlandir = NULL, $cikti = NULL, $orijin
 	$resim_uzanti = strtolower($resim_uzanti_hazirlik);
 	if (($resim_uzanti == 'png') || ($resim_uzanti == 'jpg') || ($resim_uzanti == 'gif') || ($resim_uzanti == 'jpeg')) {
 		$kontrol = 1;
+		// uzanti beyaz listesinde olsa da dosya icerigini dogrula: gecersiz
+		// gorsel icerik yuklenmesin (uzanti kontrolu tek basina yetersiz)
+		$icerik_dogrulama = getimagesize((string) ($resim_dizisi['tmp_name'] ?? ''));
+		if ($icerik_dogrulama === false) {
+			$kontrol = 0;
+		}
 
 		if (!$klasor) {
 			$klasor = 'images';
@@ -2508,7 +2570,9 @@ function options($veriler, $bol = NULL, $bol2 = NULL)
 		if ($bol2) {
 			$parcala = explode($bol2, $x);
 			$baslik = _DIL_ETIKET(strip_tags($parcala[0]));
-			$value = strip_tags($parcala[1]);
+			// satirda ayrac yoksa deger olarak baslik kullanilir; aksi halde
+			// $parcala[1] tanimlanmamis kalir ve "Undefined array key 1" uyarisi cikar
+			$value = strip_tags($parcala[1] ?? $parcala[0]);
 		}
 		else {
 			$value = $x;

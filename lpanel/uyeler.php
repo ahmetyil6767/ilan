@@ -20,9 +20,9 @@ if ($buton) {
 	$email_adresi=trim($_POST["email_adresi"]);$cep_tel=trim($_POST["cep_tel"]);
 	$parola=$_POST["parola"];
 	if ($parola) {
-		$parola_kripto=md5($parola);
+		$parola_kripto=parola_sakla($parola);
 	} else if (!$parola and $islem=="ekle"){
-		$parola_kripto=md5($ad_soyad);
+		$parola_kripto=parola_sakla($ad_soyad);
 	}		
 	$durum=$_POST["durum"];
 	$yetki=$_POST["yetki"];

@@ -25,8 +25,7 @@ if ($olustur_buton) {
 	$parola=mysqli_real_escape_string($baglan,$_POST["parola"]);
 	$parola_tekrar=mysqli_real_escape_string($baglan,$_POST["parola_tekrar"]);
 	if ($parola==$parola_tekrar) {
-		$parola_md5=md5($parola);
-		$guncelle=guncelle("uyeler","parola",$parola_md5,$uye_id);
+		parola_guncelle_hash($uye_id, $parola);
 		$dogrulama_sil=uye_bilgi_guncelle("parola_dogrulama",null);
 		$_SESSION["mesaj"]=array(_LANG('msj_parola_guncellendi'),"success");
 		yonlendir(ozel_url("giris-yap"));

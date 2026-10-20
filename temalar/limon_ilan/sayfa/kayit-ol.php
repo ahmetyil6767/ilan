@@ -29,10 +29,10 @@ tema_header(); ?>
 					if ($uye_mevcut_mu==1) {
 	echo "<div class='alert alert-danger autoclose'>" . _LANG('ko_email_kullanimda') . "</div>";
 					} else {
-						$md5_parola=md5($parola);
+						$parola_hash=parola_sakla($parola);
 						$tarih_saat=tarih_saat();
 						$url=url_olustur($ad_soyad);
-						$uye_ekle=mysqli_query($baglan,"insert into uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', parola='$md5_parola', tarih_saat='$tarih_saat', yetki='kullanici', durum='0'");
+						$uye_ekle=mysqli_query($baglan,"insert into uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', parola='$parola_hash', tarih_saat='$tarih_saat', yetki='kullanici', durum='0'");
 						$uye_id=mysqli_insert_id($baglan);
 						// Standart paket seçiliyor
                         $standart_paket=tema_ayar("standart_paket");
@@ -73,12 +73,10 @@ tema_header(); ?>
 						<p>Siteye giriş yapmak için <a href=\"$site_url/sayfa/giris-yap\">buraya</a> tıklayın.</p>";
 						auto_mail_add($ad_soyad,$email_adresi,"$mail_baslik - Hoşgeldiniz, $ad_soyad",$ileti);	
 						
-						$ileti_admin="
-	bildirim_ekle(_LANG('ko_yeni_uye_kaydi_bildirim', array($ad_soyad,$site_url,$admin_dizini)),$uye_id,0);
-	auto_mail_add($mail_baslik,$site_email,_LANG('ko_yeni_uye_kaydi', array($ad_soyad)),$ileti_admin);
-						";
+						$ileti_admin=_LANG('ko_yeni_uye_kaydi_bildirim', array($ad_soyad,$site_url,$admin_dizini));
+						bildirim_ekle($ileti_admin,$uye_id,0);
 						$site_email=ayar("site_email");
-						auto_mail_add($mail_baslik,$site_email,"Yeni üye kaydı: $ad_soyad",$ileti_admin);						
+						auto_mail_add($mail_baslik,$site_email,_LANG('ko_yeni_uye_kaydi', array($ad_soyad)),$ileti_admin);
 						// E-posta gönderimi bitti
 						
 						$email_dogrulama=tema_ayar("email_dogrulama");

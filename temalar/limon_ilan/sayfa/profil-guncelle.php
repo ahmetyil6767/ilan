@@ -81,9 +81,8 @@ tema_header(); ?>
 							}
 						}
 						if ($_POST["yeni_parola"] and $_POST["yeni_parola_tekrar"] and $_POST["yeni_parola"]==$_POST["yeni_parola_tekrar"]) {
-							$yeni_parola_md5=md5(trim($_POST["yeni_parola"]));
-							guncelle("uyeler","parola",$yeni_parola_md5,$oturum_id);
-						}							
+							parola_guncelle_hash($oturum_id, trim($_POST["yeni_parola"]));
+						}
 						if ($_POST["tip"]) {
 							uye_bilgi_guncelle("tip",trim($_POST["tip"]),$oturum_id);
 						}							

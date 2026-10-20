@@ -19,6 +19,10 @@ $width=bilesen_ayar("width",$id);
 $oto_oynat=bilesen_ayar("oto_oynat",$id);
 $efekt=bilesen_ayar("efekt",$id);
 $hiz=bilesen_ayar("hiz",$id);
+if (!$hiz or !is_numeric($hiz)) { $hiz=500; }
+if (!$height or !is_numeric($height)) { $height=300; }
+if (!$width or !is_numeric($width)) { $width=300; }
+if (!$efekt) { $efekt='slide'; }
 $sql=mysqli_query($baglan,"select * from listeler where tip='mobil_slider' order by sira asc");
 $slider_sayi=mysqli_num_rows($sql);
 $cikti=null;
