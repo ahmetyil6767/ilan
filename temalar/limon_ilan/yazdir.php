@@ -5,10 +5,16 @@ $baglan=mysqli_connect("$host","$kullanici","$parola","$veritabani");
 // Check connection
 mysqli_query($baglan,"set names utf8mb4");
 date_default_timezone_set('Europe/Istanbul');
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
 error_reporting(0);
 include_once("config/yapilandir.php");
 include_once("config/fonksiyonlar.php");
+/* dil system: yazdir.php bagimsiz giris noktalidir, loader'dan gecmez.
+ * _LANG/_DIL_BASLIK/spec_etiket icin dil ve meta fonksiyonlari yuklenir. */
+include_once("config/dil.php");
+include_once("config/fonksiyonlar_meta.php");
 $id=$_GET["id"];
 
 $logo=tema_ayar("logo");
@@ -146,7 +152,7 @@ foreach ($kategoriler as $kat) {
 						if (isset($deger)) {
 						echo "
 						<tr>
-							<th>$baslik</th>
+							<th>" . spec_etiket($baslik) . "</th>
 							<td>$deger</td>
 						</tr>";
 						}
@@ -193,7 +199,7 @@ foreach ($kategoriler as $kat) {
 			<table>
 				<?php if ($yazar_cep) { ?>
 				<tr>
-					<th style="width:50%;">Cep</th>
+					<th style="width:50%;"><?php echo spec_etiket('Cep'); ?></th>
 					<td><?php echo $yazar_cep; ?></td>
 				</tr>
 				<?php } ?>
@@ -205,7 +211,7 @@ foreach ($kategoriler as $kat) {
 				<?php } ?>
 				<?php if ($yazar_ev) { ?>
 				<tr>
-					<th>Ev</th>
+					<th><?php echo spec_etiket('Ev'); ?></th>
 					<td><?php echo $yazar_ev; ?></td>
 				</tr>
 				<?php } ?>

@@ -362,21 +362,21 @@ tema_header(); ?>
 							if (isset($marka)) {
 								echo "
 								<tr>
-									<th>Marka</th>
+									<th>"._LANG('o_marka')."</th>
 									<td>"._DIL_BASLIK(getir("kategoriler","baslik",$marka), $marka, "kategori")."</td>
 								</tr>";
 							}
 							if (isset($seri)) {
 								echo "
 								<tr>
-									<th>Seri</th>
+									<th>"._LANG('o_seri')."</th>
 									<td>"._DIL_BASLIK(getir("kategoriler","baslik",$seri), $seri, "kategori")."</td>
 								</tr>";
 							}
 							if (isset($model)) {
 								echo "
 								<tr>
-									<th>Model</th>
+									<th>"._LANG('o_model')."</th>
 									<td>"._DIL_BASLIK(getir("kategoriler","baslik",$model), $model, "kategori")."</td>
 								</tr>";
 							}
@@ -397,7 +397,7 @@ tema_header(); ?>
 									if (isset($deger)) {
 									echo "
 									<tr>
-										<th>$baslik</th>
+										<th>".spec_etiket($baslik)."</th>
 										<td>$deger</td>
 									</tr>";
 									}
@@ -545,11 +545,11 @@ tema_header(); ?>
 							unset($veriler_bol[$key]); 
 						} 
 					}
-					echo "<div class='bolum_baslik' style='margin-bottom:8px !important;font-size:13px;font-weight:500;'>$baslik</div>";
+					echo "<div class='bolum_baslik' style='margin-bottom:8px !important;font-size:13px;font-weight:500;'>" . spec_etiket($baslik) . "</div>";
 					echo "<div class='teknik_grup'><div class='row'>";
 					foreach ($veriler_bol as $x) {
 						if (strstr($mevcut_ozellikler,"($x)")) {$checked_yaz="checked='checked'";} else {$checked_yaz=null;}
-						echo "<div class='col-md-a4 col-sm-14 col-xs-21'><div class='checkbox yesil' style='padding:0 !important;margin:0 0 3px 0 !important;'><label class='ozellik' title='$x'><input type='checkbox' name='ozellikler[]' value='$x' $checked_yaz disabled/>$x</label></div></div>";
+						echo "<div class='col-md-a4 col-sm-14 col-xs-21'><div class='checkbox yesil' style='padding:0 !important;margin:0 0 3px 0 !important;'><label class='ozellik' title='" . spec_etiket($x) . "'><input type='checkbox' name='ozellikler[]' value='$x' $checked_yaz disabled/>" . spec_etiket($x) . "</label></div></div>";
 					}
 					echo "</div></div>";
 					if ($g!=$grup_say) {

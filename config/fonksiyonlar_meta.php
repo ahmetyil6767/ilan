@@ -13,6 +13,26 @@
 if (count(get_included_files()) == 1) { die(); }
 
 /*
+ * Kategori ozel alanlari ve teknik ozellik etiketlerini aktif dile cevirir.
+ * Sozluk lang/spec.php icinde kayitli; kayit yoksa kaynak metin dokundurulur.
+ */
+function spec_etiket($etiket)
+{
+	static $sozluk = null;
+	if ($sozluk === null) {
+		$sozluk = require dirname(__DIR__) . '/lang/spec.php';
+	}
+	$etiket = trim((string)$etiket);
+	if ($etiket === '' || aktif_dil() == 'tr') { return $etiket; }
+	if (isset($sozluk[$etiket])) {
+		$idx = aktif_dil() == 'en' ? 0 : (aktif_dil() == 'fr' ? 1 : 2);
+		$deger = $sozluk[$etiket][$idx];
+		if (is_string($deger) && trim($deger) !== '') { return $deger; }
+	}
+	return $etiket;
+}
+
+/*
  * Basliga eklenen metni birlestirip sondaki bosluklari temizler.
  */
 function _META_BIRLESTIR($baslik, $ekle) {

@@ -1369,6 +1369,8 @@ return array(
 	'o_krediye_uygun' => 'Éligible au crédit',
 	'o_kullanim_durumu' => 'Statut d\'occupation',
 	'o_marka' => 'Marque',
+	'o_seri' => 'Série',
+	'o_model' => 'Modèle',
 	'o_metrekare' => 'Surface (mÂ²)',
 	'o_miktar' => 'QuantitÃ©',
 	'o_motor_gucu' => 'Puissance du moteur',

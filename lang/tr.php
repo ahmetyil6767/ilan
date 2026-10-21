@@ -1374,6 +1374,8 @@ return array(
 	'o_krediye_uygun' => 'Krediye uygun',
 	'o_kullanim_durumu' => 'KullanÄ±m durumu',
 	'o_marka' => 'Marka',
+	'o_seri' => 'Seri',
+	'o_model' => 'Model',
 	'o_metrekare' => 'Metrekare',
 	'o_miktar' => 'Miktar',
 	'o_motor_gucu' => 'Motor gÃ¼cÃ¼',

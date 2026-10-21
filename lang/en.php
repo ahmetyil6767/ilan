@@ -1388,6 +1388,8 @@ return array(
 	'o_krediye_uygun'         => 'Mortgage Eligible',
 	'o_kullanim_durumu'       => 'Usage Status',
 	'o_marka'                 => 'Brand',
+	'o_seri'                 => 'Series',
+	'o_model'                => 'Model',
 	'o_metrekare'             => 'Area (mÂ²)',
 	'o_miktar'                => 'Quantity',
 	'o_motor_gucu'            => 'Engine Power',

@@ -161,7 +161,7 @@ if (@$_POST["buton"]=="Filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==
 	foreach ($filtre_parcala as $filtre) {
 		$bol=explode("|",$filtre);
 		$filtre_anahtar=$bol[0];	
-		$filtre_baslik=$bol[1];	
+		$filtre_baslik=spec_etiket($bol[1]);	
 		$filtre_tip=$bol[2];
 		$secenekler=ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]);
 		if (!$filtre_tip) {
