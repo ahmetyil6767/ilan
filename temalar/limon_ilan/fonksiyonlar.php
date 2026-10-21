@@ -1485,9 +1485,14 @@ function tl_karsilik_guncelle() {
 		@$fiyat_usd=bilgi("fiyat_usd",$ilan_id);
 		@$usd_kur=tema_ayar("usd_kur");
 		if (isset($fiyat_usd) and isset($usd_kur) and is_numeric($usd_kur)) {
-			$fiyat=$fiyat_usd*$usd_kur;
-			$fiyat=str_replace(array("."),array(","),$fiyat);
-			bilgi_guncelle("fiyat",$fiyat,$ilan_id);
+			/* PHP 8'de "9000,00" gibi virgullu metin carpimda uyari uretir;
+			   once virgul noktaya cevrilip numerikligi sinanir */
+			$fiyat_baz=str_replace(",", ".", $fiyat_usd);
+			if (is_numeric($fiyat_baz)) {
+				$fiyat=$fiyat_baz*$usd_kur;
+				$fiyat=str_replace(array("."),array(","),$fiyat);
+				bilgi_guncelle("fiyat",$fiyat,$ilan_id);
+			}
 		}
 	}
 	$eur_sql=mysqli_query($baglan,"select i.id from icerik as i INNER JOIN ekstra_bilgi as eb on i.id=eb.id and eb.anahtar='para_birimi' and eb.deger='eur' where i.tip='ilan' and i.durum='1'");
@@ -1496,9 +1501,12 @@ function tl_karsilik_guncelle() {
 		@$fiyat_eur=bilgi("fiyat_eur",$ilan_id);
 		@$eur_kur=tema_ayar("eur_kur");
 		if (isset($fiyat_eur) and isset($eur_kur) and is_numeric($eur_kur)) {
-			$fiyat=$fiyat_eur*$eur_kur;
-			$fiyat=str_replace(array("."),array(","),$fiyat);
-			bilgi_guncelle("fiyat",$fiyat,$ilan_id);
+			$fiyat_baz=str_replace(",", ".", $fiyat_eur);
+			if (is_numeric($fiyat_baz)) {
+				$fiyat=$fiyat_baz*$eur_kur;
+				$fiyat=str_replace(array("."),array(","),$fiyat);
+				bilgi_guncelle("fiyat",$fiyat,$ilan_id);
+			}
 		}
 	}
 	$gbp_sql=mysqli_query($baglan,"select i.id from icerik as i INNER JOIN ekstra_bilgi as eb on i.id=eb.id and eb.anahtar='para_birimi' and eb.deger='gbp' where i.tip='ilan' and i.durum='1'");
@@ -1507,9 +1515,12 @@ function tl_karsilik_guncelle() {
 		@$fiyat_gbp=bilgi("fiyat_gbp",$ilan_id);
 		@$gbp_kur=tema_ayar("gbp_kur");
 		if (isset($fiyat_gbp) and isset($gbp_kur) and is_numeric($gbp_kur)) {
-			$fiyat=$fiyat_gbp*$gbp_kur;
-			$fiyat=str_replace(array("."),array(","),$fiyat);
-			bilgi_guncelle("fiyat",$fiyat,$ilan_id);
+			$fiyat_baz=str_replace(",", ".", $fiyat_gbp);
+			if (is_numeric($fiyat_baz)) {
+				$fiyat=$fiyat_baz*$gbp_kur;
+				$fiyat=str_replace(array("."),array(","),$fiyat);
+				bilgi_guncelle("fiyat",$fiyat,$ilan_id);
+			}
 		}
 	}
 }
