@@ -97,7 +97,19 @@ function meta_title()
 			if (isset($sayfaBasliklari[$sayfa])) {
 				$baslik = _LANG($sayfaBasliklari[$sayfa]) . ' - ' . $site_baslik;
 			} else {
-				$baslik = $site_baslik;
+				/* Statik sayfa (icerik) basligi */
+				/* "hakkimizda-1" -> id 1 */
+				$icerik_id = 0;
+				if (preg_match('/^(.+)-([0-9]+)$/', (string)$sayfa, $m)) {
+					$icerik_id = (int)$m[2];
+				}
+				if (!$icerik_id) { $icerik_id = id_getir("icerik", "url", $sayfa); }
+				if ($icerik_id) {
+					$icerik_baslik = _DIL_BASLIK(bilgi_getir("icerik", "baslik", $icerik_id), $icerik_id, "sayfa");
+					$baslik = $icerik_baslik . ' - ' . $site_baslik;
+				} else {
+					$baslik = $site_baslik;
+				}
 			}
 		} else if ($magaza) {
 			$magaza_baslik = getir("magazalar", "baslik", $magaza);
@@ -142,6 +154,10 @@ function meta_title()
 	if (strstr($php_self, 'profil.php')) {
 		$ad = bilgi_getir("uyeler", "ad_soyad", $_GET["id"]);
 		return _META_BIRLESTIR($ad, $basliga_ekle);
+	}
+
+	if (strstr($php_self, '404.php')) {
+		return _LANG('title_404') . ' - ' . $site_baslik;
 	}
 
 	return $site_baslik;

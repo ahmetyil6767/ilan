@@ -3456,4 +3456,6 @@ return array(
 	'pn_teslim_alindi' => '',
 	'pn_odeme_yapildi' => '',
 	'b_ilaniniz_reddedildi' => '',
+	's_404_baslik' => '404. الصفحة غير موجودة',
+	'title_404' => '404 الصفحة غير موجودة',
 );

@@ -3505,4 +3505,6 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'pn_teslim_alindi' => 'Livré : %s',
 	'pn_odeme_yapildi' => 'Paiement effectué : %s',
 	'b_ilaniniz_reddedildi' => 'Votre annonce a été refusée ! - %s',
+	's_404_baslik' => '404. PAGE NOT FOUND',
+	'title_404' => '404 Page Not Found',
 );

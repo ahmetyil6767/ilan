@@ -80,7 +80,7 @@ function url_yonlendir() {
 		}
 		if ($debug!=1) { 
 			if (!$icerik_id or !$icerik_url) {
-				yonlendir(site_url()."/404");
+				yonlendir(site_url()."/404.php");
 			}
 		}
 		if (browser_url()!=$olmasi_gereken and count($_GET)==1) {
@@ -94,7 +94,7 @@ function url_yonlendir() {
 		$olmasi_gereken=site_url()."/$kategori_id/$kategori_url";
 		if ($debug!=1) { 
 			if (!$kategori_id or !$kategori_url) {
-				yonlendir(site_url()."/404");
+				yonlendir(site_url()."/404.php");
 			}
 		}
 		if (browser_url()!=$olmasi_gereken and count($_GET)==1) {
@@ -107,7 +107,7 @@ function url_yonlendir() {
 		$olmasi_gereken=site_url()."/uye/$uye_id/$uye_url";
 		if ($debug!=1) { 
 			if (!$uye_id or !$uye_url) {
-				yonlendir(site_url()."/404");
+				yonlendir(site_url()."/404.php");
 			}
 		}
 		if (browser_url()!=$olmasi_gereken and count($_GET)==1) {

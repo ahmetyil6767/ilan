@@ -3480,4 +3480,6 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'pn_teslim_alindi' => 'Delivered: %s',
 	'pn_odeme_yapildi' => 'Payment made: %s',
 	'b_ilaniniz_reddedildi' => 'Your listing has been rejected! - %s',
+	's_404_baslik' => '404. SAYFA BULUNAMADI',
+	'title_404' => '404 Sayfa Bulunamadı',
 );
