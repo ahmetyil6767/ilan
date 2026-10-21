@@ -53,8 +53,8 @@ tema_header();
 						?>
 							<tr>
 								<td><a href="<?php echo link_getir($siparis_ilan_id); ?>" target="_blank"><?php echo getir("icerik","baslik",$siparis_ilan_id); ?></a></td>
-								<td class="fiyat"><?php echo $siparis_tutar; ?> <i class="fa fa-try"></i></td>
-								<td class="fiyat"><?php echo $kazanc_hesapla; ?> <i class="fa fa-try"></i></td>
+								<td class="fiyat"><?php echo $siparis_tutar; ?> GMD</td>
+								<td class="fiyat"><?php echo $kazanc_hesapla; ?> GMD</td>
 								<td><a href="<?php echo uye_link_getir($siparis_alici_id); ?>" target="_blank"><?php echo getir("uyeler","ad_soyad",$siparis_alici_id); ?></td>
 								<td><?php echo tarih_saat_bicimlendir($siparis_tarih_saat); ?></td>
 								<td>

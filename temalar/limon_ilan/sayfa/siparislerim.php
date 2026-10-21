@@ -61,7 +61,7 @@ tema_header();
 								?>
 								
 								<div class="visible-xs visible-sm">
-									<?php echo $siparis_tutar; ?> <i class="fa fa-try"></i>
+									<?php echo $siparis_tutar; ?> GMD
 									<?php echo tarih_saat_bicimlendir($siparis_tarih_saat); ?>
 									<?php echo $siparis_tip; ?>
 								</div>
@@ -69,7 +69,7 @@ tema_header();
 								
 								
 								</td>
-								<td class="fiyat visible-md visible-lg"><?php echo $siparis_tutar; ?> <i class="fa fa-try"></i></td>
+								<td class="fiyat visible-md visible-lg"><?php echo $siparis_tutar; ?> GMD</td>
 								<td class="visible-md visible-lg"><?php echo tarih_saat_bicimlendir($siparis_tarih_saat); ?></td>
 								<td class="visible-md visible-lg"><?php echo $siparis_tip; ?></td>
 								<td>

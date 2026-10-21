@@ -138,7 +138,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<th><?php echo $id; ?></th>
 	<td><a href="<?php echo lpanel_uye_profil_url($alici_id); ?>" target="_blank"><?php echo getir("uyeler","ad_soyad",$alici_id); ?> <i class="fa fa-external-link"></i></a></td>
 	<td><a href="<?php echo link_getir($ilan_id); ?>" target="_blank"><?php echo getir("icerik","baslik",$ilan_id); ?> <i class="fa fa-external-link"></i></a></td>
-	<td><?php echo $tutar; ?> <i class="fa fa-try"></i></td>
+	<td><?php echo $tutar; ?> GMD</td>
 	<td><?php echo $tip; ?></td>
 	<td><?php echo $doping_say; ?></td>
 	<td><?php echo $tarih_saat; ?></td>

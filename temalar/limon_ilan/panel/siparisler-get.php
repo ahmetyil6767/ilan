@@ -153,9 +153,9 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><a href="<?php echo lpanel_uye_profil_url($alici_id); ?>"><?php echo getir("uyeler","ad_soyad",$alici_id); ?></a></td>
 	<td><?php if ($tip=="get") { ?><a href="<?php echo lpanel_uye_profil_url($satici_id); ?>"><?php echo getir("uyeler","ad_soyad",$satici_id); ?></a><?php } else {echo "-";} ?></td>
 	<td><?php echo $ilan_id; ?></td>
-	<td><?php echo $tutar; ?> <i class="fa fa-try"></i></td>
+	<td><?php echo $tutar; ?> GMD</td>
 	<td><?php echo ekstra_bilgi_getir("adet",$id,"siparis"); ?></td>
-	<td><?php echo $net_satici_kazanci; ?> <i class="fa fa-try"></i></td>
+	<td><?php echo $net_satici_kazanci; ?> GMD</td>
 	<td><?php echo $tip; ?></td>
 	<td><?php echo $tarih_saat; ?></td>
 	<td><?php 

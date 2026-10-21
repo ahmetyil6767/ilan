@@ -698,9 +698,9 @@ if ($islem=="uye_paket_bilgi") {
 	
 	if ($paket_ucret) {
 		if (limit_politikasi()==2) {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret <i class='fa fa-try mr0'></i> / Tek seferlik</small>";
+			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Tek seferlik</small>";
 		} else {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret <i class='fa fa-try mr0'></i> / Yıl</small>";
+			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Yıl</small>";
 		}
 	} else {$fiyat_yaz=null;}
     
@@ -721,8 +721,8 @@ if ($islem=="uye_paket_bilgi") {
         <li>Aynı Kategorideki İlan Limiti: $paket_kategori_limit</li>
         <li>Fotoğraf Limiti: $paket_foto_limit</li>
         <li>Anında Onay: $paket_onay_yaz</li>
-        <li>İlan Adet Ücreti: $ilan_basina_ucret <i class='fa fa-try mr0'></i></li>
-        <li style='font-size:20px;font-weight:700;color:#FDE82E;'>Ücret: $paket_ucret <i class='fa fa-try mr0'></i></li>
+        <li>İlan Adet Ücreti: $ilan_basina_ucret GMD</li>
+        <li style='font-size:20px;font-weight:700;color:#FDE82E;'>Ücret: $paket_ucret GMD</li>
     </ul>
     </div>
     $avantajlar_son
@@ -760,9 +760,9 @@ if ($islem=="magaza_bilgi") {
 	if ($paket_aninda_onay==1) {$paket_onay_yaz="Evet";} else {$paket_onay_yaz="Hayır";}
 	if ($paket_ucret) {
 		if (limit_politikasi()==2) {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret <i class='fa fa-try mr0'></i> / Tek seferlik</small>";
+			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Tek seferlik</small>";
 		} else {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret <i class='fa fa-try mr0'></i> / Yıl</small>";
+			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Yıl</small>";
 		}
 	} else {$fiyat_yaz=null;}
     $ilan_basina_ucret=number_format($paket_ucret/$paket_ilan_limit,2);
@@ -784,8 +784,8 @@ if ($islem=="magaza_bilgi") {
 		<li>Fotoğraf Limiti: $paket_foto_limit</li>
 		<li>Danışman Limiti: $paket_danisman_limit</li>
 		<li>Anında Onay: $paket_onay_yaz</li>
-        <li>İlan Adet Ücreti: $ilan_basina_ucret <i class='fa fa-try mr0'></i></li>
-        <li style='font-size:20px;font-weight:700;color:#FDE82E;'>Ücret: $paket_ucret <i class='fa fa-try mr0'></i></li>
+        <li>İlan Adet Ücreti: $ilan_basina_ucret GMD</li>
+        <li style='font-size:20px;font-weight:700;color:#FDE82E;'>Ücret: $paket_ucret GMD</li>
 	</ul>
 	</div>
 	$avantajlar_son

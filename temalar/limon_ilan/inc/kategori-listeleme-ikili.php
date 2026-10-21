@@ -36,10 +36,10 @@
 					if ($sahiplendirme!=1 and $gorusulur!=1) {
 						echo $ilan_fiyat;
 						$para_birimi=bilgi("para_birimi",$ilan_id);
-						if ($para_birimi!="try") {
-							$fiyat_tl=fiyat_donustur(bilgi("fiyat",$ilan_id));
-							if ($fiyat_tl) {
-								echo "<div class='clearfix mb5'></div><div class='tablo_tl'><i class='ion-arrow-swap'></i>$fiyat_tl <i class='fa fa-try'></i></div>";
+						if ($para_birimi!="gmd") {
+							$fiyat_gmd=fiyat_donustur(bilgi("fiyat",$ilan_id));
+							if ($fiyat_gmd) {
+								echo "<div class='clearfix mb5'></div><div class='tablo_tl'><i class='ion-arrow-swap'></i>$fiyat_gmd GMD</div>";
 							}
 						}
 					} else {
@@ -105,10 +105,10 @@
 					if ($sahiplendirme!=1 and $gorusulur!=1) {
 						echo $ilan_fiyat;
 						$para_birimi=bilgi("para_birimi",$ilan_id);
-						if ($para_birimi!="try") {
-							$fiyat_tl=fiyat_donustur(bilgi("fiyat",$ilan_id));
-							if ($fiyat_tl) {
-								echo "<div class='clearfix mb5'></div><div class='tablo_tl'><i class='ion-arrow-swap'></i>$fiyat_tl <i class='fa fa-try'></i></div>";
+						if ($para_birimi!="gmd") {
+							$fiyat_gmd=fiyat_donustur(bilgi("fiyat",$ilan_id));
+							if ($fiyat_gmd) {
+								echo "<div class='clearfix mb5'></div><div class='tablo_tl'><i class='ion-arrow-swap'></i>$fiyat_gmd GMD</div>";
 							}
 						}
 					} else {

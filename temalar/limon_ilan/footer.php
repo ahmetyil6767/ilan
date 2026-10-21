@@ -52,9 +52,9 @@ $footer_5_baslik=tema_ayar("footer_5_baslik");
     $apple_store_url=tema_ayar("apple_store");
     ?>
 	<div class="col-md-27">
-		<?php if ($site_telefon) { ?><a href="tel:<?php echo str_replace(' ', '', $site_telefon); ?>"><div class="buton tel"><i class="ion-iphone"></i><?php echo $site_telefon; ?></div></a><?php } ?>
+		<?php if ($site_telefon) { ?><a href="tel:+<?php echo tel_uluslararasi($site_telefon); ?>"><div class="buton tel"><i class="ion-iphone"></i><?php echo $site_telefon; ?></div></a><?php } ?>
 		<?php if ($site_email) { ?><a href="mailto:<?php echo $site_email; ?>"><div class="buton email"><i class="ion-email"></i><?php echo $site_email; ?></div></a><?php } ?>
-		<?php if ($site_whatsapp) { ?><a href="https://wa.me/+90<?php echo $site_whatsapp; ?>"><div class="buton whatsapp"><i class="fa fa-whatsapp"></i><?php echo _LANG('footer_whatsapp_support'); ?>: <?php echo $site_whatsapp; ?></div></a><?php } ?>
+		<?php if ($site_whatsapp) { ?><a href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>"><div class="buton whatsapp"><i class="fa fa-whatsapp"></i><?php echo _LANG('footer_whatsapp_support'); ?>: <?php echo $site_whatsapp; ?></div></a><?php } ?>
 	</div>
 	<div class="col-md-15 sosyal">
 		<div class="pull-right">

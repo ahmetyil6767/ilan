@@ -125,7 +125,7 @@ tema_header(); ?>
 	<h2><?php echo _LANG("title_order_summary"); ?></h2>
 	<div class="satir" style="margin-bottom:5px;">Sipariş Tanımı: <span class="fw600"><?php echo $tanim; ?></span></div>
 	<div class="satir" style="margin-bottom:5px;"><?php echo $alternatif_bilgi_baslik; ?> <span class="fw600"><?php echo $alternatif_bilgi_tanim; ?></span></div>
-	<div class="satir" style="margin-bottom:5px;">Toplam Tutar: <span class="fw600"><?php echo $tutar; ?> <i class="fa fa-try"></i></span></div>			
+	<div class="satir" style="margin-bottom:5px;">Toplam Tutar: <span class="fw600"><?php echo $tutar; ?> GMD</span></div>			
 	<?php if ($siparis_durum==0) { ?>
 	<p><?php echo _LANG('hb_degerli_uyemiz_odeme_yaptiktan_sonra_odeme_bil'); ?></p>
 	<?php } ?>
@@ -140,7 +140,7 @@ tema_header(); ?>
 		<div><?php echo _LANG('hb_satici_islemleri'); ?></div>
 		<div class="panel-body">
 			<p>Sayın <?php echo getir("uyeler","ad_soyad",$oturum_id); ?>, bu siparişte satıcı konumunda bulunuyorsunuz.</p>
-			<p style="margin-bottom:0;">Bu siparişten net <?php echo $net_satici_kazanci; ?> <i class="fa fa-try"></i> kazanacaksınız. GET komisyonu: %<?php echo $get_komisyon; ?> (KDV ve kesintiler dahil)</p>
+			<p style="margin-bottom:0;">Bu siparişten net <?php echo $net_satici_kazanci; ?> GMD kazanacaksınız. GET komisyonu: %<?php echo $get_komisyon; ?> (KDV ve kesintiler dahil)</p>
 		</div>
 		<?php if ($siparis_durum!=0) { ?>
 		<div class="panel-footer">

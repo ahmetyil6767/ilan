@@ -49,7 +49,7 @@ if (!$id) {
 			<p><a href=\"$site_url\">Siteyi Görüntüle</a> - <a href=\"$site_url/$admin_dizini\">Yönetim Paneli</a></p>
 			";
 			$site_email=ayar("site_email");
-			auto_mail_add($mail_baslik,$site_email,"Yeni mağaza paketi yükseltme siparişi: $paket_tutar TL",$ileti_admin);
+			auto_mail_add($mail_baslik,$site_email,"Yeni mağaza paketi yükseltme siparişi: $paket_tutar GMD",$ileti_admin);
 			// E-posta gönderimi bitti	
 			
 			yonlendir(ozel_url("siparis")."?siparis_id=$siparis_id");
@@ -150,8 +150,8 @@ tema_header(); ?>
 								<td><?php echo $danisman_limit; ?></td>
 								<td><?php if ($aninda_onay==1) {echo "<span class='label label-success borderless'>Evet</span>";} else {echo "<span class='label label-danger borderless'>Hayır</span>";} ?></td>
 								<td>7/24</td>
-								<td><?php if ($ilan_basina_ucret) {echo $ilan_basina_ucret." <i class='fa fa-try'></i>";} else {echo "<span class='label label-success borderless'>Ücretsiz</span>";} ?></td>
-                                <td><?php if ($paket_ucret) {echo $paket_ucret." <i class='fa fa-try'></i>";} else {echo "<span class='label label-success borderless'>Ücretsiz</span>";} ?></td>
+								<td><?php if ($ilan_basina_ucret) {echo $ilan_basina_ucret." GMD";} else {echo "<span class='label label-success borderless'>Ücretsiz</span>";} ?></td>
+                                <td><?php if ($paket_ucret) {echo $paket_ucret." GMD";} else {echo "<span class='label label-success borderless'>Ücretsiz</span>";} ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

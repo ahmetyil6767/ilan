@@ -73,7 +73,7 @@ if ($buton) {
 		<p><a href=\"$site_url\">Siteyi Görüntüle</a> - <a href=\"$site_url/$admin_dizini\">Yönetim Paneli</a></p>
 		";
 		$site_email=ayar("site_email");
-		auto_mail_add($mail_baslik,$site_email,"Yeni doping siparişi: $tutar TL",$ileti_admin);						
+		auto_mail_add($mail_baslik,$site_email,"Yeni doping siparişi: $tutar GMD",$ileti_admin);						
 		// E-posta gönderimi bitti			
 		
 		yonlendir(ozel_url("siparis")."?siparis_id=$eklenen_id");
@@ -226,7 +226,7 @@ tema_header();
 											<label>
 											  <input type="checkbox" name="anasayfa_vitrini" value="<?php echo $anasayfa_vitrini; ?>"> Dopingi Seç
 											</label>
-											<span class="pull-right"><?php echo $anasayfa_vitrini; ?> <i class="fa fa-try"></i> / <?php echo "$doping_gecerlilik gün"; ?></span>
+											<span class="pull-right"><?php echo $anasayfa_vitrini; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
 										</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -244,7 +244,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="kategori_vitrini" value="<?php echo $kategori_vitrini; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $kategori_vitrini; ?> <i class="fa fa-try"></i> / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $kategori_vitrini; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
 									</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -262,7 +262,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="acil_acil" value="<?php echo $acil_acil; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $acil_acil; ?> <i class="fa fa-try"></i> / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $acil_acil; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
 									</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -280,7 +280,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="kalin_yazi" value="<?php echo $kalin_yazi; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $kalin_yazi; ?> <i class="fa fa-try"></i> / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $kalin_yazi; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
 									</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -297,7 +297,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="guncelim" value="<?php echo $guncelim; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $guncelim; ?> <i class="fa fa-try"></i> / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $guncelim; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
 									</div>
 									</div>
 								</div>
@@ -309,7 +309,7 @@ tema_header();
 				<div class="col-md-12">
 					<div id="magaza_bilgi" style="color:#fff;">
 						<h1>Toplam Tutar</h1>
-						<h3 style="margin-bottom:25px;"><span id="toplam_tutar">0</span><i class="fa fa-try"></i></h3>
+						<h3 style="margin-bottom:25px;"><span id="toplam_tutar">0</span>GMD</h3>
 						<?php 
 						$doping_kurallari_sayfasi=link_getir(tema_ayar("doping_kurallari"));
 						form_group(array("tip"=>"checkbox","id"=>"onay","baslik"=>"<a href='$doping_kurallari_sayfasi' target='_blank' style='color:#fff;'>Doping kurallarını</a> okudum, onaylıyorum.","gerekli"=>1));

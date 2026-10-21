@@ -145,7 +145,7 @@ tema_header(); ?>
 					<div class="form-group">
 						<label for="cep_tel">Cep Telefonu <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 						<div class="input-group">
-							<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;">0</span>
+							<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;">+220</span>
 							<input type="text" class="form-control cannot_start_with_zero" id="cep_tel" name="cep_tel" placeholder="Cep Telefonu" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;" required>
 						</div>
 	<p class="text-muted" style="font-size:13px;margin-top:5px;color:#e74c3c;"><?php echo _LANG("ko_telefon_sifir"); ?></p>

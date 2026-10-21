@@ -78,8 +78,8 @@ function harita_listeleme($id) {
 		$ilan_fiyat=fiyat_donustur(bilgi("fiyat",$ilan_id));
 		$ilan_fiyat_birim=bilgi("para_birimi",$ilan_id);
 		$ilan_link=link_getir($ilan_id);
-		if ($ilan_fiyat_birim=="try") {
-			$para_birimi="TL";
+		if ($ilan_fiyat_birim=="gmd") {
+			$para_birimi="GMD";
 		} else if ($ilan_fiyat_birim=="usd") {
 			$para_birimi="USD";
 		} else if ($ilan_fiyat_birim=="eur") {

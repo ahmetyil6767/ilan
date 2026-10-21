@@ -72,7 +72,7 @@ tema_header(); ?>
 						<div class="form-group">
 							<label for="magaza_tel"><?php echo _LANG("s_magaza_telefon"); ?></label>
 							<div class="input-group">
-								<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;border-color:#ddd;">0</span>
+								<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;border-color:#ddd;">+220</span>
 								<input type="text" class="form-control cannot_start_with_zero" id="magaza_tel" name="magaza_tel" value="<?php echo $magaza_tel; ?>" placeholder="Ev Telefonu" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
 							</div>
 						</div>

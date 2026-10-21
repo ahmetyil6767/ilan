@@ -222,11 +222,11 @@ if ($limit_politikasi==1) {
 
 $ilan_ekstra_bilgiler=array(
 	array("tip"=>"tab_ac","id"=>"bilgiler","baslik"=>_LANG('s_ilan_bilgileri')),
-	array("tip"=>"text","id"=>"fiyat","baslik"=>"Fiyat","kosul"=>"para_birimi:==(try)"),
+	array("tip"=>"text","id"=>"fiyat","baslik"=>"Fiyat","kosul"=>"para_birimi:==(gmd)"),
 	array("tip"=>"text","id"=>"fiyat_usd","baslik"=>"Fiyat USD","kosul"=>"para_birimi:==(usd)"),
 	array("tip"=>"text","id"=>"fiyat_eur","baslik"=>"Fiyat EUR","kosul"=>"para_birimi:==(eur)"),
 	array("tip"=>"text","id"=>"fiyat_gbp","baslik"=>"Fiyat GBP","kosul"=>"para_birimi:==(gbp)"),
-	array("tip"=>"select","id"=>"para_birimi","baslik"=>"Para Birimi","secenekler"=>options("try,usd,eur,gbp")),
+	array("tip"=>"select","id"=>"para_birimi","baslik"=>"Para Birimi","secenekler"=>options("gmd,usd,eur,gbp")),
 	array("tip"=>"select","id"=>"iletisim","baslik"=>_LANG('ust_contact'),"secenekler"=>options("Profil iletişim bilgileri:1|Özel:2","|",":")),
 	array("tip"=>"text","id"=>"yetkili","baslik"=>_LANG('s_yetkili_kisi'),"kosul"=>"iletisim:==(2)"),
 	array("tip"=>"text","id"=>"yetkili_tel","baslik"=>"Yetkili Telefon","kosul"=>"iletisim:==(2)"),
@@ -288,7 +288,7 @@ if ($magaza_paket_say>0) {
 		$magaza_paket_id=$magaza_paket_dizisi["l_id"];
 		$paket_baslik=liste_bilgi("paket_adi",$magaza_paket_id);
 		$paket_ucret=liste_bilgi("ucret",$magaza_paket_id);
-		$ilan_kategori_ekstra_bilgiler[]=array("tip"=>"text","id"=>"magaza_paket_fiyat-$magaza_paket_id","baslik"=>"$paket_baslik paket kategori özel fiyatı","aciklama"=>"Bu paketin standart fiyatı $paket_ucret TL'dir.","kosul"=>"magaza:==(1)","grup"=>5);
+		$ilan_kategori_ekstra_bilgiler[]=array("tip"=>"text","id"=>"magaza_paket_fiyat-$magaza_paket_id","baslik"=>"$paket_baslik paket kategori özel fiyatı","aciklama"=>"Bu paketin standart fiyatı $paket_ucret GMD'dir.","kosul"=>"magaza:==(1)","grup"=>5);
 	}
 	$ilan_kategori_ekstra_bilgiler[]=array("tip"=>"grup_kapat");
 }
@@ -1448,7 +1448,7 @@ doping_pasiflestir();
 
 function fiyat($icerik_id,$fiyat=null) {
 	$para_birimi=bilgi("para_birimi",$icerik_id);
-	if ($para_birimi=="try") {
+	if ($para_birimi=="gmd") {
 		$fiyat=bilgi("fiyat",$icerik_id);
 	} else if ($para_birimi=="usd") {
 		$fiyat=bilgi("fiyat_usd",$icerik_id);
@@ -1467,7 +1467,12 @@ function fiyat($icerik_id,$fiyat=null) {
 		} else {
 			$fiyat_son=$fiyat;
 		}
-		$fiyat_yaz="$fiyat_son <i class='fa fa-$para_birimi'></i>";
+		/* FontAwesome'da dalasi ikonu olmadigi icin GMD metin olarak basilir */
+		if ($para_birimi=="gmd") {
+			$fiyat_yaz="$fiyat_son GMD";
+		} else {
+			$fiyat_yaz="$fiyat_son <i class='fa fa-$para_birimi'></i>";
+		}
 	}
 	return $fiyat_yaz;
 }
@@ -1477,7 +1482,8 @@ function fiyat_donustur($fiyat)  {
 		return $fiyat_son=number_format($fiyat,0,',','.');
 	}
 }
-function tl_karsilik_guncelle() {
+/* Ilan fiyati yabanci birimde (USD/EUR/GBP) ise GMD karsiligini hesaplar. */
+function gmd_karsilik_guncelle() {
 	global $baglan;
 	$usd_sql=mysqli_query($baglan,"select i.id from icerik as i INNER JOIN ekstra_bilgi as eb on i.id=eb.id and eb.anahtar='para_birimi' and eb.deger='usd' where i.tip='ilan' and i.durum='1'");
 	while ($usd_dizi=mysqli_fetch_array($usd_sql)) {
@@ -1541,15 +1547,20 @@ $son_guncelleme=tema_ayar("kur_guncelleme");
 $kur_guncelleme_dk=tema_ayar("kur_guncelleme_dk");
 $simdi=time();
 	if ($simdi-(strtotime($son_guncelleme))>60*$kur_guncelleme_dk) {
-		$veriler=simplexml_load_file("http://www.tcmb.gov.tr/kurlar/today.xml");
-		$usd_kur=$veriler->Currency[0]->BanknoteSelling;
-		$eur_kur=$veriler->Currency[3]->BanknoteSelling;
-		$gbp_kur=$veriler->Currency[4]->BanknoteSelling;
-		$usd_guncelle=tema_ayar_guncelle("usd_kur",$usd_kur);
-		$eur_guncelle=tema_ayar_guncelle("eur_kur",$eur_kur);
-		$gbp_guncelle=tema_ayar_guncelle("gbp_kur",$gbp_kur);
-		tema_ayar_guncelle("kur_guncelleme",tarih_saat());
-		tl_karsilik_guncelle();
+		/* Gambiya bazli kur kaynagi: 1 USD kac GMD eder.
+		 * TCMB (TL) kaynakları GMD tabanli fiyat sistemini bozuyordu. */
+		$veriler=@json_decode(@file_get_contents("https://open.er-api.com/v6/latest/USD"), true);
+		if (isset($veriler["rates"]["GMD"]) && is_numeric($veriler["rates"]["GMD"])) {
+			$usd_kur=$veriler["rates"]["GMD"];
+			/* EUR/GBP degerleri USD cinsinden döner; GMD karsiligina cevrilir */
+			$eur_gmd = (isset($veriler["rates"]["EUR"]) && $veriler["rates"]["EUR"] > 0) ? $usd_kur / $veriler["rates"]["EUR"] : false;
+			$gbp_gmd = (isset($veriler["rates"]["GBP"]) && $veriler["rates"]["GBP"] > 0) ? $usd_kur / $veriler["rates"]["GBP"] : false;
+			tema_ayar_guncelle("usd_kur",$usd_kur);
+			if ($eur_gmd) { tema_ayar_guncelle("eur_kur",$eur_gmd); }
+			if ($gbp_gmd) { tema_ayar_guncelle("gbp_kur",$gbp_gmd); }
+			tema_ayar_guncelle("kur_guncelleme",tarih_saat());
+			gmd_karsilik_guncelle();
+		}
 	}
 }
 kur_guncelle();

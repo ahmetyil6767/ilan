@@ -267,14 +267,14 @@ tema_header(); ?>
 					<?php 
 					$para_birimi=bilgi("para_birimi");
 					$fiyat=fiyat($id);
-					if ($para_birimi!="try" and $fiyat) {
-						$fiyat_tl_bilgi=bilgi("fiyat");
-						if (!$fiyat_tl_bilgi) {
-							tl_karsilik_guncelle();
+					if ($para_birimi!="gmd" and $fiyat) {
+						$fiyat_gmd_bilgi=bilgi("fiyat");
+						if (!$fiyat_gmd_bilgi) {
+							gmd_karsilik_guncelle();
 						}
-						$fiyat_tl=fiyat_donustur(bilgi("fiyat"));
-						if ($fiyat_tl) {
-							echo "<span class='tl_karsilik'><i class='ion-arrow-swap ibig'></i>$fiyat_tl <i class='fa fa-try'></i></span>";
+						$fiyat_gmd=fiyat_donustur(bilgi("fiyat"));
+						if ($fiyat_gmd) {
+							echo "<span class='tl_karsilik'><i class='ion-arrow-swap ibig'></i>$fiyat_gmd GMD</span>";
 						}
 					}
 					?>
@@ -408,7 +408,7 @@ tema_header(); ?>
 											echo "
 											<tr>
 												<th>" . _LANG('hb_metrekare_fiyati') . "</th>
-												<td>$m2_fiyati <i class='fa fa-try'></i></td>
+												<td>$m2_fiyati GMD</td>
 											</tr>";										
 										}
 									}
@@ -635,10 +635,10 @@ tema_header(); ?>
 						<?php foreach ($tel_dizi as $tel) {
 						$ara_tel=$tel["numara"];
 						if (strstr($ara_tel,"(")) {
-							$ara_tel=str_replace(array("(",")"),array("0",null),$tel["numara"]);
+							$ara_tel=tel_rakamlari($ara_tel);
 						}
 						?>
-						<a href="tel:+90<?php echo $ara_tel; ?>" class="tel_link"><div class="bilgi">
+						<a href="tel:+<?php echo tel_uluslararasi($ara_tel); ?>" class="tel_link"><div class="bilgi">
 							<i class="<?php echo $tel["ikon"]; ?>"></i>
 							<div class="prel">
 							<?php echo $tel["tip"]; ?><span><?php echo $ara_tel; ?></span>
@@ -649,7 +649,7 @@ tema_header(); ?>
 						<?php 
 						$whatsapp_butonu=tema_ayar("whatsapp_butonu");
 						if (($whatsapp_butonu==1 or !$whatsapp_butonu) and isset($cep_tel) and $cep_tel!="") { ?>
-						<a href="https://wa.me/90<?php echo str_replace(" ",null,$cep_tel); ?>" class="tel_link" style="text-decoration:none !important;"><div class="bilgi whatsapp">
+						<a href="https://wa.me/<?php echo tel_uluslararasi($cep_tel); ?>" class="tel_link" style="text-decoration:none !important;"><div class="bilgi whatsapp">
 							<i class="fa fa-whatsapp"></i>
 							<div class="prel">
 							WhatsApp<span><?php echo $cep_tel; ?></span>
@@ -674,9 +674,9 @@ tema_header(); ?>
 						<?php if ((tema_ayar("mobil_fixed_iletisim")!=2) and isset($cep_tel) and $cep_tel!="") { ?>
 						<div class="mobil_fixed_iletisim visible-xs">
 							<div class="iletisim_bilgi"><i class="fa fa-user"></i></i>İlan sahibi: <?php echo getir("uyeler","ad_soyad",$yazar); ?> (<?php echo $magaza_adi; ?>)</div>
-							<a class="tel" href="tel:+90<?php echo $ara_tel; ?>" style="<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) {echo "width:50%;";} else {echo "width:100%;";} ?>"><i class="fa fa-phone"></i>Ara</a>
+							<a class="tel" href="tel:+<?php echo tel_uluslararasi($ara_tel); ?>" style="<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) {echo "width:50%;";} else {echo "width:100%;";} ?>"><i class="fa fa-phone"></i>Ara</a>
 							<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) { ?>
-							<a class="whatsapp" href="https://wa.me/90<?php echo str_replace(" ",null,$cep_tel); ?>" style="width:50%;"><i class="fa fa-whatsapp"></i>WhatsApp</a>
+							<a class="whatsapp" href="https://wa.me/<?php echo tel_uluslararasi($cep_tel); ?>" style="width:50%;"><i class="fa fa-whatsapp"></i>WhatsApp</a>
 							<?php } ?>
 						</div>
 						<?php } ?>
@@ -690,13 +690,10 @@ tema_header(); ?>
 						<p>Üyelik tarihi: <?php echo $uyelik_tarihi; ?></p>
 						<a href="<?php echo $uye_link; ?>">Üyenin tüm ilanlarını görüntüle</a>
 						<div class="clearfix mb7"></div>
-						<?php foreach ($tel_dizi as $tel) { 
+						<?php foreach ($tel_dizi as $tel) {
 						$ara_tel=$tel["numara"];
-						if (strstr($ara_tel,"(")) {
-							$ara_tel=str_replace(array("(",")"),array("0",null),$tel["numara"]);
-						}
 						?>
-						<a href="tel:+90<?php echo $ara_tel; ?>" class="tel_link"><div class="bilgi">
+						<a href="tel:+<?php echo tel_uluslararasi($ara_tel); ?>" class="tel_link"><div class="bilgi">
 							<i class="<?php echo $tel["ikon"]; ?>"></i>
 							<div class="prel">
 							<?php echo $tel["tip"]; ?><span><?php echo $ara_tel; ?></span>
@@ -707,7 +704,7 @@ tema_header(); ?>
 						<?php 
 						$whatsapp_butonu=tema_ayar("whatsapp_butonu");
 						if (($whatsapp_butonu==1 or !$whatsapp_butonu) and isset($cep_tel) and $cep_tel!="") { ?>
-						<a href="https://wa.me/90<?php echo str_replace(" ",null,$cep_tel); ?>" class="tel_link" style="text-decoration:none !important;"><div class="bilgi whatsapp">
+						<a href="https://wa.me/<?php echo tel_uluslararasi($cep_tel); ?>" class="tel_link" style="text-decoration:none !important;"><div class="bilgi whatsapp">
 							<i class="fa fa-whatsapp"></i>
 							<div class="prel">
 							WhatsApp<span><?php echo $cep_tel; ?></span>
@@ -732,9 +729,9 @@ tema_header(); ?>
 						<?php if ((tema_ayar("mobil_fixed_iletisim")!=2) and isset($cep_tel) and $cep_tel!="") { ?>
 						<div class="mobil_fixed_iletisim visible-xs">
 							<div class="iletisim_bilgi"><i class="fa fa-user"></i></i>İlan sahibi: <?php echo getir("uyeler","ad_soyad",$yazar); ?></div>
-							<a class="tel" href="tel:+90<?php echo $ara_tel; ?>" style="<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) {echo "width:50%;";} else {echo "width:100%;";} ?>"><i class="fa fa-phone"></i>Ara</a>
+							<a class="tel" href="tel:+<?php echo tel_uluslararasi($ara_tel); ?>" style="<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) {echo "width:50%;";} else {echo "width:100%;";} ?>"><i class="fa fa-phone"></i>Ara</a>
 							<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) { ?>
-							<a class="whatsapp" href="https://wa.me/90<?php echo str_replace(" ",null,$cep_tel); ?>" style="width:50%;"><i class="fa fa-whatsapp"></i>WhatsApp</a>
+							<a class="whatsapp" href="https://wa.me/<?php echo tel_uluslararasi($cep_tel); ?>" style="width:50%;"><i class="fa fa-whatsapp"></i>WhatsApp</a>
 							<?php } ?>
 						</div>
 						<?php } ?>
@@ -749,16 +746,16 @@ tema_header(); ?>
 						<div class="bilgi">
 							<i class="ion-iphone"></i>
 							<div class="prel">
-							Cep<a href="tel:+90<?php echo $yetkili_tel; ?>" class="tel_link"><span><?php echo $yetkili_tel; ?></span></a>
+							Cep<a href="tel:+<?php echo tel_uluslararasi($yetkili_tel); ?>" class="tel_link"><span><?php echo $yetkili_tel; ?></span></a>
 							</div>
 						</div>
 						
 						<?php if ((tema_ayar("mobil_fixed_iletisim")!=2) and isset($yetkili_tel) and $yetkili_tel!="") { ?>
 						<div class="mobil_fixed_iletisim visible-xs">
 							<div class="iletisim_bilgi"><i class="fa fa-user"></i>İlan sahibi: <?php echo $yetkili; ?></div>
-							<a class="tel" href="tel:+90<?php echo $yetkili_tel; ?>" style="<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) {echo "width:50%;";} else {echo "width:100%;";} ?>"><i class="fa fa-phone"></i>Ara</a>
+							<a class="tel" href="tel:+<?php echo tel_uluslararasi($yetkili_tel); ?>" style="<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) {echo "width:50%;";} else {echo "width:100%;";} ?>"><i class="fa fa-phone"></i>Ara</a>
 							<?php if ($whatsapp_butonu==1 or !$whatsapp_butonu) { ?>
-							<a class="whatsapp" href="https://wa.me/90<?php echo str_replace(" ",null,$yetkili_tel); ?>" style="width:50%;"><i class="fa fa-whatsapp"></i>WhatsApp</a>
+							<a class="whatsapp" href="https://wa.me/<?php echo tel_uluslararasi($yetkili_tel); ?>" style="width:50%;"><i class="fa fa-whatsapp"></i>WhatsApp</a>
 							<?php } ?>
 						</div>
 						<?php } ?>

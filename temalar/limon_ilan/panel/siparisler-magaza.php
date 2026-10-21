@@ -167,7 +167,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=magaza-guncelle&id=<?php echo $magaza_id; ?>" target="_blank"><?php echo getir("magazalar","baslik",$magaza_id); ?></a> <a href="<?php echo magaza_link_getir($magaza_id); ?>" target="_blank"><i class="fa fa-external-link"></i></a></td>
 	<td><?php echo $paket_baslik; ?></td>
 	<td><?php echo $ilan_limit; ?></td>
-	<td><?php echo $tutar; ?> <i class="fa fa-try"></i></td>
+	<td><?php echo $tutar; ?> GMD</td>
 	<td><?php echo $tip; ?></td>
 	<td><?php echo $tarih_saat; ?></td>
 	<td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylandı</span>";} else {echo "<span class='label label-danger'>Ödeme bekleniyor</span>";} ?></td>

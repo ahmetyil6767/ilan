@@ -308,10 +308,10 @@ tema_header(); ?>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-21">
-								<input type="text" name="fiyat_min" id="fiyat_min" value="<?php echo @$_SESSION["filtreler"]["fiyat"]["deger_min"]; ?>" placeholder="min. TL" class="form-control fiyat_mask" data-a-sep="." data-a-dec="," />
+								<input type="text" name="fiyat_min" id="fiyat_min" value="<?php echo @$_SESSION["filtreler"]["fiyat"]["deger_min"]; ?>" placeholder="min. GMD" class="form-control fiyat_mask" data-a-sep="." data-a-dec="," />
 							</div>
 							<div class="col-md-21">
-								<input type="text" name="fiyat_max" id="fiyat_max" value="<?php echo @$_SESSION["filtreler"]["fiyat"]["deger_max"]; ?>" placeholder="max. TL" class="form-control fiyat_mask" data-a-sep="." data-a-dec="," />
+								<input type="text" name="fiyat_max" id="fiyat_max" value="<?php echo @$_SESSION["filtreler"]["fiyat"]["deger_max"]; ?>" placeholder="max. GMD" class="form-control fiyat_mask" data-a-sep="." data-a-dec="," />
 							</div>
 						</div>
 					</div>	

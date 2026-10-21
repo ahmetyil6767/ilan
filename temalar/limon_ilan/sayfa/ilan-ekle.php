@@ -273,7 +273,7 @@ tema_header(); ?>
 							<div class="row">
 								<div class="col-md-12">
 									<select class="form-control" id="para_birimi" name="para_birimi" onchange="paraBirimiDegisti(this.value)">
-										<option value="try" <?php echo (@$_POST['para_birimi']=='try' || !@$_POST['para_birimi']) ? 'selected' : ''; ?>>TRY (₺)</option>
+										<option value="gmd" <?php echo (@$_POST['para_birimi']=='gmd' || !@$_POST['para_birimi']) ? 'selected' : ''; ?>>GMD (D)</option>
 										<option value="usd" <?php echo (@$_POST['para_birimi']=='usd') ? 'selected' : ''; ?>>USD ($)</option>
 										<option value="eur" <?php echo (@$_POST['para_birimi']=='eur') ? 'selected' : ''; ?>>EUR (€)</option>
 										<option value="gbp" <?php echo (@$_POST['para_birimi']=='gbp') ? 'selected' : ''; ?>>GBP (£)</option>
@@ -281,8 +281,8 @@ tema_header(); ?>
 								</div>
 							</div>
 							<div class="row mt10" id="fiyat_alanlari">
-								<div class="col-md-6" id="fiyat_try_alan" style="display:block;">
-									<input type="text" class="form-control" name="fiyat" placeholder="Fiyat (TL)" value="<?php echo @htmlspecialchars($_POST['fiyat']); ?>">
+								<div class="col-md-6" id="fiyat_gmd_alan" style="display:block;">
+									<input type="text" class="form-control" name="fiyat" placeholder="Fiyat (GMD)" value="<?php echo @htmlspecialchars($_POST['fiyat']); ?>">
 								</div>
 								<div class="col-md-6" id="fiyat_usd_alan" style="display:none;">
 									<input type="text" class="form-control" name="fiyat_usd" placeholder="Price (USD)" value="<?php echo @htmlspecialchars($_POST['fiyat_usd']); ?>">

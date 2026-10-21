@@ -163,7 +163,7 @@ foreach ($kategoriler as $kat) {
 								echo "
 								<tr>
 									<th>" . _LANG('hb_metrekare_fiyati') . "</th>
-									<td>$m2_fiyati <i class='fa fa-try'></i></td>
+									<td>$m2_fiyati GMD</td>
 								</tr>";										
 							}
 						}

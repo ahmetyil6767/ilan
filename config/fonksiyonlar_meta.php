@@ -198,3 +198,33 @@ function meta_description()
 
 	return ayar_getir("site_aciklama");
 }
+
+/*
+ * Telefon yardimcilari (Gambiya).
+ *
+ * Sitede tel: ve wa.me baglantilari Gambia ulke koduyla (+220 / 220)
+ * kurulur; Türkiye'ye ozel 90 oneki kullanilamaz.
+ *
+ * tel_rakamlari()      : numaradaki yalnizca rakamlari dondurur.
+ * tel_uluslararasi()   : wa.me / tel:+ baglantilari icin tam uluslararasi
+ *                        numara dondurur. Uye telefonu ulke kodu olmadan
+ *                        girildigi icin (s_telefon_sifir ipucu) 220 onek
+ *                        eklenir; zaten 220 ile baslayan numara degismez.
+ */
+function tel_rakamlari($tel)
+{
+	return preg_replace('/\D/', '', (string) $tel);
+}
+
+function tel_uluslararasi($tel, $ulke_kodu = '220')
+{
+	$rakamlar = tel_rakamlari($tel);
+	if ($rakamlar === '') { return ''; }
+
+	if (substr($rakamlar, 0, strlen($ulke_kodu)) == $ulke_kodu && strlen($rakamlar) > strlen($ulke_kodu)) {
+		return $rakamlar;
+	}
+
+	$rakamlar = ltrim($rakamlar, '0');
+	return $ulke_kodu . $rakamlar;
+}

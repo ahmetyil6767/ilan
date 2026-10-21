@@ -151,7 +151,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><a href="<?php echo lpanel_uye_profil_url($alici_id); ?>" target="_blank"><?php echo getir("uyeler","ad_soyad",$alici_id); ?> <i class="fa fa-external-link"></i></a></td>
 	<td><?php echo $mevcut_paket_adi; ?></td>
 	<td><?php echo $paket_adi; ?></td>
-	<td><?php echo $tutar; ?> <i class="fa fa-try"></i></td>
+	<td><?php echo $tutar; ?> GMD</td>
 	<td><?php echo $tip; ?></td>
 	<td><?php echo $tarih_saat; ?></td>
 	<td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylandı</span>";} else {echo "<span class='label label-danger'>Ödeme bekleniyor</span>";} ?></td>
