@@ -1,0 +1,32 @@
+# Jaayko — Gambiya İlan Panosu
+
+> Jaayko (jaayko.gm), Gambiya'nın ücretsiz ilan panosudur. Araç, emlak, iş ilanı
+> ve günlük ürün ilanlarını dört dilde (Türkçe, English, Français, العربية)
+> yayınlayın ve arayın. Üyelik ve standart ilan vermek ücretsizdir; mağaza
+> açma, ilan öne çıkarma (boost) ve üyelik paketleri ücretlidir ve banka havalesi
+> (EFT) ile ödenir.
+
+## Site haritası
+
+- [Ana sayfa](http://ilan/): Tüm ilanlar, marka kutucukları, filtreler
+- [Araçlar](http://ilan/2/vasita): Vasıta, yedek parça, ikinci el, iş makineleri
+- [Emlak](http://ilan/1/emlak): Konut, işyeri, arsa, bina, devremülk
+- [İş ilanları](http://ilan/8/is-ilanlari): İş ilanları ve yardımcı arayanlar
+- [Hizmetler](http://ilan/6/ustalar-ve-hizmetler): Ustalar ve hizmetler
+- [Mağazalar](http://ilan/sayfa/magazalar/): Mağaza listesi
+- [İlan ver](http://ilan/sayfa/ilan-ekle/): Ücretsiz ilan verme
+- [Giriş yap](http://ilan/sayfa/giris-yap/) / [Üye ol](http://ilan/sayfa/kayit-ol/)
+- [Hakkımızda](http://ilan/sayfa/hakkimizda-1) · [İletişim](http://ilan/sayfa/iletisim-3)
+- [Güvenli E-Ticaret](http://ilan/sayfa/guvenli-e-ticaret-11) ·
+  [Güvenli Alışveriş İpuçları](http://ilan/sayfa/guvenli-alisveris-ipuclari-12)
+- [Kullanım Koşulları](http://ilan/sayfa/kullanim-kosullari-13) ·
+  [Gizlilik Politikası](http://ilan/sayfa/gizlilik-politikasi-15)
+
+## Bilgi
+
+- **Konum:** Banjul, Kanifing, West/North Bank, Lower/Central/Upper River, Kuntaur
+- **Para birimi:** GMD (Gambia dalasi); USD, EUR, GBP gösterim seçeneği
+- **İletişim:** info@jaayko.gm · 220 267 74 08 (WhatsApp destek)
+- **Dil:** Türkçe (kaynak), English, Français, العربية — dil seçici üstte
+- **Ödeme:** Banka havalesi (EFT). Sipariş sonrası ödeme referansı `JA-<siparis_id>`
+  verilir; ödeme yönetici tarafından doğrulanır.

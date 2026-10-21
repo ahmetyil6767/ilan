@@ -1,36 +1,95 @@
-# AGENTS.md — Limon İlan
+# AGENTS.md — Jaayko (Gambiya İlan Panosu)
 
 Bu dosya OpenCode ve bu repoda çalışan diğer AI ajanları için proje talimatıdır.
 Depoya commit edilir; herkes aynı kuralları alır.
 
 ## Proje nedir
 
-`ilan.limontasarim.net` — PHP + MySQL tabanlı **ilan / classified ads** uygulaması.
-"Limon CMS" altyapısı üzerine kurulu; ziyaretçi arayüzü ve yönetim paneli **tek kod
-tabanında** duruyor. Composer, npm, paket yöneticisi **yoktur** — bağımlılıklar
-klasör içine kopyalanmış halde gelir.
+**Jaayko** (`jaayko.gm`) — PHP + MySQL tabanlı **ilan / classified ads** uygulaması.
+"Limon CMS" altyapısı üzerine kurulu; ziyaretçi arayüzü ve yönetim paneli
+**tek kod tabanında** duruyor. Composer, npm, paket yöneticisi **yoktur** —
+bağımlılıklar klasör içine kopyalanmış halde gelir.
 
 - **PHP:** 7.2 için yazıldı, hedef sürüm **8.4** (yerelde 8.4.15 CLI kurulu)
-- **DB:** MariaDB / MySQL, `mysqli` eklentisi, `utf8mb4`
-- **Ölçek:** ~408 PHP dosyası, ~71.000 satır, 24 tablo
+- **DB:** MariaDB / MySQL, `mysqli` eklentisi, `utf8mb4`, veritabanı `jaayko_limon`
+- **Ölçek:** ~228 PHP dosyası (3. parti hariç), ~56.000 satır, 26 tablo
 - **URL:** Apache `mod_rewrite` ile SEO dostu (`.htaccess`)
+
+### Ülke / marka bağlamı — Gambiya
+
+Site **Gambiya** için çalışır; Türkiye'ye özgü hiçbir veri kalmamalıdır.
+
+| Konu | Değer |
+|---|---|
+| Marka | Jaayko (`jaayko.gm`) — `site_baslik` ayarı "Jaayko" |
+| İletişim | `info@jaayko.gm`, `220 267 74 08` (uluslararası: `+220 267 74 08`) |
+| Para birimi | **GMD (dalasi)** — DB'deki tutarlar GMD; `birim_goster()` ziyaretçi birimine çevirir |
+| Kur kaynağı | `open.er-api.com` (1 USD = kaç GMD); eski TCMB/TRY kaynağı **kaldırıldı** |
+| Telefon | `+220`; yerel numara 7 hane, ülke kodu **girdiğinde** yazılmaz (`s_telefon_sifir` ipucu) |
+| Konum | `iller` = 8 Gambia bölgesi (Banjul, Kanifing, West/North Bank, Lower/Central/Upper River, Kuntaur), `ilceler` = 33 ilçe, **`mahalleler` boş — mahalle özelliği kaldırıldı** |
+| Ülke kodu kaynakları | `temalar/limon_ilan/iyzico/**` içindeki `setCountry("Turkey")` gibi eski değerler temizlendi |
+
+**Kural:** Yeni kodu yazarken Türkiye'ye özgü varsayımlar kullanma (+90, TRY, "İl/İlçe/Mahalle"
+terminolojisi, Türk bankası/IBAN'ı, Türkçe para birimi). Bölge: **Region / District**.
+
+## Diller ve çeviri sistemi
+
+Dört dil: **tr (kaynak), en, fr, ar**. Dil `dil` cookie'siyle değişir
+(`?dil=xx` değil — çerez üzerinden). `config/dil.php` dil altyapısını kurar,
+`aktif_dil()` aktif dili döndürür.
+
+`lang/tr.php`, `en.php`, `fr.php`, `ar.php` — **anahtar kümeleri dört dosyada
+birebir aynı olmalı** (test bunu doğrular).
+
+### Çeviri mekanizmaları (hangisini nerede kullanacaksın)
+
+| Mekanizma | Nerede | Not |
+|---|---|---|
+| `_LANG('anahtar')` | Kod içi tüm arayüz metinleri | Yeni metin: 4 dile de anahtar ekle |
+| `spec_etiket('TR metin')` | Sözlük tabanlı **kategori alan etiketleri ve seçenek değerleri** (`lang/spec_a|b|c.php`) | TR metin → EN/FR/AR; kaynak metin sözlükte yoksa aynen görünür |
+| `_DIL_BASLIK($baslik, $id, $tip)` | DB'deki başlıklar (`kategori`, `sayfa`, `linker`, `liste`, `bilesen`) | Çeviriler `ekstra_bilgi` içinde `<tip>_<id>` + `baslik_en/fr/ar` anahtarıyla durur |
+| `kategori_bilgi($anahtar, $id)` | Kategori alan tanımları (`ozel_alanlar`, `filtreler`, `detaylar`, `teknik_ozellikler`, `guvenlik_ipuclari`) | Aktif dil için `<anahtar>_<dil>` kaydı varsa onu okur, yoksa TR kaynağını |
+| `birim_goster($gmd)` | Fiyat gösterimi | Ziyaretçi birimi GMD/USD/EUR/GBP |
+
+**Kural:** Kullanıcı içeriği **çevrilmez** (ilan başlıkları, mağaza/üye adları,
+marka-model adları, ilan özellik *değerleri* kendi kaydıyla). Arayüz metinleri
+her zaman çevrilir.
+
+## Ödeme — havale / EFT
+
+- **Aktif yöntem: banka havalesi (manuel onay).** `odeme_sistemi=havale`,
+  `online_odeme=pasif`, `iyzico_odeme=pasif`.
+- Akış: kullanıcı paket/doping/mağaza siparişi verir → `siparisler` kaydı
+  (`durum=0`) → `siparis.php` havale bilgilerini ve **ödeme referansını**
+  (`JA-<siparis_id>`) gösterir → kullanıcı "ödeme bildirimi" gönderir
+  (`ajax.php?islem=odeme_bildirimi`) → yönetici panelden siparişi onaylar
+  (`?onay=<id>`) → ilan/mağaza/doping/paket özellikleri aktive olur.
+- Havale hesap bilgileri `listeler` tablosunda `tip='hesaplar'` kayıtlarında
+  (`banka_adi`, `ad_soyad`, `iban`) — yönetim panelden güncellenir.
+- **İyzico SDK'sı pasif durumda** (`temalar/limon_ilan/iyzico/`). Kod
+  `siparis.php` içinde hâlâ var ama `online_odeme=aktif` değilse çalışmaz.
 
 ## Çalıştırma ve doğrulama
 
 ```bash
-# Yerel WAMP zaten http://ilan.limontasarim.net üzerinden servis ediyor.
-# Alternatif olarak PHP'nin dahili sunucusu:
-php -S localhost:8000
+# Yerel WAMP zaten http://ilan üzerinden servis ediyor (Host: ilan).
+# Alternatif: php -S localhost:8000
 
 # Testler (veritabanı bağlantısı gerekir, loader.php'i çeker)
-php tests/LanguageSystemTest.php
+php tests/LanguageSystemTest.php     # çıkış kodu 0 = hepsi geçti
 ```
 
-`tests/LanguageSystemTest.php` çıkış kodu döndürür: `0` = hepsi geçti, `1` = hata var.
-Dil ve para birimi sistemini kapsar. **Bir değişiklik yapıp bitirmeden önce çalıştır.**
+**Bir değişiklik yapıp bitirmeden önce şu sırayla doğrula:**
 
-Şu anda tek otomatik test dosyası bu. Yeni bir modül ekliyorsan aynı kalıpla
-kendi testini yaz ve `tests/` altına koy.
+1. `php -l <değişen dosya>` — sözdizimi (her dosya için)
+2. `php tests/LanguageSystemTest.php` — dil/para birimi testi (0 = geçti)
+3. Tüm iç linkleri 4 dilde tarayan smoke test (ör. `tests/` altındaki tarama
+   betikleri) → **PHP hatası olan sayfa sayısı 0** olmalı
+4. Tarayıcıda gerçek kontrol (1-2 sayfa) — özellikle görünüm/JS değiştiyse
+5. `otomatik_yedek.ps1` → commit
+
+`cache/` altındaki HTML cache'i **bayatlayabilir** — değişiklik sonrası
+`cache/` içeriğini sil, yoksa eski HTML sunulur.
 
 ## Yedek politikası — 2 gün
 
@@ -45,9 +104,9 @@ powershell -ExecutionPolicy Bypass -File otomatik_yedek.ps1
 - `otomatik_*` dosyalarını kendisi 2 güne kadar tutar, eskisini siler
   (`yedek_*.sql` adlı manuel geri yükleme noktalarına **dokunmaz**).
 - Kayıt: `SQL\yedekler\yedek_log.txt`. Günlük zamanlanmış görev `LimonYedek`
-  (her gün 03:30) da aynı script'i koşturur; mysqldump ile root şifresiz dump alır.
+  (her gün 03:30) da aynı script'i koşturur.
 - Ek olarak **her DB'de veri değiştiren adımdan önce** o adımı etkileyen tabloların
-  ayrı `yedek_<isim>.sql` yedeği alınır (mevcut kural, aynen geçerli).
+  ayrı `yedek_<isim>.sql` yedeği alınır.
 
 ## Veritabanı
 
@@ -58,31 +117,34 @@ cp config/db.php.example config/db.php
 # sonra host/veritabani/kullanici/parola alanlarını doldur
 ```
 
-Şema kaynağı `SQL/localhost.sql` — ama o dosya da `.gitignore`'da, çünkü
-`uyeler` tablosunda gerçek parola özetleri ve e-posta adresleri var.
+Şema kaynağı `SQL/localhost.sql` — o da `.gitignore`'da (üye parola özetleri ve
+e-posta adresleri içeriyor).
 
 Ayarlar (`ayarlar` tablosu) çoğunlukla **veritabanında** durur, kodda değil.
-Tema ayarları `tema_ayar("anahtar")` ile okunur; API anahtarları (İyzico, Google
-Maps) de oradan gelir — **sabit olarak koda yazma**.
+Tema ayarları `tema_ayar("anahtar")` ile okunur; API anahtarları de oradan gelir —
+**sabit olarak koda yazma**.
 
 ## Dizin haritası
 
 | Yol | Sorumluluk |
 |---|---|
-| `loader.php` | Bootstrap: hata ayarı, DB bağlantısı, oturum, eklenti/tema yükleme. Her istek buradan geçer. |
-| `config/` | `db.php` (gizli), `yapilandir.php` (tema/ayar şemaları), `fonksiyonlar*.php` (çekirdek), `dil.php` |
-| `lang/` | `tr.php`, `en.php`, `fr.php`, `ar.php` — anahtar kümesi dört dosyada **birebir aynı** olmalı |
+| `loader.php` | Bootstrap: hata ayarı, DB, oturum, eklenti/tema yükleme. Her istek buradan geçer. |
+| `config/` | `db.php` (gizli), `yapilandir.php`, `fonksiyonlar*.php` (çekirdek), `dil.php`, `fonksiyonlar_meta.php` (SEO/çeviri yardımcıları) |
+| `lang/` | `tr.php`, `en.php`, `fr.php`, `ar.php` + `spec_a|b|c.php` (sözlük) |
 | `lpanel/` | Yönetim paneli. `admin_dizini` ayarıyla adı değiştirilebilir (varsayılan `lpanel`) |
-| `temalar/limon_ilan/` | Aktif tema + `bilesen/` (bileşenler) + `iyzico/` (ödeme SDK'sı) |
+| `temalar/limon_ilan/` | Aktif tema + `bilesen/` + `panel/` (tema içi yönetim) + `iyzico/` (pasif SDK) |
 | `eklentiler/` | Eklenti modülleri (auto_mail, xml_sitemap, mysql_yedek, favoriler...) |
 | `uploads/` | Kullanıcı yüklemeleri. PHP çalıştırma `.htaccess` ile kapalı. |
-| `SQL/` | Şema/dump klasörü. İçerik repoda değil. |
+| `SQL/` | Şema/dump + `SQL/yedekler/` (otomatik + manuel yedekler) |
 | `tests/` | Otomatik testler |
+| `cache/` | Sayfa HTML cache'i (üretimde; bayatlayabilir) |
+| `AGENTS.md` | **Kurallar** (bu dosya) |
+| `PROJECT_CONTEXT.md` | **Bilgi tabanı**: mimari, veri modeli, iş akışları, sorun giderme |
+| `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` | Diğer araçlar için kısa yönlendirici |
 
 **Üçüncü parti kod — elle değiştirme:**
 `lpanel/js/ckeditor/**`, `eklentiler/smtp/phpmailer/**`,
-`temalar/limon_ilan/iyzico/src/**`. Güncelleme yapacaksan paketin kendi
-sürümünden gelmeli; yamalar ayrı dosyada tutulmalı.
+`temalar/limon_ilan/iyzico/src/**`.
 
 ## Kod kuralları
 
@@ -90,96 +152,96 @@ Mevcut üslubu koru. Refactor gereksiz yere genişletme.
 
 - **Değişken ve fonksiyon adları Türkçe, snake_case:** `$baglan`, `$veritabani`,
   `$uye_ekstra_bilgiler`, `alt_kategori_listele()`, `form_elemani()`.
-  Yeni isim de Türkçe ve mevcut stile uygun olsun.
 - **`array()` tercih edilir**, kısa `[]` sözdizimi az kullanılıyor.
-- **Girinti:** dosyadan dosyaya değişiyor (4 boşluk veya tab). Düzenlediğin
-  dosyanın kendi girintisini koru, dosyayı baştan girintileme.
-- **Dosya başında koruma:** `loader.php` ve `config/yapilandir.php` doğrudan
-  çağrılmayı engelleyen `count(get_included_files())` kontrolü içerir. Yeni
-  giriş noktası dosyası yazarsan aynısını ekle.
-- **Yorumlar Türkçe.** Bazı dosyalar (ör. `loader.php`) Türkçe diyakritik
-  kullanmadan yazılmış (`icin` değil `için`) — bu dosyada o üslubu sürdür.
+- **Girinti:** dosyadan dosyaya değişiyor. Düzenlediğin dosyanın girintisini koru.
+- **Dosya başında koruma:** `loader.php` ve `config/yapilandir.php` içinde
+  `count(get_included_files())` kontrolü var. Yeni giriş noktası dosyası yazarsan
+  aynısını ekle.
+- **Yorumlar Türkçe.** `loader.php` Türkçe diyakritiksiz yazılmıştır (`icin`
+  değil `için`) — o dosyada o üslubu sürdür.
 
 ### Kodlama (encoding) — dikkat
 
 - Tüm dosyalar **UTF-8**. Yeni dosya **BOM'suz UTF-8** olmalı.
-- Depoda **BOM'lu 55 dosya** var (`lang/*.php` dahil). Bunlar ekrana 3 görünmez
-  bayt basar ve sonraki `header()` çağrılarını "headers already sent" ile kırar.
-  **Yeni dosyaya BOM ekleme.** Mevcutları temizlemek ayrı bir iş; kapsam
-  dışıysa dokunma.
-- Dosyayı kaydederken `charset`'i değiştirme. Editörün dosyayı UTF-8'e
-  çevirmesine izin verme.
+- Depoda BOM'lu dosyalar var (`lang/*.php` dahil) — bunlar "headers already sent"
+  kırar. **Yeni dosyaya BOM ekleme**, mevcutlara dokunma.
+- Dosyayı kaydederken `charset`'i değiştirme.
 
 ### Hata ayarı — üretim farkı
 
-`loader.php` şu anda **debug modunda**: `display_errors=1`, `memory_limit=-1`,
-`max_execution_time=120`. Bu yerel geliştirme içindir.
-
-Sunucuya yüklemeden önce `display_errors` **0** olmalı. Bu değişikliği
-"küçük bir düzeltme" gibi sunma — ayrı ve bilinçli bir adım.
+`loader.php` **debug modunda**: `display_errors=1`, `memory_limit=-1`.
+Sunucuya yüklemeden önce `display_errors` **0** olmalı; bunu ayrı ve bilinçli
+bir adım olarak yap.
 
 ## Güvenlik kuralları
 
 `PROJE_RAPORU.md` bu kod tabanındaki 16 bilinen açığı listeler ve her oturumda
-yüklenir. **Yeni açık ekleme.** Mevcut desenleri körü körüne kopyalama.
+yüklenir. **Yeni açık ekleme.**
 
-1. **SQL — string birleştirme yapma.** Tüm sorgular `mysqli_query($baglan,
-   "select ... where id=$id")` biçiminde kuruluyor ve bu **zaten yapısal bir
-   SQL injection açığı**. Yeni kod yazarken prepared statement kullan:
+1. **SQL — string birleştirme yapma.** Sorgular hâlâ `mysqli_query($baglan,
+   "select ... where id=$id")` biçiminde ve bu **yapısal bir SQL injection açığı**.
+   Yeni kodda prepared statement kullan:
    ```php
    $sorgu = mysqli_prepare($baglan, "select * from uyeler where id=?");
    mysqli_stmt_bind_param($sorgu, "i", $id);
    mysqli_stmt_execute($sorgu);
    ```
-   `addslashes()`, `strip_tags()`, `get_security()` ve `tirnak_replace()`
-   SQL için **koruma değildir**. Bunlara güvenme.
+   `addslashes()`, `strip_tags()`, `get_security()`, `tirnak_replace()` SQL için
+   **koruma değildir**.
 
 2. **Çıktıyı kaçır.** `htmlspecialchars($deger, ENT_QUOTES, 'UTF-8')`.
-   Veritabanından gelen metni (`baslik`, `menu`, yorum gövdesi, üye adı)
-   olduğu gibi `echo` etme. `form_elemani()` ve menü fonksiyonları dahil.
 
-3. **Parola.** `uye_sorgula()` MD5 karşılaştırıyor (`fonksiyonlar.php:1232`).
-   MD5 kırıktır. **Yeni** parola yollarında `password_hash()` /
-   `password_verify()` kullan. Mevcut hash'leri geriye dönük uyum
-   bozulmadan değiştir — geçiş `password_needs_rehash()` ile kademeli olmalı.
+3. **Parola.** `password_hash()` / `password_verify()` kullan; geçiş
+   `password_needs_rehash()` ile kademeli. **Not:** `uyeler.parola` kolonu
+   `varchar(255)`'e çıkarıldı — bcrypt 60 karakter, `varchar(40)` sessizce
+   kırpıyordu ve rehash edilen üyeler giriş yapamıyordu.
 
-4. **Yetki kontrolü her yerde.** `$_GET['yetki']`, oturumdaki yetki veya URL
-   segmenti üzerinden karar verme. `lpanel/` altındaki her yazma işlemi
-   yetki kontrolü içermeli.
+4. **Yetki kontrolü her yerde** — `lpanel/` altındaki her yazma işlemi.
 
-5. **Gizli dosyalara dokunma / okuma:**
-   - `config/db.php` — gerçek MySQL parolası
-   - `SQL/*.sql` — üye parola özetleri, e-posta adresleri
-   - `lisans.php` — lisans anahtarı
+5. **Gizli dosyalara dokunma / okuma:** `config/db.php`, `SQL/*.sql`, `lisans.php`.
 
-   Bunlar `.gitignore`'da ve `opencode.jsonc` ile modelin okuması da engelli.
-   `config/db.php.example` vardı; iş yapmak için onu kullan.
+6. **Dosya yükleme.** `getimagesize()` ile içerik doğrula; `uploads/.htaccess`
+   PHP çalıştırmayı engelliyor.
 
-6. **Dosya yükleme.** Uzantı kontrolü tek başına yetersiz. Yeni yükleme yolu
-   yazıyorsan `getimagesize()` ile içerik doğrula ve `uploads/.htaccess`'in
-   PHP çalıştırmayı engellediğinden emin ol.
+7. **CSRF ve çıktı kaçırma** hâlâ eksik olan alanlar (raporda listeli) — yeni
+   form yazarken en azından `htmlspecialchars` kullan.
 
 ## Bilinen tuzaklar
 
-- `loader.php` içinde `mysqli_report(MYSQLI_REPORT_OFF)` bilinçli olarak
-  ayarlanmış. PHP 8.1+ varsayılanı `MYSQLI_REPORT_STRICT` olduğu için, kod
-  7.2'de "düzeltme" gibi görünen hataları fırlatıp sayfayı bozuyor. Bu satırı
-  "temizlik" diye kaldırma.
-- `loader.php` içinde `addslashes`/`strip_tags` ile yapılan global girdi
-  temizliği güvenlik katmanı değil, veri bozucu bir işlemdir.
-- Kategori ağacı fonksiyonları özyinelemeli ve her seviyede ayrı sorgu
-  çalıştırıyor (N+1). Performans sorunu çözmek istersen önce ölç.
-- `config/fonksiyonlar.php` ~1600 satır, yüzlerce fonksiyon içeriyor. Fonksiyon
-  bulmak için `grep` kullan; dosyayı baştan sona okumaya çalışma.
-- Web kökündeki `move_settings.php` tek seferlik bir geçiş betiğidir ve veritabanına
-  yazma yapar. İşi bitmişse silinmeli; sunucuya yüklenmemeli.
+- `loader.php` içinde `mysqli_report(MYSQLI_REPORT_OFF)` bilinçli ayarlı;
+  kaldırma ("temizlik" değil).
+- `loader.php` içindeki global `addslashes`/`strip_tags` girdi temizliği
+  güvenlik katmanı değil, veri bozucu bir işlemdir.
+- Kategori ağacı özyinelemeli, her seviyede ayrı sorgu (N+1) — önce ölç.
+- `config/fonksiyonlar.php` ~1600 satır; fonksiyon bulmak için `grep` kullan.
+- **PHP 8 uyumu:** dizi/eleman olmayan değişken okumaları (`$_GET["x"]`,
+  `$_SESSION["x"]`, `$degisken`) "Undefined array key / variable" üretip sayfayı
+  bozar. Yeni kodda `isset(...)` / `??` kullan; dizi/nesne olmayan yerlerde
+  `count()` çağırma.
+- **Sayfa cache'i** (`cache/`) bayat HTML sunabilir — değişiklikten sonra sil.
+- Dil değişimi **cookie** ile olur; `?dil=xx` sorgu parametresi çalışmaz
+  (testlerde `Cookie: dil=fr` kullan).
+- `id_getir("icerik","url",$sayfa)` çalışmaz: `url` kolonunda id yoktur;
+  `/sayfa/hakkimizda-1` gibi adreslerde id sondan ayrıştırılır (`-N`).
+- Web kökündeki `move_settings.php` tek seferlik geçiş betiğidir; sunucuya
+  yüklenmemeli.
+
+## Yardımcı fonksiyonlar (bu projeye özel)
+
+`config/fonksiyonlar_meta.php`:
+
+- `tel_rakamlari($tel)` — sadece rakamları döndürür.
+- `tel_uluslararasi($tel, $ulke_kodu='220')` — `tel:` / `wa.me` bağlantıları
+  için tam numara (ülke kodu zaten varsa dokunmaz, baştaki 0'ları atar).
+- `koordinat_ayir($koordinat)` — "13.45,-16.57", "13.45--16.57",
+  "-13.45-16.57" formatlarını lat/lon olarak ayırır (Gambiya batı boylamı
+  negatif olduğu için `explode("-")` yetmez).
+- `meta_title()` / `meta_description()` — adres çubuğu ve meta açıklaması.
 
 ## Git
 
 - `main` dalı, remote: `origin` → `https://github.com/ahmetyil6767/ilan.git`
-- **`.gitignore`'a uy.** `uploads/foto/`, `uploads/ajax/`, `SQL/*.sql` ve
-  `config/db.php` asla commit edilmez. Yanlışlıkla `git add .` yapma —
-  önce `git status` kontrol et.
+- **`.gitignore`'a uy.** `uploads/foto/`, `uploads/ajax/`, `SQL/*.sql`,
+  `config/db.php` asla commit edilmez. `git add .` yapma — önce `git status`.
 - Commit mesajları Türkçe, ne yaptığını söyleyen tek cümle.
-- `config/db.php.example`, `.gitignore` ve `.gitattributes` repodadır; bunları
-  düzenlemek yeni ortam kurulumunu etkiler.
+- `config/db.php.example`, `.gitignore` ve `.gitattributes` repodadır.
