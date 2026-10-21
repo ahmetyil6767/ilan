@@ -38,6 +38,7 @@ function resimsiz_listeleme($id) {
 		return;
 	}
 	
+$son_dizi=array();
 	$son_dizi=null;
 	while ($dizi=mysqli_fetch_array($sql)) {
 		$ilan_id=$dizi["id"];

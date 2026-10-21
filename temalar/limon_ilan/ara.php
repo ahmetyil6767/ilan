@@ -41,10 +41,10 @@ if ($islem=="filtre_temizle") {
 }
 if ($kat) {
 	$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat), $kat, "kategori");
-	$_SESSION["filtreler"]["kategori"]=array("id"=>"kategori","baslik"=>"Kategori","tip"=>"text","deger"=>$kat_baslik,"kat_id"=>$kat);
+	$_SESSION["filtreler"]["kategori"]=array("id"=>"kategori","baslik"=>_LANG('filter_category'),"tip"=>"text","deger"=>$kat_baslik,"kat_id"=>$kat);
 }
 
-if (@$_POST["buton"]=="Filtrele") {
+if (@$_POST["buton"]=="filtrele") {
 	unset($_SESSION["filtreler"]);
 	@$_SESSION["kategori_filtreleri"]=$_POST["kategori_filtreleri"];
 	$filtreler=$_SESSION["kategori_filtreleri"];
@@ -73,13 +73,13 @@ if (@$_POST["buton"]=="Filtrele") {
 			}
 		}
 		if ($filtre_tip=="min_max") {
-			$filtre_degeri_min=$_POST[$filtre_anahtar."_min"];
-			$filtre_degeri_max=$_POST[$filtre_anahtar."_max"];
+			$filtre_degeri_min=isset($_POST[$filtre_anahtar."_min"]) ? $_POST[$filtre_anahtar."_min"] : null;
+			$filtre_degeri_max=isset($_POST[$filtre_anahtar."_max"]) ? $_POST[$filtre_anahtar."_max"] : null;
 			if ($filtre_anahtar!="0" and $filtre_degeri_min or $filtre_degeri_max) {
 				$_SESSION["filtreler"][$filtre_anahtar]=array("id"=>$filtre_anahtar,"baslik"=>$filtre_baslik,"deger"=>$filtre_degeri,"tip"=>$filtre_tip,"deger_min"=>$filtre_degeri_min,"deger_max"=>$filtre_degeri_max);	
 			}
 		} else {
-			$filtre_degeri=$_POST[$filtre_anahtar];
+			$filtre_degeri=isset($_POST[$filtre_anahtar]) ? $_POST[$filtre_anahtar] : null;
 			if ($filtre_anahtar!="0" and $filtre_degeri) {
 				$_SESSION["filtreler"][$filtre_anahtar]=array("id"=>$filtre_anahtar,"baslik"=>$filtre_baslik,"deger"=>$filtre_degeri,"tip"=>$filtre_tip,"deger_min"=>$filtre_degeri_min,"deger_max"=>$filtre_degeri_max);
 			}
@@ -93,7 +93,6 @@ if (@$_POST["buton"]=="Filtrele") {
 	// Bölge Filtrelemeleri
 	@$post_il=$_POST["il"];
 	@$post_ilce=$_POST["ilce"];
-	@$post_mahalle=$_POST["mahalle"];
 	if ($post_il) {
 		$post_il_adi=getir("iller","il_adi",$post_il);
 		$_SESSION["filtreler"]["il"]=array("id"=>"il","baslik"=>_LANG('addr_region'),"deger"=>$post_il_adi,"tip"=>"text","deger_id"=>$post_il);
@@ -102,15 +101,11 @@ if (@$_POST["buton"]=="Filtrele") {
 		$post_ilce_adi=getir("ilceler","ilce_adi",$post_ilce);
 		$_SESSION["filtreler"]["ilce"]=array("id"=>"ilce","baslik"=>_LANG('filter_district'),"deger"=>$post_ilce_adi,"tip"=>"text","deger_id"=>$post_ilce);
 	}
-	if ($post_mahalle) {
-		$post_mahalle_adi=getir("mahalleler","mahalle_adi",$post_mahalle);
-		$_SESSION["filtreler"]["mahalle"]=array("id"=>"mahalle","baslik"=>"Mahalle","deger"=>$post_mahalle_adi,"tip"=>"text","deger_id"=>$post_mahalle);
-	}
 	// Fiyat filtrelemesi
 	$post_fiyat_min=nokta_sil($_POST["fiyat_min"]);
 	$post_fiyat_max=nokta_sil($_POST["fiyat_max"]);
 	if ($post_fiyat_min or $post_fiyat_max) {
-		$_SESSION["filtreler"]["fiyat"]=array("id"=>"fiyat","baslik"=>"Fiyat","tip"=>"min_max","deger_min"=>$post_fiyat_min,"deger_max"=>$post_fiyat_max);
+		$_SESSION["filtreler"]["fiyat"]=array("id"=>"fiyat","baslik"=>_LANG('filter_price'),"tip"=>"min_max","deger_min"=>$post_fiyat_min,"deger_max"=>$post_fiyat_max);
 	}
 }
 
@@ -133,10 +128,10 @@ if (@$_SESSION["filtreler"]) {
 				}
 			}
 			if ($filtre_tip=="min_max") {
-				$filtre_degeri_min=$_POST[$filtre_anahtar."_min"];
-				$filtre_degeri_max=$_POST[$filtre_anahtar."_max"];
+				$filtre_degeri_min=isset($_POST[$filtre_anahtar."_min"]) ? $_POST[$filtre_anahtar."_min"] : null;
+				$filtre_degeri_max=isset($_POST[$filtre_anahtar."_max"]) ? $_POST[$filtre_anahtar."_max"] : null;
 			} else {
-				$filtre_degeri=$_POST[$filtre_anahtar];
+				$filtre_degeri=isset($_POST[$filtre_anahtar]) ? $_POST[$filtre_anahtar] : null;
 			}
 			if ($filtre_anahtar!="0") {
 				if ($filtre_degeri or $filtre_degeri_min or $filtre_degeri_max) {
@@ -172,10 +167,6 @@ if (@$_SESSION["filtreler"]) {
 			$ilce_id=$_SESSION["filtreler"]["ilce"]["deger_id"];
 			$filtre_sql.=" RIGHT JOIN ekstra_bilgi as ic ON i.id=ic.id and ic.anahtar='ilce' and ic.deger='$ilce_id'";
 			
-		}
-		if (@$_SESSION["filtreler"]["mahalle"]) {
-			$mahalle_id=$_SESSION["filtreler"]["mahalle"]["deger_id"];
-			$filtre_sql.=" RIGHT JOIN ekstra_bilgi as mh ON i.id=mh.id and mh.anahtar='mahalle' and mh.deger='$mahalle_id'";
 		}
 		if (@$_SESSION["filtreler"]["kategori"]) {
 			$kat_id=$_SESSION["filtreler"]["kategori"]["kat_id"];
@@ -294,17 +285,16 @@ tema_header(); ?>
 			<div id="filtrele" class="visible-md visible-lg">
 				<form action="" method="post">
 				<div class="panel panel-default beyaz filtre">
-					<div class="panel-heading">Adres</div>
+					<div class="panel-heading"><?php echo _LANG('filter_address'); ?></div>
 					<div class="panel-body">
 						<?php $bolgesel=tema_ayar("bolgesel"); if ($bolgesel=="Hayır") { ?>
 						<div id="il_sec" style="margin-bottom:10px;"><?php no_flash_select(_LANG('tx_il_seciniz')); ?></div>
 						<?php } ?>
 						<div id="ilce_sec" style="margin-bottom:10px;"></div>
-						<div id="mahalle_sec"></div>
 					</div>	
 				</div>
 				<div class="panel panel-default beyaz filtre">
-					<div class="panel-heading">Fiyat</div>
+					<div class="panel-heading"><?php echo _LANG('filter_price'); ?></div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-21">
@@ -316,7 +306,7 @@ tema_header(); ?>
 						</div>
 					</div>	
 				</div>
-				<button type="submit" name="buton" id="buton" class="btn btn-primary btn-block" value="Filtrele"><i class="fa fa-filter"></i>Filtrele</button>
+				<button type="submit" name="buton" id="buton" class="btn btn-primary btn-block" value="filtrele"><i class="fa fa-filter"></i><?php echo _LANG('filter_submit'); ?></button>
 				</form>
 			</div>
 		</div>
@@ -486,10 +476,6 @@ if (@$_SESSION["filtreler"]["il"]) {
 if (@$_SESSION["filtreler"]["ilce"]) {
 	$ilce_id=$_SESSION["filtreler"]["ilce"]["deger_id"];
 	$gonder.="&ilce=$ilce_id";
-}
-if (@$_SESSION["filtreler"]["mahalle"]) {
-	$mahalle_id=$_SESSION["filtreler"]["mahalle"]["deger_id"];
-	$gonder.="&mahalle=$mahalle_id";
 } 
 ?>
 <script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/autoNumeric.js"></script>

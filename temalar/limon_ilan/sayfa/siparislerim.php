@@ -54,9 +54,9 @@ tema_header();
 							<tr>
 								<td><?php if ($siparis_tip=="magaza") { ?>
 								<a href="<?php echo magaza_link_getir($siparis_magaza_id); ?>" target="_blank"><?php echo getir("magazalar","baslik",$siparis_magaza_id); ?></a>
-								<?php } else if ($siparis_tip=="paket") {echo "Üyelik paketi siparişi: $siparis_paket_baslik";} else { if ($siparis_ilan_baslik) { ?>
+								<?php } else if ($siparis_tip=="paket") {echo sprintf(_LANG('b_uyelik_paketi_siparis'), $siparis_paket_baslik);} else { if ($siparis_ilan_baslik) { ?>
 								<a href="<?php echo link_getir($siparis_ilan_id); ?>" target="_blank"><?php echo $siparis_ilan_baslik; ?></a>
-								<?php } else {echo "İlan mevcut değil";}
+								<?php } else {echo " . _LANG('s_ilan_mevcut_degil') . ";}
 								} 
 								?>
 								
@@ -78,27 +78,27 @@ tema_header();
 									if ($siparis_durum==0) {
 										echo "<span class='label label-danger borderless'>Bekliyor</span>";
 									} else if ($siparis_durum==1) {
-										echo "<span class='label label-success borderless'>Onaylandı</span>";
+										echo "<span class='label label-success borderless'>" . _LANG('post_approved') . "</span>";
 									} 
 								} else if ($siparis_tip=="get") {
 									if ($siparis_durum==0) {
-										echo "<span class='label label-danger borderless'>Ödeme bekleniyor</span>";
+										echo "<span class='label label-danger borderless'>" . _LANG('order_pending') . "</span>";
 									} else if ($siparis_durum==1) {
-										echo "<span class='label label-success borderless'>Tamamlandı</span>";
+										echo "<span class='label label-success borderless'>" . _LANG('order_completed') . "</span>";
 									} else if ($siparis_durum==2) {
-										echo "<span class='label label-primary borderless'>Ödeme onaylandı</span>";
+										echo "<span class='label label-primary borderless'>" . _LANG('s_odeme_onaylandi') . "</span>";
 									}
 								} else if ($siparis_tip=="paket") {
 									if ($siparis_durum==0) {
 										echo "<span class='label label-danger borderless'>Bekliyor</span>";
 									} else if ($siparis_durum==1) {
-										echo "<span class='label label-success borderless'>Onaylandı</span>";
+										echo "<span class='label label-success borderless'>" . _LANG('post_approved') . "</span>";
 									}									
 								} else if ($siparis_tip=="magaza") {
 									if ($siparis_durum==0) {
 										echo "<span class='label label-danger borderless'>Bekliyor</span>";
 									} else if ($siparis_durum==1) {
-										echo "<span class='label label-success borderless'>Onaylandı</span>";
+										echo "<span class='label label-success borderless'>" . _LANG('post_approved') . "</span>";
 									}									
 								}
 								?>

@@ -46,7 +46,7 @@ tema_header(); ?>
 								form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"E-posta Adresi","gerekli"=>1)); 
 								form_group(array("tip"=>"text","id"=>"konu","baslik"=>"Konu","gerekli"=>1)); 
 								form_group(array("tip"=>"textarea","satir"=>3,"id"=>"mesaj","baslik"=>_LANG('msg_your_message'),"gerekli"=>1)); 
-								form_buton("buton","Gönder","primary");
+								form_buton("buton"," . _LANG('post_submit') . ","primary");
 								?>
 							</form>
 						</div>

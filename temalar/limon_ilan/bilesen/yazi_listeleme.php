@@ -72,6 +72,7 @@ function yazi_listeleme($id) {
 		$kat_sql_yaz=" and kategori like '%($goster)%'";
 	}
 	
+$son_dizi=array();
 	$son_dizi = array();
 	if ($liste=="yeni") {
 		$sql_query = "select * from icerik where tip='yazi' and durum='1' $kat_sql_yaz order by tarih_saat desc limit $offset, $adet";

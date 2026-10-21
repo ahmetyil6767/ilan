@@ -1,6 +1,9 @@
 <?php 
 if(count(get_included_files())==1) {die();}
 @$cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="sayfa";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !@$oturum_id and !$_POST) {
 	$cache_klasor="cache/ilan";
 	$cache_dosya_adi=$id;
@@ -18,6 +21,7 @@ if ($cache==1 and !@$oturum_id and !$_POST) {
 }
 
 $baslik=getir("icerik","baslik");
+$video_url=bilgi("video");
 $durum=getir("icerik","durum");
 $yazar=getir("icerik","yazar");
 $kategoriler=kategori_getir($id,"kategori");
@@ -178,16 +182,15 @@ tema_header(); ?>
 					$gorsel=resim_getir("530_393");
 					$gorsel_full=thumbnail("full");
 					$gorsel_thumb=resim_getir("160_120");
-					$video_url=bilgi("video");
 					$gorsel_full_galeri_url=str_replace(array("%20"),array(" "),$gorsel_full);
 					$galeri_id_getir=id_getir("galeri","resim",$gorsel_full_galeri_url);
-					$onceki_galeri_id=onceki_galeri_id($galeri_id_getir);
-					$sonraki_galeri_id=sonraki_galeri_id($galeri_id_getir);
+					$onceki_galeri_id=onceki_galeri_id(@$galeri_id_getir);
+					$sonraki_galeri_id=sonraki_galeri_id(@$galeri_id_getir);
 					$resim_sayisi=resim_sayisi($id);
 					?>
 					<div class="prelative visible-md visible-lg">
-						<img id="genis_gorsel" src="<?php echo $gorsel; ?>" class="img-responsive visible-md visible-lg <?php if ($resim_sayisi>1) {echo "c_pointer";} ?>" />
-						<?php if ($resim_sayisi>1) { ?>
+						<img id="genis_gorsel" src="<?php echo $gorsel; ?>" class="img-responsive visible-md visible-lg <?php if (@$resim_sayisi>1) {echo "c_pointer";} ?>" />
+						<?php if (@$resim_sayisi>1) { ?>
 						<a id="onceki" class="onceki ileri_geri_buton galeri_gorsel c_pointer"><i class="ion-chevron-left"></i></a>
 						<a id="sonraki" class="sonraki ileri_geri_buton galeri_gorsel c_pointer"><i class="ion-chevron-right"></i></a>
 						<?php } ?>
@@ -197,12 +200,12 @@ tema_header(); ?>
 					<div class="well gorseller visible-md visible-lg">
 						<div class="well-heading">
 							<div class="row">
-								<div class="col-md-21 col-xs-21"><a id="mega_foto" class="c_pointer" data-id="<?php echo $galeri_id_getir; ?>"><i class="ion-arrow-expand"></i><?php echo _LANG('ilan_fotograf_buyut'); ?></a></div>
+								<div class="col-md-21 col-xs-21"><a id="mega_foto" class="c_pointer" data-id="<?php echo @$galeri_id_getir; ?>"><i class="ion-arrow-expand"></i><?php echo _LANG('ilan_fotograf_buyut'); ?></a></div>
 								<div class="col-md-21 col-xs-21"><?php if ($video_url) { ?><a data-toggle="modal" data-target="#video_modal" class="c_pointer"><i class="ion-ios-videocam"></i>Video</a><?php 
 								} else {echo "<span style='color:#999 !important;font-weight:600;'><i class='ion-ios-videocam'></i>Video</span>";} ?></div>
 							</div>
 						</div>
-						<?php if ($resim_sayisi>0) { ?>
+						<?php if (@$resim_sayisi>0) { ?>
 						<div class="padding scroll">
 						<?php 
 						$sql=mysqli_query($baglan,"select * from galeri where icerik_id='$id' order by sira asc");
@@ -230,7 +233,7 @@ tema_header(); ?>
 					<?php 
 					$mobil_slider_sql=mysqli_query($baglan,"select * from galeri where icerik_id='$id' order by sira asc");
 					$mobil_slider_sayisi=mysqli_num_rows($mobil_slider_sql);
-					if ($mobil_slider_sayisi) {
+					if (@$mobil_slider_sayisi) {
 					?>
 					<div class="visible-xs visible-sm">
 						<div id="no_flash_slider"><i class="fa fa-circle-o-notch fa-spin"></i><p><?php echo _LANG('ilan_fotograflar_yukleniyor'); ?></p></div>
@@ -284,10 +287,10 @@ tema_header(); ?>
 							echo "<div class='s_mesaj'>Sahiplendirme <i class='ion-ios-paw'></i></div>";
 						} 
 						if ($gorusulur==1) {
-							echo "<div class='s_mesaj'>Görüşülür</div>";
+							echo "<div class='s_mesaj'>" . _LANG('s_gorusulur') . "</div>";
 						}
 						if ($teklif_usulu==1) {
-							echo "<div class='s_mesaj'>Teklif Usulü</div>";
+							echo "<div class='s_mesaj'>" . _LANG('s_teklif_usulu') . "</div>";
 						}
 					} ?>
 					<?php 
@@ -318,10 +321,10 @@ tema_header(); ?>
 						$kargo_durum=bilgi("kargo_durum",$id);
 						echo "<div class='get_ilan_bilgi'>";
 						echo "<span class='kargo_bilgi $stok_alert'><i class='fa fa-cubes'></i>Ürün Stoğu: $stok</span>";
-						if ($kargo_durum) {if ($kargo_durum=="Ücretsiz Kargo") {$ucretsiz_yaz="ucretsiz";} echo "<span class='kargo_bilgi $ucretsiz_yaz'><i class='fa fa-road'></i>$kargo_durum</span>";}
+						if ($kargo_durum) {if ($kargo_durum==" . _LANG('s_ucretsiz_kargo') . ") {$ucretsiz_yaz="ucretsiz";} echo "<span class='kargo_bilgi $ucretsiz_yaz'><i class='fa fa-road'></i>$kargo_durum</span>";}
 						if ($kargo_durum!="Online Teslimat") {
 							if ($kargo_firma) {echo "<div class='clearfix'></div><span class='kargo_bilgi'><i class='fa fa-truck'></i>$kargo_firma</span>";}
-							if ($kargo_teslimat) {if ($kargo_teslimat=="Aynı gün teslimat") {$ayni_gun_yaz="ayni_gun";} echo "<span class='kargo_bilgi $ayni_gun_yaz'><i class='fa fa-clock-o'></i>$kargo_teslimat</span>";}
+							if ($kargo_teslimat) {if ($kargo_teslimat==" . _LANG('s_ayni_gun') . ") {$ayni_gun_yaz="ayni_gun";} echo "<span class='kargo_bilgi $ayni_gun_yaz'><i class='fa fa-clock-o'></i>$kargo_teslimat</span>";}
 						}
 						echo "</div>";
 						echo "<div class='clearfix mb15'></div>";
@@ -403,8 +406,8 @@ tema_header(); ?>
 									}
 									if ($anahtar=="metrekare") {
 										if (@$metrekare_fiyati==1) {
-											$fiyat_toplam=bilgi("fiyat");
-											$m2_fiyati=fiyat_donustur($fiyat_toplam/$deger);
+											$fiyat_toplam=(float)str_replace(",", ".", bilgi("fiyat"));
+											$m2_fiyati=$deger ? fiyat_donustur($fiyat_toplam/$deger) : "";
 											echo "
 											<tr>
 												<th>" . _LANG('hb_metrekare_fiyati') . "</th>
@@ -795,7 +798,7 @@ tema_header(); ?>
 			 </div>
 			 <div class="form-group">
 				<label for="mesaj">Mesajınız <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-				<textarea class="form-control" id="mesaj" name="mesaj" placeholder="Mesajınız" rows="3" required></textarea>
+				<textarea class="form-control" id="mesaj" name="mesaj" placeholder="<?php echo _LANG('msg_your_message'); ?>" rows="3" required></textarea>
 				<input type="hidden" class="form-control" id="kime" name="kime" value="<?php echo $yazar; ?>">
 				<input type="hidden" class="form-control" id="ilan_id" name="ilan_id" value="<?php echo $id; ?>">
 			 </div>
@@ -834,7 +837,7 @@ tema_header(); ?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-        <button type="submit" id="s_gonder_buton" class="btn btn-danger"><i class="ion-paper-airplane"></i>Gönder</button>
+        <button type="submit" id="s_gonder_buton" class="btn btn-danger"><i class="ion-paper-airplane"></i><?php echo _LANG('post_submit'); ?></button>
       </div>
     </div>
 	</form>
@@ -937,7 +940,7 @@ $(function(){
 	var ileri_geri_buton_yukseklik=$("#onceki").height();
 	$(".ileri_geri_buton").css({"top":(gorsel_yukseklik-ileri_geri_buton_yukseklik)/2+"px"});
 	
-	<?php if ($mobil_slider_sayisi>=2) { ?>
+	<?php if (@$mobil_slider_sayisi>=2) { ?>
 	$("#mobil_slides").slidesjs({
 		width: '530',
 		height: '393',
@@ -956,11 +959,11 @@ $(function(){
 	
 	$('[data-toggle="tooltip"]').tooltip();
 
-	<?php if ($galeri_id_getir) { ?>
+	<?php if (@$galeri_id_getir) { ?>
 	$.ajax({
 		type:"post",
 		url:"<?php echo tema_dizini(); ?>/ajax.php?islem=galeri_sira_bilgi",
-		data:{'galeri_id':<?php echo $galeri_id_getir; ?>,'icerik_id':<?php echo $id; ?>},
+		data:{'galeri_id':<?php echo @$galeri_id_getir; ?>,'icerik_id':<?php echo $id; ?>},
 		success:function(cevap){
 			$("#galeri_sira_bilgi").html(cevap);
 		}

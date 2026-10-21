@@ -48,7 +48,7 @@ $kac_sayfa=ceil($toplam_icerik/$listeleme_adedi);
 			$sayfa_url=kategori_link_getir($_GET["id"]);
 			if ($sayfa>1) {
 				$onceki_sayfa=$sayfa-1;
-				echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+				echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='' . _LANG(\'f_onceki\') . ''><i class='ion-chevron-left'></i></a></li>";
 			}		
 			for ($x=1;$x<=$kac_sayfa;$x++) {
 				if ($x==$sayfa) {$active="class='active'";$link_yaz="";} else {$active="";$link_yaz="href='$sayfa_url/$x'";}
@@ -56,7 +56,7 @@ $kac_sayfa=ceil($toplam_icerik/$listeleme_adedi);
 			}
 			if ($sayfa<$kac_sayfa) {
 				$sonraki_sayfa=$sayfa+1; 
-				echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+				echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='' . _LANG(\'f_onceki\') . ''><i class='ion-chevron-right'></i></a></li>";
 			}
 			echo "</ul></div>";
 		}		

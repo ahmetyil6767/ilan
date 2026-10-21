@@ -29,7 +29,7 @@ if ($buton) {
 	<p><a href=\"$site_url\">Siteyi Görüntüle</a> - <a href=\"$site_url/$admin_dizini\">Yönetim Paneli</a></p>
 	";
 	$site_email=ayar("site_email");
-	auto_mail_add($mail_baslik,$site_email,"Yeni üyelik paketi siparişi: $paket_tutar GMD",$ileti_admin);
+	auto_mail_add($mail_baslik,$site_email,sprintf(_LANG('b_yeni_uyelik_paketi_siparis'), $paket_tutar),$ileti_admin);
 	// E-posta gönderimi bitti	
 	
 	yonlendir(ozel_url("siparis")."?siparis_id=$siparis_id");

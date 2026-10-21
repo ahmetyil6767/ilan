@@ -4,6 +4,12 @@
  * Marka/model/teknik koddaki evrensel degerler sozlukte yok — aynen gosterilir.
  */
 return array(
+	/* Kategori sekmeleri (tab kaydi) - sorgu degeri TR kalir, gorunen metin cevrilir */
+	'Sahibinden' => array('Owner', 'Particulier', 'من المالك'),
+	'Galeriden' => array('Dealer', 'Professionnel', 'تاجر'),
+	'Emlak Ofisinden' => array('Real Estate Office', 'Agence immobilière', 'مكتب عقاري'),
+	'Sıfır' => array('Brand New', 'Neuf', 'جديد'),
+	'İkinci El' => array('Used', 'Occasion', 'مستعمل'),
 	'Ada No' => array('Block No', 'N° d\'îlot', 'رقم المكتب'),
 	'Aidat' => array('Monthly Fee', 'Charges mensuelles', 'الرسوم الشهرية'),
 	'Aylık Fiyat' => array('Monthly Price', 'Prix mensuel', 'الثمن الشهري'),

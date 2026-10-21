@@ -1588,6 +1588,7 @@ function ilan_eklenebilir_magazalar_option($array) {
 		$magaza_baslik=getir("magazalar","baslik",$arr);
 		$magaza_durum=getir("magazalar","durum",$arr);
 		if ($magaza_durum==1) {
+$son_dizi=array();
 			$son_dizi[]=array("deger"=>$arr,"baslik"=>$magaza_baslik);
 		}
 	}

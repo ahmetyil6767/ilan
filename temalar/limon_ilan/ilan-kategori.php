@@ -14,17 +14,15 @@ kategori_icerik_sayisi_guncelle($id);
 
 @$f_il=$_GET["f_il"];
 @$f_ilce=$_GET["f_ilce"];
-@$f_mahalle=$_GET["f_mahalle"];
 
 $filtre_sql=null;
 $filtreler_value=null;
 $tab_dizi=array();
 $vitrin_dizi=array();
 
-if ($f_il or $f_ilce or $f_mahalle) {
+if ($f_il or $f_ilce) {
 	unset($_SESSION["filtreler"]["il"]);
 	unset($_SESSION["filtreler"]["ilce"]);
-	unset($_SESSION["filtreler"]["mahalle"]);
 	if ($f_il) {
 		$f_il_adi=getir("iller","il_adi",$f_il);
 		$_SESSION["filtreler"]["il"]=array("id"=>"il","baslik"=>_LANG('addr_region'),"deger"=>$f_il_adi,"tip"=>"text","deger_id"=>$f_il);
@@ -32,10 +30,6 @@ if ($f_il or $f_ilce or $f_mahalle) {
 	if ($f_ilce) {
 		$f_ilce_adi=getir("ilceler","ilce_adi",$f_ilce);
 		$_SESSION["filtreler"]["ilce"]=array("id"=>"ilce","baslik"=>_LANG('filter_district'),"deger"=>$f_ilce_adi,"tip"=>"text","deger_id"=>$f_ilce);
-	}
-	if ($f_mahalle) {
-		$f_mahalle_adi=getir("mahalleler","mahalle_adi",$f_mahalle);
-		$_SESSION["filtreler"]["mahalle"]=array("id"=>"mahalle","baslik"=>"Mahalle","deger"=>$f_mahalle_adi,"tip"=>"text","deger_id"=>$f_mahalle);
 	}
 	$_SESSION["filtre_kategori"]=$id;
 	yonlendir(kategori_link_getir($id));
@@ -121,7 +115,7 @@ if (@$kat_tablar) {
 		@$parca_deger=$parca_bol[1];
 		@$parca_baslik=$parca_bol[2];
 		@$parca_ikon=$parca_bol[3];
-		$tab_dizi[$parca_deger]=array("id"=>$parca_anahtar,"baslik"=>$parca_baslik,"deger"=>$parca_deger,"ikon"=>$parca_ikon);
+		$tab_dizi[$parca_deger]=array("id"=>$parca_anahtar,"baslik"=>spec_etiket($parca_baslik),"deger"=>$parca_deger,"ikon"=>$parca_ikon);
 	}
 }
 
@@ -135,8 +129,8 @@ if (@$_SESSION["tab"] and @$_SESSION["tab"]["id"]!="tumu") {
 	$filtre_sql.="RIGHT JOIN ekstra_bilgi as et ON i.id=et.id and et.anahtar='$tab_id' and et.deger='$tab_deger' ";
 }
 
-if (@$_POST["buton"]=="Filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==$_SESSION["filtre_kategori"])) {
-	if (@$_POST["buton"]=="Filtrele") {
+if (@$_POST["buton"]=="filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==$_SESSION["filtre_kategori"])) {
+	if (@$_POST["buton"]=="filtrele") {
 		unset($_SESSION["filtreler"]);
 	}
 	
@@ -163,7 +157,7 @@ if (@$_POST["buton"]=="Filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==
 		$filtre_anahtar=$bol[0];	
 		$filtre_baslik=spec_etiket($bol[1]);	
 		$filtre_tip=$bol[2];
-		$secenekler=ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]);
+		$secenekler=isset($ozel_alanlar_dizi[$filtre_anahtar]) ? ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]) : null;
 		if (!$filtre_tip) {
 			if (is_array($secenekler)) {
 				$filtre_tip="select";
@@ -178,7 +172,7 @@ if (@$_POST["buton"]=="Filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==
 				$_SESSION["filtreler"][$filtre_anahtar]=array("id"=>$filtre_anahtar,"baslik"=>$filtre_baslik,"deger"=>$filtre_degeri,"tip"=>$filtre_tip,"deger_min"=>$filtre_degeri_min,"deger_max"=>$filtre_degeri_max);	
 			}
 		} else {
-			$filtre_degeri=$_POST[$filtre_anahtar];
+			$filtre_degeri=isset($_POST[$filtre_anahtar]) ? $_POST[$filtre_anahtar] : null;
 			if ($filtre_anahtar!="0" and $filtre_degeri) {
 				$_SESSION["filtreler"][$filtre_anahtar]=array("id"=>$filtre_anahtar,"baslik"=>$filtre_baslik,"deger"=>$filtre_degeri,"tip"=>$filtre_tip,"deger_min"=>$filtre_degeri_min,"deger_max"=>$filtre_degeri_max);
 			}
@@ -192,7 +186,6 @@ if (@$_POST["buton"]=="Filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==
 	// Bölge Filtrelemeleri
 	@$post_il=$_POST["il"];
 	@$post_ilce=$_POST["ilce"];
-	@$post_mahalle=$_POST["mahalle"];
 	if ($post_il) {
 		$post_il_adi=getir("iller","il_adi",$post_il);
 		$_SESSION["filtreler"]["il"]=array("id"=>"il","baslik"=>_LANG('addr_region'),"deger"=>$post_il_adi,"tip"=>"text","deger_id"=>$post_il);
@@ -201,15 +194,11 @@ if (@$_POST["buton"]=="Filtrele" or (is_array(@$_SESSION["filtreler"]) and $id==
 		$post_ilce_adi=getir("ilceler","ilce_adi",$post_ilce);
 		$_SESSION["filtreler"]["ilce"]=array("id"=>"ilce","baslik"=>_LANG('filter_district'),"deger"=>$post_ilce_adi,"tip"=>"text","deger_id"=>$post_ilce);
 	}
-	if ($post_mahalle) {
-		$post_mahalle_adi=getir("mahalleler","mahalle_adi",$post_mahalle);
-		$_SESSION["filtreler"]["mahalle"]=array("id"=>"mahalle","baslik"=>"Mahalle","deger"=>$post_mahalle_adi,"tip"=>"text","deger_id"=>$post_mahalle);
-	}
 	// Fiyat filtrelemesi
-	$post_fiyat_min=nokta_sil(strip_tags($_POST["fiyat_min"]));
-	$post_fiyat_max=nokta_sil(strip_tags($_POST["fiyat_max"]));
+	$post_fiyat_min=isset($_POST["fiyat_min"]) ? nokta_sil(strip_tags($_POST["fiyat_min"])) : null;
+	$post_fiyat_max=isset($_POST["fiyat_max"]) ? nokta_sil(strip_tags($_POST["fiyat_max"])) : null;
 	if ($post_fiyat_min or $post_fiyat_max) {
-		$_SESSION["filtreler"]["fiyat"]=array("id"=>"fiyat","baslik"=>"Fiyat","tip"=>"min_max","deger_min"=>$post_fiyat_min,"deger_max"=>$post_fiyat_max);
+		$_SESSION["filtreler"]["fiyat"]=array("id"=>"fiyat","baslik"=>_LANG('filter_price'),"tip"=>"min_max","deger_min"=>$post_fiyat_min,"deger_max"=>$post_fiyat_max);
 	}
 }
 
@@ -224,12 +213,24 @@ if (@$_SESSION["filtreler"]) {
 	if ($id==$_SESSION["filtre_kategori"]) {
 		if (is_array(@$_SESSION["filtreler"])) {
 			foreach ($_SESSION["filtreler"] as $filtre) {
-			$bol=explode("|",$filtre);
-			$filtre_anahtar=$filtre["id"];	
-			$filtre_baslik=$filtre["baslik"];	
-			$filtre_tip=$filtre["tip"];	
+			/*
+			 * Filtreler session'a iki formatta yazilabiliyor:
+			 *  - dizi  : array("id"=>..,"baslik"=>..,"tip"=>..)
+			 *  - string: "id|baslik|tip"
+			 * Ikisi de desteklenir; aksi halde explode() dizi hatasi verir.
+			 */
+			if (is_array($filtre)) {
+				$filtre_anahtar=isset($filtre["id"]) ? $filtre["id"] : "";
+				$filtre_baslik=isset($filtre["baslik"]) ? $filtre["baslik"] : "";
+				$filtre_tip=isset($filtre["tip"]) ? $filtre["tip"] : "";
+			} else {
+				$bol=explode("|",(string)$filtre);
+				$filtre_anahtar=isset($bol[0]) ? $bol[0] : "";
+				$filtre_baslik=isset($bol[1]) ? $bol[1] : "";
+				$filtre_tip=isset($bol[2]) ? $bol[2] : "";
+			}
 			
-			$secenekler=ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]);
+			$secenekler=isset($ozel_alanlar_dizi[$filtre_anahtar]) ? ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]) : null;
 			if (!$filtre_tip) {
 				if (is_array($secenekler)) {
 					$filtre_tip="select";
@@ -278,10 +279,6 @@ if (@$_SESSION["filtreler"]) {
 		if (@$_SESSION["filtreler"]["ilce"]) {
 			$ilce_id=$_SESSION["filtreler"]["ilce"]["deger_id"];
 			$filtre_sql.=" RIGHT JOIN ekstra_bilgi as ic ON i.id=ic.id and ic.anahtar='ilce' and ic.deger='$ilce_id'";
-		}
-		if (@$_SESSION["filtreler"]["mahalle"]) {
-			$mahalle_id=$_SESSION["filtreler"]["mahalle"]["deger_id"];
-			$filtre_sql.=" RIGHT JOIN ekstra_bilgi as mh ON i.id=mh.id and mh.anahtar='mahalle' and mh.deger='$mahalle_id'";
 		}
 		if (@$_SESSION["filtreler"]["fiyat"]) {
 			$fiyat_min=$_SESSION["filtreler"]["fiyat"]["deger_min"];
@@ -360,6 +357,9 @@ WHERE i.tip='ilan' and i.durum='1' and $sql_kategori and i.id not in ($haric_idl
 $toplam_ilan=mysqli_num_rows($sql);
 
 $cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="sayfa-$sayfa";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !@$oturum_id and !$_POST and !@$_GET["tab"] and !@$_GET["sirala"] and !@$_GET["gorunum"]) {
 	$cache_klasor="cache/kategori/$id";
 	$cache_dosya_adi="sayfa-$sayfa";
@@ -458,18 +458,17 @@ tema_header(); ?>
 			<form action="" method="post" class="filtre_sm_hide">
 			<div class="filtre_mobil_scroll scroll">
 				<div class="panel panel-default beyaz filtre">
-					<div class="panel-heading">Adres</div>
+					<div class="panel-heading"><?php echo _LANG('filter_address'); ?></div>
 					<div class="panel-body">
-					
+
 						<?php $bolgesel=tema_ayar("bolgesel"); if ($bolgesel=="Hayır") { ?>
 						<div id="il_sec" style="margin-bottom:10px;"><?php no_flash_select(_LANG('tx_il_seciniz')); ?></div>
 						<?php } ?>
 						<div id="ilce_sec" style="margin-bottom:10px;"></div>
-						<div id="mahalle_sec"></div>
-					</div>	
+					</div>
 				</div>
 				<div class="panel panel-default beyaz filtre">
-					<div class="panel-heading">Fiyat</div>
+					<div class="panel-heading"><?php echo _LANG('filter_price'); ?></div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-xs-21">
@@ -494,7 +493,7 @@ tema_header(); ?>
 							$filtre_anahtar=$filtre_parcala[0];
 							$filtre_baslik=isset($filtre_parcala[1]) ? $filtre_parcala[1] : null;
 							@$filtre_tip=$filtre_parcala[2];
-							$secenekler=ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]);
+							$secenekler=isset($ozel_alanlar_dizi[$filtre_anahtar]) ? ozel_alan_secenekler($ozel_alanlar_dizi[$filtre_anahtar]) : null;
 							if (!$filtre_tip) {
 								if (is_array($secenekler)) {
 									$filtre_tip="select";
@@ -552,7 +551,7 @@ tema_header(); ?>
 				}
 				?>
 			</div>
-			<button type="submit" name="buton" id="buton" class="btn btn-primary btn-block" value="Filtrele"><i class="fa fa-filter"></i>Filtrele</button>
+			<button type="submit" name="buton" id="buton" class="btn btn-primary btn-block" value="filtrele"><i class="fa fa-filter"></i><?php echo _LANG('filter_submit'); ?></button>
 			</form>
 		
 		</div>
@@ -636,7 +635,7 @@ tema_header(); ?>
 						$tab_ikon=$tab["ikon"];
 						if (@$_SESSION["tab"]["id"]==$tab_id and @$_SESSION["tab"]["deger"]==$tab_deger) {$active_yaz="class='active'";} else {$active_yaz=null;}
 						if ($tab_ikon) {$tab_ikon_yaz="<i class='$tab_ikon'></i>";} else {$tab_ikon_yaz=null;}
-						$kod.="<li role='presentation' $active_yaz><a href='$tab_taban_url?tab=$tab_id&ara=$tab_deger'>$tab_ikon_yaz$tab_deger</a></li>";
+						$kod.="<li role='presentation' $active_yaz><a href='$tab_taban_url?tab=$tab_id&ara=$tab_deger'>$tab_ikon_yaz" . spec_etiket($tab_deger) . "</a></li>";
 					}
 					echo $kod;
 					?>
@@ -722,10 +721,6 @@ if (@$_SESSION["filtreler"]["il"]) {
 if (@$_SESSION["filtreler"]["ilce"]) {
 	$ilce_id=$_SESSION["filtreler"]["ilce"]["deger_id"];
 	$gonder.="&ilce=$ilce_id";
-}
-if (@$_SESSION["filtreler"]["mahalle"]) {
-	$mahalle_id=$_SESSION["filtreler"]["mahalle"]["deger_id"];
-	$gonder.="&mahalle=$mahalle_id";
 } 
 
 ?>

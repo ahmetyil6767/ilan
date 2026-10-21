@@ -38,6 +38,14 @@ if (file_exists(ROOT_DIR."/config/db.php")) {
 }
 session_start();
 /*
+ * Oturum mesaji her sayfada kullanilir; tanimsiz gelirse PHP 8'de
+ * "Undefined array key" uyarisi uretip ciktiyi bozuyor. Varsayilan
+ * deger atanir; icerik daha sonra sayfa tarafindan yazilir.
+ */
+if (!isset($_SESSION["mesaj"]) or !is_array($_SESSION["mesaj"])) {
+	$_SESSION["mesaj"] = array();
+}
+/*
  * Dil altyapisi, yapilandirmadan ONCE yuklenir.
  *
  * config/yapilandir.php icerik tiplerini ve ayar etiketlerini tanimlar

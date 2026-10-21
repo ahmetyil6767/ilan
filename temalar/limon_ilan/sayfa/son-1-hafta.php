@@ -1,5 +1,8 @@
 <?php 
 $cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="son-1-hafta";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !$oturum_id) {
 	$cache_klasor="cache/sayfa";
 	$cache_dosya_adi="son-1-hafta";

@@ -296,7 +296,7 @@ tema_header(); ?>
 										echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 									}
 									if ($gorusulur==1) {
-										echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+										echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 									}
 								}
 								?>
@@ -306,13 +306,13 @@ tema_header(); ?>
 									if ($ilan_durum==0) {
 										echo "<span class='label label-danger borderless'>Taslak</span>";
 									} else if ($ilan_durum==1) {
-										echo "<span class='label label-success borderless'>Yayında</span>";
+										echo "<span class='label label-success borderless'>" . _LANG('post_published') . "</span>";
 									} else if ($ilan_durum==2) {
 										echo "<span class='label label-info borderless'>Onay bekliyor</span>";
 									} else if ($ilan_durum==3) {
-										echo "<span class='label label-warning borderless'>Yayından kaldırıldı</span>";
+										echo "<span class='label label-warning borderless'>" . _LANG('s_yayindan_kaldirildi') . "</span>";
 									} else if ($ilan_durum==4) {
-										echo "<span class='label label-danger borderless'>Süresi doldu</span>";
+										echo "<span class='label label-danger borderless'>" . _LANG('post_expired') . "</span>";
 									}
 								?></td>
 								<td>
@@ -360,7 +360,7 @@ tema_header(); ?>
 											<li><a href="<?php echo ozel_url("ilanlarim")."?taslak=$ilan_id"; ?>"><?php echo _LANG("post_save_draft"); ?></a></li>
 										<?php } ?>
 									  <li><a href="<?php echo ozel_url("doping")."?ilan_id=$ilan_id"; ?>"><?php echo _LANG("title_buy_boost"); ?></a></li>
-									  <li><a href="<?php echo ozel_url("ilanlarim")."?sil=$ilan_id"; ?>" onclick="return confirm('İlanı kalıcı olarak silmek istiyor musunuz? Bu işlemin geri dönüşü olmayacaktır.')">Sil</a></li>
+									  <li><a href="<?php echo ozel_url("ilanlarim")."?sil=$ilan_id"; ?>" onclick="return confirm('' . _LANG(\'tx_ilan_silme_onayi\') . '')">Sil</a></li>
 									</ul>
 								  </div>
 								</div>
@@ -378,7 +378,7 @@ tema_header(); ?>
 				$sayfa_url=ozel_url("ilanlarim");
 				if ($sayfa>1) {
 					$onceki_sayfa=$sayfa-1;
-					echo "<li><a href='$sayfa_url?sayfa=$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+					echo "<li><a href='$sayfa_url?sayfa=$onceki_sayfa' aria-label='' . _LANG(\'f_onceki\') . ''><i class='ion-chevron-left'></i></a></li>";
 				}		
 				for ($x=1;$x<=$kac_sayfa;$x++) {
 					if ($x==$sayfa) {$active="class='active'";$link_yaz="";} else {$active="";$link_yaz="href='$sayfa_url?sayfa=$x'";}
@@ -386,7 +386,7 @@ tema_header(); ?>
 				}
 				if ($sayfa<$kac_sayfa) {
 					$sonraki_sayfa=$sayfa+1; 
-					echo "<li><a href='$sayfa_url?sayfa=$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+					echo "<li><a href='$sayfa_url?sayfa=$sonraki_sayfa' aria-label='' . _LANG(\'f_onceki\') . ''><i class='ion-chevron-right'></i></a></li>";
 				}
 				echo "</ul></div>";
 			} 

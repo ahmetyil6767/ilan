@@ -35,7 +35,7 @@ if (@$send_mail) {
 				<p>" . _LANG('hb_baglanti_acilmiyorsa_lutfen_asagidaki_url_yi_k') . "</p>
 				<p>$email_dogrulama_url</p>
 				";
-				auto_mail_add($ad_soyad,$email_adresi,"E-posta adresinizi doğrulayın - $mail_baslik",$ileti);	
+				auto_mail_add($ad_soyad,$email_adresi,sprintf(_LANG('p_eposta_dogrulama'), $mail_baslik),$ileti);	
 				$_SESSION["mesaj"]=array(_LANG('msj_eposta_dogrulama_gonderildi'),"success");
 			} else {
 	$_SESSION["mesaj"]=array(_LANG('pb_dogrulama_gonderildi', array($kontrol_tarihi)),"warning");
@@ -59,7 +59,7 @@ if (@$send_mail) {
 			<p>" . _LANG('hb_baglanti_acilmiyorsa_lutfen_asagidaki_url_yi_k') . "</p>
 			<p>$email_dogrulama_url</p>
 			";
-			auto_mail_add($ad_soyad,$email_adresi,"E-posta adresinizi doğrulayın - $mail_baslik",$ileti);	
+			auto_mail_add($ad_soyad,$email_adresi,sprintf(_LANG('p_eposta_dogrulama'), $mail_baslik),$ileti);	
 			$_SESSION["mesaj"]=array(_LANG('msj_eposta_dogrulama_gonderildi'),"success");
 		}
 		yonlendir(ozel_url("profil-bilgilerim"));

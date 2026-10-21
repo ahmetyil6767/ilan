@@ -121,7 +121,7 @@ tema_header(); ?>
 				</div>
 			</div>
 			<?php } else {
-				echo "<div class='alert alert-danger'>Mesaj bulunamadı.</div>";
+				echo "<div class='alert alert-danger'>" . _LANG('msg_not_found') . "</div>";
 			} ?>
 			<?php } else { ?>
 			<div class="panel panel-default limon with_footer">
@@ -141,7 +141,7 @@ tema_header(); ?>
 						<div class="input-group ara">
 						  <input type="text" class="form-control" name="mesaj" id="mesaj_input" autocomplete="off" />
 						  <span class="input-group-btn">
-							<button type="submit" id="m_gonder_buton" class="btn btn-primary" value="Gönder"><i class="ion-paper-airplane"></i><?php echo _LANG("post_submit"); ?></button>
+							<button type="submit" id="m_gonder_buton" class="btn btn-primary" value="<?php echo _LANG('post_submit'); ?>"><i class="ion-paper-airplane"></i><?php echo _LANG("post_submit"); ?></button>
 						  </span>
 						</div>
 					</form>

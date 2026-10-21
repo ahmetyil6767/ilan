@@ -2303,6 +2303,22 @@ function kategori_bilgi($anahtar, $kategori_id = NULL)
 		$kategori_id = $_GET['id'];
 	}
 
+	/*
+	 * Kategori alan tanimlari (ozel alanlar, filtreler, detaylar,
+	 * teknik ozellikler) icin dil kaydi varsa onu oku.
+	 * Kayit yoksa Turkce (kaynak) icerik doner.
+	 */
+	$ceviriAnahtarlari = array('ozel_alanlar', 'filtreler', 'detaylar', 'teknik_ozellikler');
+	if (in_array($anahtar, $ceviriAnahtarlari) and function_exists('aktif_dil')) {
+		$dil = aktif_dil();
+		if ($dil and $dil != 'tr') {
+			$ceviri = ekstra_bilgi_getir($anahtar . '_' . $dil, $kategori_id, 'kategori');
+			if ($ceviri) {
+				return $ceviri;
+			}
+		}
+	}
+
 	return ekstra_bilgi_getir($anahtar, $kategori_id, 'kategori');
 }
 
@@ -2314,7 +2330,8 @@ function kategori_icerik_sayisi($kategori_id, $durum = 1)
 
 function url_kontrol($url)
 {
-	$headers = get_headers($url);
+	$headers = @get_headers($url);
+	if (!$headers or !isset($headers[0])) { return false; }
 	return stripos($headers[0], '200 OK') ? true : false;
 }
 

@@ -28,14 +28,14 @@ if (!$magaza_baslik) {
 	$_SESSION["mesaj"]=array(_LANG('pn_boyle_bir_magaza_mevcut_degil'),".");
 	yonlendir(site_url());
 }
-if (@$_SESSION["sirala"]) {
-	if ($_SESSION["sirala"]=="tarih_yeni") {
+if (isset($_SESSION["sirala"])) {
+	if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_yeni") {
 		$orderby_sql="i.tarih_saat desc";
-	} else if ($_SESSION["sirala"]=="tarih_eski") {
+	} else if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_eski") {
 		$orderby_sql="i.tarih_saat asc";
-	} else if ($_SESSION["sirala"]=="fiyat_artan") {
+	} else if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_artan") {
 		$orderby_sql="convert(ef.deger, decimal) asc";
-	} else if ($_SESSION["sirala"]=="fiyat_azalan") {
+	} else if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_azalan") {
 		$orderby_sql="convert(ef.deger, decimal) desc";
 	} else {
 		$orderby_sql="i.tarih_saat desc";
@@ -147,11 +147,11 @@ tema_header(); ?>
 
 				  <div class="sag">
 					<select id="jump" name="jump">
-					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=gelismis" <?php if ($_SESSION["sirala"]=="gelismis" or !$_SESSION["sirala"]) {echo "selected='selected'";} ?>><?php echo _LANG("search_advanced"); ?></option>
-					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=fiyat_artan" <?php if ($_SESSION["sirala"]=="fiyat_artan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_asc"); ?></option>
-					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=fiyat_azalan" <?php if ($_SESSION["sirala"]=="fiyat_azalan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_desc"); ?></option>
-					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=tarih_yeni" <?php if ($_SESSION["sirala"]=="tarih_yeni") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_desc"); ?></option>
-					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=tarih_eski" <?php if ($_SESSION["sirala"]=="tarih_eski") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_asc"); ?></option>
+					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=gelismis" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="gelismis" or !($_SESSION["sirala"] ?? "")) {echo "selected='selected'";} ?>><?php echo _LANG("search_advanced"); ?></option>
+					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=fiyat_artan" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_artan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_asc"); ?></option>
+					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=fiyat_azalan" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_azalan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_desc"); ?></option>
+					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=tarih_yeni" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_yeni") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_desc"); ?></option>
+					  <option value="<?php echo magaza_link_getir($id); ?>?sirala=tarih_eski" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_eski") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_asc"); ?></option>
 					</select>
 				  </div>
 				</div>
@@ -198,7 +198,7 @@ tema_header(); ?>
 											echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 										}
 										if ($gorusulur==1) {
-											echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+											echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 										}
 									}
 									?>
@@ -237,7 +237,7 @@ tema_header(); ?>
 									echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 								}
 								if ($gorusulur==1) {
-									echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+									echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 								}
 							}
 							?>
@@ -262,7 +262,7 @@ tema_header(); ?>
 				$sayfa_url=magaza_link_getir($id)."?sayfa=";
 				if ($sayfa>1) {
 					$onceki_sayfa=$sayfa-1;
-					echo "<li><a href='$sayfa_url$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+					echo "<li><a href='$sayfa_url$onceki_sayfa' aria-label='' . _LANG(\'f_onceki\') . ''><i class='ion-chevron-left'></i></a></li>";
 				}		
 				for ($x=1;$x<=$kac_sayfa;$x++) {
 					$bosluk=ceil($kac_sayfa/20)*2.2;
@@ -273,13 +273,13 @@ tema_header(); ?>
 				}
 				if ($sayfa<$kac_sayfa) {
 					$sonraki_sayfa=$sayfa+1; 
-					echo "<li><a href='$sayfa_url$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+					echo "<li><a href='$sayfa_url$sonraki_sayfa' aria-label='' . _LANG(\'f_onceki\') . ''><i class='ion-chevron-right'></i></a></li>";
 				}
 				echo "</ul></div>";
 			}
 			} else {
 				if (@$uygulanan_filtreler) { 
-					echo "<div class='alert alert-danger'>Kriterlerinize uygun ilan bulunamadı.</div>";
+					echo "<div class='alert alert-danger'>" . _LANG('kriterlere_uygun_ilan_bulunamadi') . "</div>";
 				} else {
 					echo "<div class='alert alert-danger'><?php echo _LANG('listing_not_found'); ?></div>";
 				} 

@@ -1,6 +1,9 @@
 <?php 
 if(count(get_included_files())==1) {die();}
 $cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="fiyati-dusenler";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !$oturum_id) {
 	$cache_klasor="cache/sayfa";
 	$cache_dosya_adi="fiyati-dusenler";
@@ -36,6 +39,7 @@ if ($toplam>0) {
 $sql=mysqli_query($baglan,"SELECT i.id from icerik as i INNER JOIN ekstra_bilgi as eb ON i.id=eb.id and eb.anahtar='fiyat_dustu' and eb.deger='1' and i.durum='1' order by tarih_saat desc limit $baslangic, $listeleme_adedi");
 while ($dizi=mysqli_fetch_array($sql)) {
 	$ilan_id=$dizi["id"];
+$son_dizi=array();
 	$son_dizi[]=$ilan_id;
 }
 $sayi=count($son_dizi);
@@ -102,8 +106,11 @@ $fiyat_goster="Evet";
 					$fiyat=fiyat($ilan_id);
                     $yeni_fiyat=bilgi("fiyat",$ilan_id);
 					$eski_fiyat=bilgi("eski_fiyat",$ilan_id);
-					@$oran=round(100-(100/($eski_fiyat/$yeni_fiyat)));
-					if ($eski_fiyat) {
+					$oran=null;
+					if ($eski_fiyat and $yeni_fiyat) {
+						$oran=round(100-(100/((float)str_replace(",", ".",$eski_fiyat)/(float)str_replace(",", ".",$yeni_fiyat))));
+					}
+					if ($eski_fiyat and $oran!==null) {
 						$oran_yaz="<div class='oran_layer'><i class='ion-arrow-down-c'></i>%$oran</div>";
 					}
 				}

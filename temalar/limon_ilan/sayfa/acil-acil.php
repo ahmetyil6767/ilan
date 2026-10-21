@@ -1,6 +1,9 @@
 <?php 
 if(count(get_included_files())==1) {die();}
 $cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="acil-acil";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !$oturum_id) {
 	$cache_klasor="cache/sayfa";
 	$cache_dosya_adi="acil-acil";
@@ -34,6 +37,7 @@ if ($toplam>0) {
 }
 
 $sql=mysqli_query($baglan,"SELECT i.id from icerik as i INNER JOIN dopingler as dp ON i.id=dp.ilan_id and dp.doping='acil_acil' and dp.durum='1' and i.durum='1' order by i.g_tarih_saat desc limit $baslangic, $listeleme_adedi");
+$son_dizi=array();
 while ($dizi=mysqli_fetch_array($sql)) {
 	$ilan_id=$dizi["id"];
 	$son_dizi[]=$ilan_id;

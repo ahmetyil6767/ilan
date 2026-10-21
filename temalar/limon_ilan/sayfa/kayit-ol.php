@@ -102,7 +102,7 @@ tema_header(); ?>
 							<p>" . _LANG('hb_baglanti_acilmiyorsa_lutfen_asagidaki_url_yi_k') . "</p>
 							<p>$email_dogrulama_url</p>
 							";
-							auto_mail_add($ad_soyad,$email_adresi,"E-posta adresinizi doğrulayın - $mail_baslik",$ileti);	
+							auto_mail_add($ad_soyad,$email_adresi,sprintf(_LANG('p_eposta_dogrulama'), $mail_baslik),$ileti);	
 						}
 						
 						$uyelik_tip_guncelle=uye_bilgi_guncelle("tip",$uyelik_tip,$uye_id);

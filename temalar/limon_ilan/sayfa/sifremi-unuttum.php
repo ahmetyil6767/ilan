@@ -56,8 +56,8 @@ tema_header(); ?>
 							<p>Merhaba <strong>$mail_ad_soyad</strong></p>
 							<p>" . _LANG('hb_sifrenizi_sifirlamak_icin_lutfen_asagidaki_lin') . "</p>
 							<p>Doğrulama anahtarı: $gecici_dogrulama_kodu</p>
-							<p><a href=\"$site_url/sayfa/sifremi-unuttum/?email=$email_adresi&dogrulama=$gecici_dogrulama_kodu\">Yeni Şifre Oluştur</a></p>";
-							auto_mail_add($mail_baslik,$email_adresi,"Şifre Sıfırlama Onayı - $mail_baslik",$ileti);	
+							<p><a href=\"$site_url/sayfa/sifremi-unuttum/?email=$email_adresi&dogrulama=$gecici_dogrulama_kodu\"><?php echo _LANG('p_yeni_sifre_olustur'); ?></a></p>";
+							auto_mail_add($mail_baslik,$email_adresi,sprintf(_LANG('b_sifre_sifirlama_onayi'), $mail_baslik),$ileti);	
 			
 							$_SESSION["mesaj"]=array(_LANG('msj_sifre_sifirlama_gonderildi'),"success");
 							yonlendir(site_url());
@@ -80,7 +80,7 @@ tema_header(); ?>
 						<input type="password" class="form-control" id="parola_tekrar" name="parola_tekrar" placeholder="Parola Tekrar">
 					</div>
 					
-					<button type="submit" name="olustur_buton" class="btn btn-primary" value="Gönder"><i class="fa fa-lock"></i>Gönder</button>
+					<button type="submit" name="olustur_buton" class="btn btn-primary" value="<?php echo _LANG('post_submit'); ?>"><i class="fa fa-lock"></i><?php echo _LANG('post_submit'); ?></button>
 				
 				</form>
 				</div>
@@ -105,7 +105,7 @@ tema_header(); ?>
 							<p>Merhaba <strong>$mail_ad_soyad</strong></p>
 							<p>" . _LANG('hb_sifrenizi_sifirlamak_icin_lutfen_asagidaki_lin') . "</p>
 							<p>Doğrulama anahtarı: $gecici_dogrulama_kodu</p>
-							<p><a href=\"$site_url/sayfa/sifremi-unuttum/?email=$email_adresi&dogrulama=$gecici_dogrulama_kodu\">Yeni Şifre Oluştur</a></p>";
+							<p><a href=\"$site_url/sayfa/sifremi-unuttum/?email=$email_adresi&dogrulama=$gecici_dogrulama_kodu\"><?php echo _LANG('p_yeni_sifre_olustur'); ?></a></p>";
 	auto_mail_add($ad_soyad,$email_adresi,_LANG("su_sifre_sifirlama_onayi", array($mail_baslik)),$ileti);
 			
 							$_SESSION["mesaj"]=array(_LANG('msj_sifre_sifirlama_gonderildi'),"success");
@@ -125,7 +125,7 @@ tema_header(); ?>
 						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="E-posta Adresi" required>
 					</div>
 					
-					<button type="submit" name="buton" class="btn btn-primary" value="Gönder"><i class="fa fa-lock"></i>Gönder</button>
+					<button type="submit" name="buton" class="btn btn-primary" value=" . _LANG('post_submit') . "><i class="fa fa-lock"></i>Gönder</button>
 				
 				</form>
 				</div>

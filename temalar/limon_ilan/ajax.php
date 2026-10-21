@@ -340,9 +340,9 @@ if ($islem=="il_sec") {
 		$icerik_il=bilgi("il",$icerik_id);
 	}
 	if ($gerekli==1) {$gerekli_yaz="required='required'";$gerekli_gonder=1;
-	echo "<label for='il'>İl <span style='color:#e74c3c;'>*</span></label>";
+	echo "<label for='il'>" . _LANG('ad_bolge') . " <span style='color:#e74c3c;'>*</span></label>";
 	} else {$gerekli_yaz=null;$gerekli_gonder=0;}
-	echo "<select name='il' id='il' class='form-control' $gerekli_yaz><option value=''>İl Seçiniz</option>";
+	echo "<select name='il' id='il' class='form-control' $gerekli_yaz><option value=''><?php echo _LANG('tx_il_seciniz'); ?></option>";
 	$sql=mysqli_query($baglan,"select * from iller");
 	$selected_yaz=null;
 	while ($dizi=mysqli_fetch_array($sql)) {
@@ -367,7 +367,7 @@ if ($islem=="il_sec") {
 			var icerik_id='$icerik_id';
 			var il=$('#il option:checked').text();
 			$('#mahalle_sec').html('');		
-			$('#ilce_sec').load('$tema_dizini/ajax.php?islem=ilce_sec&ust='+deger+'&gerekli=$gerekli_gonder'+'$gonder');
+			$('#ilce_sec').load('$tema_dizini/ajax.php?islem=ilce_sec&ust='+deger+'&gerekli=$gerekli_gonder'+'');
 		});
 		</script>	
 		";
@@ -381,11 +381,11 @@ if ($islem=="il_sec") {
 		if ($il) {
 		echo "
 		<script type='text/javascript'>
-			$('#ilce_sec').load('$tema_dizini/ajax.php?islem=ilce_sec&ust=$il&gerekli=$gerekli_gonder'+'$gonder');
+			$('#ilce_sec').load('$tema_dizini/ajax.php?islem=ilce_sec&ust=$il&gerekli=$gerekli_gonder'+'');
 		</script>	
 		";
 		}
-		if ($il_ilce_hazir and $mahalle) {
+		if (!empty($il_ilce_hazir) and $mahalle) {
 		echo "
 		<script type='text/javascript'>
 			$('#il').change(function(){
@@ -421,12 +421,12 @@ if ($islem=="ilce_sec") {
 	}
 	if ($gerekli==1) {
 		$gerekli_yaz="required='required'";$gerekli_gonder=1;
-		echo "<label for='ilce'>İlçe <span style='color:#e74c3c;'>*</span></label>";
+		echo "<label for='ilce'>" . _LANG('ad_ilce') . " <span style='color:#e74c3c;'>*</span></label>";
 	} else {
 		$gerekli_yaz=null;$gerekli_gonder=0;
-		echo "<label for='ilce'>İlçe <span class='text-muted' style='font-size:11px;font-weight:400;'>(opsiyonel)</span></label>";
+		echo "<label for='ilce'>" . _LANG('ad_ilce') . " <span class='text-muted' style='font-size:11px;font-weight:400;'>" . _LANG('filter_optional') . "</span></label>";
 	}
-	echo "<select name='ilce' id='ilce' class='form-control' $gerekli_yaz><option value=''>İlçe Seçiniz</option>";
+	echo "<select name='ilce' id='ilce' class='form-control' $gerekli_yaz><option value=''>" . _LANG('tx_ilce_seciniz') . "</option>";
 	$sql=mysqli_query($baglan,"select * from ilceler where il_id='$ust'");
 	$selected_yaz=null;
 	while ($dizi=mysqli_fetch_array($sql)) {
@@ -462,7 +462,7 @@ if ($islem=="ilce_sec") {
 	if ($ilce) {
 	echo "
 	<script type='text/javascript'>
-		$('#mahalle_sec').load('$tema_dizini/ajax.php?islem=mahalle_sec&ust=$ilce&gerekli=$gerekli_gonder'+'$gonder');
+		$('#mahalle_sec').load('$tema_dizini/ajax.php?islem=mahalle_sec&ust=$ilce&gerekli=$gerekli_gonder'+'');
 	</script>			
 	";
 	}
@@ -698,9 +698,9 @@ if ($islem=="uye_paket_bilgi") {
 	
 	if ($paket_ucret) {
 		if (limit_politikasi()==2) {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Tek seferlik</small>";
+			$fiyat_yaz="<small class='pull-right'>" . sprintf(_LANG('p_tek_seferlik_ucret'), $paket_ucret) . "</small>";
 		} else {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Yıl</small>";
+			$fiyat_yaz="<small class='pull-right'>" . sprintf(_LANG('p_yillik_ucret'), $paket_ucret) . "</small>";
 		}
 	} else {$fiyat_yaz=null;}
     
@@ -760,9 +760,9 @@ if ($islem=="magaza_bilgi") {
 	if ($paket_aninda_onay==1) {$paket_onay_yaz="Evet";} else {$paket_onay_yaz="Hayır";}
 	if ($paket_ucret) {
 		if (limit_politikasi()==2) {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Tek seferlik</small>";
+			$fiyat_yaz="<small class='pull-right'>" . sprintf(_LANG('p_tek_seferlik_ucret'), $paket_ucret) . "</small>";
 		} else {
-			$fiyat_yaz="<small class='pull-right'>$paket_ucret GMD / Yıl</small>";
+			$fiyat_yaz="<small class='pull-right'>" . sprintf(_LANG('p_yillik_ucret'), $paket_ucret) . "</small>";
 		}
 	} else {$fiyat_yaz=null;}
     $ilan_basina_ucret=number_format($paket_ucret/$paket_ilan_limit,2);

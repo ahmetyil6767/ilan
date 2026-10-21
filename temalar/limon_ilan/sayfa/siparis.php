@@ -192,7 +192,7 @@ tema_header(); ?>
 	</div>	
 	<?php } ?>
 	
-	<?php if ($tip=="get" and $oturum_id==$alici_id and $siparis_durum==1) {echo "<div class='alert alert-success'>GET siparişiniz tamamlanmıştır.</div>";} ?> 	
+	<?php if ($tip=="get" and $oturum_id==$alici_id and $siparis_durum==1) {echo "<div class='alert alert-success'>" . _LANG('s_get_tamamlandi') . "</div>";} ?> 	
 	
 	
 	<?php if ($tip=="doping") { ?>
@@ -223,14 +223,14 @@ tema_header(); ?>
 				$doping_bitis_tarih_saat=$doping_dizi["bitis_tarih_saat"];
 				?>
 				<tr>
-					<td><?php if ($doping_ilan_baslik) { ?><a href="<?php echo link_getir($doping_ilan_id); ?>" target="_blank"><?php echo $doping_ilan_baslik; ?></a><?php } else {echo "İlan mevcut değil";} ?></td>
+					<td><?php if ($doping_ilan_baslik) { ?><a href="<?php echo link_getir($doping_ilan_id); ?>" target="_blank"><?php echo $doping_ilan_baslik; ?></a><?php } else {echo " . _LANG('s_ilan_mevcut_degil') . ";} ?></td>
 					<td><?php echo $doping; ?></td>
 					<td><?php echo $doping_gun; ?></td>
 					<td><?php echo $doping_tarih_saat; ?></td>
 					<td><?php echo $doping_bitis_tarih_saat; ?></td>
 					<td><?php echo tarih_fark($doping_bitis_tarih_saat,$doping_tarih_saat,array("birim"=>"gun")); ?></td>
 					<td>#<?php echo $siparis; ?></td>
-					<td><?php if ($doping_durum==0) {echo "<span class='label label-warning borderless'>Pasif</span>";} else if ($doping_durum==1) {echo "<span class='label label-success borderless'>Aktif</span>";} else if ($doping_durum==2) {echo "<span class='label label-danger borderless'>Süresi dolmuş</span>";} ?></td>
+					<td><?php if ($doping_durum==0) {echo "<span class='label label-warning borderless'>Pasif</span>";} else if ($doping_durum==1) {echo "<span class='label label-success borderless'>Aktif</span>";} else if ($doping_durum==2) {echo "<span class='label label-danger borderless'>" . _LANG('e_suresi_doldu') . "</span>";} ?></td>
 				</tr>
 				<?php } ?>
 			</table>
@@ -265,26 +265,26 @@ tema_header(); ?>
 					<td><a href="<?php echo uye_link_getir($satici); ?>" target="_blank"><?php echo getir("uyeler","ad_soyad",$satici); ?></a></td>
 					<td>
 					<?php if ($durum==0) {
-						echo "<span class='label label-danger borderless'>Ödeme bekleniyor</span>";
+						echo "<span class='label label-danger borderless'>" . _LANG('order_pending') . "</span>";
 					} else if ($durum==1) {
-						echo "<span class='label label-primary borderless'>Tamamlandı</span>";
+						echo "<span class='label label-primary borderless'>" . _LANG('order_completed') . "</span>";
 					} else if ($durum==2) {
-						echo "<span class='label label-success borderless'>Ödeme onaylandı</span>";
+						echo "<span class='label label-success borderless'>" . _LANG('s_odeme_onaylandi') . "</span>";
 					} ?>							
 					</td>
 					<?php if ($siparis_durum!=0) { ?>
 					<td>
 					<?php if ($satici_durum==0) {
-						echo "<span class='label label-light borderless'>Sipariş alındı</span>";
+						echo "<span class='label label-light borderless'>" . _LANG('s_siparis_alindi') . "</span>";
 					} else if ($satici_durum==1) {
 						echo "<span class='label label-warning borderless'>Tedarik ediliyor</span>";
 					} else if ($satici_durum==2) {
-						echo "<span class='label label-info borderless'>Kargoya hazırlanıyor</span>";
+						echo "<span class='label label-info borderless'>" . _LANG('s_kargoya_hazir') . "</span>";
 					} else if ($satici_durum==3) {
 						$kargo_tarihi=tarih_saat_bicimlendir(ekstra_bilgi_getir("kargo_tarihi",$siparis,"siparis"));
 						echo "<span class='label label-success borderless'>Kargoya verildi: $kargo_tarihi</span>";
 					} else if ($satici_durum==4) {
-						echo "<span class='label label-danger borderless'>İptal edildi</span>";
+						echo "<span class='label label-danger borderless'>" . _LANG('order_cancelled') . "</span>";
 					} ?>
 					</td>
 					<?php } ?>

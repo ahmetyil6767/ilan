@@ -1,6 +1,9 @@
 <?php 
 if(count(get_included_files())==1) {die();}
 $cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="get-ilanlari";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !$oturum_id) {
 	$cache_klasor="cache/sayfa";
 	$cache_dosya_adi="get-ilanlari";
@@ -36,6 +39,7 @@ if ($toplam>0) {
 $sql=mysqli_query($baglan,"SELECT i.id from icerik as i INNER JOIN ekstra_bilgi as eb ON i.id=eb.id and eb.anahtar='get' and eb.deger='1' and i.durum='1' and i.tip='ilan' order by tarih_saat desc limit $baslangic, $listeleme_adedi");
 while ($dizi=mysqli_fetch_array($sql)) {
 	$ilan_id=$dizi["id"];
+$son_dizi=array();
 	$son_dizi[]=$ilan_id;
 }
 $sayi=count($son_dizi);

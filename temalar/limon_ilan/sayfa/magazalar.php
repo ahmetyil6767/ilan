@@ -1,6 +1,9 @@
 <?php 
 if(count(get_included_files())==1) {die();}
 $cache=tema_ayar("cache");
+$cache_klasor="cache/sayfa";
+$cache_dosya_adi="magazalar";
+$cache_dosyasi="$cache_klasor/$cache_dosya_adi-cache.html";
 if ($cache==1 and !$oturum_id) {
 	$cache_klasor="cache/sayfa";
 	$cache_dosya_adi="magazalar";
@@ -36,6 +39,7 @@ $sql=mysqli_query($baglan,"select id from magazalar where durum='1' order by tar
 
 while ($dizi=mysqli_fetch_array($sql)) {
 	$magaza_id=$dizi["id"];
+$son_dizi=array();
 	$son_dizi[]=$magaza_id;
 }
 $sayi=count($son_dizi);

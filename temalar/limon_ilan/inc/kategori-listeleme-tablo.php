@@ -32,7 +32,7 @@ $il_ilce_mahalle=tema_ayar("il_ilce_mahalle");
 			$class_yaz=null;
 			if (doping_sor($ilan_id,"kalin_yazi")) {$class_yaz.=" bold";}
 			$etiketler=null;
-			$etiketler.="<span class='etiket vitrin' data-toggle='tooltip' data-placement='bottom' title='Vitrin İlanı'><i class='ion-podium mr0'></i></span>";
+			$etiketler.="<span class='etiket vitrin' data-toggle='tooltip' data-placement='bottom' title='' . _LANG(\'p_vitrin_ilani\') . ''><i class='ion-podium mr0'></i></span>";
 			if (doping_sor($ilan_id,"acil_acil")) {
 				$etiketler.="<span class='etiket acil' data-toggle='tooltip' data-placement='bottom' title='" . _LANG('title_urgent') . "'><i class='fa fa-clock-o mr0'></i></span>";
 			}
@@ -60,7 +60,7 @@ $il_ilce_mahalle=tema_ayar("il_ilce_mahalle");
 								echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 							}
 							if ($gorusulur==1) {
-								echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+								echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 							}
 						}
 						?>
@@ -101,7 +101,7 @@ $il_ilce_mahalle=tema_ayar("il_ilce_mahalle");
 						echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 					}
 					if ($gorusulur==1) {
-						echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+						echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 					}
 				}
 				?>
@@ -134,7 +134,7 @@ $il_ilce_mahalle=tema_ayar("il_ilce_mahalle");
 			}
 			if (doping_sor($ilan_id,"anasayfa_vitrini")) {
 				$class_yaz.="vitrin_sticker "; 
-				$etiketler.="<span class='etiket vitrin' data-toggle='tooltip' data-placement='bottom' title='Vitrin İlanı'><i class='ion-podium mr0'></i></span>";
+				$etiketler.="<span class='etiket vitrin' data-toggle='tooltip' data-placement='bottom' title='' . _LANG(\'p_vitrin_ilani\') . ''><i class='ion-podium mr0'></i></span>";
 			}
 		?>
 			
@@ -161,7 +161,7 @@ $il_ilce_mahalle=tema_ayar("il_ilce_mahalle");
 								echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 							}
 							if ($gorusulur==1) {
-								echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+								echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 							}
 						}
 						?>
@@ -202,7 +202,7 @@ $il_ilce_mahalle=tema_ayar("il_ilce_mahalle");
 						echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 					}
 					if ($gorusulur==1) {
-						echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+						echo "<span class='s_mesaj_tablo'>" . _LANG('s_gorusulur') . "</span>";
 					}
 				}
 				?>

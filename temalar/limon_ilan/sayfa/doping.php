@@ -73,7 +73,7 @@ if ($buton) {
 		<p><a href=\"$site_url\">Siteyi Görüntüle</a> - <a href=\"$site_url/$admin_dizini\">Yönetim Paneli</a></p>
 		";
 		$site_email=ayar("site_email");
-		auto_mail_add($mail_baslik,$site_email,"Yeni doping siparişi: $tutar GMD",$ileti_admin);						
+		auto_mail_add($mail_baslik,$site_email,sprintf(_LANG('b_yeni_doping_siparis'), $tutar),$ileti_admin);						
 		// E-posta gönderimi bitti			
 		
 		yonlendir(ozel_url("siparis")."?siparis_id=$eklenen_id");
@@ -138,13 +138,13 @@ tema_header();
 									if ($ilan_durum==0) {
 										echo "<span class='label label-danger borderless'>Taslak</span>";
 									} else if ($ilan_durum==1) {
-										echo "<span class='label label-success borderless'>Yayında</span>";
+										echo "<span class='label label-success borderless'>" . _LANG('post_published') . "</span>";
 									} else if ($ilan_durum==2) {
 										echo "<span class='label label-info borderless'>Onay Bekliyor</span>";
 									} else if ($ilan_durum==3) {
-										echo "<span class='label label-warning borderless'>Yayından Kaldırıldı</span>";
+										echo "<span class='label label-warning borderless'>" . _LANG('post_unpublished') . "</span>";
 									} else if ($ilan_durum==4) {
-										echo "<span class='label label-danger borderless'>Süresi dolmuş</span>";
+										echo "<span class='label label-danger borderless'>" . _LANG('e_suresi_doldu') . "</span>";
 									}
 								?></td>
 								<td>
@@ -157,7 +157,7 @@ tema_header();
 									<ul class="dropdown-menu dropdown-menu-right">
 									  <?php if ($ilan_durum==1) { ?><li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$ilan_id"; ?>" onclick="return confirm('İlanı yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li><?php } ?>
 									  <li><a href="<?php echo ozel_url("doping")."?id=$ilan_id"; ?>"><?php echo _LANG("title_buy_boost"); ?></a></li>
-									  <li><a href="<?php echo ozel_url("ilanlarim")."?sil=$ilan_id"; ?>" onclick="return confirm('İlanı kalıcı olarak silmek istiyor musunuz? Bu işlemin geri dönüşü olmayacaktır.')">Sil</a></li>
+									  <li><a href="<?php echo ozel_url("ilanlarim")."?sil=$ilan_id"; ?>" onclick="return confirm('' . _LANG(\'tx_ilan_silme_onayi\') . '')">Sil</a></li>
 									</ul>
 								  </div>
 								</div>								

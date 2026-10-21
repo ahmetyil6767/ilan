@@ -12,14 +12,14 @@ if (@$sirala) {
 // Null
 $kat_detaylar=array();
 
-if (@$_SESSION["sirala"]) {
-	if ($_SESSION["sirala"]=="tarih_yeni") {
+if (isset($_SESSION["sirala"])) {
+	if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_yeni") {
 		$orderby_sql="i.tarih_saat desc";
-	} else if ($_SESSION["sirala"]=="tarih_eski") {
+	} else if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_eski") {
 		$orderby_sql="i.tarih_saat asc";
-	} else if ($_SESSION["sirala"]=="fiyat_artan") {
+	} else if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_artan") {
 		$orderby_sql="convert(ef.deger, decimal) asc";
-	} else if ($_SESSION["sirala"]=="fiyat_azalan") {
+	} else if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_azalan") {
 		$orderby_sql="convert(ef.deger, decimal) desc";
 	} else {
 		$orderby_sql="i.tarih_saat desc";
@@ -108,11 +108,11 @@ tema_header(); ?>
 				  </ul>
 				  <div class="sag">
 					<select id="jump" name="jump">
-					  <option value="<?php echo profil_link_getir($id); ?>?sirala=gelismis" <?php if ($_SESSION["sirala"]=="gelismis" or !$_SESSION["sirala"]) {echo "selected='selected'";} ?>><?php echo _LANG("search_advanced"); ?></option>
-					  <option value="<?php echo profil_link_getir($id); ?>?sirala=fiyat_artan" <?php if ($_SESSION["sirala"]=="fiyat_artan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_asc"); ?></option>
-					  <option value="<?php echo profil_link_getir($id); ?>?sirala=fiyat_azalan" <?php if ($_SESSION["sirala"]=="fiyat_azalan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_desc"); ?></option>
-					  <option value="<?php echo profil_link_getir($id); ?>?sirala=tarih_yeni" <?php if ($_SESSION["sirala"]=="tarih_yeni") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_desc"); ?></option>
-					  <option value="<?php echo profil_link_getir($id); ?>?sirala=tarih_eski" <?php if ($_SESSION["sirala"]=="tarih_eski") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_asc"); ?></option>
+					  <option value="<?php echo profil_link_getir($id); ?>?sirala=gelismis" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="gelismis" or empty($_SESSION["sirala"])) {echo "selected='selected'";} ?>><?php echo _LANG("search_advanced"); ?></option>
+					  <option value="<?php echo profil_link_getir($id); ?>?sirala=fiyat_artan" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_artan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_asc"); ?></option>
+					  <option value="<?php echo profil_link_getir($id); ?>?sirala=fiyat_azalan" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="fiyat_azalan") {echo "selected='selected'";} ?>><?php echo _LANG("search_price_desc"); ?></option>
+					  <option value="<?php echo profil_link_getir($id); ?>?sirala=tarih_yeni" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_yeni") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_desc"); ?></option>
+					  <option value="<?php echo profil_link_getir($id); ?>?sirala=tarih_eski" <?php if ((isset($_SESSION["sirala"]) ? $_SESSION["sirala"] : "")=="tarih_eski") {echo "selected='selected'";} ?>><?php echo _LANG("search_date_asc"); ?></option>
 					</select>
 				  </div>
 				</div>
