@@ -84,8 +84,12 @@ if ($siparis) {
 $siparis_durum=getir("siparisler","durum",$siparis);
 $siparis_satici_odeme=getir("siparisler","satici_odeme",$siparis);
 $siparis_tip=getir("siparisler","tip",$siparis);
+/* Siparis satirinda gosterilecek alternatif bilgi (Magaza paketleri gibi).
+ * Bazi siparis turlerinde tanimli degildir; bos satir gosterilmemeli. */
+$alternatif_bilgi_baslik=@$alternatif_bilgi_baslik;
+$alternatif_bilgi_tanim=@$alternatif_bilgi_tanim;
 
-$durum_guncelle_buton=$_POST["durum_guncelle_buton"];
+$durum_guncelle_buton=@$_POST["durum_guncelle_buton"];
 if ($durum_guncelle_buton) {
 	$yeni_durum=$_POST["yeni_durum"];
 	mysqli_query($baglan,"update siparisler set satici_durum='$yeni_durum' where id='$siparis'");
@@ -101,7 +105,7 @@ if ($durum_guncelle_buton) {
 	yonlendir(ozel_url("siparis")."?siparis_id=$siparis");
 }
 
-$alici_onay_buton=$_POST["alici_onay_buton"];
+$alici_onay_buton=@$_POST["alici_onay_buton"];
 if ($alici_onay_buton) {
 	mysqli_query($baglan,"update siparisler set alici_onay='1', durum='1' where id='$siparis'");
 	$tarih_saat=tarih_saat();
@@ -124,7 +128,9 @@ tema_header(); ?>
 	<div class="bilgi gradient">
 	<h2><?php echo _LANG("title_order_summary"); ?></h2>
 	<div class="satir" style="margin-bottom:5px;">Sipariş Tanımı: <span class="fw600"><?php echo $tanim; ?></span></div>
+	<?php if ($alternatif_bilgi_baslik) { ?>
 	<div class="satir" style="margin-bottom:5px;"><?php echo $alternatif_bilgi_baslik; ?> <span class="fw600"><?php echo $alternatif_bilgi_tanim; ?></span></div>
+	<?php } ?>
 	<div class="satir" style="margin-bottom:5px;">Toplam Tutar: <span class="fw600"><?php echo $tutar; ?> GMD</span></div>			
 	<?php if ($siparis_durum==0) { ?>
 	<p><?php echo _LANG('hb_degerli_uyemiz_odeme_yaptiktan_sonra_odeme_bil'); ?></p>
@@ -375,7 +381,7 @@ tema_header(); ?>
 					<div class="col-md-20">
 						<div class="tamamla" style="border:5px solid #eee;padding:15px;">
 							<form action="" method="post">
-								<?php if (!$uye_tc_no) {form_group(array("tip"=>"text","id"=>"tc_no","baslik"=>"TC Kimlik No","deger"=>$uye_tc_no,"gerekli"=>1));} ?>				
+								<?php if (!$uye_tc_no) {form_group(array("tip"=>"text","id"=>"tc_no","baslik"=>_LANG("s_tc_no"),"deger"=>$uye_tc_no,"gerekli"=>1));} ?>
 								<?php if (!$uye_adres) {form_group(array("tip"=>"textarea","id"=>"adres","baslik"=>"Adres","satir"=>3,"deger"=>$uye_adres,"aciklama"=>_LANG('s_kargo_fatura_adresi'),"gerekli"=>1));} ?>				
 								<?php if (!$uye_il) {
 									$il_secenekleri[]=array("deger"=>null,"baslik"=>_LANG('filter_select'));
@@ -514,8 +520,11 @@ tema_header(); ?>
 							yonlendir(ozel_url("siparis")."?siparis_id=$siparis");
 						}
 					}
-				} } else {
-			
+				} }
+				/* Iyzico checkout formu yalnizca ONLINE odeme acikken baslatilir.
+				 * Kapali oldugunda (havale/EFT modu) bu blok hic calismaz. */
+				if ($online_odeme=="aktif") {
+				
 					$ad_soyad_parcala=explode(" ",$oturum_ad_soyad);
 					$oturum_ad=$ad_soyad_parcala[0];
 					$oturum_soyad=$ad_soyad_parcala[1];
@@ -584,14 +593,14 @@ tema_header(); ?>
 					$buyer->setRegistrationAddress("$oturum_adres");
 					$buyer->setIp("$oturum_ip_adresi");
 					$buyer->setCity("$oturum_il");
-					$buyer->setCountry("Turkey");
+					$buyer->setCountry("Gambia");
 					$buyer->setZipCode("$oturum_posta_kodu");
 					$request->setBuyer($buyer);
 					
 					$shippingAddress = new \Iyzipay\Model\Address();
 					$shippingAddress->setContactName("$oturum_ad");
 					$shippingAddress->setCity("$oturum_il");
-					$shippingAddress->setCountry("Turkey");
+					$shippingAddress->setCountry("Gambia");
 					$shippingAddress->setAddress("$oturum_adres");
 					$shippingAddress->setZipCode("$oturum_posta_kodu");
 					$request->setShippingAddress($shippingAddress);
@@ -599,7 +608,7 @@ tema_header(); ?>
 					$billingAddress = new \Iyzipay\Model\Address();
 					$billingAddress->setContactName("$oturum_ad");
 					$billingAddress->setCity("$oturum_il");
-					$billingAddress->setCountry("Turkey");
+					$billingAddress->setCountry("Gambia");
 					$billingAddress->setAddress("$oturum_adres");
 					$billingAddress->setZipCode("$oturum_posta_kodu");
 					$request->setBillingAddress($billingAddress);
@@ -621,8 +630,7 @@ tema_header(); ?>
 					# print result
 					//print_r($checkoutFormInitialize);
 					//print_r($checkoutFormInitialize->getstatus());
-					print_r($checkoutFormInitialize->getErrorMessage());
-					print_r($checkoutFormInitialize->getCheckoutFormContent());					
+					echo $checkoutFormInitialize->getCheckoutFormContent();					
 
 				}
 
@@ -638,6 +646,11 @@ tema_header(); ?>
 			</div>	
 			<?php } ?>			
 			<div role="tabpanel" class="tab-pane fade in <?php if ($online_odeme=="pasif") {echo "active";} ?>" id="bilgiler">
+				<div class="alert alert-info" style="margin:15px 15px 0;">
+					<strong><?php echo _LANG("hv_odeme_referansi"); ?>:</strong> JA-<?php echo $siparis; ?> &nbsp;&middot;&nbsp;
+					<strong><?php echo _LANG("hv_odeme_tutari"); ?>:</strong> <?php echo $tutar; ?> GMD<br>
+					<?php echo _LANG("hv_odeme_aciklama"); ?>
+				</div>
 				<div class="table-responsive">
 				<table class="table table-default table-hover" style="margin-bottom:0;">
 					<thead>
@@ -650,6 +663,7 @@ tema_header(); ?>
 					</thead>
 					<tbody>
 						<?php 
+						$banka_hesaplari=array();
 						$hesap_sql=mysqli_query($baglan,"select l_id from listeler where tip='hesaplar'");
 						while ($hesap_dizi=mysqli_fetch_array($hesap_sql)) {
 							$hesap_id=$hesap_dizi["l_id"];
@@ -661,9 +675,12 @@ tema_header(); ?>
 						<tr>
 							<td><?php echo $banka; ?></td>
 							<td><?php echo $ad_soyad; ?></td>
-							<td><?php echo $iban; ?></td>
+							<td><?php echo $iban ? $iban : _LANG("hv_banka_bilgisi_yok"); ?></td>
 							<td><a id="odeme_bildirimi_buton" data-toggle="modal" data-target="#odeme_bildirimi" data-title="<?php echo $banka; ?>" class="btn btn-xs btn-default"><i class="ion-paper-airplane"></i><?php echo _LANG("order_notify"); ?></a></td>
 						</tr>
+						<?php } ?>
+						<?php if (!$banka_hesaplari) { ?>
+						<tr><td colspan="4"><?php echo _LANG("hv_banka_bilgisi_yok"); ?></td></tr>
 						<?php } ?>
 					</tbody>						
 				</table>

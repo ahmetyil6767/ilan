@@ -3411,4 +3411,9 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'store_listing_count' => '<strong>%s</strong> has <span class=\'sayi\'>%s</span> listings available.',
 	'store_listing_none' => '<strong>%s</strong> has no listings currently available.',
 	'profile_listing_count' => '<strong>%s</strong> has <span class=\'sayi\'>%s</span> listings available.',
+	'hv_odeme_referansi' => 'Payment Reference',
+	'hv_odeme_tutari' => 'Amount to Pay',
+	'hv_odeme_aciklama' => 'When paying by bank transfer, write this reference number in the description field. Your purchase is approved once the payment is confirmed by the bank.',
+	'hv_banka_bilgisi_yok' => 'Bank account details will be updated by the administrator.',
+	's_tc_no' => 'ID / Passport No',
 );

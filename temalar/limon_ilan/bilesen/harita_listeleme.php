@@ -85,7 +85,8 @@ function harita_listeleme($id) {
 		} else if ($ilan_fiyat_birim=="eur") {
 			$para_birimi="EUR";
 		}
-		if (strstr($ilan_koordinat,"-")) {$k_parcala=explode("-",$ilan_koordinat); $k_lat=trim($k_parcala[0]); $k_lon=trim($k_parcala[1]);
+		$koordinat_parca = koordinat_ayir($ilan_koordinat);
+		if ($koordinat_parca) {$k_lat=$koordinat_parca['lat']; $k_lon=$koordinat_parca['lon'];
 		$markerkod.="
 		var marker_$ilan_id=new google.maps.Marker({
 			position:new google.maps.LatLng($k_lat,$k_lon),

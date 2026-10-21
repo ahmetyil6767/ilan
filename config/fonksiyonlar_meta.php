@@ -228,3 +228,55 @@ function tel_uluslararasi($tel, $ulke_kodu = '220')
 	$rakamlar = ltrim($rakamlar, '0');
 	return $ulke_kodu . $rakamlar;
 }
+
+/*
+ * Koordinat ayrıştirici.
+ *
+ * Gambiya'da boylam BATI (negatif) olduğu icin eski explode("-") mantigi
+ * "13.4549,-16.5790" degerinde boylam isaretini kaybediyordu.
+ *
+ * Desteklenen formatlar:
+ *   "13.4549,-16.5790"   (virgullu - tercih edilen)
+ *   "13.4549--16.5790"  (tireli, negatif boylam)
+ *   "-13.4549-16.5790"  (tireli, negatif enlem)
+ *   "41.1162-29.0489"   (tireli, pozitif)
+ *
+ * @return array lat/lon anahtarlari; gecersiz veride bos dizi.
+ */
+function koordinat_ayir($koordinat)
+{
+	$koordinat = trim((string) $koordinat);
+	if ($koordinat === '') { return array(); }
+
+	/* Virgullu format */
+	if (strpos($koordinat, ',') !== false) {
+		$parca = array_map('trim', explode(',', $koordinat));
+		if (count($parca) >= 2 and is_numeric($parca[0]) and is_numeric($parca[1])) {
+			return array('lat' => $parca[0], 'lon' => $parca[1]);
+		}
+	}
+
+	/* Tireli format */
+	$parca = explode('-', $koordinat);
+	$sayi = count($parca);
+
+	if ($sayi == 2) {
+		return array('lat' => trim($parca[0]), 'lon' => trim($parca[1]));
+	}
+
+	if ($sayi == 3) {
+		if (trim($parca[0]) === '') {
+			return array('lat' => '-' . trim($parca[1]), 'lon' => trim($parca[2]));
+		}
+		if (trim($parca[1]) === '') {
+			return array('lat' => trim($parca[0]), 'lon' => '-' . trim($parca[2]));
+		}
+		return array('lat' => trim($parca[0]), 'lon' => trim($parca[1]));
+	}
+
+	if ($sayi == 4) {
+		return array('lat' => '-' . trim($parca[1]), 'lon' => '-' . trim($parca[3]));
+	}
+
+	return array();
+}

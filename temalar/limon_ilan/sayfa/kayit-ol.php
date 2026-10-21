@@ -162,8 +162,8 @@ tema_header(); ?>
 					<div id="kurumsal" style="display:none;">
 
 					<div class="form-group">
-						<label for="tc_no">TC Kimlik No <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-						<input type="text" class="form-control" id="tc_no" name="tc_no" maxlength="11" placeholder="TC Kimlik No">
+						<label for="tc_no"><?php echo _LANG("s_tc_no"); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<input type="text" class="form-control" id="tc_no" name="tc_no" maxlength="25" placeholder="<?php echo _LANG("s_tc_no"); ?>">
 					</div>                
                 
 					<div class="form-group">

@@ -3364,4 +3364,9 @@ return array(
 	'store_listing_count' => "<strong>%s</strong> لديه <span class='sayi'>%s</span> إعلان منشور.",
 	'store_listing_none' => '<strong>%s</strong> لا توجد إعلانات منشورة حالياً.',
 	'profile_listing_count' => "<strong>%s</strong> لديه <span class='sayi'>%s</span> إعلان منشور.",
+	'hv_odeme_referansi' => 'مرجع الدفع',
+	'hv_odeme_tutari' => 'المبلغ المطلوب',
+	'hv_odeme_aciklama' => 'عند التحويل البنكي اكتب رقم المرجع في خانة الوصف. يتم تفعيل الشراء بعد تأكيد البنك للدفع.',
+	'hv_banka_bilgisi_yok' => 'سيتم تحديث بيانات الحساب البنكي من قبل الإدارة.',
+	's_tc_no' => 'رقم الهوية / جواز السفر',
 );

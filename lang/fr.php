@@ -3632,4 +3632,9 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'store_listing_count' => '<strong>%s</strong> propose <span class=\'sayi\'>%s</span> annonces.',
 	'store_listing_none' => "<strong>%s</strong> n'a actuellement aucune annonce publiée.",
 	'profile_listing_count' => '<strong>%s</strong> propose <span class=\'sayi\'>%s</span> annonces.',
+	'hv_odeme_referansi' => 'Référence de paiement',
+	'hv_odeme_tutari' => 'Montant à payer',
+	'hv_odeme_aciklama' => 'Lors d’un virement bancaire, indiquez ce numéro de référence dans le champ libellé. Votre achat est validé dès que le paiement est confirmé par la banque.',
+	'hv_banka_bilgisi_yok' => 'Les coordonnées bancaires seront mises à jour par l’administration.',
+	's_tc_no' => 'N° d’identité / passeport',
 );

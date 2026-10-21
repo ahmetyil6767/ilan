@@ -3020,7 +3020,7 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'pp_ad_soyad' => 'Ad Soyad',
 	'pp_dogrulanmadi' => 'Doğrulanmadı',
 	'pp_dogrulandi' => 'Doğrulandı',
-	'pp_tc_kimlik_no' => 'TC Kimlik No',
+	'pp_tc_kimlik_no' => 'Kimlik / Pasaport No',
 	'pp_vergi_no' => 'Vergi No',
 	'pp_vergi_dairesi' => 'Vergi Dairesi',
 	'lb_fotograf_limiti' => 'Fotoğraf Limiti:',
@@ -3388,4 +3388,9 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'store_listing_count' => '<strong>%s</strong> adlı mağazanın <span class=\'sayi\'>%s</span> ilanı mevcut.',
 	'store_listing_none' => '<strong>%s</strong> adlı mağazanın yayında ilanı bulunamadı.',
 	'profile_listing_count' => '<strong>%s</strong> adlı kullanıcının <span class=\'sayi\'>%s</span> ilanı mevcut.',
+	'hv_odeme_referansi' => 'Ödeme Referansı',
+	'hv_odeme_tutari' => 'Ödeme Tutarı',
+	'hv_odeme_aciklama' => 'Havale/EFT ile ödenerken açıklama alanına bu referans numarasını yazın. Ödemeniz banka tarafından teyit edildiğinde satın alma işleminiz onaylanır.',
+	'hv_banka_bilgisi_yok' => 'Banka hesap bilgileri yönetici tarafından güncellenecektir.',
+	's_tc_no' => 'Kimlik / Pasaport No',
 );

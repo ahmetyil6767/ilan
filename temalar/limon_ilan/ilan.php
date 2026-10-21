@@ -435,34 +435,18 @@ tema_header(); ?>
 					  <ul class="nav nav-tabs ozel" role="tablist">
 						<li role="presentation" class="active visible-sm visible-md visible-lg"><a href="#aciklama" aria-controls="aciklama" role="tab" data-toggle="tab"><?php echo _LANG('listing_details'); ?></a></li>
 						<li role="presentation" class="active visible-xs"><a href="#aciklama" aria-controls="aciklama" role="tab" data-toggle="tab"><?php echo _LANG('listing_desc'); ?></a></li>
-						<?php 
+						<?php
 						if (tema_ayar("google_maps")==1 and tema_ayar("google_maps_api_key")!="") {
 						$koordinat=bilgi("koordinat");$harita_gizle=bilgi("harita_gizle");
-						if ($koordinat and !$harita_gizle) {
-							if (strstr($koordinat,"-")) {
-							$koordinat_new=$koordinat;
-							$k_parcala=explode("-",$koordinat_new);
-							$k_parca_count=count($k_parcala);	
-							if ($k_parca_count==2) {
-								$k_lat=$k_parcala[0];
-								$k_lon=$k_parcala[1];
-							} else if ($k_parca_count==3) {
-								if (substr($koordinat_new,0,1)=="-") {
-									$k_lat="-".$k_parcala[1];
-									$k_lon=$k_parcala[2];
-								} else {
-									$k_lat=$k_parcala[0];
-									$k_lon="-".$k_parcala[2];
-								}
-							} else if ($k_parca_count==4) {
-								$k_lat="-".$k_parcala[1];
-								$k_lon="-".$k_parcala[3];
-							}
+						$koordinat_parca = koordinat_ayir($koordinat);
+						if ($koordinat and !$harita_gizle and $koordinat_parca) {
+							$k_lat = $koordinat_parca['lat'];
+							$k_lon = $koordinat_parca['lon'];
 						?>
 						<li role="presentation"><a href="#konum" aria-controls="konum" role="tab" data-toggle="tab"><i class="ion-location"></i>Konum</a></li>
 						<li role="presentation" id="sokak_gorunumu" class="visible-sm visible-md visible-lg" style="display:none;"><a href="#sokak" aria-controls="sokak" role="tab" data-toggle="tab"><i class="fa fa-street-view"></i>Sokak Görünümü</a></li>
 						<li role="presentation" id="sokak_gorunumu_mobil" class="visible-xs" style="display:none;"><a href="#sokak" aria-controls="sokak" role="tab" data-toggle="tab"><i class="fa fa-street-view mr0"></i></a></li>
-						<?php } } } ?>
+						<?php } } ?>
 						<li role="presentation" class="visible-sm visible-md visible-lg"><a href="#benzer" aria-controls="benzer" role="tab" data-toggle="tab"><i class="ion-refresh"></i><?php echo _LANG('listing_similar'); ?></a></li>
 						<li role="presentation" class="visible-xs"><a href="#benzer" aria-controls="benzer" role="tab" data-toggle="tab"><i class="ion-refresh mr0"></i></a></li>
 					  </ul>
