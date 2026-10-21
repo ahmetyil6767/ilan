@@ -2308,7 +2308,7 @@ function kategori_bilgi($anahtar, $kategori_id = NULL)
 	 * teknik ozellikler) icin dil kaydi varsa onu oku.
 	 * Kayit yoksa Turkce (kaynak) icerik doner.
 	 */
-	$ceviriAnahtarlari = array('ozel_alanlar', 'filtreler', 'detaylar', 'teknik_ozellikler');
+	$ceviriAnahtarlari = array('ozel_alanlar', 'filtreler', 'detaylar', 'teknik_ozellikler', 'guvenlik_ipuclari');
 	if (in_array($anahtar, $ceviriAnahtarlari) and function_exists('aktif_dil')) {
 		$dil = aktif_dil();
 		if ($dil and $dil != 'tr') {

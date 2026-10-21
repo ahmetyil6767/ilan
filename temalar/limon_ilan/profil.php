@@ -159,7 +159,7 @@ tema_header(); ?>
 											echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 										}
 										if ($gorusulur==1) {
-											echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+											echo "<span class='s_mesaj_tablo'><?php echo _LANG('s_gorusulur'); ?></span>";
 										}
 									}
 									?>
@@ -198,7 +198,7 @@ tema_header(); ?>
 									echo "<span class='s_mesaj_tablo'>Sahiplendirme</span>";
 								}
 								if ($gorusulur==1) {
-									echo "<span class='s_mesaj_tablo'>Görüşülür</span>";
+									echo "<span class='s_mesaj_tablo'><?php echo _LANG('s_gorusulur'); ?></span>";
 								}
 							}
 							?>
@@ -223,7 +223,7 @@ tema_header(); ?>
 				$sayfa_url=profil_link_getir($id);
 				if ($sayfa>1) {
 					$onceki_sayfa=$sayfa-1;
-					echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='Önceki'><i class='ion-chevron-left'></i></a></li>";
+					echo "<li><a href='$sayfa_url/$onceki_sayfa' aria-label='_LANG(\'f_onceki\')'><i class='ion-chevron-left'></i></a></li>";
 				}		
 				for ($x=1;$x<=$kac_sayfa;$x++) {
 					if ($x==$sayfa) {$active="class='active'";$link_yaz="";} else {$active="";$link_yaz="href='$sayfa_url/$x'";}
@@ -231,15 +231,15 @@ tema_header(); ?>
 				}
 				if ($sayfa<$kac_sayfa) {
 					$sonraki_sayfa=$sayfa+1; 
-					echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='Önceki'><i class='ion-chevron-right'></i></a></li>";
+					echo "<li><a href='$sayfa_url/$sonraki_sayfa' aria-label='_LANG(\'f_onceki\')'><i class='ion-chevron-right'></i></a></li>";
 				}
 				echo "</ul></div>";
 			}
 			} else {
 				if (@$uygulanan_filtreler) { 
-					echo "<div class='alert alert-danger'>Kriterlerinize uygun ilan bulunamadı.</div>";
+					echo "<div class='alert alert-danger'><?php echo _LANG('kriterlere_uygun_ilan_bulunamadi'); ?></div>";
 				} else {
-					echo "<div class='alert alert-danger'>İlan bulunamadı.</div>";
+					echo "<div class='alert alert-danger'><?php echo _LANG('listing_not_found'); ?></div>";
 				} 
 			} ?>
 		</div>

@@ -79,7 +79,7 @@
 			</tr>
 		<?php } if (count($vitrin_dizi)>0) { ?>
 		<tr class="satir_link c_pointer vitrin" data-href="<?php echo ozel_url("doping"); ?>">
-			<td colspan="<?php echo 5+count($kat_detaylar); ?>" class="vitrin_mesaj"><p>İlanınız yukarıda yer alsın, alıcılara daha kısa sürede ulaşın! Detaylı bilgi için tıklayın.</p></td>
+			<td colspan="<?php echo 5+count($kat_detaylar); ?>" class="vitrin_mesaj"><p>' . _LANG('s_ilani') . 'nız yukarıda yer alsın, alıcılara daha kısa sürede ulaşın! Detaylı bilgi için tıklayın.</p></td>
 		</tr>
 		<?php } while ($dizi=mysqli_fetch_array($sql)) {
 			$ilan_id=$dizi["id"];

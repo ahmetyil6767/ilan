@@ -23,7 +23,7 @@ if (!$limit) {
 }
 @$baslik=$_GET["title"];
 if (!$baslik) {
-	$baslik="İLAN PANOSU";
+	$baslik="_LANG('tx_ilan_panosu')";
 }
 
 if ($cat) {

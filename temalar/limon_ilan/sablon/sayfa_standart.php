@@ -31,7 +31,7 @@ tema_header(); ?>
 						";
 						$mail_baslik=tema_ayar("mail_baslik");
 						$site_email=ayar("site_email");
-						auto_mail_add($mail_baslik,$site_email,"Yeni iletişim formu: $ad_soyad",$ileti_admin);						
+						auto_mail_add($mail_baslik,$site_email,"" . sprintf(_LANG('b_yeni_iletisim_formu'), $ad_soyad) . "",$ileti_admin);						
 						// E-posta gönderimi bitti						
 						echo "<div class='alert alert-success'>Mesajınız bize ulaştı. Size en kısa zamanda dönüş yapacağız.</div>";
 					}

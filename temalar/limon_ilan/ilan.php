@@ -202,7 +202,7 @@ tema_header(); ?>
 							<div class="row">
 								<div class="col-md-21 col-xs-21"><a id="mega_foto" class="c_pointer" data-id="<?php echo @$galeri_id_getir; ?>"><i class="ion-arrow-expand"></i><?php echo _LANG('ilan_fotograf_buyut'); ?></a></div>
 								<div class="col-md-21 col-xs-21"><?php if ($video_url) { ?><a data-toggle="modal" data-target="#video_modal" class="c_pointer"><i class="ion-ios-videocam"></i>Video</a><?php 
-								} else {echo "<span style='color:#999 !important;font-weight:600;'><i class='ion-ios-videocam'></i>Video</span>";} ?></div>
+								} else {echo "<span style='color:#999 !important;font-weight:600;'><i class='ion-ios-videocam'></i><?php echo _LANG('s_video'); ?></span>";} ?></div>
 							</div>
 						</div>
 						<?php if (@$resim_sayisi>0) { ?>
@@ -320,7 +320,7 @@ tema_header(); ?>
 						}
 						$kargo_durum=bilgi("kargo_durum",$id);
 						echo "<div class='get_ilan_bilgi'>";
-						echo "<span class='kargo_bilgi $stok_alert'><i class='fa fa-cubes'></i>Ürün Stoğu: $stok</span>";
+						echo "<span class='kargo_bilgi $stok_alert'><i class='fa fa-cubes'></i>" . sprintf(_LANG('s_urun_stogu'), $stok) . "</span>";
 						if ($kargo_durum) {if ($kargo_durum==" . _LANG('s_ucretsiz_kargo') . ") {$ucretsiz_yaz="ucretsiz";} echo "<span class='kargo_bilgi $ucretsiz_yaz'><i class='fa fa-road'></i>$kargo_durum</span>";}
 						if ($kargo_durum!="Online Teslimat") {
 							if ($kargo_firma) {echo "<div class='clearfix'></div><span class='kargo_bilgi'><i class='fa fa-truck'></i>$kargo_firma</span>";}
@@ -340,7 +340,7 @@ tema_header(); ?>
 					if ($il or $ilce or $mahalle) {
 					?>
 					<ul class="adres">
-						<?php if (tema_ayar("bolgesel")=="Hayır") { ?>
+						<?php if (tema_ayar("bolgesel")=="_LANG('_LANG(\'Hayır\')')") { ?>
 						<li><a href="<?php echo kategori_link_getir($son_kategori); ?>/?f_il=<?php echo $il_id; ?>"><?php echo $il; ?></a></li>
 						<?php } ?>
 						<?php if ($ilce_id) { ?><li><a href="<?php echo kategori_link_getir($son_kategori); ?>/?f_il=<?php echo $il_id; ?>&f_ilce=<?php echo $ilce_id; ?>"><?php echo $ilce; ?></a></li><?php } ?>
@@ -401,7 +401,7 @@ tema_header(); ?>
 									echo "
 									<tr>
 										<th>".spec_etiket($baslik)."</th>
-										<td>$deger</td>
+										<td><?php echo spec_etiket($deger); ?></td>
 									</tr>";
 									}
 									if ($anahtar=="metrekare") {
@@ -560,7 +560,7 @@ tema_header(); ?>
 				<?php } ?>
 				<?php if (function_exists("postviews")) {
 					$okunma=postviews();
-					echo "<div class='text-center ziyaret'><i class='ion-eye'></i>$okunma kez görüntülendi.</div>";
+					echo "<div class='text-center ziyaret'><i class='ion-eye'></i>" . sprintf(_LANG('s_okunma_kez'), $okunma) . "</div>";
 				} ?>
 			</div>
 		</div>
@@ -610,12 +610,12 @@ tema_header(); ?>
 						<div class="clearfix mb15"></div>
 						
 						<h3><?php echo getir("uyeler","ad_soyad",$yazar); ?></h3>
-						<p>Üyelik tarihi: <?php echo $uyelik_tarihi; ?></p>
+						<p><?php echo _LANG("s_uyelik_tarihi"); ?><?php echo $uyelik_tarihi; ?></p>
 						
 						<?php if ($ilan_magaza) {$magaza_link=magaza_link_getir($ilan_magaza); ?>
 							<a href="<?php echo $magaza_link; ?>">Mağazanın tüm ilanlarını görüntüle</a>
 						<?php } else { ?>
-							<a href="<?php echo $uye_link; ?>">Üyenin tüm ilanlarını görüntüle</a>
+							<a href="<?php echo $uye_link; ?>"><?php echo _LANG("s_uyenin_ilanlari"); ?></a>
 						<?php } ?>
 						
 						<div class="clearfix mb7"></div>
@@ -628,7 +628,7 @@ tema_header(); ?>
 						<a href="tel:+<?php echo tel_uluslararasi($ara_tel); ?>" class="tel_link"><div class="bilgi">
 							<i class="<?php echo $tel["ikon"]; ?>"></i>
 							<div class="prel">
-							<?php echo $tel["tip"]; ?><span><?php echo $ara_tel; ?></span>
+							<?php echo spec_etiket($tel["tip"]); ?><span><?php echo $ara_tel; ?></span>
 							</div>
 						</div></a>
 						<?php } ?>
@@ -654,7 +654,7 @@ tema_header(); ?>
 						}
 						} else { ?>
 						<div class="text-center">
-							<a href="<?php echo ozel_url("giris-yap"); ?>?m=1">İlan sahibine mesaj gönder</a>
+							<a href="<?php echo ozel_url("giris-yap"); ?>?m=1"><?php echo _LANG("s_ilan_sahibine_mesaj"); ?></a>
 						</div>						
 						<?php }	?>
 						
@@ -674,8 +674,8 @@ tema_header(); ?>
 						if ($ilan_iletisim==1) {
 						?>
 						<h3><?php echo getir("uyeler","ad_soyad",$yazar); ?></h3>
-						<p>Üyelik tarihi: <?php echo $uyelik_tarihi; ?></p>
-						<a href="<?php echo $uye_link; ?>">Üyenin tüm ilanlarını görüntüle</a>
+						<p><?php echo _LANG("s_uyelik_tarihi"); ?><?php echo $uyelik_tarihi; ?></p>
+						<a href="<?php echo $uye_link; ?>"><?php echo _LANG("s_uyenin_ilanlari"); ?></a>
 						<div class="clearfix mb7"></div>
 						<?php foreach ($tel_dizi as $tel) {
 						$ara_tel=$tel["numara"];
@@ -683,7 +683,7 @@ tema_header(); ?>
 						<a href="tel:+<?php echo tel_uluslararasi($ara_tel); ?>" class="tel_link"><div class="bilgi">
 							<i class="<?php echo $tel["ikon"]; ?>"></i>
 							<div class="prel">
-							<?php echo $tel["tip"]; ?><span><?php echo $ara_tel; ?></span>
+							<?php echo spec_etiket($tel["tip"]); ?><span><?php echo $ara_tel; ?></span>
 							</div>
 						</div></a>
 						<?php } ?>
@@ -709,7 +709,7 @@ tema_header(); ?>
 						}
 						} else { ?>
 						<div class="text-center">
-							<a href="<?php echo ozel_url("giris-yap"); ?>?m=1">İlan sahibine mesaj gönder</a>
+							<a href="<?php echo ozel_url("giris-yap"); ?>?m=1"><?php echo _LANG("s_ilan_sahibine_mesaj"); ?></a>
 						</div>						
 						<?php }	?>
 						

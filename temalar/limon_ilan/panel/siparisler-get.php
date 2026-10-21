@@ -160,11 +160,11 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><?php echo $tarih_saat; ?></td>
 	<td><?php 
 		if ($durum==0) {
-			echo "<span class='label label-danger'>Ödeme bekleniyor</span>";
+			echo "<span class='label label-danger'><?php echo _LANG('order_pending'); ?></span>";
 		} else if ($durum==1) {
-			echo "<span class='label label-success'>Tamamlandı</span>";
+			echo "<span class='label label-success'><?php echo _LANG('order_completed'); ?></span>";
 		} else if ($durum==2) {
-			echo "<span class='label label-primary'>Ödeme onaylandı</span>";
+			echo "<span class='label label-primary'><?php echo _LANG('s_odeme_onaylandi'); ?></span>";
 		}
 		?></td>
 	<td>

@@ -76,7 +76,7 @@ foreach ($kategoriler as $kat) {
 	if ($kat_metrekare_fiyati) {
 		$metrekare_fiyati=$kat_metrekare_fiyati;
 	}
-	//echo getir("kategoriler","baslik",$kat);
+	//echo _DIL_BASLIK(getir("kategoriler","baslik",$kat), $kat, "kategori");
 }
 
 ?>
@@ -114,7 +114,7 @@ foreach ($kategoriler as $kat) {
 			if ($il or $ilce or $mahalle) {
 			?>					
 			<ul class="adres">
-				<?php if (tema_ayar("bolgesel")=="Hayır") { ?>
+				<?php if (tema_ayar("bolgesel")=="_LANG('_LANG(\'Hayır\')')") { ?>
 				<li><?php echo $il; ?></li>
 				<?php } ?>
 				<li><?php echo $ilce; ?></li>

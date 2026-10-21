@@ -155,7 +155,7 @@ tema_header();
 								  <div class="btn-group" role="group">
 									<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret ml0"></span></button>
 									<ul class="dropdown-menu dropdown-menu-right">
-									  <?php if ($ilan_durum==1) { ?><li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$ilan_id"; ?>" onclick="return confirm('İlanı yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li><?php } ?>
+									  <?php if ($ilan_durum==1) { ?><li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$ilan_id"; ?>" onclick="return confirm('' . _LANG('s_ilani') . ' yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li><?php } ?>
 									  <li><a href="<?php echo ozel_url("doping")."?id=$ilan_id"; ?>"><?php echo _LANG("title_buy_boost"); ?></a></li>
 									  <li><a href="<?php echo ozel_url("ilanlarim")."?sil=$ilan_id"; ?>" onclick="return confirm('' . _LANG(\'tx_ilan_silme_onayi\') . '')">Sil</a></li>
 									</ul>
@@ -226,7 +226,7 @@ tema_header();
 											<label>
 											  <input type="checkbox" name="anasayfa_vitrini" value="<?php echo $anasayfa_vitrini; ?>"> Dopingi Seç
 											</label>
-											<span class="pull-right"><?php echo $anasayfa_vitrini; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
+											<span class="pull-right"><?php echo $anasayfa_vitrini; ?> GMD / <?php echo "' . sprintf(_LANG('s_doping_gecerlilik_gun'), $doping_gecerlilik) . '"; ?></span>
 										</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -244,7 +244,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="kategori_vitrini" value="<?php echo $kategori_vitrini; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $kategori_vitrini; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $kategori_vitrini; ?> GMD / <?php echo "' . sprintf(_LANG('s_doping_gecerlilik_gun'), $doping_gecerlilik) . '"; ?></span>
 									</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -262,7 +262,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="acil_acil" value="<?php echo $acil_acil; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $acil_acil; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $acil_acil; ?> GMD / <?php echo "' . sprintf(_LANG('s_doping_gecerlilik_gun'), $doping_gecerlilik) . '"; ?></span>
 									</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -280,7 +280,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="kalin_yazi" value="<?php echo $kalin_yazi; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $kalin_yazi; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $kalin_yazi; ?> GMD / <?php echo "' . sprintf(_LANG('s_doping_gecerlilik_gun'), $doping_gecerlilik) . '"; ?></span>
 									</div>
 									</div>
 									<?php } else {echo "<div class='sec aktif'><i class='ion-android-checkmark-circle'></i>Doping aktif</div>";} ?>
@@ -297,7 +297,7 @@ tema_header();
 										<label>
 										  <input type="checkbox" name="guncelim" value="<?php echo $guncelim; ?>"> Dopingi Seç
 										</label>
-										<span class="pull-right"><?php echo $guncelim; ?> GMD / <?php echo "$doping_gecerlilik gün"; ?></span>
+										<span class="pull-right"><?php echo $guncelim; ?> GMD / <?php echo "' . sprintf(_LANG('s_doping_gecerlilik_gun'), $doping_gecerlilik) . '"; ?></span>
 									</div>
 									</div>
 								</div>

@@ -80,7 +80,7 @@ $son_dizi=array();
 		
 		$sql = mysqli_query($baglan, $sql_query);
 		if (!$sql) {
-			echo '<div class="alert alert-danger">SQL Hatası (yazi_listeleme ID: ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
+			echo '' . _LANG('s_sql_hatasi_yazi') . ' ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
 			error_reporting($error_reporting_was);
 			return;
 		}

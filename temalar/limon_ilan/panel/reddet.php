@@ -24,7 +24,7 @@ if ($_POST["buton"]) {
 	<p>$ilan_baslik başlıklı ilanınız kurallara uygun olmadığı için reddedilmiştir. Lütfen ilanınızı kurallara uygun şekilde düzenleyerek yayına alınız.</p>
 	$sebep_yaz
 	<p>İlan verme kurallarını görüntülemek için <a href=\"$kurallar_url\">buraya</a> tıklayın.</p>";
-	auto_mail_add($ilan_sahibi_ad_soyad,$ilan_sahibi_email_adresi,"İlanınız reddedildi! - $mail_baslik",$ileti);
+	auto_mail_add($ilan_sahibi_ad_soyad,$ilan_sahibi_email_adresi,"" . _LANG('s_ilani') . "nız reddedildi! - $mail_baslik",$ileti);
 	guncelle("icerik","durum",0,$ilan_id);
 	
     limit_artir($ilan_id);

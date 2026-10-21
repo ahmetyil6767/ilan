@@ -35,7 +35,7 @@ if ($onay) {
 	$ileti="
 	<p>Merhaba <strong>$siparis_uye_ad_soyad</strong></p>
 	<p>" . _LANG('hb_bu_e_posta_doping_siparisinizin_onaylandigini') . "</p>
-	<p>Siteye giriş yapmak için <a href=\"$site_url/sayfa/giris-yap\">buraya</a> tıklayın.</p>";
+	<p>Siteye giriş yapmak için <a href=\"" . sprintf(_LANG('tx_buraya_tiklayin3'), $site_url) . "";
 	auto_mail_add($siparis_uye_ad_soyad,$siparis_uye_email_adresi,"Siparişiniz onaylandı! - $mail_baslik",$ileti);	
 	// E-posta gönderimi bitti
 	
@@ -142,7 +142,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><?php echo $tip; ?></td>
 	<td><?php echo $doping_say; ?></td>
 	<td><?php echo $tarih_saat; ?></td>
-	<td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylandı</span>";} else {echo "<span class='label label-danger'>Ödeme bekleniyor</span>";} ?></td>
+	<td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylandı</span>";} else {echo "<span class='label label-danger'><?php echo _LANG('order_pending'); ?></span>";} ?></td>
 	<td>
 	<?php if ($durum==0) { ?>
 	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=doping&onay=<?php echo $id; ?>" onclick="return confirm('Siparişi onaylamak istediğinizden emin misiniz?')" class="btn btn-primary btn-xs"><?php echo _LANG("pn_hizli_onay"); ?></a>

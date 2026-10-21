@@ -1,12 +1,12 @@
 <?php if(count(get_included_files())==1) {die();} ?>
 <div class="btn-group btn-group-justified mb15" role="group" aria-label="...">
-	<a href="<?php echo ozel_url("ilan-ekle"); ?>?ilan=<?php echo $id; ?>" class="btn btn-primary" title="İlanı güncelle"><i class="ion-refresh mr0"></i><br /><?php echo _LANG("general_update"); ?></a>
+	<a href="<?php echo ozel_url("ilan-ekle"); ?>?ilan=<?php echo $id; ?>" class="btn btn-primary" title="" . _LANG('s_ilani') . " güncelle"><i class="ion-refresh mr0"></i><br /><?php echo _LANG("general_update"); ?></a>
 	<a href="<?php echo ozel_url("doping"); ?>?ilan_id=<?php echo $id; ?>" class="btn btn-default" title="<?php echo _LANG('tx_doping_satin_al'); ?>"><i class="fa fa-rocket mr0"></i><br />Doping</a>
 	<?php if ($durum==1) { ?>
 		<div class="btn-group" role="group">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret ml0"></span><br /><?php echo _LANG("pn_diger"); ?></button>
 		<ul class="dropdown-menu dropdown-menu-right">
-		<li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$id"; ?>" onclick="return confirm('İlanı yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li>
+		<li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$id"; ?>" onclick="return confirm('' . _LANG('s_ilani') . ' yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li>
 		</ul>
 		</div>
 	<?php } ?>
@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 		<td><?php echo _LANG('hb_bugun_ziyaret'); ?></td>
-		<td><?php echo $bugun; ?><?php if ($dun) { $fark=$bugun-$dun; echo "<small style='float:right;color:#999;'>(düne göre: $fark)</small>";} ?></td>
+		<td><?php echo $bugun; ?><?php if ($dun) { $fark=$bugun-$dun; echo "<small style='float:right;color:#999;'>" . sprintf(_LANG('s_dune_gore'), $fark) . "</small>";} ?></td>
 		</tr>
 		<?php if ($dun>0) { ?>
 		<tr>

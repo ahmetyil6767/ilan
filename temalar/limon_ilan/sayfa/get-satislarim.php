@@ -59,16 +59,16 @@ tema_header();
 								<td><?php echo tarih_saat_bicimlendir($siparis_tarih_saat); ?></td>
 								<td>
 								<?php if ($siparis_durum==0) {
-									echo "<span class='label label-danger borderless'>Ödeme bekleniyor</span>";
+									echo "<span class='label label-danger borderless'><?php echo _LANG('order_pending'); ?></span>";
 								} else if ($siparis_durum==1) {
-									echo "<span class='label label-success borderless'>Tamamlandı</span>";
+									echo "<span class='label label-success borderless'><?php echo _LANG('order_completed'); ?></span>";
 								} else if ($siparis_durum==2) {
-									echo "<span class='label label-info borderless'>Ödeme onaylandı</span>";
+									echo "<span class='label label-info borderless'><?php echo _LANG('s_odeme_onaylandi'); ?></span>";
 								} ?></td>
 								<td>
 								<?php if ($siparis_satici_odeme==1) {
 									$odeme_tarihi=ekstra_bilgi_getir("odeme_tarihi",$siparis_id,"siparis");
-									echo "<span class='label label-success borderless' title='$odeme_tarihi'>Ödeme yapıldı</span>";
+									echo "<span class='label label-success borderless' title='$odeme_tarihi'><?php echo _LANG('order_paid'); ?></span>";
 								} else {echo "<span class='label label-info borderless'>Bekliyor</span>";} ?>
 								</td>
 								<td>

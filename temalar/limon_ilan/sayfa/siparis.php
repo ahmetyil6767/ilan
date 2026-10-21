@@ -47,7 +47,7 @@ if ($siparis) {
             $magaza_paket_adi=liste_bilgi("paket_adi",$paket_id);
             $magaza_link=magaza_link_getir($magaza_id);
             $tanim="<a href='$magaza_link' target='_blank'>$magaza_baslik</a> için $magaza_paket_adi Mağaza üyeliği";
-            $tanim_text="$magaza_baslik için $magaza_paket_adi Mağaza üyeliği";
+            $tanim_text="" . sprintf(_LANG('s_magaza_uyeligi'), $magaza_baslik, $magaza_paket_adi) . "";
 
         } else if ($limit_politikasi==2) {
             
@@ -56,7 +56,7 @@ if ($siparis) {
             $magaza_paket_ilan_limiti=liste_bilgi("ilan_limit",$paket_id);
             $magaza_link=magaza_link_getir($magaza_id);
             $tanim="<a href='$magaza_link' target='_blank'>$magaza_baslik</a> için $magaza_paket_adi Mağaza üyeliği ($magaza_paket_ilan_limiti ilan)";
-            $tanim_text="$magaza_baslik için $magaza_paket_adi Mağaza üyeliği";
+            $tanim_text="" . sprintf(_LANG('s_magaza_uyeligi'), $magaza_baslik, $magaza_paket_adi) . "";
 
         }
 	} else if ($tip=="paket") {
@@ -67,7 +67,7 @@ if ($siparis) {
             $paket_ilan_limiti=liste_bilgi("ilan_limit",$paket_id);
             $uye_link=uye_link_getir($alici_id);
             $tanim="<a href='$uye_link' target='_blank'>$uye_ad_soyad</a> için $paket_baslik paket üyeliği ($paket_ilan_limiti ilan)";
-            $tanim_text="$uye_ad_soyad için $paket_baslik paket üyeliği";
+            $tanim_text="" . sprintf(_LANG('s_paket_uyeligi'), $uye_ad_soyad, $paket_baslik) . "";
             
         } else if ($limit_politikasi==2) {
             
@@ -76,7 +76,7 @@ if ($siparis) {
             $paket_ilan_limiti=liste_bilgi("ilan_limit",$paket_id);
             $uye_link=uye_link_getir($alici_id);
             $tanim="<a href='$uye_link' target='_blank'>$uye_ad_soyad</a> için $paket_baslik paket siparişi ($paket_ilan_limiti ilan)";
-            $tanim_text="$uye_ad_soyad için $paket_baslik paket siparişi";
+            $tanim_text="" . sprintf(_LANG('s_paket_siparis'), $uye_ad_soyad, $paket_baslik) . "";
 	    }
 	}
 }
@@ -420,7 +420,7 @@ tema_header(); ?>
 					if ($odeme_durum=="FAILURE") {
 						echo "<div class='alert alert-danger'>Ödeme işlemi sırasında bir hata oluştu. Lütfen farklı bir ödeme yöntemi kullanınız.</div>";
 					} else if ($odeme_durum=="SUCCESS") {
-						echo "<div class='alert alert-success'>Ödemeniz onaylandı. Ödeme numarası: $islem_no</div>";
+						echo "<div class='alert alert-success'>" . sprintf(_LANG('s_odeme_onaylandi_no'), $islem_no) . "</div>";
 						
 						if ($tip=="magaza") {
                             $limit_politikasi=limit_politikasi();

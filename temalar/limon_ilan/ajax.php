@@ -214,7 +214,7 @@ if ($islem=="iletisim_numaralari") {
 	
 	$tel_kod.="<div><div class='pull-left'>";
 	$tel_kod.="<div>Cep telefonu: $cep_tel_yaz</div>";
-	$tel_kod.="<div>İş telefonu: $is_tel_yaz</div>";
+	$tel_kod.="" . sprintf(_LANG('s_is_telefonu_etiket'), $is_tel_yaz) . "";
 	$tel_kod.="<div>Ev telefonu: $ev_tel_yaz</div>";
 	$tel_kod.="</div><a class='pull-right btn btn-xs btn-default c_pointer' id='iletisim_guncelle_buton'>İletişim Numaralarını Güncelle</a>
 	<div class='clearfix'></div>
@@ -238,7 +238,7 @@ if ($islem=="iletisim_numaralari") {
 			<label>" . _LANG('hb_is_telefonu') . "</label>
 			<div class='input-group'>
 				<span class='input-group-addon' style='border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;'>0</span>
-				<input type='text' class='form-control cannot_start_with_zero' id='is_tel' name='is_tel' placeholder='İş Telefonu' value='$is_tel' style='border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;'>
+				<input type='text' class='form-control cannot_start_with_zero' id='is_tel' name='is_tel' placeholder='_LANG(\'s_is_telefonu\')' value='$is_tel' style='border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;'>
 			</div>
 			<p>" . _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl') . "</p>
 		</div>
@@ -298,7 +298,7 @@ $('#ev_tel').mask('000 000 00 00',{placeholder: '212 123 45 67'});
 	if ($tel_kod) {
 		echo $tel_kod;
 	} else {
-		echo "<p>Hesabınıza tanımlanmış iletişim numarası bulunamadı.</p><a href='#'>Ekle</a>";
+		echo "" . _LANG('p_iletisim_numarasi_yok_ekle') . "";
 	}
 }
 if ($islem=="iletisim_guncelle") {
@@ -518,11 +518,11 @@ if ($islem=="sikayet_gonder") {
 		<p>Üye ID: <strong>$uye_id</strong></p>
 		<p>İlan: <strong>$ilan_id</strong></p>
 		<p>Kullanıcı mesajı: <strong>$mesaj</strong></p>
-		<p><a href=\"$ilan_link\">İlanı Görüntüle</a> - <a href=\"$site_url/$admin_dizini\">Yönetim Paneli</a></p>
+		<p><a href=\"$ilan_link\">" . _LANG('s_ilani') . " Görüntüle</a> - <a href=\"$site_url/$admin_dizini\">Yönetim Paneli</a></p>
 		";
 		$site_email=ayar("site_email");
 		$tarih_saat=tarih_saat();
-		$ekle=mysqli_query($baglan,"insert into auto_mail set ad_soyad='$mail_baslik', email_adresi='$site_email', baslik='Yeni şikayet bildirimi: $ad_soyad', mesaj='$ileti_admin', tarih_saat='$tarih_saat', durum='0'");
+		$ekle=mysqli_query($baglan,"insert into auto_mail set ad_soyad='$mail_baslik', email_adresi='$site_email', baslik='' . sprintf(_LANG('b_yeni_sikayet_bildirimi'), $ad_soyad) . '', mesaj='$ileti_admin', tarih_saat='$tarih_saat', durum='0'");
 		// E-posta gönderimi bitti
 		echo "
 		<div class='alert alert-success autoclose'>
@@ -595,7 +595,7 @@ if ($islem=="mesaj_gonder") {
 			
 			$ileti="
 			<p>Merhaba <strong>$kime_ad_soyad</strong></p>
-			<p>Mesajınızı görüntülemek için lütfen <a href=\"$gorusme_link\">buraya</a> tıklayın.</p>";
+			<p>Mesajınızı görüntülemek için lütfen <a href=\"" . sprintf(_LANG('tx_buraya_tiklayin'), $gorusme_link) . "";
 			auto_mail_add($kime_ad_soyad,$kime_email,"$uye_ad_soyad kullanıcısından yeni bir özel mesaj aldınız",$ileti);	
 			
 		} else {
@@ -694,7 +694,7 @@ if ($islem=="uye_paket_bilgi") {
 	$paket_kategori_limit=liste_bilgi("kategori_limit",$paket);
 	$paket_foto_limit=liste_bilgi("foto_limit",$paket);
 	$paket_aninda_onay=liste_bilgi("aninda_onay",$paket);
-	if ($paket_aninda_onay==1) {$paket_onay_yaz="Evet";} else {$paket_onay_yaz="Hayır";}
+	if ($paket_aninda_onay==1) {$paket_onay_yaz="Evet";} else {$paket_onay_yaz="_LANG('_LANG(\'Hayır\')')";}
 	
 	if ($paket_ucret) {
 		if (limit_politikasi()==2) {
@@ -757,7 +757,7 @@ if ($islem=="magaza_bilgi") {
 	$paket_foto_limit=liste_bilgi("foto_limit",$paket);
 	$paket_danisman_limit=liste_bilgi("danisman_limit",$paket);
 	$paket_aninda_onay=liste_bilgi("aninda_onay",$paket);
-	if ($paket_aninda_onay==1) {$paket_onay_yaz="Evet";} else {$paket_onay_yaz="Hayır";}
+	if ($paket_aninda_onay==1) {$paket_onay_yaz="Evet";} else {$paket_onay_yaz="_LANG('_LANG(\'Hayır\')')";}
 	if ($paket_ucret) {
 		if (limit_politikasi()==2) {
 			$fiyat_yaz="<small class='pull-right'>" . sprintf(_LANG('p_tek_seferlik_ucret'), $paket_ucret) . "</small>";
@@ -820,7 +820,7 @@ if ($islem=="odeme_bildirimi") {
 	";
 	$site_email=ayar("site_email");
 	$tarih_saat=tarih_saat();
-	$ekle=mysqli_query($baglan,"insert into auto_mail set ad_soyad='$mail_baslik', email_adresi='$site_email', baslik='Yeni ödeme bildirimi: $lp_uye_ad_soyad', mesaj='$ileti_admin', tarih_saat='$tarih_saat', durum='0'");
+	$ekle=mysqli_query($baglan,"insert into auto_mail set ad_soyad='$mail_baslik', email_adresi='$site_email', baslik='' . sprintf(_LANG('b_yeni_odeme_bildirimi'), $lp_uye_ad_soyad) . '', mesaj='$ileti_admin', tarih_saat='$tarih_saat', durum='0'");
 	
 	// E-posta gönderimi bitti
 		echo "<div class='alert alert-success autoclose'>Ödeme bildiriminiz bize ulaştı. En kısa sürede işleminizi onaylayacağız.</div>";

@@ -275,7 +275,7 @@ tema_header(); ?>
 								<td style="padding:3px !important;"><a href="<?php echo $ilan_link; ?>"><img src="<?php echo $ilan_resim; ?>" alt="" class="img-responsive"/></a></td>
 								<td class="baslik_td">
 									<a href="<?php echo $ilan_link; ?>"><?php echo $ilan_baslik; ?></a>
-									<p style="color:#777;font-size:12px;margin-top:3px;"><?php echo $ilan_ziyaret; ?> görüntülenme<?php if ($ilan_favori>0) {echo ", $ilan_favori kişinin favorisi";} ?></p>
+									<p style="color:#777;font-size:12px;margin-top:3px;"><?php echo $ilan_ziyaret; ?> görüntülenme<?php if ($ilan_favori>0) {echo "" . sprintf(_LANG('s_favori_kisinin_favorisi'), $ilan_favori) . "";} ?></p>
 									<?php if ($magaza_id) {echo "<a href='$magaza_link' target='_blank' style='color:#777;font-size:12px;margin-top:0;font-weight:500;'><i class='ion-bag'></i>$magaza_baslik</a>";} ?>
 								</td>
 								<td class="fiyat visible-sm visible-md visible-lg">
@@ -336,7 +336,7 @@ tema_header(); ?>
 								  <div class="btn-group" role="group">
 									<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret ml0"></span></button>
 									<ul class="dropdown-menu dropdown-menu-right">
-										<?php if ($ilan_durum==1) { ?><li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$ilan_id"; ?>" onclick="return confirm('İlanı yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li><?php } 
+										<?php if ($ilan_durum==1) { ?><li><a href="<?php echo ozel_url("ilanlarim")."?pasif=$ilan_id"; ?>" onclick="return confirm('' . _LANG('s_ilani') . ' yayından kaldırmak istiyor musunuz?')"><?php echo _LANG("post_unpublish"); ?></a></li><?php } 
 										else if ($ilan_durum!=2) { 
 										if ($magaza_id and $kalan_ilan_limit>0) {
 										// Mağaza
@@ -354,7 +354,7 @@ tema_header(); ?>
 											<li><a href="<?php echo ozel_url("ilanlarim")."?yayinla=$ilan_id"; ?>" <?php if ($limit_politikasi==2) {echo "onclick='return confirm(\"İlan onay kuyruğuna eklenecek ve ilan krediniz 1 azaltılacaktır. Onaylıyor musunuz?\");'";} ?>><?php echo _LANG("post_publish"); ?></a></li>
 										<?php } 
 										} else { ?>
-											<li><a data-toggle="tooltip" title="Kategori ilan limitiniz dolduğu için bu ilanı yayınlayamazsınız." class="c_pointer" onclick="event.preventDefault();"><?php echo _LANG("s_yayinlanamaz"); ?></a></li>
+											<li><a data-toggle="tooltip" title="" . _LANG('s_ilan_limiti_doldu') . "" class="c_pointer" onclick="event.preventDefault();"><?php echo _LANG("s_yayinlanamaz"); ?></a></li>
 										<?php } } 
 										} else if ($ilan_durum==2) { ?>
 											<li><a href="<?php echo ozel_url("ilanlarim")."?taslak=$ilan_id"; ?>"><?php echo _LANG("post_save_draft"); ?></a></li>

@@ -58,7 +58,7 @@ array("tip"=>"select","id"=>"standart_paket","baslik"=>_LANG('ay_varsayilan_uyel
 array("tip"=>"select","id"=>"ilan_sayilari","baslik"=>_LANG('ay_ilan_sayi_yuksek'),"standart"=>"1","aciklama"=>_LANG('ad_ilan_sayi_yuksek'),"secenekler"=>options("Gerçek ilan sayılarını göster:1|İlan sayılarını ikiye katla:2|İlan sayılarını üçe katla:3","|",":")),
 array("tip"=>"select","id"=>"whatsapp_butonu","baslik"=>_LANG('ay_whatsapp_butonu'),"standart"=>"1","aciklama"=>_LANG('ad_ilan_sayi_yuksek'),"secenekler"=>options("Gösterilsin:1|Gösterilmesin:2","|",":")),
 array("tip"=>"text","id"=>"get_komisyon","baslik"=>_LANG('s_get_komisyon_orani'),"standart"=>"2.25","aciklama"=>_LANG('ad_get_komisyon_orani_aciklama')),
-array("tip"=>"select","id"=>"bolgesel","baslik"=>_LANG('ay_bolgesel_site'),"secenekler"=>options("Evet,Hayır"),"standart"=>"Hayır","aciklama"=>_LANG('ad_bolgesel_site')),
+array("tip"=>"select","id"=>"bolgesel","baslik"=>_LANG('ay_bolgesel_site'),"secenekler"=>options("Evet,Hayır"),"standart"=>"_LANG('_LANG(\'Hayır\')')","aciklama"=>_LANG('ad_bolgesel_site')),
 array("tip"=>"select","id"=>"ana_sehir","baslik"=>_LANG('ay_ana_sehir'),"aciklama"=>_LANG('ad_ana_sehir'),"secenekler"=>$sehir_seciniz,"kosul"=>"bolgesel:==(Evet)"),
 array("tip"=>"select","id"=>"watermark","baslik"=>_LANG('ay_watermark'),"aciklama"=>_LANG('ad_watermark_soru'),"secenekler"=>options("Evet:1|Hayır:2","|",":"),"standart"=>2),
 array("tip"=>"upload","id"=>"watermark_logo","baslik"=>_LANG('ay_watermark_logosu'),"aciklama"=>_LANG('ad_watermark_logo'),"kosul"=>"watermark:==(1)"),

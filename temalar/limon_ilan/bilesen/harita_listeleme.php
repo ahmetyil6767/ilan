@@ -65,7 +65,7 @@ function harita_listeleme($id) {
 	
 	$ilan_sql = mysqli_query($baglan, $sql_query);
 	if (!$ilan_sql) {
-		echo '<div class="alert alert-danger">SQL Hatası (harita_listeleme ID: ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
+		echo '' . _LANG('s_sql_hatasi_harita') . ' ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
 		error_reporting($error_reporting_was);
 		return;
 	}

@@ -83,7 +83,7 @@ tema_header(); ?>
 			<?php if (!$islem) { ?>
 			<?php 
 			if ($magaza_uye_sayisi==0) {
-				echo "<div class='alert alert-danger'>Bu mağazaya hiç satış danışmanı eklenmemiş.</div>";
+				echo "<div class='alert alert-danger'><?php echo _LANG('s_danisman_yok'); ?></div>";
 				
 				if ($magaza_uye_sayisi-$magaza_temsilci_limiti==0) {
 					echo "<div class='alert alert-info'>

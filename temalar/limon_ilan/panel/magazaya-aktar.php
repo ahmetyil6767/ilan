@@ -59,7 +59,7 @@ if ($aktif_magaza_sayisi>0) {
 <div class="panel panel-default">
 	<div class="panel-heading"><?php echo $a_m_baslik; ?></div>
 	<div class="panel-body">
-		<p>Bu ilanı <?php echo $a_m_baslik; ?> adlı mağazaya aktarmak için butona tıklayın.</p>
+		<p><?php echo _LANG('s_bu_ilani'); ?> <?php echo $a_m_baslik; ?> adlı mağazaya aktarmak için butona tıklayın.</p>
 		<a class="btn btn-primary" href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=magazaya-aktar&id=<?php echo $id; ?>&magaza_id=<?php echo $a_m_id; ?>"><?php echo _LANG("pn_ilani_bu_magazaya_aktar"); ?></a>	
 	</div>
 </div>

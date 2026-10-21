@@ -73,8 +73,8 @@ tema_header(); ?>
 						<p>Merhaba <strong>$ad_soyad</strong></p>
 						<p>" . _LANG('hb_web_sitemize_hos_geldiniz_sonraki_ziyaretlerin') . "</p>
 						<p>E-posta adresi: $email_adresi<br />Parola: $parola</p>
-						<p>Siteye giriş yapmak için <a href=\"$site_url/sayfa/giris-yap\">buraya</a> tıklayın.</p>";
-						auto_mail_add($ad_soyad,$email_adresi,"$mail_baslik - Hoşgeldiniz, $ad_soyad",$ileti);	
+						<p>Siteye giriş yapmak için <a href=\"" . sprintf(_LANG('tx_buraya_tiklayin3'), $site_url) . "";
+						auto_mail_add($ad_soyad,$email_adresi,"" . sprintf(_LANG('b_hosgeldiniz'), $mail_baslik, $ad_soyad) . "",$ileti);	
 						
 						$ileti_admin=_LANG('ko_yeni_uye_kaydi_bildirim', array($ad_soyad,$site_url,$admin_dizini));
 						bildirim_ekle($ileti_admin,$uye_id,0);

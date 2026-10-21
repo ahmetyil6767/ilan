@@ -9,7 +9,7 @@ array("tip"=>"text","id"=>"link_baslik","baslik"=>_LANG('pn_baslik_yanindaki_lin
 array("tip"=>"text","id"=>"link","baslik"=>_LANG('pn_baslik_yanindaki_link_hedefi')),
 array("tip"=>"select","id"=>"baslik_stil","baslik"=>_LANG('pn_baslik_stili'),"secenekler"=>options("Standart,Alternatif")),
 array("tip"=>"select","id"=>"listeleme_stil","baslik"=>_LANG('pn_listeleme_stili'),"secenekler"=>options("Standart,Alternatif")),
-array("tip"=>"select","id"=>"fiyat_goster","baslik"=>_LANG('pn_fiyat_gosterilsin_mi'),"secenekler"=>options("Evet,Hayır"),"standart"=>"Hayır"),
+array("tip"=>"select","id"=>"fiyat_goster","baslik"=>_LANG('pn_fiyat_gosterilsin_mi'),"secenekler"=>options("Evet,Hayır"),"standart"=>"_LANG('_LANG(\'Hayır\')')"),
 array("tip"=>"select","id"=>"sutun","baslik"=>_LANG('pn_sutun_sayisi'),"aciklama"=>"Bir satırda gösterilecek ilan adedi.  Standart: 7","secenekler"=>options("2,3,4,5,6,7"),"standart"=>7),
 array("tip"=>"select","id"=>"mobil_sutun","baslik"=>_LANG('pn_mobil_sutun_sayisi'),"aciklama"=>"Mobil görünümdeki sütun sayısı. Standart: 3","secenekler"=>options("2,3"),"standart"=>3),
 array("tip"=>"select","id"=>"liste","baslik"=>_LANG('pn_listeleme_kriteri'),"secenekler"=>options("Yeni İçerikler:yeni|Popüler İlanlar:populer|Bugünün Popüler İlanları:bugun_populer|Anasayfa Vitrini:anasayfa_vitrin|Acil Acil:acil_acil","|",":"),"standart"=>1),
@@ -147,7 +147,7 @@ function klasik_listeleme($id) {
 	
 	$sql = mysqli_query($baglan, $sql_query);
 	if (!$sql) {
-		echo '<div class="alert alert-danger">SQL Hatası (klasik_listeleme ID: ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
+		echo '' . _LANG('s_sql_hatasi_klasik') . ' ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
 		error_reporting($error_reporting_was);
 		return;
 	}

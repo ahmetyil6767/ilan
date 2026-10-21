@@ -140,7 +140,7 @@ $fiyat_goster="Evet";
 				echo "</ul></div>";
 			}			
 			
-			} else {echo "<div class='alert alert-danger'>İlan bulunamaadı.</div>";} ?>
+			} else {echo "<div class='alert alert-danger'><?php echo _LANG('s_ilan_bulunamadi_y'); ?></div>";} ?>
 			</div>
 		</div>
 	</div>

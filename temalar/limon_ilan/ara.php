@@ -287,7 +287,7 @@ tema_header(); ?>
 				<div class="panel panel-default beyaz filtre">
 					<div class="panel-heading"><?php echo _LANG('filter_address'); ?></div>
 					<div class="panel-body">
-						<?php $bolgesel=tema_ayar("bolgesel"); if ($bolgesel=="Hayır") { ?>
+						<?php $bolgesel=tema_ayar("bolgesel"); if ($bolgesel=="_LANG('_LANG(\'Hayır\')')") { ?>
 						<div id="il_sec" style="margin-bottom:10px;"><?php no_flash_select(_LANG('tx_il_seciniz')); ?></div>
 						<?php } ?>
 						<div id="ilce_sec" style="margin-bottom:10px;"></div>
@@ -481,7 +481,7 @@ if (@$_SESSION["filtreler"]["ilce"]) {
 <script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/autoNumeric.js"></script>
 <script type="text/javascript">
 $(function(){
-<?php if ($bolgesel=="Hayır" or !$bolgesel) { ?>
+<?php if ($bolgesel=="_LANG('_LANG(\'Hayır\')')" or !$bolgesel) { ?>
 $("#il_sec").load("<?php echo tema_dizini(); ?>/ajax.php?islem=il_sec&tip=filtre<?php echo $gonder; ?>");
 <?php } else { $ana_sehir=tema_ayar("ana_sehir"); ?>
 $("#ilce_sec").load("<?php echo tema_dizini(); ?>/ajax.php?islem=ilce_sec&ust=<?php echo $ana_sehir; ?>&tip=filtre<?php echo $gonder; ?>");

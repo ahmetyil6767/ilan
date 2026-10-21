@@ -7,7 +7,7 @@ tema_header(); ?>
 			<?php include("temalar/$aktif_tema/inc/alert.php"); ?>
 			<h1>404. SAYFA BULUNAMADI</h1>
 			<div class="content">
-				Aradığınız sayfa bulunamadı. Bunun sebebi teknik bir problem veya ilanın yayından kaldırılması olabilir. Daha detaylı bilgi için lütfen bizimle iletişime geçiniz.
+				<?php echo _LANG('s_404_aciklama'); ?>
 			</div>
 		</div>
 	</div>

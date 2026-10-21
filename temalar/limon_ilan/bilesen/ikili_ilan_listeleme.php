@@ -10,7 +10,7 @@ array("tip"=>"text","id"=>"link","baslik"=>_LANG('pn_baslik_yanindaki_link_hedef
 array("tip"=>"color","id"=>"border_color","baslik"=>_LANG('pn_kenarlik_rengi_border_color'),"standart"=>"#e5e5e5"),
 array("tip"=>"color","id"=>"border_color_hover","baslik"=>_LANG('pn_hover_kenarlik_rengi_border_color_hover'),"standart"=>"#FBAD37"),
 array("tip"=>"select","id"=>"baslik_stil","baslik"=>_LANG('pn_baslik_stili'),"secenekler"=>options("Standart,Alternatif")),
-array("tip"=>"select","id"=>"fiyat_goster","baslik"=>_LANG('pn_fiyat_gosterilsin_mi'),"secenekler"=>options("Evet,Hayır"),"standart"=>"Hayır"),
+array("tip"=>"select","id"=>"fiyat_goster","baslik"=>_LANG('pn_fiyat_gosterilsin_mi'),"secenekler"=>options("Evet,Hayır"),"standart"=>"_LANG('_LANG(\'Hayır\')')"),
 array("tip"=>"select","id"=>"liste","baslik"=>_LANG('pn_listeleme_kriteri'),"secenekler"=>options("Yeni İçerikler:yeni|Popüler İlanlar:populer|Bugünün Popüler İlanları:bugun_populer|Anasayfa Vitrini:anasayfa_vitrin|Acil Acil:acil_acil","|",":"),"standart"=>1),
 array("tip"=>"checkbox","id"=>"rastgele","baslik"=>_LANG('pn_ilanlari_rastgele_goster'),"aciklama"=>"Listelemedeki ilanları rastgele göstermenizi sağlar.","kosul"=>"liste:!=(yeni)"),
 array("tip"=>"multiple_checkbox","id"=>"gosterme","baslik"=>_LANG('pn_su_ana_kategori_ilanlarini_gosterme'),"secenekler"=>$kat_op,"aciklama"=>"Seçtiğiniz kategori ilanlarını listeleden çıkarmanızı sağlar.","kosul"=>"liste:==(yeni)"),
@@ -97,7 +97,7 @@ function ikili_listeleme($id) {
 	
 	$sql = mysqli_query($baglan, $sql_query);
 	if (!$sql) {
-		echo '<div class="alert alert-danger">SQL Hatası (ikili_listeleme ID: ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
+		echo '' . _LANG('s_sql_hatasi_ikili') . ' ' . $id . '): ' . mysqli_error($baglan) . '<br>Sorgu: ' . htmlspecialchars($sql_query) . '</div>';
 		error_reporting($error_reporting_was);
 		return;
 	}

@@ -28,11 +28,11 @@ if ($paket_siparis>0) {
 $limonpanel_menu[]=array("baslik"=>_LANG('menu_ilan_sistemi_ayarlari'),"url"=>"temalar.php?islem=ayar","ikon"=>"cogs","sira"=>250);
 $limonpanel_menu[]=array("baslik"=>_LANG('stores'),"url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=magazalar","ikon"=>"shopping-bag","sira"=>10,"alt_linkler"=>array(array("baslik"=>_LANG('pn_magaza_ekle'),"url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=magaza-ekle")));
 $limonpanel_menu[]=array("baslik"=>_LANG('pn_odeme_bildirimleri'),"url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=odemeler","ikon"=>"money","sira"=>15);
-$limonpanel_menu[]=array("baslik"=>"Siparişler $toplam_siparis_badge","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler","ikon"=>"shopping-cart","sira"=>15,"alt_linkler"=>array(
-array("baslik"=>"GET Siparişleri $get_siparis_badge","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=get"),
-array("baslik"=>"Mağaza Siparişleri $magaza_siparis_badge","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=magaza"),
-array("baslik"=>"Doping Siparişleri $doping_siparis_badge","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=doping"),
-array("baslik"=>"Paket Siparişleri $paket_siparis_badge","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=paket"),
+$limonpanel_menu[]=array("baslik"=>"" . sprintf(_LANG('s_menu_siparisler'), $toplam_siparis_badge) . "","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler","ikon"=>"shopping-cart","sira"=>15,"alt_linkler"=>array(
+array("baslik"=>"" . sprintf(_LANG('s_menu_get_siparisler'), $get_siparis_badge) . "","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=get"),
+array("baslik"=>"" . sprintf(_LANG('s_menu_magaza_siparisler'), $magaza_siparis_badge) . "","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=magaza"),
+array("baslik"=>"" . sprintf(_LANG('s_menu_doping_siparisler'), $doping_siparis_badge) . "","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=doping"),
+array("baslik"=>"" . sprintf(_LANG('s_menu_paket_siparisler'), $paket_siparis_badge) . "","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=siparisler&tip=paket"),
 ));
 $limonpanel_menu[]=array("baslik"=>"Dopingler","url"=>"temalar.php?tema=$tema_ne&sayfa=panel&islem=dopingler","ikon"=>"rocket","sira"=>16);
 $limonpanel_menu[]=array("baslik"=>_LANG('menu_uyelik_paketleri'),"url"=>"listeler.php?liste=uyelik_paketleri","ikon"=>"sticky-note-o","sira"=>17);
@@ -288,7 +288,7 @@ if ($magaza_paket_say>0) {
 		$magaza_paket_id=$magaza_paket_dizisi["l_id"];
 		$paket_baslik=liste_bilgi("paket_adi",$magaza_paket_id);
 		$paket_ucret=liste_bilgi("ucret",$magaza_paket_id);
-		$ilan_kategori_ekstra_bilgiler[]=array("tip"=>"text","id"=>"magaza_paket_fiyat-$magaza_paket_id","baslik"=>"$paket_baslik paket kategori özel fiyatı","aciklama"=>"Bu paketin standart fiyatı $paket_ucret GMD'dir.","kosul"=>"magaza:==(1)","grup"=>5);
+		$ilan_kategori_ekstra_bilgiler[]=array("tip"=>"text","id"=>"magaza_paket_fiyat-$magaza_paket_id","baslik"=>"" . sprintf(_LANG('s_paket_ozel_fiyat'), $paket_baslik) . "","aciklama"=>"" . sprintf(_LANG('s_paket_standart_fiyat'), $paket_ucret) . "","kosul"=>"magaza:==(1)","grup"=>5);
 	}
 	$ilan_kategori_ekstra_bilgiler[]=array("tip"=>"grup_kapat");
 }
@@ -304,7 +304,7 @@ $icerik_tipleri["ilan"]=array(
 	"id"=>"ilan",
 	"baslik"=>_LANG('search_found_ads'),
 	"baslik_cogul"=>_LANG('tx_ilanlar'),
-	"baslik_isaret"=>"İlanı",
+	"baslik_isaret"=>"" . _LANG('s_ilani') . "",
 	"ikon"=>"calendar-check-o",
 	"gorsel"=>"0",
 	"galeri"=>"1",
@@ -377,7 +377,7 @@ function ilan_ozel_alanlar_form() {
 					";
 				} else {
 					$secenekler_dizi=explode(",",$secenekler);
-					@$options.="<option value=''>Seçiniz</option>";
+					@$options.="<option value=''><?php echo _LANG('filter_select'); ?></option>";
 					foreach ($secenekler_dizi as $secenek) {
 						$secenek=trim($secenek);
 						if ($secenek==$deger) {
@@ -409,7 +409,7 @@ function ilan_ozel_alanlar_form() {
 				if (count($mevcut_kategoriler)==0) {
 					$kod="<div class='alert alert-info'>Kategoriye özel bilgileri eklemek için lütfen kategori seçiminizi yapın ve ilanı taslak olarak kaydedin.</div>";
 				} else {
-					$kod="<div class='alert alert-danger'>Kategori özel alanları yapılandırılmamış.</div>";
+					$kod="<div class='alert alert-danger'>" . _LANG('s_ozel_alan_yapilandirilmadi') . "</div>";
 				}
 			}
 			
@@ -564,7 +564,7 @@ function ilan_reddet_link() {
 	if (isset($_GET["id"]) and getir("icerik","durum",$_GET["id"])==2) {
 		$icerik_id=$_GET["id"];
 		$kod.="
-		<a href='temalar.php?tema=$aktif_tema&sayfa=panel&islem=reddet&ilan_id=$icerik_id' class='btn btn-danger'><i class='fa fa-ban'></i>İlanı Reddet</a>
+		<a href='temalar.php?tema=$aktif_tema&sayfa=panel&islem=reddet&ilan_id=$icerik_id' class='btn btn-danger'><i class='fa fa-ban'></i>" . _LANG('s_ilani') . " Reddet</a>
 		";	
 		return $kod;
 	}
@@ -597,8 +597,8 @@ function onay_bildirimi_gonder() {
 		$ileti="
 		<p>Merhaba <strong>$ilan_sahibi_ad_soyad</strong></p>
 		p" . _LANG('hb_bu_e_posta_ilaninizin_onaylandigini_bildirmek') . "</p>
-		<p>İlanınızı ziyaretçi gözüyle görüntülemek için <a href=\"$ilan_url\">buraya</a> tıklayın.</p>";
-		auto_mail_add($ilan_sahibi_ad_soyad,$ilan_sahibi_email_adresi,"İlanınız onaylandı! - $mail_baslik",$ileti);				
+		<p>" . _LANG('s_ilani') . "nızı ziyaretçi gözüyle görüntülemek için <a href=\"" . sprintf(_LANG('tx_buraya_tiklayin2'), $ilan_url) . "";
+		auto_mail_add($ilan_sahibi_ad_soyad,$ilan_sahibi_email_adresi,"' . sprintf(_LANG('b_ilaniniz_onaylandi'), $mail_baslik) . '",$ileti);				
 	}
 }
 $panel_icerik_sol_alt_kod[]=onay_bildirimi_gonder();
@@ -2042,7 +2042,7 @@ function vitrin_gorseli_update() {
 				<div class="panel-body">
 				';
 				if ($vitrin_resim_kucuk) {
-					$kod.='<strong>Mevcut Görsel</strong><img src="'.$vitrin_resim_kucuk.'" alt="" id="mevcut-vitrin-gorseli" class="img-responsive" /><div class="clearfix mb15"></div>';				
+					$kod.='' . _LANG('s_mevcut_gorsel') . '"'.$vitrin_resim_kucuk.'" alt="" id="mevcut-vitrin-gorseli" class="img-responsive" /><div class="clearfix mb15"></div>';				
 				} else {
 					$kod.='<div class="alert alert-danger">Vitrin görseli bulunamadı</div><div class="clearfix mb15"></div>';
 				}

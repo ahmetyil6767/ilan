@@ -35,7 +35,7 @@ tema_header(); ?>
 		</div>
 		<div class="col-md-33">
 			<?php include("temalar/$aktif_tema/inc/alert.php"); ?>
-			<?php if ($bildirim_sayisi==0) {echo "<div class='alert alert-danger'>Bildirim bulunamadı.</div>";} else { ?>
+			<?php if ($bildirim_sayisi==0) {echo "<div class='alert alert-danger'><?php echo _LANG('s_bildirim_bulunamadi'); ?></div>";} else { ?>
 			<form action="" method="post">
 			<div class="panel panel-default limon with_footer">
 				<div class="panel-body" style="padding:0 !important;">

@@ -22,7 +22,7 @@ if (!in_array("(Mobil)",$parcala)) {
 ?>
 <div class="bilesen <?php echo $class_yaz; ?> visible-md visible-lg">
 <div id="gg_container"><?php echo $html_kod; ?></div>
-<?php if ($goster_gizle=="Evet") {echo "<a href='#' class='goster_gizle pull-right' style='font-size:12px;'>Reklamı gizle</a><div class='clearfix'></div>";} ?>
+<?php if ($goster_gizle=="Evet") {echo "<a href='#' class='goster_gizle pull-right' style='font-size:12px;'" . _LANG('s_reklami_gizle') . "'clearfix'></div>";} ?>
 </div>
 <?php 
 if ($goster_gizle=="Evet") {
