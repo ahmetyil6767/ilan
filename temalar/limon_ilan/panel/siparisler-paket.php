@@ -49,9 +49,8 @@ if ($onay) {
 	$siparis_uye_email_adresi=getir("uyeler","email_adresi",$siparis_uye_id);
 	$ileti="
 	<p>Merhaba <strong>$siparis_uye_ad_soyad</strong></p>
-	<p>" . _LANG('hb_bu_e_posta_uyelik_paketi_siparisinizin_onaylan') . "</p>
-	<p>Siteye giriş yapmak için <a href=\"" . sprintf(_LANG('tx_buraya_tiklayin3'), $site_url) . "";
-	auto_mail_add($siparis_uye_ad_soyad,$siparis_uye_email_adresi,"Siparişiniz onaylandı! - $mail_baslik",$ileti);	
+	<p>" . _LANG('hb_bu_e_posta_uyelik_paketi_siparisinizin_onaylan') . "_LANG('s_siteye_giris_yap')" . sprintf(_LANG('tx_buraya_tiklayin3'), $site_url) . "";
+	auto_mail_add($siparis_uye_ad_soyad,$siparis_uye_email_adresi,"_LANG('b_siparisiniz_onaylandi')",$ileti);	
 	// E-posta gönderimi bitti
 	
 	yonlendir("temalar.php?tema=$aktif_tema&sayfa=panel&islem=siparisler&tip=paket");
@@ -154,12 +153,12 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><?php echo $tutar; ?> GMD</td>
 	<td><?php echo $tip; ?></td>
 	<td><?php echo $tarih_saat; ?></td>
-	<td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylandı</span>";} else {echo "<span class='label label-danger'><?php echo _LANG('order_pending'); ?></span>";} ?></td>
+	<td><?php if ($durum==1) {echo "_LANG('post_approved')";} else {echo "<span class='label label-danger'><?php echo _LANG('order_pending'); ?></span>";} ?></td>
 	<td>
 	<?php if ($durum==0) { ?>
-	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=paket&onay=<?php echo $id; ?>" onclick="return confirm('Siparişi onaylamak istediğinizden emin misiniz?')" class="btn btn-primary btn-xs"><?php echo _LANG("pn_hizli_onay"); ?></a>
+	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=paket&onay=<?php echo $id; ?>" onclick="return confirm('_LANG(\'tx_siparis_onaylama\')')" class="btn btn-primary btn-xs"><?php echo _LANG("pn_hizli_onay"); ?></a>
 	<?php } ?>
-	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=paket&sil=<?php echo $id; ?>" onclick="return confirm('Siparişi ve siparişe bağlı kayıtları silmek istediğinizden emin misiniz?')" class="btn btn-danger btn-xs">Sil</a>
+	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=paket&sil=<?php echo $id; ?>" onclick="return confirm('_LANG(\'tx_siparis_silme_onayi\')')" class="btn btn-danger btn-xs">Sil</a>
 	</td>
 </tr>
 <?php }	?>
@@ -174,7 +173,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<form action="" method="post">
 		<?php if ($pasif_toplam>0) { ?>
 			<p>Ödeme bekleyen <?php echo $pasif_toplam; ?> sipariş bulundu. Ödeme bekleyen tüm siparişleri tek seferde silebilirsiniz.</p>
-			<button type="submit" name="toplu_sil" value="Sil" class="btn btn-danger" onclick="return confirm('Tüm bekleyen siparişler silinecek.');"><?php echo _LANG("pn_bekleyen_siparisleri_sil"); ?></button>
+			<button type="submit" name="toplu_sil" value="Sil" class="btn btn-danger" onclick="return confirm(_LANG('tx_siparis_silme_onayi'));"><?php echo _LANG("pn_bekleyen_siparisleri_sil"); ?></button>
 		<?php } else { ?>
 			<div><?php echo _LANG('hb_uygulanabilir_toplu_islem_yok'); ?></div>
 		<?php } ?>
@@ -182,7 +181,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	</div>
 </div>
 
-<?php } else {echo "<div class='alert alert-danger'>Sipariş bulunamadı.</div>";} ?>
+<?php } else {echo "_LANG('order_not_found')";} ?>
 <?php } else { ?>
 <div class="row">
 	<div class="col-md-20">

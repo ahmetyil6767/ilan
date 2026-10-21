@@ -104,7 +104,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<?php if ($limit_politikasi==1) { ?>
 	<td class="<?php echo $bitis_uyari; ?>"><?php echo $paket_bitis_tarihi; ?></td>
 	<?php } ?>
-	<td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylı</span>";} else if ($durum==0) {echo "<span class='label label-danger'>Pasif</span>";} else if ($durum==2) {echo "<span class='label label-danger'>Süresi doldu</span>";}?></td>
+	<td><?php if ($durum==1) {echo "_LANG('s_onayli')";} else if ($durum==0) {echo "<span class='label label-danger'>Pasif</span>";} else if ($durum==2) {echo "_LANG('post_expired')";}?></td>
 	<td>
 	
 	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=magaza-guncelle&id=<?php echo $id; ?>" class="btn btn-default btn-xs"><?php echo _LANG("general_update"); ?></a>

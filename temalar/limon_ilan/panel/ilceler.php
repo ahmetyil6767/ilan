@@ -89,7 +89,7 @@ if ($guncelle) {
 				<td><?php echo $ad; ?></td>
 				<td><a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=mahalleler&ilce=<?php echo $id; ?>" class="btn btn-primary btn-xs"><?php echo _LANG("pn_mahalleleri_goruntule"); ?></a></td>
 				<td>
-					<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=ilceler&il=<?php echo $il; ?>&sil=<?php echo $id; ?>" onclick="return confirm('<?php echo $ad; ?> ilçesini ve bu ilçeye bağlı <?php echo $mahalle_sayisi; ?> mahalleyi kaldırmak üzeresiniz');" class="btn btn-danger btn-xs">Sil</a>
+					<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=ilceler&il=<?php echo $il; ?>&sil=<?php echo $id; ?>" onclick="return confirm(_LANG('pn_ilce_bulunamadi'));" class="btn btn-danger btn-xs">Sil</a>
 					<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=ilceler&il=<?php echo $il; ?>&guncelle=<?php echo $id; ?>" class="btn btn-default btn-xs"><?php echo _LANG("general_update"); ?></a>
 				</td>
 			</tr>

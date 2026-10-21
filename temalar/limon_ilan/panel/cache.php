@@ -38,7 +38,7 @@ if ($buton) {
 	<div class="col-md-15">
 		<div class="kutu" style="padding:20px;font-size:18px;background:<?php if (tema_ayar("cache")==1) {echo "#2ecc71";} else {echo "#e74c3c";} ?>;color:#fff;border-radius:3px;margin-bottom:20px;">
 			Cache Sistemi
-			<div class="rakam" style="font-size:32px;font-weight:700;"><?php if (tema_ayar("cache")==1) {echo "Açık";} else {echo "Kapalı";} ?></div>
+			<div class="rakam" style="font-size:32px;font-weight:700;"><?php if (tema_ayar("cache")==1) {echo "_LANG('general_open')";} else {echo "_LANG('general_closed')";} ?></div>
 		</div>
 	</div>
 	<div class="col-md-15">

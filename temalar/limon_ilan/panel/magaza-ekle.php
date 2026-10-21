@@ -99,11 +99,11 @@ if ($buton) {
 			form_group(array("tip"=>"select","id"=>"paket","baslik"=>"Paket","secenekler"=>$magaza_paket_seciniz,"gerekli"=>1));							
 			form_group(array("tip"=>"select","id"=>"durum","baslik"=>"Durum","secenekler"=>options(_LANG('tx_pasif_0_onayli_1_suresi_doldu_2'),"|",":"),"gerekli"=>1));
 
-			form_group(array("tip"=>"select","id"=>"ozel_limitler","baslik"=>_LANG('s_ozel_limitler'),"secenekler"=>options("Hayır:0|Evet:1","|",":"),"aciklama"=>"Özel limitleri Hayır olarak işaretlerseniz mağazanın paket limitleri, Evet olarak işaretlerseniz ise aşağıda belirleyeceğiniz limitler geçerli olacaktır."));
+			form_group(array("tip"=>"select","id"=>"ozel_limitler","baslik"=>_LANG('s_ozel_limitler'),"secenekler"=>options("_LANG('tx_hayir_0_evet_1')","|",":"),"aciklama"=>"Özel limitleri Hayır olarak işaretlerseniz mağazanın paket limitleri, Evet olarak işaretlerseniz ise aşağıda belirleyeceğiniz limitler geçerli olacaktır."));
 			form_group(array("tip"=>"text","id"=>"ilan_limit","baslik"=>_LANG('s_ilan_limiti')));
 			form_group(array("tip"=>"text","id"=>"foto_limit","baslik"=>_LANG('s_fotograf_limiti')));
 			form_group(array("tip"=>"text","id"=>"danisman_limit","baslik"=>_LANG('s_danisman_limiti_k')));
-			form_group(array("tip"=>"select","id"=>"aninda_onay","baslik"=>_LANG('s_aninda_onay'),"secenekler"=>options("Hayır:0|Evet:1","|",":")));
+			form_group(array("tip"=>"select","id"=>"aninda_onay","baslik"=>_LANG('s_aninda_onay'),"secenekler"=>options("_LANG('tx_hayir_0_evet_1')","|",":")));
 			
 			?>
 			<?php form_buton("buton",_LANG('tx_magaza_olustur'),"primary"); ?>

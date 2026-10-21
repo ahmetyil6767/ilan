@@ -192,7 +192,7 @@ if ($kalan_magaza_sayisi) {
                 <th><?php echo $id; ?></th>
                 <td><?php echo $baslik; ?></td>
                 <td><?php echo $uye_ad_soyad; ?></td>
-                <td><?php if ($durum==1) {echo "<span class='label label-success'>Onaylı</span>";} else if ($durum==0) {echo "<span class='label label-danger'>Pasif</span>";} else if ($durum==2) {echo "<span class='label label-danger'>Süresi doldu</span>";}?></td>
+                <td><?php if ($durum==1) {echo "_LANG('s_onayli')";} else if ($durum==0) {echo "<span class='label label-danger'>Pasif</span>";} else if ($durum==2) {echo "_LANG('post_expired')";}?></td>
                 <td><?php echo $sabit_limit; ?></td>
                 <td><?php echo $sabit_foto_limit; ?></td>
                 <td><?php echo $sabit_danisman_limit; ?></td>

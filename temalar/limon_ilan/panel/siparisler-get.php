@@ -170,16 +170,16 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td>
 	<?php 
 	if ($satici_durum==0 and $siparis_durum==2) {
-		echo "<span class='label label-default borderless'>Sipariş alındı</span>";
+		echo "_LANG('s_siparis_alindi')";
 	} else if ($satici_durum==1) {
 		echo "<span class='label label-warning borderless'>Tedarik ediliyor</span>";
 	} else if ($satici_durum==2) {
-		echo "<span class='label label-info borderless'>Kargoya hazırlanıyor</span>";
+		echo "_LANG('s_kargoya_hazir')";
 	} else if ($satici_durum==3) {
 		$kargo_tarihi=ekstra_bilgi_getir("kargo_tarihi",$id,"siparis");
 		echo "<span class='label label-success borderless'>Kargoya verildi: $kargo_tarihi</span>";
 	} else if ($satici_durum==4) {
-		echo "<span class='label label-danger borderless'>İptal edildi</span>";
+		echo "_LANG('order_cancelled')";
 	} 
 	?>
 	</td>
@@ -191,7 +191,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 		if ($satici_odeme==1) {
 			$odeme_tarihi=ekstra_bilgi_getir("odeme_tarihi",$id,"siparis");
 			echo "<span class='label label-success'>Ödeme yapıldı: $odeme_tarihi</span>";
-		} else {echo "<span class='label label-danger'>Ödenmedi</span>";} 
+		} else {echo "_LANG('order_unpaid')";} 
 	}
 	?></td>
 	<td>
@@ -200,7 +200,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<?php } ?>
 	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=get&guncelle=<?php echo $id; ?>" class="btn btn-default btn-xs"><?php echo _LANG("general_update"); ?></a>
 	
-	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=get&sil=<?php echo $id; ?>" onclick="return confirm('Siparişi ve siparişe bağlı kayıtları silmek istediğinizden emin misiniz?')" class="btn btn-danger btn-xs">Sil</a>
+	<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=siparisler&tip=get&sil=<?php echo $id; ?>" onclick="return confirm('_LANG(\'tx_siparis_silme_onayi\')')" class="btn btn-danger btn-xs">Sil</a>
 	</td>
 </tr>
 <?php }	?>
@@ -214,7 +214,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<form action="" method="post">
 		<?php if ($pasif_toplam>0) { ?>
 			<p>Ödeme bekleyen <?php echo $pasif_toplam; ?> sipariş bulundu. Ödeme bekleyen tüm siparişleri tek seferde silebilirsiniz.</p>
-			<button type="submit" name="toplu_sil" value="Sil" class="btn btn-danger" onclick="return confirm('Tüm bekleyen siparişler silinecek.');"><?php echo _LANG("pn_bekleyen_siparisleri_sil"); ?></button>
+			<button type="submit" name="toplu_sil" value="Sil" class="btn btn-danger" onclick="return confirm(_LANG('tx_siparis_silme_onayi'));"><?php echo _LANG("pn_bekleyen_siparisleri_sil"); ?></button>
 		<?php } else { ?>
 			<div><?php echo _LANG('hb_uygulanabilir_toplu_islem_yok'); ?></div>
 		<?php } ?>
@@ -222,7 +222,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	</div>
 </div>
 
-<?php } else {echo "<div class='alert alert-danger'>Sipariş bulunamadı.</div>";} ?>
+<?php } else {echo "_LANG('order_not_found')";} ?>
 <?php } else { ?>
 <div class="row">
 	<div class="col-md-20">

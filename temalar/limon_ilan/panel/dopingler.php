@@ -191,11 +191,11 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<td><?php echo $tarih_saat; ?></td>
 	<td><?php echo $bitis_tarih_saat; ?></td>
 	<td>#<?php echo $siparis_id; ?></td>
-	<td><?php if ($durum==1) {echo "<span class='label label-success'>Aktif</span>";} else if ($durum==2) {echo "<span class='label label-danger'>Süresi doldu</span>";} else {echo "<span class='label label-danger'>Pasif</span>";} ?></td>
+	<td><?php if ($durum==1) {echo "<span class='label label-success'>Aktif</span>";} else if ($durum==2) {echo "_LANG('post_expired')";} else {echo "<span class='label label-danger'>Pasif</span>";} ?></td>
 	<td>
 	<?php if ($durum!=1) { ?><button type="submit" name="onayla" class="btn btn-primary btn-xs" value="<?php echo $id; ?>">Onayla</button><?php } ?>
 	<?php if ($durum==1) { ?><button type="submit" name="pasiflestir" class="btn btn-warning btn-xs" value="<?php echo $id; ?>"><?php echo _LANG("p_pasiflestir"); ?></button><?php } ?>
-	<button type="submit" name="sil" class="btn btn-danger btn-xs" value="<?php echo $id; ?>" onclick="return confirm('Dopingi silmek istediğinizden emin misiniz?')">Sil</button>
+	<button type="submit" name="sil" class="btn btn-danger btn-xs" value="<?php echo $id; ?>" onclick="_LANG('tx_return_confirm_dopingi_silmek_istediginizden_e')">Sil</button>
 	</td>
 </tr>
 <?php }	?>
@@ -211,7 +211,7 @@ while ($dizi=mysqli_fetch_array($sql)) {
 	<form action="" method="post">
 		<?php if ($pasif_toplam>0) { ?>
 			<p>Doping süresi dolmuş <?php echo $pasif_toplam; ?> ilan var. Tümünü toplu olarak aktifleştirebilirsiniz. Bu işlem tüm ilanlar için bugünden başlayarak mevcut gün sayısı kadar doping tanımlaması yapar.</p>
-			<button type="submit" name="toplu_onay" value="Onayla" class="btn btn-success" onclick="return confirm('Tüm pasif doping istekleri aktifleştirilecek.');"><?php echo _LANG("pn_tumunu_aktiflestir"); ?></button>
+			<button type="submit" name="toplu_onay" value="Onayla" class="btn btn-success" onclick="return confirm(_LANG('tx_doping_aktifleştirilecek'));"><?php echo _LANG("pn_tumunu_aktiflestir"); ?></button>
 		<?php } else { ?>
 			<div><?php echo _LANG('hb_uygulanabilir_toplu_islem_yok'); ?></div>
 		<?php } ?>
