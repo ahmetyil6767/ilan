@@ -225,7 +225,7 @@ while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) {
 		$tum_alt_kategoriler=null;
 		$x=1;
 		foreach ($alt_kategoriler as $alt_kategori) {
-			$alt_kategori_baslik=getir("kategoriler","baslik",$alt_kategori);
+			$alt_kategori_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$alt_kategori), $alt_kategori, "kategori");
 			if ($x!=1) {
 				$tum_alt_kategoriler.="$alt_kategori_baslik, ";
 			}

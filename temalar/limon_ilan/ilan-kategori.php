@@ -1,6 +1,6 @@
 <?php 
 if(count(get_included_files())==1) {die();}
-$kategori_baslik=getir("kategoriler","baslik",$id);
+$kategori_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 $kategori_ilan_sayisi=getir("kategoriler","icerik",$id);
 $kategori_link=kategori_link_getir($id);
 
@@ -401,7 +401,7 @@ tema_header(); ?>
 						$x=1;
 						foreach ($ust_kategoriler as $ust) {
 							$ust_link=kategori_link_getir($ust);
-							$ust_baslik=getir("kategoriler","baslik",$ust);
+							$ust_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$ust), $ust, "kategori");
 							$ust_ilan_sayisi=getir("kategoriler","icerik",$ust);
 							if ($ilan_sayilari_ayar==2 or $ilan_sayilari_ayar==3) {
 								$ust_ilan_sayisi*=$ilan_sayilari_ayar;
@@ -431,7 +431,7 @@ tema_header(); ?>
 						
 						while ($alt_dizi=mysqli_fetch_array($alt_sql)) {
 							$alt_id=$alt_dizi["id"];
-							$alt_baslik=$alt_dizi["baslik"];
+							$alt_baslik=_DIL_BASLIK($alt_dizi["baslik"], $alt_id, "kategori");
 							$alt_ilan_sayisi=$alt_dizi["icerik"];
 							if ($ilan_sayilari_ayar==2 or $ilan_sayilari_ayar==3) {
 								$alt_ilan_sayisi*=$ilan_sayilari_ayar;
@@ -568,7 +568,7 @@ tema_header(); ?>
 							$ust_link=$ust["link"];
 							echo "<a href='$ust_link'>$ust_baslik</a>";
 						$x++;}
-					} ?><a href="<?php echo kategori_link_getir($id); ?>"><?php echo getir("kategoriler","baslik"); ?></a>
+					} ?><a href="<?php echo kategori_link_getir($id); ?>"><?php echo _DIL_BASLIK(getir("kategoriler","baslik"), $id, "kategori"); ?></a>
 					</span> <?php echo _LANG('search_kategorisinde'); ?>
 					<?php if (@$uygulanan_filtre_sayisi>0) {echo _LANG('kriterlere_uygun_kisa');} ?>
 					<?php if ($toplam_gosterilen_icerik>0) { ?>

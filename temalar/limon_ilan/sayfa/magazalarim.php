@@ -94,7 +94,7 @@ tema_header(); ?>
 					$id=$magaza_dizi["id"];
 					$baslik=$magaza_dizi["baslik"];
 					$kategori=$magaza_dizi["kategori"];
-					$kategori_adi=getir("kategoriler","baslik",$magaza_dizi["kategori"]);
+					$kategori_adi=_DIL_BASLIK(getir("kategoriler","baslik",$magaza_dizi["kategori"]), $magaza_dizi["kategori"], "kategori");
 					$tarih_saat=tarih_saat_bicimlendir($magaza_dizi["tarih_saat"]);
 					$magaza_paket=magaza_bilgi("paket",$id);
 					$magaza_paket_adi=liste_bilgi("paket_adi",magaza_bilgi("paket",$id));
@@ -163,7 +163,7 @@ tema_header(); ?>
 					$id=$x;
 					$baslik=getir("magazalar","baslik",$id);
 					$kategori=getir("magazalar","kategori",$id);
-					$kategori_adi=getir("kategoriler","baslik",$kategori);
+					$kategori_adi=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
 					$tarih_saat=tarih_saat_bicimlendir(getir("magazalar","tarih_saat",$id));
 					$magaza_paket=magaza_bilgi("paket",$id);
 					$magaza_paket_adi=liste_bilgi("paket_adi",magaza_bilgi("paket",$id));

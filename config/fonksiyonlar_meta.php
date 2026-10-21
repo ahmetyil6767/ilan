@@ -100,7 +100,7 @@ function meta_title()
 		$kategori_id = $_GET["id"];
 		$seo = ekstra_bilgi_getir("seo_title", $kategori_id, "kategori");
 		if ($seo) { return $seo; }
-		$kategori_adi = kategori_adi_getir($kategori_id);
+		$kategori_adi = _DIL_BASLIK(kategori_adi_getir($kategori_id), $kategori_id, "kategori");
 		return _META_BIRLESTIR($kategori_adi, $basliga_ekle);
 	}
 

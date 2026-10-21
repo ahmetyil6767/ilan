@@ -73,7 +73,7 @@ function tab_listeleme($id) {
 		  <ul class="nav nav-tabs ozel" role="tablist">
 			<?php $x=1; 
 			foreach ($katlar as $kat) { 
-			$kat_baslik=getir("kategoriler","baslik",$kat);
+			$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat), $kat, "kategori");
 			$kat_ikon=kategori_bilgi("ikon",$kat);
 			if ($x==1) {$active_yaz="active";} else {$active_yaz=null;}
 			if ($x<4) { ?>
@@ -88,7 +88,7 @@ function tab_listeleme($id) {
 			<div class="tab-content">
 				<?php $x=1; 
 				foreach ($katlar as $kat) { 
-				$kat_baslik=getir("kategoriler","baslik",$kat);
+				$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat), $kat, "kategori");
 				$kat_ikon=kategori_bilgi("ikon",$kat);
 				if ($x==1) {$active_yaz="active";} else {$active_yaz=null;}
 				?>

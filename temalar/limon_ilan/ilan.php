@@ -112,7 +112,7 @@ tema_header(); ?>
 		  <li><a href="<?php echo site_url(); ?>">Anasayfa</a></li>
 		  <?php 
 			foreach ($kategoriler as $kategori) {
-				$kat_baslik=getir("kategoriler","baslik",$kategori);
+				$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
 				$kat_link=kategori_link_getir($kategori);
 				echo "<li><a href='$kat_link'>$kat_baslik</a></li>";
 			}
@@ -363,21 +363,21 @@ tema_header(); ?>
 								echo "
 								<tr>
 									<th>Marka</th>
-									<td>".getir("kategoriler","baslik",$marka)."</td>
+									<td>"._DIL_BASLIK(getir("kategoriler","baslik",$marka), $marka, "kategori")."</td>
 								</tr>";
 							}
 							if (isset($seri)) {
 								echo "
 								<tr>
 									<th>Seri</th>
-									<td>".getir("kategoriler","baslik",$seri)."</td>
+									<td>"._DIL_BASLIK(getir("kategoriler","baslik",$seri), $seri, "kategori")."</td>
 								</tr>";
 							}
 							if (isset($model)) {
 								echo "
 								<tr>
 									<th>Model</th>
-									<td>".getir("kategoriler","baslik",$model)."</td>
+									<td>"._DIL_BASLIK(getir("kategoriler","baslik",$model), $model, "kategori")."</td>
 								</tr>";
 							}
 						}

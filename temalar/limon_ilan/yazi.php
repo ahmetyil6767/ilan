@@ -13,7 +13,7 @@ $kategoriler=kategori_getir($id);
 		  <li><a href="<?php echo site_url(); ?>/sayfa/yazilar/"><?php echo _LANG("y_yazilar"); ?></a></li>
 		  <?php 
 			foreach ($kategoriler as $kategori) {
-				$kat_baslik=getir("kategoriler","baslik",$kategori);
+				$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
 				$kat_link=kategori_link_getir($kategori);
 				echo "<li><a href='$kat_link'>$kat_baslik</a></li>";
 			}
@@ -31,7 +31,7 @@ $kategoriler=kategori_getir($id);
 			<?php 
 			if (count($kategoriler)>0) {echo "<ul>";}
 			foreach ($kategoriler as $kat) { 
-			$kat_baslik=getir("kategoriler","baslik",$kat);
+			$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat), $kat, "kategori");
 			$kat_link=kategori_link_getir($kat);
 			?>
 			<li><a href="<?php echo $kat_link; ?>"><?php echo $kat_baslik; ?></a></li>

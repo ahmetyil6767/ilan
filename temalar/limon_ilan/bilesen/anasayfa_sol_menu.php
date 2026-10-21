@@ -80,7 +80,7 @@ ul.ana_menu li a i {border-radius:0 !important;}
 
 		while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) { 
 			$kategori_id=$kategori_dizi["id"];
-			$kategori_baslik=$kategori_dizi["baslik"];
+			$kategori_baslik=_DIL_BASLIK($kategori_dizi["baslik"], $kategori_id, "kategori");
 			$kategori_ikon=kategori_bilgi("ikon",$kategori_id);
 			$kategori_ikon_bg=kategori_bilgi("ikon_bg",$kategori_id);
 			$kategori_link=kategori_link_getir($kategori_id);
@@ -107,7 +107,7 @@ ul.ana_menu li a i {border-radius:0 !important;}
 			
 				while ($alt_kategori_dizi=mysqli_fetch_array($alt_kategori_sql)) { 
 				$alt_kategori_id=$alt_kategori_dizi["id"];
-				$alt_kategori_baslik=$alt_kategori_dizi["baslik"];
+				$alt_kategori_baslik=_DIL_BASLIK($alt_kategori_dizi["baslik"], $alt_kategori_id, "kategori");
 				$alt_kategori_link=kategori_link_getir($alt_kategori_id);
 				$alt_kategori_ilan_sayisi=$alt_kategori_dizi["icerik"];
 				if ($ilan_sayilari_ayar==2 or $ilan_sayilari_ayar==3) {
@@ -153,7 +153,7 @@ ul.ana_menu_a li a:hover {color:<?php echo $link_hover; ?> !important;}
 		$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and $ust_kategori_yaz");
 		while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) { 
 			$kategori_id=$kategori_dizi["id"];
-			$kategori_baslik=$kategori_dizi["baslik"];
+			$kategori_baslik=_DIL_BASLIK($kategori_dizi["baslik"], $kategori_id, "kategori");
 			$kategori_ikon=kategori_bilgi("ikon",$kategori_id);
 			$kategori_ikon_bg=kategori_bilgi("ikon_bg",$kategori_id);
 			$kategori_link=kategori_link_getir($kategori_id);

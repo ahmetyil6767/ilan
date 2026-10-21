@@ -40,7 +40,7 @@ if ($islem=="filtre_temizle") {
 	yonlendir(site_url()."/ara/$s");
 }
 if ($kat) {
-	$kat_baslik=getir("kategoriler","baslik",$kat);
+	$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat), $kat, "kategori");
 	$_SESSION["filtreler"]["kategori"]=array("id"=>"kategori","baslik"=>"Kategori","tip"=>"text","deger"=>$kat_baslik,"kat_id"=>$kat);
 }
 

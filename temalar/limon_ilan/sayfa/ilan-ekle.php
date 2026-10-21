@@ -21,7 +21,7 @@ $limit_politikasi=limit_politikasi();
 if ($magaza_id) {
 	$magaza_adi=getir("magazalar","baslik",$magaza_id);
 	$magaza_kategori=getir("magazalar","kategori",$magaza_id);
-	$magaza_kategori_adi=getir("kategoriler","baslik",$magaza_kategori);
+	$magaza_kategori_adi=_DIL_BASLIK(getir("kategoriler","baslik",$magaza_kategori), $magaza_kategori, "kategori");
 	$magaza_durum=getir("magazalar","durum",$magaza_id);
 	$ilan_eklenebilir_magazalar=ilan_eklenebilir_magazalar($oturum_id);
 	if (!in_array($magaza_id,$ilan_eklenebilir_magazalar)) {

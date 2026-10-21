@@ -1,7 +1,7 @@
 <?php 
 if(count(get_included_files())==1) {die();}
 tema_header(); 
-$baslik=getir("kategoriler","baslik",$id);
+$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 $sql_kategori=sql_kategori($id);
 
 $toplam_icerik=mysqli_num_rows(mysqli_query($baglan,"select * from icerik where tip='yazi' and durum='1' and $sql_kategori"));

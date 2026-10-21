@@ -79,14 +79,14 @@ if ($islem=="vitrin_degistir") {
 if ($islem=="ornek_breadcrumb") {
 	$kategori=$_POST["id"];
 	$kategori_link=kategori_link_getir($kategori);
-	$kategori_baslik=getir("kategoriler","baslik",$kategori);
+	$kategori_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
 	$ust_kategoriler=ust_kategoriler($kategori);
 	$ust_kategoriler_sayi=count($ust_kategoriler);
 	echo "<ol class='breadcrumb'>";
 	if (is_array($ust_kategoriler) and count($ust_kategoriler_sayi)>0) {
 		foreach ($ust_kategoriler as $x) {
 			$x_link=kategori_link_getir($x);
-			$x_baslik=getir("kategoriler","baslik",$x);
+			$x_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$x), $x, "kategori");
 			echo "<li><a>$x_baslik</a></li>";
 		}
 	}
@@ -731,7 +731,7 @@ if ($islem=="uye_paket_bilgi") {
 }
 if ($islem=="magaza_bilgi") {
 	$kategori=$_GET["kategori"];
-	$kategori_adi=getir("kategoriler","baslik",$kategori);
+	$kategori_adi=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
 	$paket=$_GET["paket"];
 	$paket_adi=liste_bilgi("paket_adi",$paket);
 	$paket_ucret=liste_bilgi("ucret",$paket);

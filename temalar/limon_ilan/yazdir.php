@@ -21,23 +21,23 @@ $kategoriler=kategori_getir($id,"kategori");
 //print_r($kategoriler);
 $kat1=$kategoriler[0];
 if (kat1) {
-	$kat1_baslik=getir("kategoriler","baslik",$kat1);
+	$kat1_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat1), $kat1, "kategori");
 }
 $kat2=$kategoriler[1];
 if (kat2) {
-	$kat2_baslik=getir("kategoriler","baslik",$kat2);
+	$kat2_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat2), $kat2, "kategori");
 }
 $kat3=$kategoriler[2];
 if (kat3) {
-	$kat3_baslik=getir("kategoriler","baslik",$kat3);
+	$kat3_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat3), $kat3, "kategori");
 }
 $kat4=$kategoriler[3];
 if ($kat4) {
-	$kat4_baslik=getir("kategoriler","baslik",$kat4);
+	$kat4_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat4), $kat4, "kategori");
 }
 $kat5=$kategoriler[4];
 if ($kat5) {
-	$kat5_baslik=getir("kategoriler","baslik",$kat5);
+	$kat5_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat5), $kat5, "kategori");
 }
 if ($kat1==1) {
 	$header_yaz="$kat3_baslik $kat4_baslik";

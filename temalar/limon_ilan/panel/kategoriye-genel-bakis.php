@@ -15,7 +15,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='magaza' and deger='1' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -44,7 +44,7 @@ if(count(get_included_files())==1) {die();}
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
 		$deger=$dizi["deger"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -72,7 +72,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='fiyat_zorunlu' and deger='1' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -99,7 +99,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='ozel_alanlar' and deger!='' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -126,7 +126,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='teknik_ozellikler' and deger!='' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -153,7 +153,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='filtreler' and deger!='' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -181,7 +181,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='detaylar' and deger!='' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -208,7 +208,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='tab' and deger!='' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
@@ -235,7 +235,7 @@ if(count(get_included_files())==1) {die();}
 		$sql=mysqli_query($baglan,"select id from ekstra_bilgi where anahtar='ilan_sag_reklam' and deger!='' and tip='kategori'");
 		while ($dizi=mysqli_fetch_array($sql)) {
 		$id=$dizi["id"];
-		$baslik=getir("kategoriler","baslik",$id);
+		$baslik=_DIL_BASLIK(getir("kategoriler","baslik",$id), $id, "kategori");
 	?>
 	<tr>
 		<th><?php echo $id; ?></th>
