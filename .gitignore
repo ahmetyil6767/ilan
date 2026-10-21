@@ -10,6 +10,7 @@ config/*.local.php
 # parola ozetleri bulunuyor. Repoya alinmamalidir.
 # ---------------------------------------------------------------------------
 SQL/*.sql
+SQL/yedekler/*.sql
 !SQL/.gitkeep
 
 # ---------------------------------------------------------------------------
