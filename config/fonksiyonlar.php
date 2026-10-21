@@ -3419,7 +3419,7 @@ function copyright()
 	global $foot_kod;
 
 	if ($limonsoft_remove_copyright != 1) {
-		$foot_kod[] = "\n" . '<div class=\'yazilim text-center\'><a href=\'https://www.ilanpiyasasi.com\' class=\'limontasarim\' target=\'_blank\'></a></div>' . "\n" . '<style>' . "\n" . '.yazilim {font-size:11px !important;line-height:16px !important;padding:10px !important;margin:0 !important;color:#999 !important;background:#f9f9f9 !important;margin-top:-15px !important;padding-bottom:25px !important;display:block !important;}' . "\n" . '.yazilim a {color:#999 !important;text-decoration:none !important;}' . "\n" . '.yazilim a.limontasarim {background:url(\'https://www.ilanpiyasasi.com/uploads/images/2020/05/29/logo-5ed16456d6a61.png\') !important;width:250px !important;height:38px !important;display:block !important;margin-left:auto !important;margin-right:auto !important;}' . "\n" . '</style>' . "\n\t\t";
+		$foot_kod[] = "\n" . '<div class=\'yazilim text-center\'><a href=\'https://www.ilanpiyasasi.com\' class=\'limontasarim\' target=\'_blank\'></a></div>' . "\n" . '<style>' . "\n" . '.yazilim {font-size:11px !important;line-height:16px !important;padding:10px !important;margin:0 !important;color:#999 !important;background:#f9f9f9 !important;margin-top:-15px !important;padding-bottom:25px !important;display:block !important;}' . "\n" . '.yazilim a {color:#999 !important;text-decoration:none !important;}' . "\n" . '.yazilim a.limontasarim {width:250px !important;height:38px !important;display:block !important;margin-left:auto !important;margin-right:auto !important;}' . "\n" . '</style>' . "\n\t\t";
 	}
 }
 

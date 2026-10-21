@@ -99,7 +99,6 @@ if ($guncelleme_buton) {
 				<form action="" method="post">
 					<?php form_elemani("hidden","dosya_adi",_LANG('tx_sitemap_dosyasi_adi'),eklenti_ayar_getir("sitemap_url","xml_sitemap")); ?>
 					<?php form_buton("buton",_LANG('tx_sitemap_guncelle'),"primary"); ?>
-					<a href="http://www.google.com/webmasters/tools/ping?sitemap=<?php echo site_url()."/".eklenti_ayar_getir("sitemap_url","xml_sitemap"); ?>" class="btn btn-default" target="_blank">Ping</a>
 				</form>
 				<div class="clearfix mb20"></div>
 			<?php } ?>

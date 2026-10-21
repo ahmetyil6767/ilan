@@ -161,7 +161,7 @@ tema_header(); ?>
 				<div class="buton sosyal pull-right">
 					<?php $icerik_link=link_getir($id); ?>
 					<a href="http://www.facebook.com/sharer.php?u=<?php echo $icerik_link; ?>" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" target="blank" class="facebook"><i class="ion-social-facebook"></i></a>
-					<a href="http://twitter.com/share?url=<?php echo $icerik_link; ?>&text=<?php echo $baslik; ?>" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" target="blank" class="twitter"><i class="ion-social-twitter"></i></a>
+					<a href="https://x.com/intent/post?url=<?php echo $icerik_link; ?>&text=<?php echo $baslik; ?>" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" target="blank" class="twitter"><i class="ion-social-twitter"></i></a>
 					<a href="http://pinterest.com/pin/create/button/?url=<?php echo $icerik_link; ?>&media={URI-encoded URL of the image to pin}&description=<?php echo $baslik; ?>" onclick="window.open(this.href, 'mywin','left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" target="blank" class="pinterest"><i class="ion-social-pinterest"></i></a>
 					<a href="whatsapp://send?text=<?php echo $icerik_link; ?>&t=<?php echo $baslik; ?>" data-action="share/whatsapp/share" target="blank" class="whatsapp visible-xs"><i class="ion-social-whatsapp"></i></a>
 				</div>
