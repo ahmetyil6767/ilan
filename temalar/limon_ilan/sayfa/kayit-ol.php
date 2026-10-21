@@ -25,9 +25,12 @@ tema_header(); ?>
 	<div class="panel-heading"><?php echo _LANG("ko_panel_kayit_ol"); ?></div>
 				<?php
 				if ($buton) {
+					$cep_tel_form=telefon_format($cep_tel);
 					$uye_mevcut_mu=uye_mevcut_mu($email_adresi);
 					if ($uye_mevcut_mu==1) {
 	echo "<div class='alert alert-danger autoclose'>" . _LANG('ko_email_kullanimda') . "</div>";
+					} elseif ($cep_tel_form && cep_tel_mevcut_mu($cep_tel_form)) {
+	echo "<div class='alert alert-danger autoclose'>" . _LANG('ko_telefon_kullanimda') . "</div>";
 					} else {
 						$parola_hash=parola_sakla($parola);
 						$tarih_saat=tarih_saat();
@@ -103,7 +106,7 @@ tema_header(); ?>
 						}
 						
 						$uyelik_tip_guncelle=uye_bilgi_guncelle("tip",$uyelik_tip,$uye_id);
-						if ($cep_tel) {uye_bilgi_guncelle("cep_tel",$cep_tel,$uye_id);}
+						if ($cep_tel_form) {uye_bilgi_guncelle("cep_tel",$cep_tel_form,$uye_id);}
 						
 						if ($uyelik_tip=="Kurumsal") {
               if ($tc_no)	{uye_bilgi_guncelle("tc_no",$tc_no,$uye_id);}

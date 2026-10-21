@@ -508,6 +508,8 @@ return array(
 	'account_register'  => 'Sign up',
 	'account_logout'    => 'Log out',
 	'account_email'     => 'Email address',
+	'login_kimlik'          => 'Phone or Email',
+	'ko_telefon_kullanimda' => 'This phone number is already in use',
 	'account_password'  => 'Password',
 	'account_name'      => 'Full name',
 	'account_phone'     => 'Phone number',

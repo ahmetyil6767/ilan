@@ -89,8 +89,8 @@ tema_header(); ?>
 				<form action="" method="post">
 
 					<div class="form-group">
-						<label for="email_adresi"><?php echo _LANG('account_email'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="<?php echo _LANG('account_email'); ?>" required>
+						<label for="email_adresi"><?php echo _LANG('login_kimlik'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<input type="text" class="form-control" id="email_adresi" name="email_adresi" placeholder="<?php echo _LANG('login_kimlik'); ?>" required>
 					</div>
 					
 					<div class="form-group">
