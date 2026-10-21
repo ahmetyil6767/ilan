@@ -4,7 +4,7 @@ include_once("../../eklentiler/favori_icerikler/eklenti.php");
 include_once("../../eklentiler/mesajlasma/eklenti.php");
 include_once("fonksiyonlar.php");
 
-$islem=$_GET["islem"];
+$islem=isset($_GET["islem"])?$_GET["islem"]:null;
 
 if (!strstr(ref_url(),site_url())) {
 	die("Hata: Erisim engellendi.");
@@ -15,8 +15,8 @@ if (!$islem) {
 
 if ($islem=="ilan_ekle_alt_kategoriler") {
 	$oturum_id=$_SESSION["oturum_id"];
-	$ust_kategori=$_POST["id"];
-	$magaza=$_GET["magaza"];
+	$ust_kategori=isset($_POST["id"])?$_POST["id"]:null;
+	$magaza=isset($_GET["magaza"])?$_GET["magaza"]:null;
 	
 	if (!$magaza) {
 		$kategori_limiti=uye_ilan_limiti("kategori",$oturum_id);
@@ -70,14 +70,14 @@ if ($islem=="ilan_ekle_alt_kategoriler") {
 	}
 }
 if ($islem=="vitrin_degistir") {
-	$icerik_id=$_POST["icerik_id"];
-	$resim_url=$_POST["resim_url"];
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
+	$resim_url=isset($_POST["resim_url"])?$_POST["resim_url"]:null;
 	bilgi_guncelle("gorsel",$resim_url,$icerik_id);
 	galeri_sira_update($resim_url,$icerik_id);
 	echo _LANG('tx_vitrin_gorseli_basariyla_guncellenmistir');
 }
 if ($islem=="ornek_breadcrumb") {
-	$kategori=$_POST["id"];
+	$kategori=isset($_POST["id"])?$_POST["id"]:null;
 	$kategori_link=kategori_link_getir($kategori);
 	$kategori_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
 	$ust_kategoriler=ust_kategoriler($kategori);
@@ -95,7 +95,7 @@ if ($islem=="ornek_breadcrumb") {
 }
 
 if ($islem=="favorilere_ekle") {
-	$icerik_id=$_POST["id"];
+	$icerik_id=isset($_POST["id"])?$_POST["id"]:null;
 	$uye_id=$_SESSION["oturum_id"];
 	if (!$uye_id) {
 		echo "<div class='alert alert-danger autoclose'>" . _LANG('gy_uye_girisi_gerekli') . "
@@ -129,7 +129,7 @@ if ($islem=="favorilere_ekle") {
 }
 
 if ($islem=="favorilerden_kaldir") {
-	$icerik_id=$_POST["id"];
+	$icerik_id=isset($_POST["id"])?$_POST["id"]:null;
 	$uye_id=$_SESSION["oturum_id"];
 	if (!$uye_id) {
 		echo "<div class='alert alert-danger autoclose'>" . _LANG('gy_uye_girisi_gerekli') . "
@@ -163,8 +163,8 @@ if ($islem=="favorilerden_kaldir") {
 }
 
 if ($islem=="vitrin_sec") {
-	$resim=$_POST["url"];
-	$icerik_id=$_POST["icerik_id"];
+	$resim=isset($_POST["url"])?$_POST["url"]:null;
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
 	$mevcut_gorsel=bilgi("gorsel",$icerik_id);
 	if ($resim!=$mevcut_gorsel) {
 		bilgi_guncelle("gorsel",$resim,$icerik_id);
@@ -177,8 +177,8 @@ if ($islem=="vitrin_sec") {
 }
 
 if ($islem=="foto_sil") {
-	$resim=$_POST["url"];
-	$icerik_id=$_POST["icerik_id"];
+	$resim=isset($_POST["url"])?$_POST["url"]:null;
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
 	$mevcut_gorsel=bilgi("gorsel",$icerik_id);
 	$galeri_id=id_getir("galeri","resim",$resim);
 	$thumb_url=thumbnail_url("160_120",$resim);
@@ -302,22 +302,22 @@ $('#ev_tel').mask('000 000 00 00',{placeholder: '212 123 45 67'});
 	}
 }
 if ($islem=="iletisim_guncelle") {
-	$cep_tel=$_POST["cep_tel"];
-	$is_tel=$_POST["is_tel"];
-	$ev_tel=$_POST["ev_tel"];
+	$cep_tel=isset($_POST["cep_tel"])?$_POST["cep_tel"]:null;
+	$is_tel=isset($_POST["is_tel"])?$_POST["is_tel"]:null;
+	$ev_tel=isset($_POST["ev_tel"])?$_POST["ev_tel"]:null;
 	$oturum_id=$_SESSION["oturum_id"];
 	uye_bilgi_guncelle("cep_tel",$cep_tel,$oturum_id);
 	uye_bilgi_guncelle("is_tel",$is_tel,$oturum_id);
 	uye_bilgi_guncelle("ev_tel",$ev_tel,$oturum_id);
 }
 if ($islem=="il_sec") {
-	@$ust=$_GET["ust"];
-	@$gerekli=$_GET["gerekli"];
-	@$icerik_id=$_GET["icerik_id"];
-	@$il=$_GET["il"];
-	@$ilce=$_GET["ilce"];
-	@$mahalle=$_GET["mahalle"];
-	@$sayfa=$_GET["sayfa"];
+	@$ust=isset($_GET["ust"])?$_GET["ust"]:null;
+	@$gerekli=isset($_GET["gerekli"])?$_GET["gerekli"]:null;
+	@$icerik_id=isset($_GET["icerik_id"])?$_GET["icerik_id"]:null;
+	@$il=isset($_GET["il"])?$_GET["il"]:null;
+	@$ilce=isset($_GET["ilce"])?$_GET["ilce"]:null;
+	@$mahalle=isset($_GET["mahalle"])?$_GET["mahalle"]:null;
+	@$sayfa=isset($_GET["sayfa"])?$_GET["sayfa"]:null;
 	
 	if ($sayfa=="ilan_ekle") {
 		$uye_id=$_SESSION["oturum_id"];
@@ -402,12 +402,12 @@ if ($islem=="il_sec") {
 	}
 }
 if ($islem=="ilce_sec") {
-	$ust=$_GET["ust"];
-	$gerekli=$_GET["gerekli"];
-	$icerik_id=$_GET["icerik_id"];
-	$il=$_GET["il"];
-	$ilce=$_GET["ilce"];
-	$mahalle=$_GET["mahalle"];
+	$ust=isset($_GET["ust"])?$_GET["ust"]:null;
+	$gerekli=isset($_GET["gerekli"])?$_GET["gerekli"]:null;
+	$icerik_id=isset($_GET["icerik_id"])?$_GET["icerik_id"]:null;
+	$il=isset($_GET["il"])?$_GET["il"]:null;
+	$ilce=isset($_GET["ilce"])?$_GET["ilce"]:null;
+	$mahalle=isset($_GET["mahalle"])?$_GET["mahalle"]:null;
 	
 	if (tema_ayar("il_ilce_mahalle")==2) {
 		$gerekli=false;
@@ -468,11 +468,11 @@ if ($islem=="ilce_sec") {
 	}
 }
 if ($islem=="mahalle_sec") {
-	$ust=$_GET["ust"];
-	$gerekli=$_GET["gerekli"];
-	$icerik_id=$_GET["icerik_id"];
-	$ilce=$_GET["ilce"];
-	$mahalle=$_GET["mahalle"];	
+	$ust=isset($_GET["ust"])?$_GET["ust"]:null;
+	$gerekli=isset($_GET["gerekli"])?$_GET["gerekli"]:null;
+	$icerik_id=isset($_GET["icerik_id"])?$_GET["icerik_id"]:null;
+	$ilce=isset($_GET["ilce"])?$_GET["ilce"]:null;
+	$mahalle=isset($_GET["mahalle"])?$_GET["mahalle"]:null;	
 	
 	
 	if (tema_ayar("il_ilce_mahalle")==2) {
@@ -506,10 +506,10 @@ if ($islem=="mahalle_sec") {
 }
 if ($islem=="sikayet_gonder") {
 	$uye_id=$_SESSION["oturum_id"];
-	$ad_soyad=$_POST["ad_soyad"];
-	$mesaj=$_POST["mesaj"];
+	$ad_soyad=isset($_POST["ad_soyad"])?$_POST["ad_soyad"]:null;
+	$mesaj=isset($_POST["mesaj"])?$_POST["mesaj"]:null;
 	if ($ad_soyad and $mesaj) {
-		$ilan_id=$_GET["ilan_id"];
+		$ilan_id=isset($_GET["ilan_id"])?$_GET["ilan_id"]:null;
 		$ilan_baslik=getir("icerik","baslik",$ilan_id);
 		$ilan_link=link_getir($ilan_id);
 		$mail_baslik=tema_ayar("mail_baslik");
@@ -561,10 +561,10 @@ if ($islem=="sikayet_gonder") {
 if ($islem=="mesaj_gonder") {
 	$uye_id=$_SESSION["oturum_id"];
 	if ($uye_id) {
-		$mesaj=$_POST["mesaj"];
-		$kime=$_POST["kime"];
-		$ilan_id=$_GET["ilan_id"];
-		$bildirim=$_GET["bildirim"];
+		$mesaj=isset($_POST["mesaj"])?$_POST["mesaj"]:null;
+		$kime=isset($_POST["kime"])?$_POST["kime"]:null;
+		$ilan_id=isset($_GET["ilan_id"])?$_GET["ilan_id"]:null;
+		$bildirim=isset($_GET["bildirim"])?$_GET["bildirim"]:null;
 		$kime_ad_soyad=getir("uyeler","ad_soyad",$kime);
 		$uye_ad_soyad=getir("uyeler","ad_soyad",$uye_id);
 		$gorusme_id=gorusme_id($uye_id,$kime,$ilan_id);
@@ -631,14 +631,14 @@ if ($islem=="mesaj_gonder") {
 	
 }
 if ($islem=="mesaj_sayisi") {
-	$gorusme_id=$_GET["gorusme_id"];
+	$gorusme_id=isset($_GET["gorusme_id"])?$_GET["gorusme_id"]:null;
 	$mesaj_sayisi=mesaj_sayisi($gorusme_id);
 	echo $mesaj_sayisi;
 }
 if ($islem=="mesajlari_getir") {
 global $footer_kod;
 $oturum_id=$_SESSION["oturum_id"];
-$gorusme_id=$_GET["g"];
+$gorusme_id=isset($_GET["g"])?$_GET["g"]:null;
 $sql=mysqli_query($baglan,"select * from mesajlar where gorusme_id='$gorusme_id' order by tarih_saat asc limit 0, 250");
 while ($mesaj_dizi=mysqli_fetch_array($sql)) {
 	$uye_id=$mesaj_dizi["uye_id"];
@@ -654,8 +654,8 @@ while ($mesaj_dizi=mysqli_fetch_array($sql)) {
 echo $kod;
 }
 if ($islem=="gorusme_sil") {
-	$gorusme_id=$_POST["gorusme_id"];
-	$tip=$_POST["tip"];
+	$gorusme_id=isset($_POST["gorusme_id"])?$_POST["gorusme_id"]:null;
+	$tip=isset($_POST["tip"])?$_POST["tip"]:null;
 	$oturum_id=$_SESSION["oturum_id"];
 	
 	$gorusme_uye_1=getir("gorusmeler","uye_1",$gorusme_id);
@@ -675,7 +675,7 @@ if ($islem=="gorusme_sil") {
 	
 }
 if ($islem=="uye_paket_bilgi") {
-	$paket=$_GET["paket"];
+	$paket=isset($_GET["paket"])?$_GET["paket"]:null;
     
 	$paket_adi=liste_bilgi("paket_adi",$paket);
 	$paket_ucret=liste_bilgi("ucret",$paket);
@@ -730,9 +730,9 @@ if ($islem=="uye_paket_bilgi") {
 	echo $kod;
 }
 if ($islem=="magaza_bilgi") {
-	$kategori=$_GET["kategori"];
+	$kategori=isset($_GET["kategori"])?$_GET["kategori"]:null;
 	$kategori_adi=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");
-	$paket=$_GET["paket"];
+	$paket=isset($_GET["paket"])?$_GET["paket"]:null;
 	$paket_adi=liste_bilgi("paket_adi",$paket);
 	$paket_ucret=liste_bilgi("ucret",$paket);
 	$avantajlar=liste_bilgi("avantajlar",$paket);
@@ -793,11 +793,11 @@ if ($islem=="magaza_bilgi") {
 	echo $kod;
 }
 if ($islem=="odeme_bildirimi") {
-	$hesap=$_POST["hesap"];
-	$tanim=$_POST["tanim"];
-	$ad_soyad=$_POST["gonderen"];
+	$hesap=isset($_POST["hesap"])?$_POST["hesap"]:null;
+	$tanim=isset($_POST["tanim"])?$_POST["tanim"]:null;
+	$ad_soyad=isset($_POST["gonderen"])?$_POST["gonderen"]:null;
 	$uye_id=$_SESSION["oturum_id"];
-	$mesaj=$_POST["mesaj"];
+	$mesaj=isset($_POST["mesaj"])?$_POST["mesaj"]:null;
 	$tarih_saat=tarih_saat();
 	$bildirim_ekle=mysqli_query($baglan,"insert into odemeler set ad_soyad='$ad_soyad', uye_id='$uye_id', hesap='$hesap', mesaj='$mesaj', tarih_saat='$tarih_saat', aciklama='$tanim'");
 	
@@ -829,7 +829,7 @@ if ($islem=="odeme_bildirimi") {
 	}
 }
 if ($islem=="video_onizleme") {
-	$video_url=$_GET["video_url"];
+	$video_url=isset($_GET["video_url"])?$_GET["video_url"]:null;
 	if ($video_url) {
 		$video_id=youtube_video_id($video_url);
 		if ($video_id) {
@@ -845,8 +845,8 @@ if ($islem=="video_onizleme") {
 	}
 }
 if ($islem=="yayindan_kaldir") { 
-	$hiddenid=$_POST["hiddenid"];
-	$sebep=$_POST["sebep"];
+	$hiddenid=isset($_POST["hiddenid"])?$_POST["hiddenid"]:null;
+	$sebep=isset($_POST["sebep"])?$_POST["sebep"]:null;
 	$ilan_sahibi=getir("icerik","yazar",$hiddenid);
 	$oturum_id=$_SESSION["oturum_id"];
 	if ($ilan_sahibi==$oturum_id) {
@@ -863,7 +863,7 @@ if ($islem=="iyzico_form") {
 	';
 }
 if ($islem=="sonraki_gorsel") {
-	$galeri_id=$_POST["id"];
+	$galeri_id=isset($_POST["id"])?$_POST["id"]:null;
 	$galeri_sira=getir("galeri","sira",$galeri_id);
 	$resim_sayisi=resim_sayisi($id);
 	$sonraki=mysqli_query($baglan,"select * from galeri where icerik_id='$id' and sira>$galeri_sira order by sira asc limit 0,1");
@@ -873,7 +873,7 @@ if ($islem=="sonraki_gorsel") {
 }
 if ($islem=="ajax_upload") {
 	global $aktif_tema;
-	$icerik_id=$_POST["icerik_id"];
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
 	$file=$_FILES["files"];
 	$resim_sayisi=count($file["name"]);
 	$b=0;
@@ -933,8 +933,8 @@ if ($islem=="ajax_upload") {
 							bilgi_guncelle("gorsel",$yuklenen_resim,$icerik_id);
 						}
 					} else {
-						$kat=$_POST["kat"];
-						$uye_id=$_POST["uye_id"];
+						$kat=isset($_POST["kat"])?$_POST["kat"]:null;
+						$uye_id=isset($_POST["uye_id"])?$_POST["uye_id"]:null;
 						$tarih_saat=tarih_saat();
 						$resim_sayisi=mysqli_fetch_array(mysqli_query($baglan,"select COUNT(id) from ajax_upload where uye_id='$uye_id' and kat='$kat'"))[0];
 						$yeni_sira=$resim_sayisi*10;
@@ -1009,9 +1009,9 @@ if ($islem=="ajax_upload") {
 }
 if ($islem=="resmi_dondur") {
 
-	$url=$_POST["url"];
-	$kat=$_POST["kat"];
-	$icerik_id=$_POST["icerik_id"];
+	$url=isset($_POST["url"])?$_POST["url"]:null;
+	$kat=isset($_POST["kat"])?$_POST["kat"]:null;
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
 
 	$full=thumbnail_url("full",$url,"160_120");
 
@@ -1047,7 +1047,7 @@ if ($islem=="resmi_dondur") {
 	echo $cikti;
 }
 if ($islem=="ilan_gorselleri_getir") {
-	$id=$_GET["ilan_id"];
+	$id=isset($_GET["ilan_id"])?$_GET["ilan_id"]:null;
 	$galeri_sql=mysqli_query($baglan,"select * from galeri where icerik_id='$id'");
 	$resim_sayisi=mysqli_num_rows($galeri_sql);
 	if ($resim_sayisi>0) {
@@ -1097,8 +1097,8 @@ if ($islem=="ilan_gorselleri_getir") {
 	}  // İlan düzenleme sayfası ise
 }
 if ($islem=="ajax_upload_getir") {
-	$uye_id=$_GET["uye_id"];
-	$kat=$_GET["kat"];
+	$uye_id=isset($_GET["uye_id"])?$_GET["uye_id"]:null;
+	$kat=isset($_GET["kat"])?$_GET["kat"]:null;
 	$galeri_sql=mysqli_query($baglan,"select * from ajax_upload where uye_id='$uye_id' and kat='$kat'");
 	$resim_sayisi=mysqli_num_rows($galeri_sql);
 	if ($resim_sayisi>0) {
@@ -1148,10 +1148,10 @@ if ($islem=="ajax_upload_getir") {
 	}  // İlan düzenleme sayfası ise
 }
 if ($islem=="resim_limitleri") {
-	$magaza_id=$_GET["magaza_id"];
-	$uye_id=$_GET["uye_id"];
-	$kat=$_GET["kat"];
-	$ilan_id=$_GET["ilan_id"];
+	$magaza_id=isset($_GET["magaza_id"])?$_GET["magaza_id"]:null;
+	$uye_id=isset($_GET["uye_id"])?$_GET["uye_id"]:null;
+	$kat=isset($_GET["kat"])?$_GET["kat"]:null;
+	$ilan_id=isset($_GET["ilan_id"])?$_GET["ilan_id"]:null;
 	if ($magaza_id) {
 		$foto_limit=magaza_ilan_limiti("foto",$magaza_id);
 	} else {
@@ -1176,10 +1176,10 @@ if ($islem=="resim_limitleri") {
 	<?php
 }
 if ($islem=="ajax_remove") {
-	@$data=$_POST["file"];
-	@$name=$_POST["name"];
+	@$data=isset($_POST["file"])?$_POST["file"]:null;
+	@$name=isset($_POST["name"])?$_POST["name"]:null;
 
-	$ilan_id=$_GET["ilan_id"];
+	$ilan_id=isset($_GET["ilan_id"])?$_GET["ilan_id"]:null;
 	$uye_id=$_SESSION["oturum_id"];
 	$galeri_id=$data["galeri_id"];
 
@@ -1219,9 +1219,9 @@ if ($islem=="ajax_remove") {
 	
 }
 if ($islem=="ajax_remove_new") {
-	@$icerik_id=$_POST["icerik_id"];
-	@$url=$_POST["url"];
-	@$kat=$_POST["kat"];
+	@$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
+	@$url=isset($_POST["url"])?$_POST["url"]:null;
+	@$kat=isset($_POST["kat"])?$_POST["kat"]:null;
 
 	$uye_id=$_SESSION["oturum_id"];
 	$galeri_id=$data["galeri_id"];
@@ -1256,9 +1256,9 @@ if ($islem=="ajax_remove_new") {
 	}
 }
 if ($islem=="vitrin_yap") {
-	$url=$_POST["url"];
-	$ilan_id=$_POST["icerik_id"];
-	$kat=$_POST["kat"];
+	$url=isset($_POST["url"])?$_POST["url"]:null;
+	$ilan_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
+	$kat=isset($_POST["kat"])?$_POST["kat"]:null;
 	$uye_id=$_SESSION["oturum_id"];
 	$tam_boyut=thumbnail_url("full",$url,"160_120");
 	if ($ilan_id) {
@@ -1291,9 +1291,9 @@ if ($islem=="vitrin_yap") {
 	}
 }
 if ($islem=="galeri_sira_update") {
-	$icerik_id=$_POST["icerik_id"];
-	$kat=$_POST["kat"];
-	$positions=$_POST["positions"];
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
+	$kat=isset($_POST["kat"])?$_POST["kat"]:null;
+	$positions=isset($_POST["positions"])?$_POST["positions"]:null;
 	$uye_id=$_SESSION["oturum_id"];
 	
 	$positions_bol=explode(";",$positions);
@@ -1321,26 +1321,26 @@ if ($islem=="galeri_sira_update") {
 
 }
 if ($islem=="thumbnail_url") {
-	$url=$_POST["url"];
+	$url=isset($_POST["url"])?$_POST["url"]:null;
 	echo thumbnail_url("160_120",$url);
 }
 if ($islem=="il_ilce_mahalle_kaydet") {
-	$il=$_POST["il"];
-	$ilce=$_POST["ilce"];
-	$mahalle=$_POST["mahalle"];
+	$il=isset($_POST["il"])?$_POST["il"]:null;
+	$ilce=isset($_POST["ilce"])?$_POST["ilce"]:null;
+	$mahalle=isset($_POST["mahalle"])?$_POST["mahalle"]:null;
 	$uye_id=$_SESSION["oturum_id"];
 	if (!$il) {
 		$il=getir("ilceler","il_id",$ilce);
 	}
-	uye_bilgi_guncelle("il_ilce_hazir","$il:$ilce:$mahalle",$uye_id);
+	uye_bilgi_guncelle("il_ilce_hazir","$il:$ilce",$uye_id);
 }
 if ($islem=="il_ilce_mahalle_unut") {
 	$uye_id=$_SESSION["oturum_id"];
 	uye_bilgi_guncelle("il_ilce_hazir",null,$uye_id);
 }
 if ($islem=="galeri_sira_bilgi") {
-	$galeri_id=$_POST["galeri_id"];
-	$icerik_id=$_POST["icerik_id"];
+	$galeri_id=isset($_POST["galeri_id"])?$_POST["galeri_id"]:null;
+	$icerik_id=isset($_POST["icerik_id"])?$_POST["icerik_id"]:null;
 	$onceki_galeri_id=onceki_galeri_id($galeri_id,$icerik_id);
 	$sonraki_galeri_id=sonraki_galeri_id($galeri_id,$icerik_id);
 	/* echo "önceki id: $onceki_galeri_id<br />";
