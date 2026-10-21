@@ -131,9 +131,9 @@ tema_header(); ?>
 			<div class="panel panel-default beyaz sonuc visible-md visible-lg">
 				<div class="panel-body">
 					<?php if ($toplam_ilan>0) { 
-						echo "<strong>$magaza_baslik</strong> adlı mağazanın <span class='sayi'>$toplam_icerik</span> ilanı mevcut.";
+						echo _LANG('store_listing_count', array($magaza_baslik, $toplam_icerik));
 					} else {
-						echo "<strong>$magaza_baslik</strong> adlı mağazanın yayında ilanı bulunamadı.";
+						echo _LANG('store_listing_none', array($magaza_baslik));
 					} ?>
 				</div>
 			</div>		
@@ -142,7 +142,7 @@ tema_header(); ?>
 			<div class="panel panel-default beyaz tab">
 				<div class="panel-heading">
 				  <ul class="nav nav-tabs ozel visible-sm visible-md visible-lg" role="tablist">
-					<li role="presentation" class="active"><a href="#tumu" aria-controls="tumu" role="tab" data-toggle="tab">Tüm Mağaza İlanları</a></li>
+					<li role="presentation" class="active"><a href="#tumu" aria-controls="tumu" role="tab" data-toggle="tab"><?php echo _LANG('store_all_listings'); ?></a></li>
 				  </ul>
 
 				  <div class="sag">
@@ -161,9 +161,9 @@ tema_header(); ?>
 							<tr>
 								<th width="110"></th>
 								<th class="baslik_th" width="280"><?php echo _LANG("listing_title"); ?></th>
-								<th class="visible-sm visible-md visible-lg">Fiyat</th>
+								<th class="visible-sm visible-md visible-lg"><?php echo _LANG("listing_price"); ?></th>
 								<th class="visible-md visible-lg"><?php echo _LANG("listing_date"); ?></th>
-								<th class="visible-sm visible-md visible-lg">Adres</th>
+								<th class="visible-sm visible-md visible-lg"><?php echo _LANG("filter_address"); ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -281,7 +281,7 @@ tema_header(); ?>
 				if (@$uygulanan_filtreler) { 
 					echo "<div class='alert alert-danger'>Kriterlerinize uygun ilan bulunamadı.</div>";
 				} else {
-					echo "<div class='alert alert-danger'>İlan bulunamadı.</div>";
+					echo "<div class='alert alert-danger'><?php echo _LANG('listing_not_found'); ?></div>";
 				} 
 			} ?>
 		</div>

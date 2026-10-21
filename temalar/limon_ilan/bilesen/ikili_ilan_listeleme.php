@@ -30,7 +30,7 @@ function ikili_listeleme($id) {
 	$baslik_stil=null;
 	$listeleme_stil=null;
 	$rastgele=null;
-	$baslik=getir("bilesenler","baslik",$id);
+	$baslik=_DIL_BASLIK(getir("bilesenler","baslik",$id),$id,'bilesen');
 	$adet=(int)bilesen_ayar("adet",$id);
 	if (!$adet) $adet=21;
 	$offset=(int)bilesen_ayar("offset",$id);
@@ -44,7 +44,7 @@ function ikili_listeleme($id) {
 	if (!$border_color_hover) $border_color_hover="#FBAD37";
 	$liste=bilesen_ayar("liste",$id);
 	if (!$liste) $liste="yeni";
-	$link_baslik=bilesen_ayar("link_baslik",$id);
+	$link_baslik=_DIL_BASLIK(bilesen_ayar("link_baslik",$id),$id,'bilesen');
 	$link=bilesen_ayar("link",$id);
 	$gosterme=bilesen_ayar("gosterme",$id);
 	$fiyat_goster=bilesen_ayar("fiyat_goster",$id);

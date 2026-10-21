@@ -23,12 +23,12 @@ function yazi_listeleme($id) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
 	
-	$baslik=getir("bilesenler","baslik",$id);
+	$baslik=_DIL_BASLIK(getir("bilesenler","baslik",$id),$id,'bilesen');
 	$adet=bilesen_ayar("adet",$id);
 	$offset=bilesen_ayar("offset",$id);
 	$sutun=bilesen_ayar("sutun",$id);
 	$liste=bilesen_ayar("liste",$id);
-	$link_baslik=bilesen_ayar("link_baslik",$id);
+	$link_baslik=_DIL_BASLIK(bilesen_ayar("link_baslik",$id),$id,'bilesen');
 	$link=bilesen_ayar("link",$id);
 	$goster=bilesen_ayar("goster",$id);
 	if ($sutun==2) {

@@ -3623,4 +3623,7 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'search_bulundu' => 'trouvé.',
 	'tumunu_goster' => 'Tout afficher',
 	'search_kategorisinde' => 'dans la catégorie',
+	'store_all_listings' => 'Toutes les annonces de la boutique',
+	'store_listing_count' => '<strong>%s</strong> propose <span class=\'sayi\'>%s</span> annonces.',
+	'store_listing_none' => "<strong>%s</strong> n'a actuellement aucune annonce publiée.",
 );

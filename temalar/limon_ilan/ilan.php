@@ -197,7 +197,7 @@ tema_header(); ?>
 					<div class="well gorseller visible-md visible-lg">
 						<div class="well-heading">
 							<div class="row">
-								<div class="col-md-21 col-xs-21"><a id="mega_foto" class="c_pointer" data-id="<?php echo $galeri_id_getir; ?>"><i class="ion-arrow-expand"></i>Fotoğrafı büyüt</a></div>
+								<div class="col-md-21 col-xs-21"><a id="mega_foto" class="c_pointer" data-id="<?php echo $galeri_id_getir; ?>"><i class="ion-arrow-expand"></i><?php echo _LANG('ilan_fotograf_buyut'); ?></a></div>
 								<div class="col-md-21 col-xs-21"><?php if ($video_url) { ?><a data-toggle="modal" data-target="#video_modal" class="c_pointer"><i class="ion-ios-videocam"></i>Video</a><?php 
 								} else {echo "<span style='color:#999 !important;font-weight:600;'><i class='ion-ios-videocam'></i>Video</span>";} ?></div>
 							</div>
@@ -233,7 +233,7 @@ tema_header(); ?>
 					if ($mobil_slider_sayisi) {
 					?>
 					<div class="visible-xs visible-sm">
-						<div id="no_flash_slider"><i class="fa fa-circle-o-notch fa-spin"></i><p>Fotoğraflar yükleniyor</p></div>
+						<div id="no_flash_slider"><i class="fa fa-circle-o-notch fa-spin"></i><p><?php echo _LANG('ilan_fotograflar_yukleniyor'); ?></p></div>
 						<div id="mobil_slides" style="margin-bottom:10px;display:none;">
 							<?php 
 							while ($galeri_dizisi=mysqli_fetch_array($mobil_slider_sql)) {
@@ -418,7 +418,7 @@ tema_header(); ?>
 						?>
 					</table>
 					<div class="text-center">
-						<a id="sikayetim_var_buton" data-toggle="modal" data-target="#sikayet" class="c_pointer"><i class="ion-flag"></i>İlan ile ilgili şikayetim var</a>
+						<a id="sikayetim_var_buton" data-toggle="modal" data-target="#sikayet" class="c_pointer"><i class="ion-flag"></i><?php echo _LANG('listing_report'); ?></a>
 					</div>
 				</div>
 				<?php 
@@ -433,8 +433,8 @@ tema_header(); ?>
 				<div class="panel panel-default beyaz">
 					<div class="panel-heading">
 					  <ul class="nav nav-tabs ozel" role="tablist">
-						<li role="presentation" class="active visible-sm visible-md visible-lg"><a href="#aciklama" aria-controls="aciklama" role="tab" data-toggle="tab">İlan Detayları</a></li>
-						<li role="presentation" class="active visible-xs"><a href="#aciklama" aria-controls="aciklama" role="tab" data-toggle="tab">Açıklama</a></li>
+						<li role="presentation" class="active visible-sm visible-md visible-lg"><a href="#aciklama" aria-controls="aciklama" role="tab" data-toggle="tab"><?php echo _LANG('listing_details'); ?></a></li>
+						<li role="presentation" class="active visible-xs"><a href="#aciklama" aria-controls="aciklama" role="tab" data-toggle="tab"><?php echo _LANG('listing_desc'); ?></a></li>
 						<?php 
 						if (tema_ayar("google_maps")==1 and tema_ayar("google_maps_api_key")!="") {
 						$koordinat=bilgi("koordinat");$harita_gizle=bilgi("harita_gizle");
@@ -463,7 +463,7 @@ tema_header(); ?>
 						<li role="presentation" id="sokak_gorunumu" class="visible-sm visible-md visible-lg" style="display:none;"><a href="#sokak" aria-controls="sokak" role="tab" data-toggle="tab"><i class="fa fa-street-view"></i>Sokak Görünümü</a></li>
 						<li role="presentation" id="sokak_gorunumu_mobil" class="visible-xs" style="display:none;"><a href="#sokak" aria-controls="sokak" role="tab" data-toggle="tab"><i class="fa fa-street-view mr0"></i></a></li>
 						<?php } } } ?>
-						<li role="presentation" class="visible-sm visible-md visible-lg"><a href="#benzer" aria-controls="benzer" role="tab" data-toggle="tab"><i class="ion-refresh"></i>Benzer İlanlar</a></li>
+						<li role="presentation" class="visible-sm visible-md visible-lg"><a href="#benzer" aria-controls="benzer" role="tab" data-toggle="tab"><i class="ion-refresh"></i><?php echo _LANG('listing_similar'); ?></a></li>
 						<li role="presentation" class="visible-xs"><a href="#benzer" aria-controls="benzer" role="tab" data-toggle="tab"><i class="ion-refresh mr0"></i></a></li>
 					  </ul>
 					</div>
@@ -472,7 +472,7 @@ tema_header(); ?>
 							<div class="panel-body">
 							<div class="ilan_icerik">
 							<?php $icerik=icerik_getir();
-							if ($icerik=="") {$icerik="<p>Açıklama bulunamadı</p>";}
+							if ($icerik=="") {$icerik="<p>"._LANG('ilan_aciklama_bulunamadi')."</p>";}
 							echo $icerik;
 							?>
 							</div>
@@ -809,7 +809,7 @@ tema_header(); ?>
 				<input type="text" class="form-control" id="gonderilecek" name="gonderilecek" placeholder="<?php echo _LANG('tx_gonderilecek_kisi'); ?>" value="<?php echo getir("icerik","baslik"); ?>" disabled>
 			 </div>
 			 <div class="form-group">
-				<label for="kime">Gönderilecek Kişi <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+				<label for="kime"><?php echo _LANG('ilan_gonderilecek_kisi'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 				<input type="text" class="form-control" id="gonderilecek" name="gonderilecek" placeholder="<?php echo _LANG('tx_gonderilecek_kisi'); ?>" value="<?php echo getir("uyeler","ad_soyad",$yazar); ?>" disabled>
 			 </div>
 			 <div class="form-group">
@@ -835,18 +835,18 @@ tema_header(); ?>
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Şikayet Formu</h4>
+        <h4 class="modal-title" id="myModalLabel"><?php echo _LANG('report_form_title'); ?></h4>
       </div>
       <div class="modal-body">
 		<div id="mesaj_cevap"></div>
 		<div id="mesaj_gizle">
 			 <div class="form-group">
 				<label for="ad_soyad">Ad Soyad <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-				<input type="text" class="form-control" id="ad_soyad" name="ad_soyad" placeholder="Ad Soyad" value="<?php if ($oturum_id) {echo getir("uyeler","ad_soyad",$oturum_id); }?>">
+				<input type="text" class="form-control" id="ad_soyad" name="ad_soyad" placeholder="<?php echo _LANG('account_name'); ?>" value="<?php if ($oturum_id) {echo getir("uyeler","ad_soyad",$oturum_id); }?>">
 			 </div>
 			 <div class="form-group">
-				<label for="mesaj">Şikayet Nedeni <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-				<textarea class="form-control" id="mesaj" name="mesaj" placeholder="Şikayet Nedeni" rows="3" required></textarea>
+				<label for="mesaj"><?php echo _LANG('report_reason'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+				<textarea class="form-control" id="mesaj" name="mesaj" placeholder="<?php echo _LANG('report_reason'); ?>" rows="3" required></textarea>
 				<input type="hidden" class="form-control" id="ilan_id" name="ilan_id" value="<?php echo $id; ?>">
 			 </div>
 		 </div>

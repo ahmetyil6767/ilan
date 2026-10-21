@@ -3355,4 +3355,7 @@ return array(
 	'search_bulundu' => 'تم العثور عليها.',
 	'tumunu_goster' => 'عرض الكل',
 	'search_kategorisinde' => 'في القسم',
+	'store_all_listings' => 'جميع إعلانات المتجر',
+	'store_listing_count' => "<strong>%s</strong> لديه <span class='sayi'>%s</span> إعلان منشور.",
+	'store_listing_none' => '<strong>%s</strong> لا توجد إعلانات منشورة حالياً.',
 );

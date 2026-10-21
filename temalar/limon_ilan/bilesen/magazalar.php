@@ -14,11 +14,11 @@ array("tip"=>"tab_kapat"),
 $bilesen["magazalar"]=array("id"=>"magazalar","baslik"=>_LANG('stores'),"ayarlar"=>$ayarlar,"fonksiyon"=>"magazalar","aciklama"=>_LANG('e_magaza_listeleme_aciklama'));
 function magazalar($id) {
 global $baglan;
-$baslik=getir("bilesenler","baslik",$id);
+$baslik=_DIL_BASLIK(getir("bilesenler","baslik",$id),$id,'bilesen');
 $adet=bilesen_ayar("adet",$id);
 $sutun=bilesen_ayar("sutun",$id);
 $liste=bilesen_ayar("liste",$id);
-$link_baslik=bilesen_ayar("link_baslik",$id);
+$link_baslik=_DIL_BASLIK(bilesen_ayar("link_baslik",$id),$id,'bilesen');
 $link=bilesen_ayar("link",$id);
 $baslik_stil=bilesen_ayar("baslik_stil",$id);
 if ($sutun==2) {
