@@ -74,7 +74,6 @@ if ($guncelle) {
 				<tr>
 					<th width="10">ID</th>
 					<th><?php echo _LANG("filter_district"); ?></th>
-					<th>Mahalleler</th>
 					<th><?php echo _LANG("general_options"); ?></th>
 				</tr>
 			</thead>
@@ -82,12 +81,10 @@ if ($guncelle) {
 			<?php while ($dizi=mysqli_fetch_array($sql)) {
 				$id=$dizi["id"];
 				$ad=$dizi["ilce_adi"];
-				$mahalle_sayisi=mysqli_num_rows(mysqli_query($baglan,"select id from mahalleler where ilce_id='$id'"));
 			?>
 			<tr>
 				<th><?php echo $id; ?></th>
 				<td><?php echo $ad; ?></td>
-				<td><a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=mahalleler&ilce=<?php echo $id; ?>" class="btn btn-primary btn-xs"><?php echo _LANG("pn_mahalleleri_goruntule"); ?></a></td>
 				<td>
 					<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=ilceler&il=<?php echo $il; ?>&sil=<?php echo $id; ?>" onclick="return confirm(_LANG('pn_ilce_bulunamadi'));" class="btn btn-danger btn-xs">Sil</a>
 					<a href="temalar.php?tema=<?php echo $aktif_tema; ?>&sayfa=panel&islem=ilceler&il=<?php echo $il; ?>&guncelle=<?php echo $id; ?>" class="btn btn-default btn-xs"><?php echo _LANG("general_update"); ?></a>
