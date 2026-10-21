@@ -32,6 +32,23 @@ Dil ve para birimi sistemini kapsar. **Bir değişiklik yapıp bitirmeden önce 
 Şu anda tek otomatik test dosyası bu. Yeni bir modül ekliyorsan aynı kalıpla
 kendi testini yaz ve `tests/` altına koy.
 
+## Yedek politikası — 2 gün
+
+Değişiklik yapan her ajan oturum sonunda `otomatik_yedek.ps1`'i çalıştırır:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File otomatik_yedek.ps1
+```
+
+- DB dump (`otomatik_db_*.sql`) + proje dosyalarının zip'i (`otomatik_dosyalar_*.zip`,
+  `.git` ve `SQL/yedekler` hariç, `uploads` dahil) → `SQL\yedekler\` altına yazar.
+- `otomatik_*` dosyalarını kendisi 2 güne kadar tutar, eskisini siler
+  (`yedek_*.sql` adlı manuel geri yükleme noktalarına **dokunmaz**).
+- Kayıt: `SQL\yedekler\yedek_log.txt`. Günlük zamanlanmış görev `LimonYedek`
+  (her gün 03:30) da aynı script'i koşturur; mysqldump ile root şifresiz dump alır.
+- Ek olarak **her DB'de veri değiştiren adımdan önce** o adımı etkileyen tabloların
+  ayrı `yedek_<isim>.sql` yedeği alınır (mevcut kural, aynen geçerli).
+
 ## Veritabanı
 
 `config/db.php` **repoda yok** (`.gitignore`'da). Yeni ortamda:
