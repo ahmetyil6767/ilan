@@ -3382,4 +3382,5 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'store_all_listings' => 'Tüm Mağaza İlanları',
 	'store_listing_count' => '<strong>%s</strong> adlı mağazanın <span class=\'sayi\'>%s</span> ilanı mevcut.',
 	'store_listing_none' => '<strong>%s</strong> adlı mağazanın yayında ilanı bulunamadı.',
+	'profile_listing_count' => '<strong>%s</strong> adlı kullanıcının <span class=\'sayi\'>%s</span> ilanı mevcut.',
 );

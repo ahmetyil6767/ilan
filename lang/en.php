@@ -3406,4 +3406,5 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'store_all_listings' => 'All Store Listings',
 	'store_listing_count' => '<strong>%s</strong> has <span class=\'sayi\'>%s</span> listings available.',
 	'store_listing_none' => '<strong>%s</strong> has no listings currently available.',
+	'profile_listing_count' => '<strong>%s</strong> has <span class=\'sayi\'>%s</span> listings available.',
 );

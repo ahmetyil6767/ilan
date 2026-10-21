@@ -63,9 +63,9 @@ tema_header(); ?>
 			<div class="panel panel-default beyaz sonuc visible-md visible-lg">
 				<div class="panel-body">
 					<?php if ($toplam_ilan>0) { 
-						echo "<strong>$ad_soyad</strong> adlı kullanıcının <span class='sayi'>$toplam_ilan</span> ilanı mevcut.";
+						echo _LANG('profile_listing_count', array($ad_soyad, $toplam_ilan));
 					} else {
-						echo "<strong>$ad_soyad</strong> adlı kullanıcının yayında ilanı bulunamadı.";
+						echo _LANG('profile_no_listings', array($ad_soyad));
 					} ?>
 				</div>
 			</div>

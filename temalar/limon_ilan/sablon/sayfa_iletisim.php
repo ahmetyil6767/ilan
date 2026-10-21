@@ -8,7 +8,7 @@ tema_header(); ?>
 		</div>
 		<div class="col-md-23">
 			<?php include("temalar/$aktif_tema/inc/alert.php"); ?>
-			<h1><?php echo getir("icerik","baslik",$id); ?></h1>
+			<h1><?php echo _DIL_BASLIK(getir("icerik","baslik",$id), $id, "sayfa"); ?></h1>
 			<div class="content">
 				<?php echo icerik_getir($id); ?>
 				

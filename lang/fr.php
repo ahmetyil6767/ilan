@@ -3626,4 +3626,5 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'store_all_listings' => 'Toutes les annonces de la boutique',
 	'store_listing_count' => '<strong>%s</strong> propose <span class=\'sayi\'>%s</span> annonces.',
 	'store_listing_none' => "<strong>%s</strong> n'a actuellement aucune annonce publiée.",
+	'profile_listing_count' => '<strong>%s</strong> propose <span class=\'sayi\'>%s</span> annonces.',
 );
