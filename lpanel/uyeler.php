@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include("../loader.php");
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$id=$_GET["id"];
@@ -17,7 +17,7 @@ if ($buton) {
 	if ($url=="") {
 		$url=url_olustur($ad_soyad);
 	}
-	$email_adresi=trim($_POST["email_adresi"]);$cep_tel=trim($_POST["cep_tel"]);
+	$email_adresi=trim(isset($_POST["email_adresi"])?$_POST["email_adresi"]:"");$cep_tel=trim(isset($_POST["cep_tel"])?$_POST["cep_tel"]:"");
 	$parola=$_POST["parola"];
 	if ($parola) {
 		$parola_kripto=parola_sakla($parola);
@@ -433,7 +433,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 				while ($dizi=mysqli_fetch_array($sql)) {
 					$id=$dizi["id"];
 					$ad_soyad=$dizi["ad_soyad"];
-					$email_adresi=$dizi["email_adresi"];$cep_tel=$dizi["cep_tel"];
+					$email_adresi=$dizi["email_adresi"];$cep_tel=ekstra_bilgi_getir("cep_tel",$id,"uye");
 					$parola=$dizi["parola"];
 					$durum=$dizi["durum"];
 					$yetki=$dizi["yetki"];
@@ -443,7 +443,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 						<th scope="row"><?php echo $id; ?></th>
 				    <td><a href="uyeler.php?islem=guncelle&id=<?php echo $id; ?>"><?php echo $ad_soyad; ?></a> <?php if (function_exists('lpanel_uye_profil_link')) {$panel_profil_url=lpanel_uye_profil_url($id); echo "<a href='$panel_profil_url'><i class='fa fa-user'></i></a>";} ?> <a href="<?php echo profil_link_getir($id); ?>"><i class="fa fa-external-link"></i></a>
 				    
-						<?php if ($id!=1 and $id!=$oturum_id) { $g++; ?><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')" data-toggle="tooltip" title="<?php echo _LANG("p_oturum_ac_olarak_baslik", array($ad_soyad)); ?>"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i></a><?php } ?>
+						<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')" data-toggle="tooltip" title="<?php echo _LANG("p_oturum_ac_olarak_baslik", array($ad_soyad)); ?>"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i></a><?php } ?>
 
 				    </td>
 						<td><?php echo $email_adresi; ?></td><?php echo "  "; ?><td><?php echo $cep_tel; ?></td>
@@ -478,8 +478,8 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 							  </button>
 							  <ul class="dropdown-menu dropdown-menu-right">
 								<?php $g=0; if (function_exists('lpanel_uye_profil_url')) { $g=1; ?><li><a href="<?php echo lpanel_uye_profil_url($id); ?>"><i class="fa fa-tv fa-fw" aria-hidden="true"></i><?php echo _LANG('p_goruntule'); ?></a></li><?php } ?>
-								<?php if ($id!=1 and $id!=$oturum_id) { $g++; ?><li><a href="uyeler.php?islem=sil&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_emi_misiniz"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li><?php } ?>
-								<?php if ($id!=1 and $id!=$oturum_id) { $g++; ?><li><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i><?php echo $ad_soyad; ?> <?php echo _LANG('p_giris_yap_olarak'); ?></a></li><?php } ?>
+								<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><li><a href="uyeler.php?islem=sil&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_emi_misiniz"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li><?php } ?>
+								<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><li><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i><?php echo $ad_soyad; ?> <?php echo _LANG('p_giris_yap_olarak'); ?></a></li><?php } ?>
 								<?php if ($g==0) {echo "<li><a href=''>" . _LANG('p_islem_yok') . "</a></li>";}?>
 							  </ul>
 							</div>

@@ -117,7 +117,7 @@ if ($logout==1) {
 							</div>
 						<?php }	
 						
-						$garanti_bitis_tarih_saat=$limonsoft_array["garanti_bitis_tarih_saat"];
+						$garanti_bitis_tarih_saat=isset($limonsoft_array["garanti_bitis_tarih_saat"])?$limonsoft_array["garanti_bitis_tarih_saat"]:null;
 						if ($garanti_bitis_tarih_saat) {
 							$garanti_kalan_gun=kac_gun_kaldi($garanti_bitis_tarih_saat);
 							$garanti_son_odeme_tarihi=tarih_saat_hesapla("+15 days",$garanti_bitis_tarih_saat);
@@ -189,7 +189,7 @@ if ($logout==1) {
 							<div class="clearfix"></div>
 							<p style="margin-bottom:0 !important;" class="pull-left"><?php echo _LANG('p_altyapi'); ?>: <a href="http://www.limontasarim.com/?ref_url=<?php echo site_url(); ?>" target="_blank"><?php echo $lpanel_baslik; ?> <?php $versiyon=ayar_getir("versiyon"); echo $versiyon; ?></a></p>
 							<?php
-							$guncel_versiyon=$limonsoft_array["versiyon"]; 
+							$guncel_versiyon=isset($limonsoft_array["versiyon"])?$limonsoft_array["versiyon"]:"19.8.64"; 
 							if ($guncel_versiyon) {
 								$versiyon=ayar_getir("versiyon");
 								if (str_replace(".",null,$versiyon)<str_replace(".",null,$guncel_versiyon)) {

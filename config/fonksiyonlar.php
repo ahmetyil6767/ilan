@@ -54,6 +54,10 @@ function domain($domain = NULL)
 				$uzanti = $bol[$say - 1];
 			}
 		}
+		else {
+			/* Tek parcali host (ornegin "ilan") - uzanti atanmazsa hata veriyordu */
+			$uzanti = $bol[$say - 1];
+		}
 
 		$uzanti_ayir = explode('.' . $uzanti, $domain);
 		$uzanti_haric = $uzanti_ayir[0];
@@ -453,6 +457,7 @@ function ayar_getir($ayar)
 {
 	global $baglan;
 	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $ayar . '\''));
+	if (!$dizi) { return ''; }
 	return tirnak_ekle($dizi['deger']);
 }
 
@@ -2120,9 +2125,9 @@ function yetki_kontrol()
 		}
 	}
 	if (strstr($php_self, 'icerik.php') || strstr($php_self, 'kategoriler.php')) {
-		$tip = $_GET['tip'];
-		$tip_ozellikleri = $icerik_tipleri[$tip];
-		@$tip_yetki = $tip_ozellikleri['yetki'];
+		$tip = isset($_GET['tip']) ? $_GET['tip'] : '';
+		$tip_ozellikleri = isset($icerik_tipleri[$tip]) ? $icerik_tipleri[$tip] : array();
+		@$tip_yetki = isset($tip_ozellikleri['yetki']) ? $tip_ozellikleri['yetki'] : null;
 		if (($oturum_yetki != 'admin') && $tip_yetki && !strstr($tip_yetki, $oturum_yetki)) {
 			$_SESSION['mesaj'] = [_LANG('f_islem_yetki_yok'), 'danger'];
 			yonlendir(site_url() . ('/' . $admin_dizini . '/'));
