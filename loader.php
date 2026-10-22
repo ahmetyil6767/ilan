@@ -164,7 +164,7 @@ if (file_exists(ROOT_DIR."/$temalar_dizini/$aktif_tema/$fonksiyon_dosyasi")) {
 }
 /* Lpanel oturum kontrolü başladı */
 if (strstr(browser_url(), "/$admin_dizini/") and !strstr(browser_url(), "giris-yap.php")) {
-	if (!$_SESSION["yonetici_id"]) {
+	if (empty($_SESSION["yonetici_id"])) {
 		session_destroy();
 		session_start();
 		yonlendir("giris-yap.php");

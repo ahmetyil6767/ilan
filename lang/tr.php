@@ -3482,4 +3482,7 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'b_ilaniniz_reddedildi' => 'Your listing has been rejected! - %s',
 	's_404_baslik' => '404. SAYFA BULUNAMADI',
 	'title_404' => '404 Sayfa Bulunamadı',
+	'p_bilesen_alan_yok'    => 'Temanızda düzenlenebilir bileşen alanı bulunamadı.',
+	'p_liste_alan_yok'      => 'Düzenlenebilir liste alanı bulunamadı.',
+
 );

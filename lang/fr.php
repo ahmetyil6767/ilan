@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
  * Français
  *
@@ -3726,4 +3726,5 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'b_ilaniniz_reddedildi' => 'تم رفض إعلانك! - %s',
 	's_404_baslik' => '404. PAGE INTROUVABLE',
 	'title_404' => '404 Page introuvable',
+
 );

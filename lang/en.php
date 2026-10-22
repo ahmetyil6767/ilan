@@ -3507,4 +3507,5 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'b_ilaniniz_reddedildi' => 'Votre annonce a été refusée ! - %s',
 	's_404_baslik' => '404. PAGE NOT FOUND',
 	'title_404' => '404 Page Not Found',
+
 );

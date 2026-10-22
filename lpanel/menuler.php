@@ -209,11 +209,11 @@ if ($panel_sablon=="fullwidth") {
 			<a href="menuler.php?islem=ekle" class="btn btn-primary"><?php echo _LANG('p_menu_ekle_k'); ?></a>
 			<div class="clearfix mb20"></div>
 			<?php $v_say=count($tema_menuleri); ?>
-			<div class="alert alert-primary"><?php echo _LANG('p_menu_destekliyor'), array($v_say); ?>
+			<div class="alert alert-primary"><?php echo sprintf(_LANG('p_menu_destekliyor'), $v_say); ?>
 			<?php
 			$v=1; foreach ($tema_menuleri as $yaz => $x) {
-			if ($v==$v_say) {echo "<strong>". (is_array($x) ? implode(", ", $x) : $x)["id"]."</strong>";}
-			else {echo "<strong>". (is_array($x) ? implode(", ", $x) : $x)["id"]."</strong>, ";}
+			if ($v==$v_say) {echo "<strong>". (is_array($x) ? $x["id"] : $x)."</strong>";}
+			else {echo "<strong>". (is_array($x) ? $x["id"] : $x)."</strong>, ";}
 			$menude_ara[]=$x["id"];
 			$v++; }
 			?>
