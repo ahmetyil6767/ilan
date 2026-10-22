@@ -1125,7 +1125,7 @@ if ($islem=="sil") {
 					<?php } ?>
 					<?php limon(@$panel_kategori_form_kod); ?>
 					<?php form_buton("buton",_LANG('p_guncelle'),"primary"); ?>
-					<?php form_elemani("hidden","aktif_tab","Aktif Tab"); ?>
+					<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 				</form>				
 			</div>
 			<div class="col-md-25">

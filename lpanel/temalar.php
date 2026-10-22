@@ -523,7 +523,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 						echo "</div>";
 						form_buton("buton",_LANG('p_ayarlar_kaydet'),"primary");
 						} else {echo _LANG('p_tema_ayar_yok');}?>			
-						<?php form_elemani("hidden","aktif_tab","Aktif Tab"); ?>
+						<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 						</form>
 						</div>
 						</div>					

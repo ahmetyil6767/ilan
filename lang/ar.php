@@ -3465,4 +3465,5 @@ return array(
 
 	'p_erisim_engellendi' => 'تم رفض الوصول.',
 	'p_kategori_secimi_tamamlandi' => 'اكتمل اختيار الفئة',
+	'p_class' => 'فئة CSS',
 );

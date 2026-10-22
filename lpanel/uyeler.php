@@ -554,7 +554,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 						</div>
 					</div>
 					<?php form_elemani("email","email_adresi",_LANG('p_email_adresi'),@$email_adresi); ?>
-								<?php form_elemani("text","cep_tel","Telefon",@$cep_tel); ?>
+								<?php form_elemani("text","cep_tel",_LANG('p_cep_telefonu'),@$cep_tel); ?>
 					<?php select_olustur("durum","Durum",$uye_durumlari,@$durum); ?>					
 					<?php select_olustur("yetki",_LANG('p_yetki'),$uye_yetkileri,"kullanici"); ?>		
 					<?php form_elemani("text","parola",_LANG("p_parola"),null,null,null,null,_LANG("p_parola_bos_ipucu")); ?>
@@ -728,7 +728,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 							<p class="help-block"><i class="fa fa-bell-o"></i><?php echo _LANG('p_url_oto_olusur'); ?></p>
 						</div>
 					</div>
-								<?php form_elemani("text","cep_tel","Telefon",bilgi_getir("uyeler","cep_tel",$id)); ?>
+								<?php form_elemani("text","cep_tel",_LANG('p_cep_telefonu'),ekstra_bilgi_getir("cep_tel",$id,"uye")); ?>
 					<?php form_elemani("email","email_adresi",_LANG('p_email_adresi'),bilgi_getir("uyeler","email_adresi",$id)); ?>			
 					<?php select_olustur("durum","Durum",$uye_durumlari,bilgi_getir("uyeler","durum",$id)); ?>						
 					<?php if ($_SESSION["oturum_yetki"]=="admin") {select_olustur("yetki",_LANG('p_yetki'),$uye_yetkileri,bilgi_getir("uyeler","yetki",$id));} ?>	

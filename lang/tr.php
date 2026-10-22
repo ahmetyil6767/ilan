@@ -3490,4 +3490,5 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'Evet' => 'Evet',
 	'p_erisim_engellendi' => 'Erişim engellendi.',
 	'p_kategori_secimi_tamamlandi' => 'Kategori seçimi tamamlandı',
+	'p_class' => 'CSS Sınıfı',
 );

@@ -1602,7 +1602,7 @@ if ($toplu_buton) {
 				
 				<?php limon(@$panel_icerik_sag_alt_kod); ?>
 				</div>
-				<?php form_elemani("hidden","aktif_tab","Aktif Tab"); ?>
+				<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 				</form>	
 			</div>
 			<?php } else if ($islem=="guncelle") { ?>
@@ -2161,7 +2161,7 @@ if ($toplu_buton) {
 					
 					<?php limon(@$panel_icerik_sag_alt_kod); ?>
 				</div>
-				<?php form_elemani("hidden","aktif_tab","Aktif Tab"); ?>
+				<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 				</form>	
 			</div>
 		<?php } ?>

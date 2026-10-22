@@ -628,7 +628,7 @@ if ($panel_sablon=="fullwidth") {
 							</div>
 							<?php form_elemani("text","sira",_LANG('p_sira'),$guncelle_sira); ?>
 							<?php form_elemani("text","ikon",_LANG('p_ikon'),$guncelle_ikon); ?>
-							<?php form_elemani("text","class","Class",$guncelle_class); ?>
+							<?php form_elemani("text","class",_LANG('p_class'),$guncelle_class); ?>
 							<?php form_buton("link_guncelle_buton",_LANG('p_link_update'),"primary"); ?>
 						</form>
 						</div>

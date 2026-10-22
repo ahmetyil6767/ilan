@@ -488,7 +488,7 @@ if ($panel_sablon=="fullwidth") {
 								echo $grup_kapat_kod;
 								}
 								// Tab hidden input
-								form_elemani("hidden","aktif_tab","Aktif Tab");
+								form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab'));
 								echo "</div>";
 								?>
 								</div>

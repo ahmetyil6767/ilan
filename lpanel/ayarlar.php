@@ -359,7 +359,7 @@ $sql=mysqli_query($baglan,"select * from ayarlar");
 				echo $grup_kapat_kod;
 				} 
 				// Tab hidden input
-				form_elemani("hidden","aktif_tab","Aktif Tab");
+				form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab'));
 				echo "</div>";
 				form_buton("buton",_LANG("p_ayarlar_kaydet"),"primary");
 				echo "</form>

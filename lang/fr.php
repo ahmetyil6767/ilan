@@ -3731,4 +3731,5 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 
 	'p_erisim_engellendi' => 'Accès refusé.',
 	'p_kategori_secimi_tamamlandi' => 'Sélection de catégorie terminée',
+	'p_class' => 'Classe CSS',
 );

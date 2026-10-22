@@ -564,7 +564,7 @@ if ($panel_sablon=="fullwidth") {
 								}
 								form_elemani("text","sira",_LANG('p_sira'));
 								// Tab hidden input
-								form_elemani("hidden","aktif_tab","Aktif Tab");
+								form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab'));
 								echo "</div>";
 								?>
 								</div>
@@ -719,7 +719,7 @@ if ($panel_sablon=="fullwidth") {
 								}
 								form_elemani("text","sira",_LANG('p_sira'),$sira);
 								// Tab hidden input
-								form_elemani("hidden","aktif_tab","Aktif Tab");
+								form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab'));
 								echo "</div>";
 								?>
 								</div>
