@@ -1,5 +1,9 @@
 <?php
 
+/* Dosya seviyesinde guvenli tanim: thumb islemlerinde kullanilan $uzanti her zaman
+ * tanimli olmayabiliyor (PHP 8 'Undefined variable' uyarisi veriyordu). */
+$uzanti = "";
+
 
 function limonsoft()
 {
@@ -848,9 +852,33 @@ function autop($text)
 	return '<p>' . implode('</p>' . "\n\n" . '<p>', preg_split('/\\n(?:\\s*\\n)+/', $text)) . '</p>';
 }
 
-function bildirim_ekle($bildirim, $uye_id, $tip = 0)
+function bildirim_ekle($bildirim, $uye_id, $tip = 0, $ek_tip = 0)
 {
 	global $baglan;
+
+	/*
+	 * Iki imza desteklenir:
+	 *  1) bildirim_ekle($metin, $uye_id, $tip)
+	 *  2) bildirim_ekle($sablon, array($link, $ad), $uye_id, $tip)   (eski imza)
+	 * 2. imzada $uye_id dizi gelirse sablon vsprintf ile doldurulur.
+	 */
+	if (is_array($uye_id)) {
+		$ekstra = $uye_id;
+		$uye_id = $tip;
+		$tip = $ek_tip;
+		if (is_array($bildirim)) { $bildirim = implode(' ', $bildirim); }
+		elseif (is_array($ekstra) and $ekstra) {
+			/* %s yerine sirayla deger yazilir (vsprintf'dan daha esnek:
+			 * metindeki ek % isaretleri veya eksik arguman hataya yol acmaz) */
+			$sira = 0;
+			$bildirim = preg_replace_callback('/%s/', function ($m) use ($ekstra, &$sira) {
+				if (isset($ekstra[$sira])) { $deger = $ekstra[$sira]; $sira++; return is_array($deger) ? implode(' ', $deger) : (string)$deger; }
+				return '';
+			}, $bildirim);
+		}
+	}
+	if (is_array($bildirim)) { $bildirim = implode(' ', $bildirim); }
+
 	$bildirimler = ayar_getir('bildirimler');
 
 	if ($bildirimler == 1) {
@@ -868,6 +896,7 @@ function bildirim_sil($bildirim_id)
 
 function thumbnail_url($boyut, $image_url, $mevcut_boyut = NULL, $url_kontrol = false)
 {
+	global $uzanti;
 	$image_url = bosluk_donustur($image_url);
 	$uzanti = '.' . uzanti_ne($image_url);
 	$hazirlik = explode($uzanti, $image_url);

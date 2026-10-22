@@ -100,7 +100,7 @@ if ($logout==1) {
 						
 						<?php
 						$domain=domain();
-						$lisans_bitis_tarih_saat=$limonsoft_array["lisans_bitis_tarih_saat"];
+						$lisans_bitis_tarih_saat=isset($limonsoft_array["lisans_bitis_tarih_saat"]) ? $limonsoft_array["lisans_bitis_tarih_saat"] : null;
 						if ($lisans_bitis_tarih_saat) {
 							$lisans_kalan_gun=kac_gun_kaldi($lisans_bitis_tarih_saat);
 							$lisans_son_odeme_tarihi=tarih_saat_hesapla("+15 days",$lisans_bitis_tarih_saat);
@@ -135,7 +135,7 @@ if ($logout==1) {
 							<?php
 						}
 						
-						$hosting_bitis_tarih=$limonsoft_array["hosting"]["bitis_tarih"];
+						$hosting_bitis_tarih=isset($limonsoft_array["hosting"]["bitis_tarih"]) ? $limonsoft_array["hosting"]["bitis_tarih"] : null;
 						if ($hosting_bitis_tarih) {
 							$hosting_kalan_gun=kac_gun_kaldi($hosting_bitis_tarih);
 							$hosting_son_odeme_tarihi=tarih_saat_hesapla("+15 days","$hosting_bitis_tarih 00:00:00");

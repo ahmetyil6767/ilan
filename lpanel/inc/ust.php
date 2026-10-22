@@ -20,9 +20,10 @@
 </div>
 <?php limon(@$panel_header_alt_kod); ?>
 <?php
-if (@$_SESSION["mesaj"]!="") {
-$mesaj_mesaj=stripslashes($_SESSION["mesaj"][0]);
-$mesaj_bicim=$_SESSION["mesaj"][1];
+if (isset($_SESSION["mesaj"]) and is_array($_SESSION["mesaj"]) and isset($_SESSION["mesaj"][0])) {
+$mesaj_kaynak = $_SESSION["mesaj"][0];
+$mesaj_mesaj = is_array($mesaj_kaynak) ? implode(" ", $mesaj_kaynak) : stripslashes((string)$mesaj_kaynak);
+$mesaj_bicim=isset($_SESSION["mesaj"][1]) ? $_SESSION["mesaj"][1] : "";
 echo "<div class='alert alert-$mesaj_bicim autoclose' style='margin:20px;margin-bottom:0;'>$mesaj_mesaj
 <button type='button' class='close' data-dismiss='alert' aria-label='Kapat'>
   <span aria-hidden='true' style='color:#fff !important;' class='glyphicon glyphicon-ok'></span>

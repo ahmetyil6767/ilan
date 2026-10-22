@@ -203,7 +203,7 @@ $kategori_siralama=tema_ayar("ilan_ekle_kategori_siralama");
 if ($kategori_siralama=="baslik_a_z") {
 	$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by baslik asc");
 } else if ($kategori_siralama=="icerik_sayisi") {
-	$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by icerik desc, baslik");
+	$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by baslik asc");
 } else {
 	$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql");
 }

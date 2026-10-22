@@ -9,7 +9,7 @@ if (@$_SESSION["yonetici_id"]) {
 }
 @$buton=$_POST["buton"];
 if ($buton) {
-	$cep_tel=trim(addslashes(mysqli_real_escape_string($baglan,$_POST["cep_tel"])));
+	$kullanici=trim(addslashes(mysqli_real_escape_string($baglan,isset($_POST["kullanici"])?$_POST["kullanici"]:"")));
 	$parola=addslashes(mysqli_real_escape_string($baglan,$_POST["parola"]));
 }
 @$logout=$_GET["logout"];
@@ -258,10 +258,10 @@ if ($logout==1) {
 				?>
 				<form method="post" action="">
 					<div class="field">
-						<label><?php echo _LANG("p_cep_telefonu"); ?></label>
+						<label><?php echo _LANG("login_kimlik"); ?></label>
 						<div class="input-wrap">
-							<span class="prefix">+220</span>
-							<input type="text" name="cep_tel" id="cep_tel" class="form-control" placeholder="700 1234" required autofocus>
+							
+							<input type="text" name="kullanici" id="kullanici" class="form-control" placeholder="info@jaayko.gm" required autofocus>
 						</div>
 					</div>
 					<div class="field">
@@ -287,11 +287,11 @@ if ($logout==1) {
 				if ($buton) { ?>
 				<?php
 					$_SESSION["son_deneme"]=time();
-					$uye_mevcut_mu=uye_mevcut_mu($cep_tel);
+					$uye_mevcut_mu=uye_mevcut_mu($kullanici);
 					if ($uye_mevcut_mu==1) {
-						$kontrol=uye_sorgula($cep_tel,$parola);
+						$kontrol=uye_sorgula($kullanici,$parola);
 						if ($kontrol==1) {
-							$uye_id=uye_id_getir($cep_tel);
+							$uye_id=uye_id_getir($kullanici);
 							$_SESSION["oturum_id"]=$uye_id;
 							$yonetici_mi=yonetici_mi($uye_id);
 							if ($yonetici_mi==true) {
@@ -325,9 +325,9 @@ if ($logout==1) {
 					<?php } } ?>
 					
 					<?php 
-					if (@$_SESSION["mesaj"]!="") {
+					if (isset($_SESSION["mesaj"]) and is_array($_SESSION["mesaj"]) and isset($_SESSION["mesaj"][0])) {
 					$mesaj_mesaj=stripslashes($_SESSION["mesaj"][0]);
-					$mesaj_bicim=$_SESSION["mesaj"][1];
+					$mesaj_bicim=isset($_SESSION["mesaj"][1]) ? $_SESSION["mesaj"][1] : "";
 					echo "<div class='alert alert-$mesaj_bicim autoclose text-center' style='margin-bottom:0;border-radius:4px !important;'>$mesaj_mesaj
 					<button type='button' class='close' data-dismiss='alert' aria-label='Kapat'></button></div>";
 					$_SESSION["mesaj"]="";
@@ -345,10 +345,17 @@ if ($logout==1) {
 			</section>
 		</div>
 	</div>
-	<!-- phone mask -->
+	<!-- phone mask: yalnizca rakam girilirse; e-posta serbest kalir -->
 	<script type="text/javascript">
 	$(function(){
-		$("#cep_tel").mask("000 0000",{placeholder:"700 1234"});
+		$("#kullanici").on("input",function(){
+			var deger=$(this).val();
+			if (/^[0-9 ]+$/.test(deger) and deger.replace(/\D/g,"").length<=7) {
+				$(this).mask("000 0000",{placeholder:"700 1234"});
+			} else {
+				$(this).unmask();
+			}
+		});
 	});
 	</script>
 </body>
