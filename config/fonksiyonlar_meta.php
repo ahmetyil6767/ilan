@@ -170,7 +170,7 @@ function meta_description()
 	if (strstr($php_self, 'index.php')) {
 		$sayfa = @$_GET["p"];
 		$magaza = @$_GET["magaza"];
-		$aciklama = ayar_getir("site_aciklama");
+		$aciklama = site_aciklama_getir();
 		if ($sayfa || $magaza) { return $aciklama; }
 		return $aciklama;
 	}
@@ -187,7 +187,11 @@ function meta_description()
 		$kategori_id = $_GET["id"];
 		$seo = ekstra_bilgi_getir("seo_aciklama", $kategori_id, "kategori");
 		if ($seo) { return $seo; }
-		return ekstra_bilgi_getir("aciklama", $kategori_id, "kategori");
+		$aciklama = ekstra_bilgi_getir("aciklama", $kategori_id, "kategori");
+		if ($aciklama !== "" and $aciklama !== null) { return $aciklama; }
+		/* Kategori aciklamasi yoksa: kategori adi + site aciklamasi */
+		$kategori_adi = _DIL_BASLIK(kategori_adi_getir($kategori_id), $kategori_id, "kategori");
+		return $kategori_adi . ' - ' . site_aciklama_getir();
 	}
 
 	if (strstr($php_self, 'icerik.php')) {
@@ -197,13 +201,13 @@ function meta_description()
 		if ($seo !== "" && $seo !== null) { return $seo; }
 		$ozet = strip_tags(bilgi_getir("icerik", "icerik", $icerik_id));
 		$ozet = trim(preg_replace('/\s+/u', ' ', $ozet));
-		if ($ozet === '') { return ayar_getir("site_aciklama"); }
+		if ($ozet === '') { return site_aciklama_getir(); }
 		return mb_strlen($ozet) > 150 ? mb_substr($ozet, 0, 150) . '...' : $ozet;
 	}
 
 	if (strstr($php_self, 'ara.php')) {
 		$s = trim((string)@$_GET["s"]);
-		if ($s === '') { return ayar_getir("site_aciklama"); }
+		if ($s === '') { return site_aciklama_getir(); }
 		return _LANG('meta_search_results') . ': "' . $s . '"';
 	}
 
@@ -212,7 +216,7 @@ function meta_description()
 		return $ad . ' ' . _LANG('meta_profile_of');
 	}
 
-	return ayar_getir("site_aciklama");
+	return site_aciklama_getir();
 }
 
 /*
@@ -259,6 +263,15 @@ function tel_uluslararasi($tel, $ulke_kodu = '220')
  *
  * @return array lat/lon anahtarlari; gecersiz veride bos dizi.
  */
+/* Site aciklamasi: aktif dildeki varyant varsa onu kullanir */
+function site_aciklama_getir()
+{
+	$dil = function_exists('aktif_dil') ? aktif_dil() : 'tr';
+	$varyant = ayar_getir('site_aciklama_' . $dil);
+	if ($varyant !== '' and $varyant !== null) { return $varyant; }
+	return ayar_getir('site_aciklama');
+}
+
 function koordinat_ayir($koordinat)
 {
 	$koordinat = trim((string) $koordinat);

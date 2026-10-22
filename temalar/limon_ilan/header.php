@@ -40,11 +40,20 @@ if ($site_font=="Work Sans") { ?>
 <?php } ?>
 <?php $script_name=$_SERVER["SCRIPT_NAME"]; if (strstr($script_name,"icerik.php")) {@$id=$_GET["id"]; ?>
 <link rel="canonical" href="<?php echo link_getir($id); ?>" />
-<meta property="og:url" content="<?php echo link_getir($id); ?>" />
 <meta property="og:type" content="website" />
+<meta property="og:site_name" content="<?php echo ayar_getir('site_baslik'); ?>" />
+<meta property="og:locale" content="<?php echo _DIL_HTML_LANG(); ?>" />
 <meta property="og:title" content="<?php echo meta_title(); ?>" />
 <meta property="og:description" content="<?php echo meta_description(); ?>" />
+<?php if (isset($id) and $id) { ?>
+<meta property="og:url" content="<?php echo link_getir($id); ?>" />
 <meta property="og:image" content="<?php echo thumbnail("full",$id); ?>" />
+<?php } else { ?>
+<meta property="og:url" content="<?php echo site_url(); ?>" />
+<?php } ?>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="<?php echo meta_title(); ?>" />
+<meta name="twitter:description" content="<?php echo meta_description(); ?>" />
 <?php } else if (strstr($script_name,"kategori.php")) {@$id=$_GET["id"]; ?>
 <link rel="canonical" href="<?php echo kategori_link_getir($id); ?>"/>
 <?php } else if (strstr($script_name,"index.php")) {@$magaza=$_GET["magaza"]; if (!@$magaza) { ?>
