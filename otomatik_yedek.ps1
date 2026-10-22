@@ -21,7 +21,9 @@ $mysqlBin = "C:\wamp64\bin\mysql\mysql8.4.7\bin\mysqldump.exe"
 if (-not (Test-Path $mysqlBin)) { $mysqlBin = (Get-Command mysqldump -ErrorAction SilentlyContinue).Source }
 if (-not $mysqlBin) { throw "mysqldump bulunamadi" }
 $dump = Join-Path $hedef ("otomatik_db_" + $damga + ".sql")
-& $mysqlBin -u root --single-transaction --quick --default-character-set=utf8mb4 jaayko_limon 2>$null | Out-File -FilePath $dump -Encoding utf8
+# NOT: Dogrudan redirect kullanilir (Out-File UTF-8 BOM ekliyordu ve
+# BOM'lu dump dosyalari mysql'e geri yuklenemiyordu).
+cmd /c "`"$mysqlBin`" -u root --single-transaction --quick --default-character-set=utf8mb4 jaayko_limon > `"$dump`" 2>nul"
 $boyut = (Get-Item $dump).Length
 if ($boyut -lt 1MB) { Log "HATA: DB dump cok kucuk ($boyut bayt)"; throw "DB yedeği güvenilir degil" }
 Log ("DB yedegi: " + (Split-Path -Leaf $dump) + " (" + [math]::Round($boyut/1MB,1) + " MB)")

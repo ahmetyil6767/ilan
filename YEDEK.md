@@ -63,3 +63,25 @@ git checkout v1.0-gambiya-20261022     # o sürüme dön
 | Kategori ağacı bozuk | `kategoriler` + `ekstra_bilgi` tabloları birlikte yedeklenmeli |
 | Menü/bağlantılar bozuk | `linkler` tablosu yedeği |
 | Dosyalar eksik | `SQL\yedekler\yedek_kod_<tarih>.zip` |
+
+## Yedek kalitesini doğrulama (bozuk yedek tuzağı)
+
+PowerShell'in `>` yönlendirmesi ve `Out-File -Encoding utf8` **BOM ekler**; BOM'lu
+dump dosyaları `mysql` ile geri yüklenemez ("Unknown character set" / "ASCII '\0'").
+
+Bu nedenle:
+- `otomatik_yedek.ps1` artık **doğrudan `cmd` yönlendirmesi** kullanır (BOM'suz)
+- Manuel yedek alırken de `cmd /c "mysqldump ... > dosya.sql"` kullanın
+  (PowerShell `>` yerine)
+
+Doğrulama (orijinal DB'ye dokunmadan):
+
+```powershell
+$mysql = "C:\wamp64\bin\mysql\mysql8.4.7\bin\mysql.exe"
+& $mysql -u root -e "DROP DATABASE IF EXISTS jaayko_yedek_test; CREATE DATABASE jaayko_yedek_test DEFAULT CHARACTER SET utf8mb4;"
+cmd /c "`"$mysql`" -u root --default-character-set=utf8mb4 jaayko_yedek_test < SQL\yedekler\yedek_bozulma_guvenli_<tarih>.sql"
+& $mysql -u root -e "SELECT COUNT(*) FROM jaayko_yedek_test.kategoriler;"
+& $mysql -u root -e "DROP DATABASE jaayko_yedek_test;"
+```
+
+Dosyanın ilk baytları `-- M` (45 45 32 77) ise dosya BOM'suz ve geri yüklenebilirdir.
