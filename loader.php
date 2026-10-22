@@ -1,9 +1,14 @@
 <?php
 if(count(get_included_files())==1) exit("Bu bolgeye girmek tehlikeli ve yasaktir.");
 ob_start();
-// Error Reporting - Debug modu için hataları göster
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+// Error Reporting - hatalar sadece yerel gelistirme ortaminda gosterilir.
+// Uretimde (gercek domain) display_errors kapali kalir, hatalar sunucu loguna yazilir.
+$gelistirme_hostlari = array('ilan', 'localhost', '127.0.0.1', '::1');
+$su_ana_konuk = isset($_SERVER['HTTP_HOST']) ? strtolower(explode(':', $_SERVER['HTTP_HOST'])[0]) : '';
+$gelistirme_modu = in_array($su_ana_konuk, $gelistirme_hostlari, true);
+ini_set('display_errors', $gelistirme_modu ? '1' : '0');
+ini_set('display_startup_errors', $gelistirme_modu ? '1' : '0');
+ini_set('log_errors', '1');
 // E_STRICT sabiti PHP 8.4'te kullanimdan kalkti; referans almak kendisi bir
 // deprecation uyarisina neden oluyor. PHP 8'de de anlamsiz, bu yuzden kaldirildi.
 error_reporting(E_ALL & ~E_DEPRECATED);
