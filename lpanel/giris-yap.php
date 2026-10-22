@@ -25,7 +25,7 @@ if ($logout==1) {
 	<?php include("inc/header-kod.php"); ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-		/* === JAAYKO ADMIN LOGIN :: SURPRISE REDESIGN === */
+		/* === JAAYQUICK ADMIN LOGIN :: SURPRISE REDESIGN === */
 		:root {
 			--deep: #0b1023;
 			--navy: #14224a;
@@ -226,7 +226,7 @@ if ($logout==1) {
 			<aside class="brand-side">
 				<div class="logo">
 					<div class="logo-mark">J</div>
-					<span>Jaayko Admin</span>
+					<span>JaayQuick Admin</span>
 				</div>
 				<div>
 					<h1><?php echo _LANG("p_login_hero_baslik"); ?></h1>
@@ -238,7 +238,7 @@ if ($logout==1) {
 						<li><?php echo _LANG("p_login_ozellik_bildirim"); ?></li>
 					</ul>
 				</div>
-				<div class="brand-foot">JAAYKO.GM · v2.0</div>
+				<div class="brand-foot">JAAYQUICK.COM · v2.0</div>
 			</aside>
 			<section class="form-side">
 				<div class="badge-row">
@@ -261,7 +261,7 @@ if ($logout==1) {
 						<label><?php echo _LANG("login_kimlik"); ?></label>
 						<div class="input-wrap">
 							
-							<input type="text" name="kullanici" id="kullanici" class="form-control" placeholder="info@jaayko.gm" required autofocus>
+							<input type="text" name="kullanici" id="kullanici" class="form-control" placeholder="info@jaayquick.com" required autofocus>
 						</div>
 					</div>
 					<div class="field">
@@ -334,7 +334,7 @@ if ($logout==1) {
 					}
 					?>
 				</div>
-				<span class="watermark">JAAYKO ADMIN</span>
+				<span class="watermark">JAAYQUICK ADMIN</span>
 			<div style="position:absolute; top:18px; right:22px; display:flex; gap:6px;">
 <?php $lpanel_diller=array('tr','en'); foreach ($lpanel_diller as $lk) { ?>
 				<a href="<?php echo _DIL_DEGISTIR_LINK($lk); ?>" style="padding:5px 9px; border-radius:8px; font-size:11px; font-weight:700; letter-spacing:.5px; text-decoration:none; color:#e8ecf7; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15);">

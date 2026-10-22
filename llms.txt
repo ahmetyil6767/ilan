@@ -1,6 +1,6 @@
-# Jaayko — Gambiya İlan Panosu
+# JaayQuick — Gambiya İlan Panosu
 
-> Jaayko (jaayko.gm), Gambiya'nın ücretsiz ilan panosudur. Araç, emlak, iş ilanı
+> JaayQuick (jaayquick.com), Gambiya'nın ücretsiz ilan panosudur. Araç, emlak, iş ilanı
 > ve günlük ürün ilanlarını dört dilde (Türkçe, English, Français, العربية)
 > yayınlayın ve arayın. Üyelik ve standart ilan vermek ücretsizdir; mağaza
 > açma, ilan öne çıkarma (boost) ve üyelik paketleri ücretlidir ve banka havalesi
@@ -26,7 +26,7 @@
 
 - **Konum:** Banjul, Kanifing, West/North Bank, Lower/Central/Upper River, Kuntaur
 - **Para birimi:** GMD (Gambia dalasi); USD, EUR, GBP gösterim seçeneği
-- **İletişim:** info@jaayko.gm · 220 267 74 08 (WhatsApp destek)
+- **İletişim:** info@jaayquick.com · 220 267 74 08 (WhatsApp destek)
 - **Dil:** Türkçe (kaynak), English, Français, العربية — dil seçici üstte
 - **Ödeme:** Banka havalesi (EFT). Sipariş sonrası ödeme referansı `JA-<siparis_id>`
   verilir; ödeme yönetici tarafından doğrulanır.

@@ -4,7 +4,7 @@ Bu depo için geçerli talimatlar **`AGENTS.md`** dosyasındadır. Onu oku ve uy
 
 Özet hatırlatma (ayrıntı için AGENTS.md):
 
-- **Proje:** Jaayko (`jaayko.gm`) — PHP 8.4 + MySQL ilan uygulaması, Gambiya için.
+- **Proje:** JaayQuick (`jaayquick.com`) — PHP 8.4 + MySQL ilan uygulaması, Gambiya için.
   Para birimi **GMD**, ülke kodu **+220**, diller **tr/en/fr/ar** (çerez ile değişir).
 - **Kurallar:** Türkçe yorum/commit, `array()` tercih edilir, `prepared statement` ile SQL,
   çıktıyı `htmlspecialchars` ile kaçır, yeni dosya **BOM'suz UTF-8**.

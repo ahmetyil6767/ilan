@@ -1,4 +1,4 @@
-# Jaayko (jaayko.gm)
+# JaayQuick (jaayquick.com)
 
 Gambiya için ücretsiz ilan panosu. PHP 8.4 + MySQL, "Limon CMS" altyapısı.
 Ziyaretçi arayüzü ve yönetim paneli tek kod tabanında; Composer/npm yoktur.

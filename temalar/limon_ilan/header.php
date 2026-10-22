@@ -54,7 +54,10 @@ if ($site_font=="Work Sans") { ?>
 <link rel="canonical" href="<?php echo magaza_link_getir($magaza); ?>"/>
 <?php } } ?>
 <meta property="og:url" content="<?php echo $og_url; ?>" />
-<?php if ($og_image) { ?><meta property="og:image" content="<?php echo $og_image; ?>" /><?php } ?>
+<?php if (!$og_image) { $og_image=tema_ayar("og_image"); if ($og_image) { $og_image=site_url().$og_image; } } ?>
+<meta property="og:image" content="<?php echo $og_image ? e($og_image) : ""; ?>" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="<?php echo meta_title(); ?>" />
 <meta name="twitter:description" content="<?php echo meta_description(); ?>" />
@@ -184,7 +187,7 @@ if (!$site_header) {
 <div class="container">
 	<div class="row">
 		<div class="col-md-9 col-sm-12 yukseklik_h">
-			<div class="logo noselect"><a href="<?php echo site_url(); ?>"><img src="<?php echo tema_ayar("logo"); ?>" class="img-responsive" /></a></div>
+			<div class="logo noselect"><a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" class="img-responsive" /></a></div>
 		</div>
 		<div class="ortala_h">
 			<div class="col-md-14 col-md-offset-2 visible-md visible-lg">
@@ -260,7 +263,7 @@ if (!$site_header) {
 					<button type="button" class="pull-left" id="mm_buton" href="#mm_panel"><i class="ion-navicon-round mr0"></i></button>
 				</div>
 				<div class="col-xs-26 yukseklik_h">
-					<a href="<?php echo site_url(); ?>"><img src="<?php echo tema_ayar("logo"); ?>" class="img-responsive img-center mobil_logo"/></a>
+					<a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" class="img-responsive img-center mobil_logo"/></a>
 				</div>
 				<div class="col-xs-8 text-center" <?php if ($mbmt) {echo "style='margin-top:".$mbmt."px';";} ?>>
 					<button type="button" class="pull-right" id="mmu_buton" href="#mmu_panel"><i class="ion-person-stalker mr0"></i></button>

@@ -662,12 +662,25 @@ function eklenti_pasiflestir($eklenti)
 	mysqli_query($baglan, 'delete from ayarlar where anahtar=\'eklenti\' and deger=\'' . $eklenti . '\'');
 }
 
-function site_url()
-{
+  function site_url()
+  {
 	global $baglan;
+
+	/*
+	 * SITE_URL_YEREL: yerel gelistirme ortaminda (ilan / localhost)
+	 * istek adresi kullanilir. Boylece uretim icin kayitli alan adi
+	 * (jaayquick.com) sabit kalir, yerelde de testler calisir.
+	 * Uretimde alan adi "ilan"/"localhost" olmadigi icin bu yol
+	 * devreye girmez.
+	 */
+	$host = isset($_SERVER['HTTP_HOST']) ? strtolower(explode(':', $_SERVER['HTTP_HOST'])[0]) : '';
+	if ($host == 'ilan' or $host == 'localhost' or $host == '127.0.0.1' or $host == '::1') {
+		$semasi = (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== '' and strtolower($_SERVER['HTTPS']) != 'off') ? 'https' : 'http';
+		return $semasi . '://' . $host;
+	}
 	$dizi = (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\'') ? (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\'')) : null) : null);
 	return $dizi['deger'];
-}
+  }
 
 function alt_kategori_sayisi($kategori_id)
 {

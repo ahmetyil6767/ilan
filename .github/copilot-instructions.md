@@ -4,7 +4,7 @@ Bu depo için geçerli kurallar **`AGENTS.md`** dosyasındadır. Onu oku ve uygu
 Mimari/iş akışı bilgisi: `PROJECT_CONTEXT.md`.
 
 Özet:
-- Jaayko (`jaayko.gm`) — PHP 8.4 + MySQL ilan uygulaması; **Gambiya** için
+- JaayQuick (`jaayquick.com`) — PHP 8.4 + MySQL ilan uygulaması; **Gambiya** için
   (para birimi GMD, ülke kodu +220, bölge: Region/District — "İl/İlçe/Mahalle" değil).
 - Diller tr/en/fr/ar; `lang/` anahtar kümeleri dört dilde birebir aynı olmalı.
 - Kod stili: Türkçe değişken/fonksiyon adları (snake_case), `array()` tercih edilir,

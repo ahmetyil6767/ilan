@@ -1,11 +1,11 @@
-# AGENTS.md — Jaayko (Gambiya İlan Panosu)
+# AGENTS.md — JaayQuick (Gambiya İlan Panosu)
 
 Bu dosya OpenCode ve bu repoda çalışan diğer AI ajanları için proje talimatıdır.
 Depoya commit edilir; herkes aynı kuralları alır.
 
 ## Proje nedir
 
-**Jaayko** (`jaayko.gm`) — PHP + MySQL tabanlı **ilan / classified ads** uygulaması.
+**JaayQuick** (`jaayquick.com`) — PHP + MySQL tabanlı **ilan / classified ads** uygulaması.
 "Limon CMS" altyapısı üzerine kurulu; ziyaretçi arayüzü ve yönetim paneli
 **tek kod tabanında** duruyor. Composer, npm, paket yöneticisi **yoktur** —
 bağımlılıklar klasör içine kopyalanmış halde gelir.
@@ -21,8 +21,8 @@ Site **Gambiya** için çalışır; Türkiye'ye özgü hiçbir veri kalmamalıd�
 
 | Konu | Değer |
 |---|---|
-| Marka | Jaayko (`jaayko.gm`) — `site_baslik` ayarı "Jaayko" |
-| İletişim | `info@jaayko.gm`, `220 267 74 08` (uluslararası: `+220 267 74 08`) |
+| Marka | JaayQuick (`jaayquick.com`) — `site_baslik` ayarı "JaayQuick" |
+| İletişim | `info@jaayquick.com`, `220 267 74 08` (uluslararası: `+220 267 74 08`) |
 | Para birimi | **GMD (dalasi)** — DB'deki tutarlar GMD; `birim_goster()` ziyaretçi birimine çevirir |
 | Kur kaynağı | `open.er-api.com` (1 USD = kaç GMD); eski TCMB/TRY kaynağı **kaldırıldı** |
 | Telefon | `+220`; yerel numara 7 hane, ülke kodu **girdiğinde** yazılmaz (`s_telefon_sifir` ipucu) |
@@ -77,16 +77,24 @@ her zaman çevrilir.
 
 # Testler (veritabanı bağlantısı gerekir, loader.php'i çeker)
 php tests/LanguageSystemTest.php     # çıkış kodu 0 = hepsi geçti
+php tests/BindParamTest.php          # prepared statement tip/değişken tutarlılığı
+php tests/PanelFunctionTest.php      # lpanel CRUD işlev testi (admin oturumu gerekir)
+php tests/PanelLanguageTest.php      # lpanel 4 dilde sayfa taraması
 ```
 
 **Bir değişiklik yapıp bitirmeden önce şu sırayla doğrula:**
 
 1. `php -l <değişen dosya>` — sözdizimi (her dosya için)
 2. `php tests/LanguageSystemTest.php` — dil/para birimi testi (0 = geçti)
-3. Tüm iç linkleri 4 dilde tarayan smoke test (ör. `tests/` altındaki tarama
+3. `php tests/BindParamTest.php` — `mysqli_stmt_bind_param` tip sayısı = değişken
+   sayısı olmalı (aksi halde PHP 8 `ArgumentCountError` fırlatır ve sayfa
+   sessizce HTTP 200 döner)
+4. Değişiklik paneldeyse `php tests/PanelFunctionTest.php` (CRUD uçtan uca)
+   ve `php tests/PanelLanguageTest.php` (4 dil × 12 sayfa → 0 sorun)
+5. Tüm iç linkleri 4 dilde tarayan smoke test (ör. `tests/` altındaki tarama
    betikleri) → **PHP hatası olan sayfa sayısı 0** olmalı
-4. Tarayıcıda gerçek kontrol (1-2 sayfa) — özellikle görünüm/JS değiştiyse
-5. `otomatik_yedek.ps1` → commit
+6. Tarayıcıda gerçek kontrol (1-2 sayfa) — özellikle görünüm/JS değiştiyse
+7. `otomatik_yedek.ps1` → commit
 
 `cache/` altındaki HTML cache'i **bayatlayabilir** — değişiklik sonrası
 `cache/` içeriğini sil, yoksa eski HTML sunulur.

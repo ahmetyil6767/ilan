@@ -1,4 +1,4 @@
-# PROJECT_CONTEXT.md — Jaayko Bilgi Tabanı
+# PROJECT_CONTEXT.md — JaayQuick Bilgi Tabanı
 
 **Ne bu dosya:** `AGENTS.md` *kuralları* anlatır (ne yapma, nasıl yap). Bu dosya
 *bilgiyi* anlatır: sistem nasıl çalışır, veri nerede durur, hangi iş akışı
@@ -157,3 +157,38 @@ git status && git add <spesifik dosyalar> && git commit -m "Türkçe tek cümle"
 - `display_errors=1` (yerel) → üretimde **0** yapılmalı.
 - SSL yok → tarayıcı "Güvenli değil" uyarısı verir; üretim öncesi sertifika şart.
 - Kategori ağacı N+1 sorgu yapıyor; önce ölç, sonra optimize et.
+
+---
+
+## 11. Marka, domain ve logo (JaayQuick)
+
+| Konu | Değer |
+|---|---|
+| Alan adı | `jaayquick.com` — `ayarlar` tablosunda `site_url` |
+| Marka adı | `JaayQuick` — `ayarlar.site_baslik` |
+| İletişim | `info@jaayquick.com`, `220 267 74 08` (+220) |
+| Yedek alan adı / eski marka | `jaayko.gm` **kullanılmıyor** (tüm DB + kod temizlendi) |
+| Veritabanı adı | `jaayko_limon` (yerel `config/db.php` içinde; kullanıcıya görünmez) |
+
+**Logo dosyaları** (hepsi `uploads/images/` altında, GD + FreeType ile üretildi):
+
+| Dosya | Boyut | Nerede kullanılıyor |
+|---|---|---|
+| `jaayquick-logo.png` | 600×160 | Açık zemin (yazdırma, e-posta) — `tema_ayar("logo")` |
+| `jaayquick-logo-light.png` | 600×160 | **Koyu header** — `tema_ayar("logo_light")` |
+| `jaayquick-logo-mobil-light.png` | 320×90 | Mobil header — `tema_ayar("mobil_logo")` |
+| `jaayquick-icon.png` | 512×512 | Ana ikon (paylaşım, panel) |
+| `jaayquick-favicon.ico` + `-16/32/48/64.png` | — | `tema_ayar("favicon")` |
+| `jaayquick-watermark.png` | 600×160 | Görsel su izareti — `tema_ayar("watermark_logo")` |
+| `jaayquick-og.jpg` | 1200×630 | `og:image` — `tema_ayar("og_image")` |
+| `jaayquick-logo.svg`, `jaayquick-icon.svg` | — | Vektörel (ölçeklenebilir) |
+
+Logo konsepti: lacivert gradyanlı yuvarlak kare rozet, içinde beyaz "Q" halkası
+(harita pini + sınıf ilan panosu çağrışımı), Q'nun kuyruğunda amber simsek
+(hız/"quick"). Palet: lacivert `#0E2A47` → `#1B4A80`, amber `#F2A900`.
+
+**Önemli:** `config/fonksiyonlar.php` içindeki `site_url()` fonksiyonu
+**yerel gelistirme override'ı** içerir (`SITE_URL_YEREL` bloğu): `ilan` veya
+`localhost` hostu geldiğinde istek adresini döndürür. Üretimde alan adı
+`jaayquick.com` olarak kayıtlı değerden okunur. Bu sayede yerelde testler
+çalışırken de `site_url` değişikliği yapılandırma gerektirmez.

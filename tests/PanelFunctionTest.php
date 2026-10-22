@@ -44,7 +44,7 @@ function sonuc($ad, $basarili, $detay = '')
 $gecen = 0; $kalan = 0;
 
 /* --- giris --- */
-list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', 'kullanici=info%40jaayko.gm&parola=Jaayko%232026&buton=1', $ciz);
+list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', 'kullanici=info%40jaayquick.com&parola=Jaayko%232026&buton=1', $ciz);
 echo "Panel girisi: HTTP $kod " . ($kod == 302 ? "(basarili)" : "(BASARISIZ)") . "\n\n";
 if ($kod != 302) { die("giris basarisiz - test durduruldu\n"); }
 
