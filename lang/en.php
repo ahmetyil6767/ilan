@@ -2713,6 +2713,7 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'p_theme_info_not_found' => 'Theme information could not be retrieved',
 	'p_no_theme_matching' => 'No theme matching your search',
 	'p_seo_aciklama' => 'SEO Description',
+	'p_seo_title' => 'Seo Title',
 	'p_plugin_settings_updated' => 'Plugin settings updated',
 	'p_plugin_enabled' => 'Plugin enabled: %s',
 	'p_eklenti_pasiflestirildi' => 'Plugin disabled: %s',
@@ -3509,4 +3510,5 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	's_404_baslik' => '404. PAGE NOT FOUND',
 	'title_404' => '404 Page Not Found',
 
+	'p_erisim_engellendi' => 'Access denied.',
 );

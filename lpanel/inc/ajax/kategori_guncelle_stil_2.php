@@ -1,16 +1,22 @@
 <?php
 require("../../../loader.php");
 
-$ref_url=explode("/$admin_dizini",ref_url())[0];
-if (site_url()!=$ref_url) {
-	die("Hata: Erisim engellendi.");
+/*
+ * Panel erisim kontrolu oturum tabanlidir.
+ * Onceki surum Referer basligina bagliydi; tarayici veya proxy
+ * Referer'i gondermezse istek reddediliyordu. loader.php zaten
+ * /lpanel/ altinda yonetici oturumu zorunlu kiliyor; buradaki
+ * kontrol ikinci savunma katmanidir.
+ */
+if (!isset($_SESSION["yonetici_id"]) or !yonetici_mi($_SESSION["yonetici_id"])) {
+	die(_LANG('p_erisim_engellendi'));
 }
 
-$sinif=$_GET["sinif"];
-$tip=$_GET["tip"];
-$id=$_GET["id"];
+$sinif=isset($_GET["sinif"]) ? $_GET["sinif"] : "";
+$tip=isset($_GET["tip"]) ? $_GET["tip"] : "";
+$id=(int)($_GET["id"] ?? 0);
 
-@$ust_kategori=$_GET["ust_kategori"];
+@$ust_kategori=(int)($_GET["ust_kategori"] ?? 0);
 if (!$ust_kategori) {
 	$ust_kategori=0;
 }
@@ -18,8 +24,11 @@ $mevcut_kategoriler=kategori_getir($id,$sinif);
 if (count($mevcut_kategoriler)>0) {
 	$tum_kategoriler=kategori_getir($id,$sinif);
 }
-$sql=mysqli_query($baglan,"select * from kategoriler where ust_kategori='$ust_kategori' and tip='$tip' and sinif='$sinif'");
-$toplam=mysqli_num_rows($sql);
+$sql=mysqli_prepare($baglan,"select * from kategoriler where ust_kategori=? and tip=? and sinif=?");
+mysqli_stmt_bind_param($sql,"iss",$ust_kategori,$tip,$sinif);
+mysqli_stmt_execute($sql);
+$sonuc=mysqli_stmt_get_result($sql);
+$toplam=mysqli_num_rows($sonuc);
 
 $x=1;
 $tum_kategori_sayisi=count($tum_kategoriler);

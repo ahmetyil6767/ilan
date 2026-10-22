@@ -10,7 +10,11 @@ if (!$tip) {
 	$tip_value=2;
 }
 if ($sil) {
-	$sql=mysqli_query($baglan,"delete from bildirimler where id='$sil'");
+	$sil_id_int=(int)$sil;
+	$sql=mysqli_prepare($baglan,"delete from bildirimler where id=?");
+	mysqli_stmt_bind_param($sql,"i",$sil_id_int);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
 	if (!$tip) {
 		$_SESSION["mesaj"]=array(_LANG('msj_bildirim_silindi'),"success");
 		yonlendir("bildirimler.php");

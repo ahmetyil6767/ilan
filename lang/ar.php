@@ -2670,6 +2670,7 @@ return array(
 	'p_theme_info_not_found' => 'تعذّر الحصول على معلومات القالب',
 	'p_no_theme_matching' => 'لا توجد قوالب مطابقة لبحثك',
 	'p_seo_aciklama' => 'وصف SEO',
+	'p_seo_title' => 'عنوان تحسين محركات البحث',
 	'p_plugin_settings_updated' => 'تم تحديث إعدادات الإضافة',
 	'p_plugin_enabled' => 'تم تفعيل الإضافة: %s',
 	'p_eklenti_pasiflestirildi' => 'تم تعطيل الإضافة: %s',
@@ -3462,4 +3463,5 @@ return array(
 	'p_bilesen_alan_yok'    => 'لم يتم العثور على حقل مكون قابل للتعديل في القالب.',
 	'p_liste_alan_yok'      => 'لم يتم العثور على حقل قائمة قابل للتعديل.',
 
+	'p_erisim_engellendi' => 'تم رفض الوصول.',
 );

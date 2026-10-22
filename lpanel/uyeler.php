@@ -32,7 +32,10 @@ if ($buton) {
 		if ($uye_mevcut_mu==1) {
 		$_SESSION["mesaj"]=array(_LANG('p_email_kullaniluyor'), array($email_adresi),"danger");
 		} else {		
-		$sql=mysqli_query($baglan,"insert into uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', parola='$parola_kripto', tarih_saat='$tarih_saat', yetki='$yetki', durum='$durum'");
+		$sql=mysqli_prepare($baglan,"insert into uyeler set ad_soyad=?, url=?, email_adresi=?, parola=?, tarih_saat=?, yetki=?, durum=?");
+		mysqli_stmt_bind_param($sql,"sssssss",$ad_soyad,$url,$email_adresi,$parola_kripto,$tarih_saat,$yetki,$durum);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_close($sql);
 		$eklenen_id=mysqli_insert_id($baglan);
 		if ($cep_tel!="") { uye_bilgi_guncelle("cep_tel", $cep_tel, $eklenen_id); }
 		foreach ($uye_ekstra_bilgiler as $yaz => $x) {
@@ -99,9 +102,18 @@ if ($buton) {
 		if ($_SESSION["oturum_yetki"]!="admin") {
 			$yetki=$_SESSION["oturum_yetki"];
 		}
-		$sql=mysqli_query($baglan,"update uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', durum='$durum', yetki='$yetki' where id='$id'");
+		$id_int=(int)$id;
+		$sql=mysqli_prepare($baglan,"update uyeler set ad_soyad=?, url=?, email_adresi=?, durum=?, yetki=? where id=?");
+		mysqli_stmt_bind_param($sql,"sssssi",$ad_soyad,$url,$email_adresi,$durum,$yetki,$id_int);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_close($sql);
 		if ($cep_tel!="") { uye_bilgi_guncelle("cep_tel", $cep_tel, $id); }
-		if ($parola!="") {$sql=mysqli_query($baglan,"update uyeler set parola='$parola_kripto' where id='$id'");}
+		if ($parola!="") {
+		$parola_sorgu=mysqli_prepare($baglan,"update uyeler set parola=? where id=?");
+		mysqli_stmt_bind_param($parola_sorgu,"si",$parola_kripto,$id_int);
+		mysqli_stmt_execute($parola_sorgu);
+		mysqli_stmt_close($parola_sorgu);
+	}
 		foreach ($uye_ekstra_bilgiler as $yaz => $x) {
 			$eb_type=$x["tip"];
 			$eb_name=$x["id"];
@@ -198,8 +210,15 @@ if ($buton) {
 if ($islem=="sil") {
 	if ($id!=1 and $id!=$oturum_id) {
 		$uye_ad_soyad=bilgi_getir("uyeler","ad_soyad",$id);
-		$uye_sil=mysqli_query($baglan,"delete from uyeler where id='$id'");
-		$ekstra_bilgi_sil=mysqli_query($baglan,"delete from ekstra_bilgi where id='$id' and tip='$tip'");
+		$sil_id_int=(int)$id;
+		$uye_sil=mysqli_prepare($baglan,"delete from uyeler where id=?");
+		mysqli_stmt_bind_param($uye_sil,"i",$sil_id_int);
+		mysqli_stmt_execute($uye_sil);
+		mysqli_stmt_close($uye_sil);
+		$ekstra_bilgi_sil=mysqli_prepare($baglan,"delete from ekstra_bilgi where id=? and tip=?");
+		mysqli_stmt_bind_param($ekstra_bilgi_sil,"is",$sil_id_int,$tip);
+		mysqli_stmt_execute($ekstra_bilgi_sil);
+		mysqli_stmt_close($ekstra_bilgi_sil);
 		$_SESSION["mesaj"]=array(_LANG('p_adi_ile_uye_silindi'), array($uye_ad_soyad),"success");
 	} else {
 		$_SESSION["mesaj"]=array(_LANG('p_kullanici_silinemez'),"danger");

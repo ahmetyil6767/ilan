@@ -17,8 +17,11 @@ if ($islem=="ekle") {
 	@$menu_pozisyon=$_POST["menu_pozisyon"];
 	@$buton=$_POST["buton"];
 	if ($buton) {
-		$sql=mysqli_query($baglan,"insert into ayarlar set anahtar='menu', deger='$menu_baslik'");
-		$menu_id_getir=mysqli_fetch_array(mysqli_query($baglan,"select id from ayarlar where anahtar='menu' and deger='$menu_baslik'"));
+		$sql=mysqli_prepare($baglan,"insert into ayarlar set anahtar='menu', deger=?");
+		mysqli_stmt_bind_param($sql,"s",$menu_baslik);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_close($sql);
+		$menu_id_getir=mysqli_fetch_array(mysqli_query($baglan,"select id from ayarlar where anahtar='menu' and deger='".mysqli_real_escape_string($baglan,$menu_baslik)."'"));
 		$menu_id=$menu_id_getir["id"];
 		if ($menu_pozisyon) {
 			ayar_guncelle("$menu_pozisyon","menu-$menu_id");
@@ -44,9 +47,20 @@ if ($islem=="menuleri_olustur") {
 }
 if ($islem=="sil") {
 	// Linkler siliniyor
-	$menu_sil=mysqli_query($baglan,"delete from linkler where menu_id='$menu_id'");
-	$menu_sil=mysqli_query($baglan,"delete from ayarlar where id='$menu_id'");
-	$menu_iliski_sil=mysqli_query($baglan,"delete from ayarlar where deger='menu-$menu_id'");
+	$menu_id_int=(int)$menu_id;
+	$menu_sil=mysqli_prepare($baglan,"delete from linkler where menu_id=?");
+	mysqli_stmt_bind_param($menu_sil,"i",$menu_id_int);
+	mysqli_stmt_execute($menu_sil);
+	mysqli_stmt_close($menu_sil);
+	$menu_sil=mysqli_prepare($baglan,"delete from ayarlar where id=?");
+	mysqli_stmt_bind_param($menu_sil,"i",$menu_id_int);
+	mysqli_stmt_execute($menu_sil);
+	mysqli_stmt_close($menu_sil);
+	$menu_iliski_deger="menu-$menu_id_int";
+	$menu_iliski_sil=mysqli_prepare($baglan,"delete from ayarlar where deger=?");
+	mysqli_stmt_bind_param($menu_iliski_sil,"s",$menu_iliski_deger);
+	mysqli_stmt_execute($menu_iliski_sil);
+	mysqli_stmt_close($menu_iliski_sil);
 	$_SESSION["mesaj"]=array(_LANG('p_menu_links_deleted'),"success");
 	yonlendir("menuler.php");
 }
@@ -63,7 +77,11 @@ if ($menu_pozisyonu_guncelle_buton) {
 		if (menu_pozisyonu($menu_id)) {ayar_sil(menu_pozisyonu($menu_id));}
 		ayar_guncelle("$menu_pozisyonu","menu-$menu_id");
 	}
-	$baslik_degistir=mysqli_query($baglan,"update ayarlar set deger='$menu_baslik' where id='$menu_id'");
+	$baslik_degistir=mysqli_prepare($baglan,"update ayarlar set deger=? where id=?");
+	$menu_id_int=(int)$menu_id;
+	mysqli_stmt_bind_param($baslik_degistir,"si",$menu_baslik,$menu_id_int);
+	mysqli_stmt_execute($baslik_degistir);
+	mysqli_stmt_close($baslik_degistir);
 	$_SESSION["mesaj"]=array(_LANG('p_menu_updated'),"success");
 	yonlendir("menuler.php?islem=linkler&menu_id=$menu_id");
 }

@@ -2696,6 +2696,7 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'p_theme_info_not_found' => 'Tema bilgileri alınamadı',
 	'p_no_theme_matching' => 'Aramanıza uygun tema bulunamadı',
 	'p_seo_aciklama' => 'Seo Açıklama',
+	'p_seo_title' => 'Seo Başlığı',
 	'p_plugin_settings_updated' => 'Eklenti ayarları güncellendi',
 	'p_plugin_enabled' => 'Plugin enabled: %s',
 	'p_eklenti_pasiflestirildi' => 'Eklenti pasifleştirildi: %s',
@@ -3487,4 +3488,5 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'p_liste_alan_yok'      => 'Düzenlenebilir liste alanı bulunamadı.',
 
 	'Evet' => 'Evet',
+	'p_erisim_engellendi' => 'Erişim engellendi.',
 );

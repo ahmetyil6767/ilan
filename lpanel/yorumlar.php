@@ -4,12 +4,20 @@ yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/gir
 @$islem=$_GET["islem"];
 @$id=$_GET["id"];
 if ($islem=="onayla") {
-	$sql=mysqli_query($baglan,"update yorumlar set durum=1 where id='$id'");
+	$onay_id_int=(int)$id;
+	$sql=mysqli_prepare($baglan,"update yorumlar set durum=1 where id=?");
+	mysqli_stmt_bind_param($sql,"i",$onay_id_int);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('p_comment_approved'),"success");
 	yonlendir("yorumlar.php");
 }
 if ($islem=="sil") {
-	$sql=mysqli_query($baglan,"delete from yorumlar where id='$id'");
+	$sil_id_int=(int)$id;
+	$sql=mysqli_prepare($baglan,"delete from yorumlar where id=?");
+	mysqli_stmt_bind_param($sql,"i",$sil_id_int);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('msj_yorum_silindi'),"success");
 	yonlendir("yorumlar.php");
 }
@@ -20,7 +28,11 @@ if ($islem=="guncelle") {
 	$email_adresi=$_POST["email_adresi"];
 	$yorum=$_POST["yorum"];
 	$durum=$_POST["durum"];
-	$sql=mysqli_query($baglan,"update yorumlar set ad_soyad='$ad_soyad', $email_adresi='$email_adresi', yorum='$yorum', durum='$durum' where id='$id'");
+	$guncelle_id_int=(int)$id;
+	$sql=mysqli_prepare($baglan,"update yorumlar set ad_soyad=?, email_adresi=?, yorum=?, durum=? where id=?");
+	mysqli_stmt_bind_param($sql,"ssssi",$ad_soyad,$email_adresi,$yorum,$durum,$guncelle_id_int);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('p_comment_updated'),"success");
 	yonlendir("yorumlar.php");
 	}

@@ -108,7 +108,11 @@ if (!$islem) {
 if ($islem=="sil") {
 	$anahtar=bilgi_getir("ayarlar","anahtar",$id);
 	if ($anahtar!="site_url" and $anahtar!="site_baslik" and $anahtar!="site_email" and $anahtar!="limonsoft" and $anahtar!="panel_renk" and $anahtar!="versiyon" and $anahtar!="basliga_ekle" and $anahtar!="tema" and $anahtar!="bildirimler" and $anahtar!="datatable" and $anahtar!="panel_sablon") {
-		$sql=mysqli_query($baglan,"delete from ayarlar where id='$id'");
+		$sil_id_int=(int)$id;
+		$sql=mysqli_prepare($baglan,"delete from ayarlar where id=?");
+		mysqli_stmt_bind_param($sql,"i",$sil_id_int);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_close($sql);
 		$_SESSION["mesaj"]=array(sprintf(_LANG('msj_ayar_silindi'), $anahtar),"success");
 	} else {
 		$_SESSION["mesaj"]=array(sprintf(_LANG('msj_ayar_silinemez'), $anahtar),"danger");
@@ -119,7 +123,10 @@ if ($islem=="ekle") {
 	if ($buton) {
 		$anahtar=$_POST["anahtar"];
 		$deger=$_POST["deger"];
-	$sql=mysqli_query($baglan,"insert into ayarlar set anahtar='$anahtar', deger='$deger'");
+	$sql=mysqli_prepare($baglan,"insert into ayarlar set anahtar=?, deger=?");
+	mysqli_stmt_bind_param($sql,"ss",$anahtar,$deger);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(sprintf(_LANG('msj_ayar_eklendi'), $anahtar),"success");
 	yonlendir("ayarlar.php");		
 	}
@@ -128,7 +135,10 @@ if ($islem=="guncelle") {
 	if ($buton) {
 		$anahtar=$ayar;
 		$deger=$_POST["deger"];
-	$sql=mysqli_query($baglan,"update ayarlar set deger='$deger' where anahtar='$anahtar'");
+	$sql=mysqli_prepare($baglan,"update ayarlar set deger=? where anahtar=?");
+	mysqli_stmt_bind_param($sql,"ss",$deger,$anahtar);
+	mysqli_stmt_execute($sql);
+	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('p_ayar_guncellendi'),"success");
 	yonlendir("ayarlar.php");		
 	}

@@ -1237,12 +1237,13 @@ function tab_kapat()
 }
 
 function yonetici_degilse_yonlendir($uye_id, $url)
-{
-	$yetki = bilgi_getir('uyeler', 'yetki', $uye_id);
+  {
+  	$yetki = $uye_id ? bilgi_getir('uyeler', 'yetki', $uye_id) : null;
 	if (($yetki != 'admin') && ($yetki != 'editor') && ($yetki != 'yazar')) {
 		if ($url) {
 			header('location:' . $url);
 		}
+  		exit();
 	}
 }
 

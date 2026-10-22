@@ -22,7 +22,10 @@ if (!$tip_ozellikleri) {
 if ($tip_kategori and $tip_kategori_ortak) {
 	yonlendir(site_url()."/$admin_dizini/kategoriler.php?tip=$tip_kategori_ortak");
 }
-if ($sinif=="kategori" or !$sinif) {
+if ($sinif=="kategori" or !$sinif or !isset($tip_ozellikleri["ekstra_siniflar"][$sinif])) {
+	/* Gecersiz sinif verildiginde varsayilan "kategori" kullanilir;
+	 * aksi halde $sinif_name NULL kaliyor ve NOT NULL kolonlara
+	 * NULL baglandigi icin kayit eklenemiyordu. */
 	$sinif_name="kategori";
 	$sinif_baslik="Kategori";
 	$sinif_baslik_cogul="Kategoriler";
@@ -73,7 +76,12 @@ if ($buton) {
 			if (!$ust_kategori) {
 				$ust_kategori = 0;
 			}
-			$ekle = mysqli_query($baglan, "insert into kategoriler set baslik='$baslik', url='$url', ust_kategori='$ust_kategori', tip='$tip', sinif='$sinif_name', icerik='0'");
+			$ekle = mysqli_prepare($baglan, "insert into kategoriler set baslik=?, url=?, ust_kategori=?, tip=?, sinif=?, icerik=0");
+	$ust_kategori_int=(int)$ust_kategori;
+	$sinif_name_str=(string)$sinif_name;
+	mysqli_stmt_bind_param($ekle,"ssiss",$baslik,$url,$ust_kategori_int,$tip,$sinif_name_str);
+	mysqli_stmt_execute($ekle);
+	mysqli_stmt_close($ekle);
 			$eklenen_id = mysqli_insert_id($baglan);
 			
 			// Çeviri alanlarını kaydet (Türkçe + diğer diller)
@@ -157,7 +165,12 @@ if ($buton) {
 	} else { 
 	// $islem="guncelle"
 		if ($baslik!="") {
-			$guncelle = mysqli_query($baglan, "update kategoriler set baslik='$baslik', url='$url', ust_kategori='$ust_kategori' where id='$id'");
+			$guncelle = mysqli_prepare($baglan, "update kategoriler set baslik=?, url=?, ust_kategori=? where id=?");
+	$ust_kategori_int=(int)$ust_kategori;
+	$guncelle_id_int=(int)$id;
+	mysqli_stmt_bind_param($guncelle,"ssii",$baslik,$url,$ust_kategori_int,$guncelle_id_int);
+	mysqli_stmt_execute($guncelle);
+	mysqli_stmt_close($guncelle);
 			
 			// Çeviri alanlarını güncelle
 			foreach ($cevir_alanlar as $alan) {
@@ -283,7 +296,11 @@ if ($islem=="sil") {
 	} else {
 		$silinen_baslik=bilgi_getir("kategoriler","baslik",$id);
 		$ust_var_mi=getir("kategoriler","ust_kategori",$id);
-		$sql=mysqli_query($baglan,"delete from kategoriler where id='$id'");
+		$sil_id_int=(int)$id;
+		$sql=mysqli_prepare($baglan,"delete from kategoriler where id=?");
+		mysqli_stmt_bind_param($sql,"i",$sil_id_int);
+		mysqli_stmt_execute($sql);
+		mysqli_stmt_close($sql);
 		$_SESSION["mesaj"]=array(_LANG('p_adi_ile_kategori_silindi'), array($silinen_baslik),"success");
 		if ($ust_var_mi!=0) {
 			$ust_kategori_alt_sayisi=mysqli_num_rows(mysqli_query($baglan,"select id from kategoriler where ust_kategori='$ust_var_mi'"));
@@ -593,7 +610,7 @@ if ($islem=="sil") {
 											$required_attr = ($dil_kod === 'tr') ? 'required' : '';
 											?>
 											<div class="form-group">
-												<label><?php echo _LANG('p_baslik'); ?> <small class="text-muted">({$dil_bilgi['ad']})</small></label>
+												<label><?php echo _LANG('p_baslik'); ?> <small class="text-muted">(<?php echo htmlspecialchars($dil_bilgi['ad'], ENT_QUOTES, 'UTF-8'); ?>)</small></label>
 												<input type="text" class="form-control" name="baslik<?php echo $name_suffix; ?>" value="<?php echo htmlspecialchars($baslik_val); ?>" <?php echo $required_attr; ?>>
 											</div>
 											
@@ -618,7 +635,7 @@ if ($islem=="sil") {
 											
 											<!-- Açıklama -->
 											<div class="form-group">
-												<label><?php echo _LANG("p_aciklama"); ?> <small class="text-muted">({$dil_bilgi['ad']})</small></label>
+												<label><?php echo _LANG("p_aciklama"); ?> <small class="text-muted">(<?php echo htmlspecialchars($dil_bilgi['ad'], ENT_QUOTES, 'UTF-8'); ?>)</small></label>
 												<textarea class="form-control" name="aciklama<?php echo $name_suffix; ?>" rows="3"><?php echo htmlspecialchars($aciklama_val); ?></textarea>
 											</div>
 											
@@ -628,13 +645,13 @@ if ($islem=="sil") {
 											
 											<!-- SEO Title -->
 											<div class="form-group">
-												<label>Seo Title <small class="text-muted">({$dil_bilgi['ad']})</small></label>
+												<label><?php echo _LANG('p_seo_title'); ?> <small class="text-muted">(<?php echo htmlspecialchars($dil_bilgi['ad'], ENT_QUOTES, 'UTF-8'); ?>)</small></label>
 												<textarea class="form-control" name="seo_title<?php echo $name_suffix; ?>" rows="2"><?php echo htmlspecialchars($seo_title_val); ?></textarea>
 											</div>
 											
 											<!-- SEO Açıklama -->
 											<div class="form-group">
-												<label><?php echo _LANG("p_seo_aciklama"); ?> <small class="text-muted">({$dil_bilgi['ad']})</small></label>
+												<label><?php echo _LANG("p_seo_aciklama"); ?> <small class="text-muted">(<?php echo htmlspecialchars($dil_bilgi['ad'], ENT_QUOTES, 'UTF-8'); ?>)</small></label>
 												<textarea class="form-control" name="seo_aciklama<?php echo $name_suffix; ?>" rows="3"><?php echo htmlspecialchars($seo_aciklama_val); ?></textarea>
 											</div>
 											

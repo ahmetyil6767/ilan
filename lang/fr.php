@@ -2690,6 +2690,7 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'p_theme_info_not_found' => 'Informations du thème introuvables',
 	'p_no_theme_matching' => 'Aucun thème correspondant',
 	'p_seo_aciklama' => 'Description SEO',
+	'p_seo_title' => 'Titre SEO',
 	'p_plugin_settings_updated' => 'Paramètres du plugin mis à jour',
 	'p_plugin_enabled' => 'Plugin enabled: %s',
 	'p_eklenti_pasiflestirildi' => 'Extension désactivée : %s',
@@ -3728,4 +3729,5 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	's_404_baslik' => '404. PAGE INTROUVABLE',
 	'title_404' => '404 Page introuvable',
 
+	'p_erisim_engellendi' => 'Accès refusé.',
 );
