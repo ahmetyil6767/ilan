@@ -2184,7 +2184,7 @@ function bilesen_alani($alan)
 	$sql = mysqli_query($baglan, 'select * from bilesenler where alan=\'' . $alan . '\' order by sira asc');
 	
 	if (!$sql) {
-		echo '<div class="alert alert-danger">Bileşen alanı sorgu hatası (' . $alan . '): ' . mysqli_error($baglan) . '</div>';
+		echo '<div class="alert alert-danger">' . _LANG('s_bilesen_sorgu_hatasi') . '(' . $alan . '): ' . mysqli_error($baglan) . '</div>';
 		error_reporting($error_reporting_was);
 		return;
 	}
@@ -2198,19 +2198,19 @@ function bilesen_alani($alan)
 			$baslik = $dizi['baslik'];
 			
 			if (!isset($bilesen[$bilesen_value])) {
-				echo '<div class="alert alert-warning">Bileşen tanımsız: ' . htmlspecialchars($bilesen_value) . ' (ID: ' . $id . ')</div>';
+				echo '<div class="alert alert-warning">' . _LANG('s_bilesen_tanimsiz') . ' ' . htmlspecialchars($bilesen_value) . ' (ID: ' . $id . ')</div>';
 				continue;
 			}
 			
 			if (!isset($bilesen[$bilesen_value]['fonksiyon'])) {
-				echo '<div class="alert alert-warning">Bileşen fonksiyonu yok: ' . htmlspecialchars($bilesen_value) . ' (ID: ' . $id . ')</div>';
+				echo '<div class="alert alert-warning">' . _LANG('s_bilesen_fonksiyon_yok') . ' ' . htmlspecialchars($bilesen_value) . ' (ID: ' . $id . ')</div>';
 				continue;
 			}
 			
 			$fonksiyon = $bilesen[$bilesen_value]['fonksiyon'];
 			
 			if (!function_exists($fonksiyon)) {
-				echo '<div class="alert alert-danger">Bileşen fonksiyonu bulunamadı: ' . htmlspecialchars($fonksiyon) . ' (ID: ' . $id . ')</div>';
+				echo '<div class="alert alert-danger">' . _LANG('s_bilesen_fonksiyon_bulunamadi') . ' ' . htmlspecialchars($fonksiyon) . ' (ID: ' . $id . ')</div>';
 				continue;
 			}
 			
@@ -2219,9 +2219,9 @@ function bilesen_alani($alan)
 			try {
 				echo $fonksiyon($id);
 			} catch (Exception $e) {
-				echo '<div class="alert alert-danger">Bileşen hatası (' . htmlspecialchars($bilesen_value) . '): ' . $e->getMessage() . '</div>';
+				echo '<div class="alert alert-danger">' . _LANG('s_bilesen_hatasi') . '(' . htmlspecialchars($bilesen_value) . '): ' . $e->getMessage() . '</div>';
 			} catch (Error $e) {
-				echo '<div class="alert alert-danger">Bileşen fatal hatası (' . htmlspecialchars($bilesen_value) . '): ' . $e->getMessage() . '</div>';
+				echo '<div class="alert alert-danger">' . _LANG('s_bilesen_fatal_hatasi') . '(' . htmlspecialchars($bilesen_value) . '): ' . $e->getMessage() . '</div>';
 			}
 			echo '</div>';
 		}

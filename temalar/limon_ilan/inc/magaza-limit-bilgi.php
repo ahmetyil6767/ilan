@@ -39,7 +39,7 @@ if ($oturum_id==getir("magazalar","uye_id",$id)) {
         <a href="<?php echo $paket_url; ?>" style="text-decoration:none;">
         <div class="alert alert-<?php if ($aninda_onayy==1) {echo "success";} else {echo "danger";} ?>" style="padding:15px 20px;display:block;width:100% !important;position:relative;">
            Anında Onay:
-            <div style="font-size:20px;"><strong><?php if ($aninda_onayy==1) {echo "<i class='fa fa-check'></i> Evet";} else {echo "<i class='fa fa-times'></i> Hayır";} ?></strong></div>
+            <div style="font-size:20px;"><strong><?php if ($aninda_onayy==1) {echo "<i class='fa fa-check'></i> " . _LANG('Evet');} else {echo "<i class='fa fa-times'></i> " . _LANG('Hayır');} ?></strong></div>
             <div class="pabsolute top right" style="top:13px;right:5px;opacity:.6;"><i class="fa fa-rocket fa-4x"></i></div>
         </div>
         </a>

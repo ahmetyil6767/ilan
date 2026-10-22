@@ -3485,4 +3485,5 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'p_bilesen_alan_yok'    => 'Temanızda düzenlenebilir bileşen alanı bulunamadı.',
 	'p_liste_alan_yok'      => 'Düzenlenebilir liste alanı bulunamadı.',
 
+	'Evet' => 'Evet',
 );
