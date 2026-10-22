@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
  * English strings - reference catalogue.
  *
@@ -771,7 +771,7 @@ return array(
 	'p_bilesen_eklenebilir_yok' => 'No components can be added',
 	'p_bilesen_basliksiz'   => 'Untitled',
 	'p_bilesen_durum'       => 'You are editing the',
-	'p_bilesen_alan_yok'    => 'editable component field exists in your theme.',
+	'p_bilesen_alan_yok'    => 'editable component fields.',
 	'p_tema_bilesen_yok'    => 'Your theme does not support components.',
 	'p_temanizda'           => 'In your theme there are',
 	'p_kategori_bulunamadi' => 'Category not found',
@@ -808,7 +808,7 @@ return array(
 	'p_liste_sayisi'        => 'Item count',
 	'p_link_sayisi'         => 'Link count',
 	'p_icerik_tipi'         => 'Content Type',
-	'p_liste_alan_yok'      => 'editable listing field exists.',
+	'p_liste_alan_yok'      => 'editable listing fields exist.',
 	'p_uyeler_basligi'      => 'MEMBERS',
 	'p_uye_ekle'            => 'ADD MEMBER',
 	'p_uye_guncelle'        => 'UPDATE MEMBER',

@@ -209,7 +209,7 @@ if ($kategori_siralama=="baslik_a_z") {
 }
 while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) {
 	$kategori_id=$kategori_dizi["id"];
-	$kategori_baslik=$kategori_dizi["baslik"];
+	$kategori_baslik=_DIL_BASLIK($kategori_dizi["baslik"], $kategori_id, "kategori");
 	$kategori_ikon=kategori_bilgi("ikon",$kategori_id);
 	$kategori_ikon_bg=kategori_bilgi("ikon_bg",$kategori_id);
 	$kategori_link=kategori_link_getir($kategori_id);

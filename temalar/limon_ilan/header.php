@@ -38,30 +38,27 @@ if ($site_font=="Work Sans") { ?>
 <?php } else if ($site_font=="Ubuntu") { ?>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
 <?php } ?>
-<?php $script_name=$_SERVER["SCRIPT_NAME"]; if (strstr($script_name,"icerik.php")) {@$id=$_GET["id"]; ?>
-<link rel="canonical" href="<?php echo link_getir($id); ?>" />
+<?php $script_name=$_SERVER["SCRIPT_NAME"]; $og_url=site_url() . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''); $og_image=""; ?>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="<?php echo ayar_getir('site_baslik'); ?>" />
 <meta property="og:locale" content="<?php echo _DIL_HTML_LANG(); ?>" />
 <meta property="og:title" content="<?php echo meta_title(); ?>" />
 <meta property="og:description" content="<?php echo meta_description(); ?>" />
-<?php if (isset($id) and $id) { ?>
-<meta property="og:url" content="<?php echo link_getir($id); ?>" />
-<meta property="og:image" content="<?php echo thumbnail("full",$id); ?>" />
-<?php } else { ?>
-<meta property="og:url" content="<?php echo site_url(); ?>" />
-<?php } ?>
+<?php if (strstr($script_name,"icerik.php")) {@$id=$_GET["id"]; $og_url=link_getir($id); $og_image=thumbnail("full",$id); ?>
+<link rel="canonical" href="<?php echo link_getir($id); ?>" />
+<?php } else if (strstr($script_name,"kategori.php")) {@$id=$_GET["id"]; $og_url=kategori_link_getir($id); ?>
+<link rel="canonical" href="<?php echo kategori_link_getir($id); ?>"/>
+<?php } else if (strstr($script_name,"index.php")) {@$magaza=$_GET["magaza"]; if (!@$magaza) { $og_url=site_url(); ?>
+<link rel="canonical" href="<?php echo site_url(); ?>"/>
+<?php } else { $og_url=magaza_link_getir($magaza); ?>
+<link rel="canonical" href="<?php echo magaza_link_getir($magaza); ?>"/>
+<?php } } ?>
+<meta property="og:url" content="<?php echo $og_url; ?>" />
+<?php if ($og_image) { ?><meta property="og:image" content="<?php echo $og_image; ?>" /><?php } ?>
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="<?php echo meta_title(); ?>" />
 <meta name="twitter:description" content="<?php echo meta_description(); ?>" />
-<?php } else if (strstr($script_name,"kategori.php")) {@$id=$_GET["id"]; ?>
-<link rel="canonical" href="<?php echo kategori_link_getir($id); ?>"/>
-<?php } else if (strstr($script_name,"index.php")) {@$magaza=$_GET["magaza"]; if (!@$magaza) { ?>
-<link rel="canonical" href="<?php echo site_url(); ?>"/>
-<?php } else { ?>
-<link rel="canonical" href="<?php echo magaza_link_getir($magaza); ?>"/>
-<?php } }
-@$sayfa=$_GET["sayfa"]; if ($sayfa>1) { ?>
+<?php $sayfa=@$_GET["sayfa"]; if ($sayfa>1) { ?>
 <meta name="robots" content="noindex">
 <?php } ?>
 <?php $favicon=tema_ayar("favicon"); if ($favicon) {echo "<link rel='icon' href='$favicon' />";} ?>
