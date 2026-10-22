@@ -30,13 +30,22 @@ function auto_mail_send($ad_soyad,$email_adresi,$baslik,$mesaj) {
 	
 	//$mail->SMTPDebug = 3;                              			 	 // Enable verbose debug output
 
-	$mail->isSMTP();                                     				 // Set mailer to use SMTP
-	$mail->Host = eklenti_ayar_getir("smtp_host","smtp");  							 // Specify main and backup SMTP servers
-	$mail->SMTPAuth = eklenti_ayar_getir("smtp_auth","smtp");               			 // Enable SMTP authentication
-	$mail->Username = eklenti_ayar_getir("smtp_username","smtp");          			 // SMTP username
-	$mail->Password = eklenti_ayar_getir("smtp_password","smtp");            			 // SMTP password
-	$mail->SMTPSecure = eklenti_ayar_getir("smtp_type","smtp");                    	 // Enable TLS encryption, `ssl` also accepted
-	$mail->Port = eklenti_ayar_getir("smtp_port","smtp");                           	 // TCP port to connect to
+	/*
+	 * SMTP sunucusu tanimli degilse PHP mail() fonksiyonuna duser.
+	 * Boylece eklenti ayarlari tamamlanana kadar gonderim hatasi vermez.
+	 */
+	$smtp_host = eklenti_ayar_getir("smtp_host","smtp");
+	if ($smtp_host) {
+		$mail->isSMTP();                                     				 // Set mailer to use SMTP
+		$mail->Host = $smtp_host;  							 // Specify main and backup SMTP servers
+		$mail->SMTPAuth = eklenti_ayar_getir("smtp_auth","smtp");               			 // Enable SMTP authentication
+		$mail->Username = eklenti_ayar_getir("smtp_username","smtp");          			 // SMTP username
+		$mail->Password = eklenti_ayar_getir("smtp_password","smtp");            			 // SMTP password
+		$mail->SMTPSecure = eklenti_ayar_getir("smtp_type","smtp");                    	 // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = eklenti_ayar_getir("smtp_port","smtp");                           	 // TCP port to connect to
+	} else {
+		$mail->isMail();                                    // Yerel PHP mail() ile gonderim
+	}
 	$mail->setFrom(eklenti_ayar_getir("from_email","smtp"), eklenti_ayar_getir("from_name","smtp"));
 	$mail->addAddress($email_adresi,$ad_soyad);
 	$mail->isHTML(true);                                  				 // Set email format to HTML
