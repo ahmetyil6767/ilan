@@ -123,12 +123,23 @@ function bilgi_getir($table, $bilgi, $id = NULL)
 	if ($id < 1) {
 		return NULL;
 	}
-	$sorgu = mysqli_query($baglan, 'select ' . $bilgi . ' from ' . $table . ' where id=' . $id);
-	$dizi = $sorgu ? mysqli_fetch_array($sorgu) : null;
+	/* Tablo ve sutun adi kullanici girdisi olamaz; deger ise prepared
+	   statement ile baglanir. */
+	$tablo = sql_ad_guvenli($table);
+	$sutun = sql_ad_guvenli($bilgi);
+	if ($tablo === '' or $sutun === '') {
+		return NULL;
+	}
+	$sorgu = mysqli_prepare($baglan, 'select ' . $sutun . ' from ' . $tablo . ' where id=?');
+	mysqli_stmt_bind_param($sorgu, 'i', $id);
+	mysqli_stmt_execute($sorgu);
+	$sonuc = mysqli_stmt_get_result($sorgu);
+	$dizi = $sonuc ? mysqli_fetch_array($sonuc) : null;
+	mysqli_stmt_close($sorgu);
 	if (!$dizi) {
 		return NULL;
 	}
-	return $dizi[(string) $bilgi];
+	return $dizi[(string) $sutun];
 }
 
 function getir($table, $bilgi, $id = NULL)
@@ -165,9 +176,17 @@ function guncelle($tablo, $sutun, $yeni_deger, $id = NULL)
 	if ($id < 1) {
 		return false;
 	}
-	$guncelle = mysqli_query($baglan, 'update ' . $tablo . ' set ' . $sutun . '=\'' . $yeni_deger . '\' where id=' . $id);
-
-	if ($guncelle) {
+	/* Tablo/sutun adi dogrulanir, deger prepared statement ile baglanir. */
+	$tablo = sql_ad_guvenli($tablo);
+	$sutun = sql_ad_guvenli($sutun);
+	if ($tablo === '' or $sutun === '') {
+		return false;
+	}
+	$sorgu = mysqli_prepare($baglan, 'update ' . $tablo . ' set ' . $sutun . '=? where id=?');
+	mysqli_stmt_bind_param($sorgu, 'si', $yeni_deger, $id);
+	$basarili = mysqli_stmt_execute($sorgu);
+	mysqli_stmt_close($sorgu);
+	if ($basarili) {
 		return true;
 	}
 	else {
@@ -282,7 +301,13 @@ function uye_bilgi_getir($anahtar, $uye_id = NULL)
 	}
 
 	global $baglan;
-	$dizi = (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\'') ? (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\'')) : null) : null);
+	$uye_id_int = (int)$uye_id;
+	$sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where anahtar=? and id=? and tip=\'uye\'');
+	mysqli_stmt_bind_param($sorgu, 'si', $anahtar, $uye_id_int);
+	mysqli_stmt_execute($sorgu);
+	$sonuc = mysqli_stmt_get_result($sorgu);
+	$dizi = $sonuc ? mysqli_fetch_array($sonuc) : null;
+	mysqli_stmt_close($sorgu);
 	if ($dizi && $dizi['deger'] !== null) {
 		return tirnak_ekle($dizi['deger']);
 	}
@@ -296,13 +321,24 @@ function uye_bilgi_guncelle($anahtar, $yeni_deger, $uye_id = NULL)
 	}
 
 	global $baglan;
-	$say = mysqli_num_rows(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . $uye_id . ' and tip=\'uye\''));
+	$uye_id_int = (int)$uye_id;
+	$say_sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where anahtar=? and id=? and tip=\'uye\'');
+	mysqli_stmt_bind_param($say_sorgu, 'si', $anahtar, $uye_id_int);
+	mysqli_stmt_execute($say_sorgu);
+	$say = mysqli_stmt_num_rows($say_sorgu);
+	mysqli_stmt_close($say_sorgu);
 
 	if ($say == 1) {
-		mysqli_query($baglan, 'update ekstra_bilgi set deger=\'' . $yeni_deger . '\' where anahtar=\'' . $anahtar . '\' and id=' . $uye_id . ' and tip=\'uye\'');
+		$sorgu = mysqli_prepare($baglan, 'update ekstra_bilgi set deger=? where anahtar=? and id=? and tip=\'uye\'');
+		mysqli_stmt_bind_param($sorgu, 'ssi', $yeni_deger, $anahtar, $uye_id_int);
+		mysqli_stmt_execute($sorgu);
+		mysqli_stmt_close($sorgu);
 	}
 	else {
-		mysqli_query($baglan, 'insert into ekstra_bilgi set id=' . $uye_id . ', anahtar=\'' . $anahtar . '\', deger=\'' . $yeni_deger . '\', tip=\'uye\'');
+		$sorgu = mysqli_prepare($baglan, 'insert into ekstra_bilgi set id=?, anahtar=?, deger=?, tip=\'uye\'');
+		mysqli_stmt_bind_param($sorgu, 'iss', $uye_id_int, $anahtar, $yeni_deger);
+		mysqli_stmt_execute($sorgu);
+		mysqli_stmt_close($sorgu);
 	}
 }
 
@@ -325,11 +361,12 @@ function ekstra_bilgi_getir($anahtar, $yazi_id, $tip = 'yazi')
 	if ($yazi_id < 1) {
 		return NULL;
 	}
-	$sorgu = mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . $yazi_id . ' and tip=\'' . $tip . '\'');
-	if (!$sorgu) {
-		return NULL;
-	}
-	$dizi = mysqli_fetch_array($sorgu);
+	$sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where anahtar=? and id=? and tip=?');
+	mysqli_stmt_bind_param($sorgu, 'sis', $anahtar, $yazi_id, $tip);
+	mysqli_stmt_execute($sorgu);
+	$sonuc = mysqli_stmt_get_result($sorgu);
+	$dizi = $sonuc ? mysqli_fetch_array($sonuc) : null;
+	mysqli_stmt_close($sorgu);
 	if (!$dizi) {
 		return NULL;
 	}
@@ -339,13 +376,24 @@ function ekstra_bilgi_getir($anahtar, $yazi_id, $tip = 'yazi')
 function ekstra_bilgi_guncelle($anahtar, $yeni_deger, $id, $tip = 'yazi')
 {
 	global $baglan;
-	$say = mysqli_num_rows(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $id . '\' and tip=\'' . $tip . '\''));
+	$id_int = (int)$id;
+	$say_sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where anahtar=? and id=? and tip=?');
+	mysqli_stmt_bind_param($say_sorgu, 'sis', $anahtar, $id_int, $tip);
+	mysqli_stmt_execute($say_sorgu);
+	$say = mysqli_stmt_num_rows($say_sorgu);
+	mysqli_stmt_close($say_sorgu);
 
 	if ($say == 1) {
-		mysqli_query($baglan, 'update ekstra_bilgi set deger=\'' . $yeni_deger . '\' where anahtar=\'' . $anahtar . '\' and id=\'' . $id . '\' and tip=\'' . $tip . '\'');
+		$sorgu = mysqli_prepare($baglan, 'update ekstra_bilgi set deger=? where anahtar=? and id=? and tip=?');
+		mysqli_stmt_bind_param($sorgu, 'ssis', $yeni_deger, $anahtar, $id_int, $tip);
+		mysqli_stmt_execute($sorgu);
+		mysqli_stmt_close($sorgu);
 	}
 	else {
-		mysqli_query($baglan, 'insert into ekstra_bilgi set anahtar=\'' . $anahtar . '\', deger=\'' . $yeni_deger . '\', id=\'' . $id . '\', tip=\'' . $tip . '\'');
+		$sorgu = mysqli_prepare($baglan, 'insert into ekstra_bilgi set anahtar=?, deger=?, id=?, tip=?');
+		mysqli_stmt_bind_param($sorgu, 'ssis', $anahtar, $yeni_deger, $id_int, $tip);
+		mysqli_stmt_execute($sorgu);
+		mysqli_stmt_close($sorgu);
 	}
 
 	return mysqli_insert_id($baglan);
@@ -354,17 +402,25 @@ function ekstra_bilgi_guncelle($anahtar, $yeni_deger, $id, $tip = 'yazi')
 function ekstra_bilgi_ekle($anahtar, $yeni_deger, $id, $tip = 'yazi')
 {
 	global $baglan;
-	mysqli_query($baglan, 'insert into ekstra_bilgi set anahtar=\'' . $anahtar . '\', deger=\'' . $yeni_deger . '\', id=' . $id . ', tip=\'' . $tip . '\'');
+	$id_int = (int)$id;
+	$sorgu = mysqli_prepare($baglan, 'insert into ekstra_bilgi set anahtar=?, deger=?, id=?, tip=?');
+	mysqli_stmt_bind_param($sorgu, 'ssis', $anahtar, $yeni_deger, $id_int, $tip);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_close($sorgu);
 	return mysqli_insert_id($baglan);
 }
 
 function ekstra_bilgi_id_getir($anahtar, $icerik_id, $tip = 'yazi')
 {
 	global $baglan;
-	$say = mysqli_num_rows(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\''));
-
-	if ($say == 1) {
-		$dizi = (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\'') ? (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\'')) : null) : null);
+	$icerik_id_int = (int)$icerik_id;
+	$sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where anahtar=? and id=? and tip=?');
+	mysqli_stmt_bind_param($sorgu, 'sis', $anahtar, $icerik_id_int, $tip);
+	mysqli_stmt_execute($sorgu);
+	$sonuc = mysqli_stmt_get_result($sorgu);
+	$dizi = $sonuc ? mysqli_fetch_array($sonuc) : null;
+	mysqli_stmt_close($sorgu);
+	if ($dizi) {
 		return $dizi['b_id'];
 	}
 }
@@ -372,13 +428,23 @@ function ekstra_bilgi_id_getir($anahtar, $icerik_id, $tip = 'yazi')
 function ekstra_bilgi_sil($id)
 {
 	global $baglan;
-	mysqli_query($baglan, 'delete from ekstra_bilgi where b_id=\'' . $id . '\'');
+	$id_int = (int)$id;
+	$sorgu = mysqli_prepare($baglan, 'delete from ekstra_bilgi where b_id=?');
+	mysqli_stmt_bind_param($sorgu, 'i', $id_int);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_close($sorgu);
 }
 
 function idden_ekstra_bilgi_getir($id, $bilgi)
 {
 	global $baglan;
-	$dizi = (mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\'') ? (mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\'')) : null) : null);
+	$id_int = (int)$id;
+	$sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where b_id=?');
+	mysqli_stmt_bind_param($sorgu, 'i', $id_int);
+	mysqli_stmt_execute($sorgu);
+	$sonuc = mysqli_stmt_get_result($sorgu);
+	$dizi = $sonuc ? mysqli_fetch_array($sonuc) : null;
+	mysqli_stmt_close($sorgu);
 	return tirnak_ekle($dizi[$bilgi]);
 }
 
@@ -3485,6 +3551,15 @@ function e($deger)
 function ejs($deger)
 {
 	return addslashes(htmlspecialchars((string)$deger, ENT_QUOTES, 'UTF-8'));
+}
+/*
+ * Tablo ve sutun adlari SQL metnine gomulur; kullanici girdisiyle
+ * degistirilemeleri icin yalnizca harf, rakam ve alt cizgi kabul edilir.
+ */
+function sql_ad_guvenli($ad)
+{
+	$ad = (string)$ad;
+	return preg_match('/^[A-Za-z0-9_]+$/', $ad) ? $ad : '';
 }
 function copyright()
 {
