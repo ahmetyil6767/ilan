@@ -883,10 +883,10 @@ return array(
 	'p_hosting_yenilenmedi' => 'If the hosting service is not renewed,',
 	'p_panel_erisim_yok'    => 'you will no longer be able to access the admin panel from this date.',
 	'p_uye'                 => 'member',
-	'p_limontasarim'        => 'Limontasarım',
+	'p_jaayquick'        => 'JaayQuick',
 	'e_adminbar_ac'           => 'Creates a link to the admin panel and quick links on the front end of your site.',
 	'e_adminbar_ekle_butonlari' => 'Create Add buttons for these content types',
-	'e_adminbar_link_bicimi'  => 'Separate the link title, URL and icon class with a comma (,). Example: (Limonwp,http://www.limonwp.com,fa fa-lemon-o)',
+	'e_adminbar_link_bicimi'  => 'Separate the link title, URL and icon class with a comma (,). Example: (JaayQuickWP,http://www.jaayquickwp.com,fa fa-lemon-o)',
 	'e_adminbar_secilen'      => 'Add buttons will be shown for the content types you select.',
 	'e_arkaplan_gorsel'       => 'Background image',
 	'e_aylik'                 => 'Monthly',
@@ -895,13 +895,13 @@ return array(
 	'e_bugun'                 => 'Today',
 	'e_db_guncelle'           => 'Update Database',
 	'e_db_guncelle_gerek'     => 'Database update required',
-	'e_db_optimize_ac'        => 'Database optimisation tool recommended for the Limonsoft 1.9.3 version migration.',
-	'e_db_optimize_bir_kez'   => 'Using this plugin once during the Limonsoft 1.9.3 version migration is enough.',
+	'e_db_optimize_ac'        => 'Database optimisation tool recommended for the yazilim_bilgisi 1.9.3 version migration.',
+	'e_db_optimize_bir_kez'   => 'Using this plugin once during the yazilim_bilgisi 1.9.3 version migration is enough.',
 	'e_db_optimize_calistir'  => 'Optimise Tables',
 	'e_db_optimize_sonra'     => 'After running the optimiser you can deactivate, or even delete, the plugin.',
 	'e_db_optimize_tamam'     => 'Database optimised.',
-	'e_db_update_1_9_7'       => 'A database optimisation must be run once during the Limonsoft 1.9.7 update.',
-	'e_db_update_bir_kez'     => 'Must be used once to update the database during the Limonsoft 1.9.4 migration.',
+	'e_db_update_1_9_7'       => 'A database optimisation must be run once during the yazilim_bilgisi 1.9.7 update.',
+	'e_db_update_bir_kez'     => 'Must be used once to update the database during the yazilim_bilgisi 1.9.4 migration.',
 	'e_db_zaten_guncel'       => 'Database is already up to date.',
 	'e_dun'                   => 'Yesterday',
 	'e_dun_gore'              => 'Compared to yesterday',
@@ -1625,7 +1625,7 @@ return array(
 	'ust_location' => 'The Gambia',
 	/*
 	 * Giris / kayit sayfalari: etiketler, karsilama mesajlari ve
-	 * e-posta sablonlari (bkz. temalar/limon_ilan/sayfa/giris-yap.php
+	 * e-posta sablonlari (bkz. temalar/jaayquick/sayfa/giris-yap.php
 	 * ve kayit-ol.php). %s yer tutuculari _LANG icinde vsprintf ile
 	 * doldurulur.
 	 */
@@ -2582,7 +2582,7 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'p_yazilim_indir_onay' => 'The latest version of the software will be downloaded from the remote server and prepared for updating.',
 	'p_yazilim_yeniden_indir_onay' => 'The current version of the software will be downloaded again from the remote server and prepared for updating.',
 	'p_lokal_sunucu_uyari' => 'You cannot use this service. This may be because you are running on a local server or you do not have a valid licence. Contact us for detailed information.',
-	'p_garanti_sona_erdi_uyari' => 'Your free software update guarantee expired on %s, so you cannot use this service. Please <a href=\'https://www.limontasarim.com\' target=\'_blank\' class=\'alert-link\'>contact us</a> for more details and to extend your update period.',
+	'p_garanti_sona_erdi_uyari' => 'Your free software update guarantee expired on %s, so you cannot use this service. Please <a href=\'https://jaayquick.com\' target=\'_blank\' class=\'alert-link\'>contact us</a> for more details and to extend your update period.',
 	'p_guncelleme_devam_uyari' => 'We are still working on the software update; you will be able to use this service once everything is perfect.',
 	'p_yukleme_ipucu_1' => 'If the upload times out and maintenance mode stays on, mark the <strong>Maintenance Mode</strong> setting as "No" on the settings page and save. The timeout problem is server-side.',
 	'p_yukleme_ipucu_2' => 'If your site does not open after the upload and a PHP file is being downloaded, delete the "AddHandler application/x-httpd-php72 .php" line at the very bottom of the public_html/.htaccess file via cPanel / File Manager or an FTP client.',
@@ -3338,8 +3338,8 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'tx_sectiginiz_icerik_tipleri_icin_okunma_sayilari' => 'View counts are not updated for the content types you select.',
 	'tx_citroen_kategorilerindeki_url_problemini_gider' => 'Written to fix the url problem in Citroen categories.',
 	'tx_google_ve_diger_arama_motorlari_icin_standartl' => 'Creates a standards-compliant xml sitemap for Google and other search engines.',
-	'tx_limonsoft_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'A database optimisation tool recommended to be used once when upgrading to Limonsoft 1.9.3.',
-	'tx_limonsoft_1_9_4_surumu_gecisinde_veritabani_gu' => 'Must be used once for the database update when upgrading to Limonsoft 1.9.4.',
+	'tx_yazilim_bilgisi_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'A database optimisation tool recommended to be used once when upgrading to yazilim_bilgisi 1.9.3.',
+	'tx_yazilim_bilgisi_1_9_4_surumu_gecisinde_veritabani_gu' => 'Must be used once for the database update when upgrading to yazilim_bilgisi 1.9.4.',
 	'tx_progressive_web_app_olusturma_eklentisi' => 'Plugin to create a Progressive Web App',
 	'tx_smtp_eklentisi_ile_birlikte_calisarak_otomatik' => 'Provides automatic e-mail sending by working together with the SMTP plugin.',
 	'tx_sitenizin_smtp_mail_ayarlarini_yapilandirin' => 'Configure your site\'s SMTP mail settings',

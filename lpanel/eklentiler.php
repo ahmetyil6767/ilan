@@ -195,7 +195,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 							<th><?php echo _LANG('p_eklenti'); ?></th>
 							<th><?php echo _LANG('p_baslik'); ?></th>
 							<th class="visible-md visible-lg"><?php echo _LANG('p_aciklama'); ?></th> 
-							<?php if (!$limonsoft_bayi) { ?><th><?php echo _LANG('p_developer'); ?></th> <?php } ?>
+							<?php if (!$yazilim_bilgisi_bayi) { ?><th><?php echo _LANG('p_developer'); ?></th> <?php } ?>
 							<th><?php echo _LANG('p_durum'); ?></th> 
 							<th><?php echo _LANG('p_islemler'); ?></th>
 						</tr>
@@ -230,7 +230,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 							<?php if ($hata=="") { ?>
 							<td><?php echo $baslik; ?> <span class="text-muted" style="font-size:11px;"><?php echo $versiyon; ?></span></td>
 							<td class="visible-md visible-lg"><?php echo $aciklama; ?></td>
-							<?php if (!$limonsoft_bayi) { ?><td><?php if ($gelistirici_url=="") {echo $gelistirici;} else {echo "<a href='$gelistirici_url' target='_blank'>$gelistirici</a>";} ?></td><?php } ?>
+							<?php if (!$yazilim_bilgisi_bayi) { ?><td><?php if ($gelistirici_url=="") {echo $gelistirici;} else {echo "<a href='$gelistirici_url' target='_blank'>$gelistirici</a>";} ?></td><?php } ?>
 							<td><?php if ($eklenti_durum==0) {echo "<span class='label label-danger'>Pasif</span>";} else { ?><span class='label label-success'><?php echo _LANG('p_aktif'); ?></span><?php } ?></td>
 							<td><?php if ($eklenti_durum==0) { ?><a href="eklentiler.php?islem=etkinlestir&eklenti=<?php echo $eklenti; ?>" class="btn btn-xs btn-primary"><i class="fa fa-toggle-off" aria-hidden="true"></i><?php echo _LANG('p_etkinlestir'); ?></a><?php } else { if ($gerekli!=1) { ?><a href="eklentiler.php?islem=pasiflestir&eklenti=<?php echo $eklenti; ?>" class="btn btn-xs btn-default"><i class="fa fa-toggle-on" aria-hidden="true"></i><?php echo _LANG('p_pasiflestir'); ?></a><?php }} ?><?php if (($ayar==1 or $ayar) and $eklenti_durum==1) { if ($ayar==1) {$ayar_url="eklentiler.php?eklenti=$eklenti&islem=ayar";} else {$ayar_url="eklentiler.php?eklenti=$eklenti&sayfa=$ayar";} ?><a href="<?php echo $ayar_url; ?>" class="btn btn-xs btn-success" style="margin-left:3px;margin-right:0 !important;"><i class="fa fa-cogs mr0" aria-hidden="true"></i></a><?php } ?>
 							<?php if ($dokuman!="") {echo "<a href='../$eklentiler_dizini/$eklenti/$dokuman' target='_blank' class='btn btn-xs btn-warning'><i class='fa fa-file-text mr0' aria-hidden='true'></i></a>";} ?>

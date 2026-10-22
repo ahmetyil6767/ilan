@@ -865,10 +865,10 @@ return array(
 	'p_hosting_yenilenmedi' => 'Si l\'hébergement n\'est pas renouvelé,',
 	'p_panel_erisim_yok' => 'vous ne pourrez plus accéder au panneau d\'administration à partir de cette date.',
 	'p_uye' => 'membre',
-	'p_limontasarim' => 'Limontasarım',
+	'p_jaayquick' => 'JaayQuick',
 	'e_adminbar_ac' => 'Crée un lien vers le panneau d\'administration et des liens rapides en façade du site.',
 	'e_adminbar_ekle_butonlari' => 'Créer des boutons d\'ajout pour ces types de contenu',
-	'e_adminbar_link_bicimi' => 'Séparez le titre, l\'URL et la classe d\'icône par une virgule. Exemple : (Limonwp,http://www.limonwp.com,fa fa-lemon-o)',
+	'e_adminbar_link_bicimi' => 'Séparez le titre, l\'URL et la classe d\'icône par une virgule. Exemple : (JaayQuickWP,http://www.jaayquickwp.com,fa fa-lemon-o)',
 	'e_adminbar_secilen' => 'Les boutons d\'ajout s\'afficheront pour les types sélectionnés.',
 	'e_arkaplan_gorsel' => 'Image d\'arrière-plan',
 	'e_aylik' => 'Mensuel',
@@ -877,13 +877,13 @@ return array(
 	'e_bugun' => 'Aujourd\'hui',
 	'e_db_guncelle' => 'Mettre à jour la base de données',
 	'e_db_guncelle_gerek' => 'Mise à jour de la base requise',
-	'e_db_optimize_ac' => 'Outil d\'optimisation de base de données recommandé pour la migration vers Limonsoft 1.9.3.',
-	'e_db_optimize_bir_kez' => 'Il suffit d\'utiliser cette extension une fois lors de la migration vers Limonsoft 1.9.3.',
+	'e_db_optimize_ac' => 'Outil d\'optimisation de base de données recommandé pour la migration vers yazilim_bilgisi 1.9.3.',
+	'e_db_optimize_bir_kez' => 'Il suffit d\'utiliser cette extension une fois lors de la migration vers yazilim_bilgisi 1.9.3.',
 	'e_db_optimize_calistir' => 'Optimiser les tables',
 	'e_db_optimize_sonra' => 'Après avoir exécuté l\'outil, vous pouvez désactiver, voire supprimer l\'extension.',
 	'e_db_optimize_tamam' => 'Base de données optimisée.',
-	'e_db_update_1_9_7' => 'Une optimisation de la base doit être lancée une fois lors de la mise à jour Limonsoft 1.9.7.',
-	'e_db_update_bir_kez' => 'À utiliser une fois pour mettre à jour la base lors de la migration Limonsoft 1.9.4.',
+	'e_db_update_1_9_7' => 'Une optimisation de la base doit être lancée une fois lors de la mise à jour yazilim_bilgisi 1.9.7.',
+	'e_db_update_bir_kez' => 'À utiliser une fois pour mettre à jour la base lors de la migration yazilim_bilgisi 1.9.4.',
 	'e_db_zaten_guncel' => 'La base de données est déjà à jour.',
 	'e_dun' => 'Hier',
 	'e_dun_gore' => 'Par rapport à hier',
@@ -1607,7 +1607,7 @@ return array(
 	'ust_location' => 'Gambie',
 	/*
 	 * Giris / kayit sayfalari: etiketler, karsilama mesajlari ve
-	 * e-posta sablonlari (bkz. temalar/limon_ilan/sayfa/giris-yap.php
+	 * e-posta sablonlari (bkz. temalar/jaayquick/sayfa/giris-yap.php
 	 * ve kayit-ol.php). %s yer tutuculari _LANG icinde vsprintf ile
 	 * doldurulur.
 	 */
@@ -2564,7 +2564,7 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'p_yazilim_indir_onay' => 'La dernière version du logiciel sera téléchargée depuis le serveur distant et préparée pour la mise à jour.',
 	'p_yazilim_yeniden_indir_onay' => 'La version actuelle du logiciel sera retéléchargée depuis le serveur distant et préparée pour la mise à jour.',
 	'p_lokal_sunucu_uyari' => 'Vous ne pouvez pas utiliser ce service. Vous travaillez peut-être sur un serveur local ou vous n\'avez pas de licence valide. Contactez-nous pour plus de détails.',
-	'p_garanti_sona_erdi_uyari' => 'Votre garantie de mise à jour gratuite a expiré le %s, vous ne pouvez donc pas utiliser ce service. Veuillez <a href=\'https://www.limontasarim.com\' target=\'_blank\' class=\'alert-link\'>nous contacter</a> pour plus de détails.',
+	'p_garanti_sona_erdi_uyari' => 'Votre garantie de mise à jour gratuite a expiré le %s, vous ne pouvez donc pas utiliser ce service. Veuillez <a href=\'https://jaayquick.com\' target=\'_blank\' class=\'alert-link\'>nous contacter</a> pour plus de détails.',
 	'p_guncelleme_devam_uyari' => 'Nous travaillons encore sur la mise à jour du logiciel ; vous pourrez utiliser ce service une fois tout est au point.',
 	'p_yukleme_ipucu_1' => 'Si le téléversement expire et que le mode maintenance reste actif, mettez le réglage <strong>Mode maintenance</strong> sur « Non » dans les paramètres et enregistrez. Le problème d\'expiration vient du serveur.',
 	'p_yukleme_ipucu_2' => 'Si votre site ne s\'ouvre pas après le téléversement et qu\'un fichier PHP se télécharge, supprimez la ligne « AddHandler application/x-httpd-php72 .php » tout en bas du fichier public_html/.htaccess via cPanel / File Manager ou un client FTP.',
@@ -3309,8 +3309,8 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'tx_sectiginiz_icerik_tipleri_icin_okunma_sayilari' => 'Le nombre de vues n\'est pas mis à jour pour les types de contenu sélectionnés.',
 	'tx_citroen_kategorilerindeki_url_problemini_gider' => 'Écrit pour corriger le problème d\'url dans les catégories Citroën.',
 	'tx_google_ve_diger_arama_motorlari_icin_standartl' => 'Crée un plan de site xml conforme aux normes pour Google et les autres moteurs de recherche.',
-	'tx_limonsoft_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'Un outil d\'optimisation de base de données recommandé une seule fois lors du passage à Limonsoft 1.9.3.',
-	'tx_limonsoft_1_9_4_surumu_gecisinde_veritabani_gu' => 'Doit être utilisé une fois pour la mise à jour de la base de données lors du passage à Limonsoft 1.9.4.',
+	'tx_yazilim_bilgisi_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'Un outil d\'optimisation de base de données recommandé une seule fois lors du passage à yazilim_bilgisi 1.9.3.',
+	'tx_yazilim_bilgisi_1_9_4_surumu_gecisinde_veritabani_gu' => 'Doit être utilisé une fois pour la mise à jour de la base de données lors du passage à yazilim_bilgisi 1.9.4.',
 	'tx_progressive_web_app_olusturma_eklentisi' => 'Plugin de création d\'application web progressive',
 	'tx_smtp_eklentisi_ile_birlikte_calisarak_otomatik' => 'Permet l\'envoi automatique d\'e-mails en collaboration avec le plugin SMTP.',
 	'tx_sitenizin_smtp_mail_ayarlarini_yapilandirin' => 'Configurez les paramètres SMTP de votre site',

@@ -289,7 +289,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 								<th><?php echo _LANG('p_tema'); ?></th>
 								<th><?php echo _LANG('p_baslik'); ?></th>
 								<th class="visible-md visible-lg"><?php echo _LANG('p_aciklama'); ?></th> 
-								<?php if (!$limonsoft_bayi) { ?><th><?php echo _LANG('p_developer'); ?></th> <?php } ?>
+								<?php if (!$yazilim_bilgisi_bayi) { ?><th><?php echo _LANG('p_developer'); ?></th> <?php } ?>
 								<th><?php echo _LANG('p_islemler'); ?></th>
 							</tr>
 						</thead>
@@ -318,7 +318,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 								<?php if ($hata=="") { ?>
 								<td><?php echo $baslik; ?> <span class="text-muted" style="font-size:11px;"><?php echo $versiyon; ?></span></td>
 								<td class="visible-md visible-lg"><?php echo $aciklama; ?></td>
-								<?php if (!$limonsoft_bayi) { ?><td><?php if ($tema_gelistirici_url=="") {echo $tema_gelistirici;} else {echo "<a href='$tema_gelistirici_url' target='_blank'>$tema_gelistirici</a>";} ?></td><?php } ?>
+								<?php if (!$yazilim_bilgisi_bayi) { ?><td><?php if ($tema_gelistirici_url=="") {echo $tema_gelistirici;} else {echo "<a href='$tema_gelistirici_url' target='_blank'>$tema_gelistirici</a>";} ?></td><?php } ?>
 								<td>
 								<?php if ($tema_durum!=$tema) { ?><a href="temalar.php?islem=etkinlestir&tema=<?php echo $tema; ?>" class="btn btn-xs btn-default"><?php echo _LANG("p_etkinlestir"); ?></a><?php } ?>
 								<?php if ($ayar==1 and $tema_durum==$tema) { ?><a href="temalar.php?tema=<?php echo $tema; ?>&islem=ayar" class="btn btn-xs btn-success"><i class="fa fa-cogs" aria-hidden="true"></i><?php echo _LANG('p_ayarlar'); ?></a><?php } ?>

@@ -80,4 +80,4 @@ $("#telefon").mask("000 000 00 00",{placeholder: "555 123 45 67"});
 $("#yetkili_tel").mask("000 000 00 00",{placeholder: "555 123 45 67"});
 $("#tc_no").mask("00000000000");
 </script>
-<?php limon(@$panel_footer_kod); ?>
+<?php jaayquick(@$panel_footer_kod); ?>

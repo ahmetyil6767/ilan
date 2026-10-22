@@ -870,10 +870,10 @@ return array(
 	'p_hosting_yenilenmedi' => 'tarihinde sona erecektir. Hosting hizmeti yenilenmediği taktirde',
 	'p_panel_erisim_yok' => 'tarihinden itibaren yönetim paneline erişemeyeceksiniz.',
 	'p_uye' => 'üye',
-	'p_limontasarim' => 'Limontasarım',
+	'p_jaayquick' => 'JaayQuick',
 	'e_adminbar_ac' => 'Sitenizin ön yüzünde admin paneline giden bir link ve hızlı bağlantılar oluşturur.',
 	'e_adminbar_ekle_butonlari' => 'Bu içerik tipleri için ekle butonları oluştur',
-	'e_adminbar_link_bicimi' => 'Link başlığı, url ve ikon sınıfını virgül ile (,) ayırın. Örn: (Limonwp,http://www.limonwp.com,fa fa-lemon-o)',
+	'e_adminbar_link_bicimi' => 'Link başlığı, url ve ikon sınıfını virgül ile (,) ayırın. Örn: (JaayQuickWP,http://www.jaayquickwp.com,fa fa-lemon-o)',
 	'e_adminbar_secilen' => 'Seçtiğiniz içerik tipleri için ekle butonları görünür.',
 	'e_arkaplan_gorsel' => 'Arkaplan görseli',
 	'e_aylik' => 'Aylık',
@@ -882,13 +882,13 @@ return array(
 	'e_bugun' => 'Bugün',
 	'e_db_guncelle' => 'Veritabanı Güncelle',
 	'e_db_guncelle_gerek' => 'Veritabanı güncellemesi gerekli',
-	'e_db_optimize_ac' => 'Limonsoft 1.9.3 versiyon geçişinde bir kez kullanılması önerilen veritabanı optimizasyon aracı.',
-	'e_db_optimize_bir_kez' => 'Bu eklentiyi Limonsoft 1.9.3 versiyon geçişinde bir kez kullanmanız yeterlidir.',
+	'e_db_optimize_ac' => 'yazilim_bilgisi 1.9.3 versiyon geçişinde bir kez kullanılması önerilen veritabanı optimizasyon aracı.',
+	'e_db_optimize_bir_kez' => 'Bu eklentiyi yazilim_bilgisi 1.9.3 versiyon geçişinde bir kez kullanmanız yeterlidir.',
 	'e_db_optimize_calistir' => 'Tabloları iyileştir',
 	'e_db_optimize_sonra' => 'Optimize aracını çalıştırdıktan sonra eklentiyi pasifleştirebilir, hatta silebilirsiniz.',
 	'e_db_optimize_tamam' => 'Veritabanı optimize edildi.',
-	'e_db_update_1_9_7' => 'Limonsoft 1.9.7 güncellemesinde bir kez db optimizasyonu yapılması gerekir.',
-	'e_db_update_bir_kez' => 'Limonsoft 1.9.4 sürümü geçişinde veritabanı güncellemesi için bir kez kullanılmalıdır.',
+	'e_db_update_1_9_7' => 'yazilim_bilgisi 1.9.7 güncellemesinde bir kez db optimizasyonu yapılması gerekir.',
+	'e_db_update_bir_kez' => 'yazilim_bilgisi 1.9.4 sürümü geçişinde veritabanı güncellemesi için bir kez kullanılmalıdır.',
 	'e_db_zaten_guncel' => 'Veritabanı zaten güncellendi.',
 	'e_dun' => 'Dün',
 	'e_dun_gore' => 'Düne göre',
@@ -1613,7 +1613,7 @@ return array(
 	'ust_location' => 'Gambiya',
 	/*
 	 * Giris / kayit sayfalari: etiketler, karsilama mesajlari ve
-	 * e-posta sablonlari (bkz. temalar/limon_ilan/sayfa/giris-yap.php
+	 * e-posta sablonlari (bkz. temalar/jaayquick/sayfa/giris-yap.php
 	 * ve kayit-ol.php). %s yer tutuculari _LANG icinde vsprintf ile
 	 * doldurulur.
 	 */
@@ -2570,7 +2570,7 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'p_yazilim_indir_onay' => 'Yazılımın güncel sürümü uzak sunucudan indirilecek ve güncelleme işlemi için hazır hale getirilecek.',
 	'p_yazilim_yeniden_indir_onay' => 'Yazılımın mevcut sürümü uzak sunucudan indirilecek ve güncelleme işlemi için hazır hale getirilecek.',
 	'p_lokal_sunucu_uyari' => 'Bu servisi kullanamazsınız. Bunun sebebi lokal sunucuda çalışıyor olmanız veya geçerli bir lisansa sahip olmamanız olabilir. Detaylı bilgi için bize ulaşınız.',
-	'p_garanti_sona_erdi_uyari' => 'Ücretsiz yazılım güncellemesi garanti süreniz %s tarihinde sona erdiği için bu servisi kullanamazsınız. Daha detaylı bilgi almak ve güncelleme sürenizi uzatmak için lütfen <a href=\'https://www.limontasarim.com\' target=\'_blank\' class=\'alert-link\'>bize ulaşın.</a>',
+	'p_garanti_sona_erdi_uyari' => 'Ücretsiz yazılım güncellemesi garanti süreniz %s tarihinde sona erdiği için bu servisi kullanamazsınız. Daha detaylı bilgi almak ve güncelleme sürenizi uzatmak için lütfen <a href=\'https://jaayquick.com\' target=\'_blank\' class=\'alert-link\'>bize ulaşın.</a>',
 	'p_guncelleme_devam_uyari' => 'Hala yazılım güncellemesi üzerinde çalışıyoruz, her şey kusursuz olduğunda bu servisi kullanabileceksiniz.',
 	'p_yukleme_ipucu_1' => 'Yükleme esnasında işlem zaman aşımına uğrar ve bakım modu açık kalırsa <strong> Bakım Modu</strong> ayarını "Hayır" olarak işaretleyin ve ayarları kaydedin. Zaman aşımı problemi sunucu kaynaklıdır.',
 	'p_yukleme_ipucu_2' => 'Yükleme tamamlandıktan sonra siteniz açılmıyor ve bir php dosyası iniyor ise cPanel / Dosya Yöneticisi veya bir ftp programı aracılığıyla public_html/.htaccess dosyasının en alt kısımdaki "AddHandler application/x-httpd-php72 .php" satırını silin.',
@@ -3315,8 +3315,8 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'tx_sectiginiz_icerik_tipleri_icin_okunma_sayilari' => 'Seçtiğiniz içerik tipleri için okunma sayıları güncellenmez.',
 	'tx_citroen_kategorilerindeki_url_problemini_gider' => 'Citroen kategorilerindeki url problemini gidermek için yazılmıştır.',
 	'tx_google_ve_diger_arama_motorlari_icin_standartl' => 'Google ve diğer arama motorları için standartlara uygun xml site haritası oluşturur.',
-	'tx_limonsoft_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'Limonsoft 1.9.3 versiyon geçişinde bir kez kullanılması önerilen veritabanı optimizasyon aracı.',
-	'tx_limonsoft_1_9_4_surumu_gecisinde_veritabani_gu' => 'Limonsoft 1.9.4 sürümü geçişinde veritabanı güncellemesi için bir kez kullanılmalıdır.',
+	'tx_yazilim_bilgisi_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'yazilim_bilgisi 1.9.3 versiyon geçişinde bir kez kullanılması önerilen veritabanı optimizasyon aracı.',
+	'tx_yazilim_bilgisi_1_9_4_surumu_gecisinde_veritabani_gu' => 'yazilim_bilgisi 1.9.4 sürümü geçişinde veritabanı güncellemesi için bir kez kullanılmalıdır.',
 	'tx_progressive_web_app_olusturma_eklentisi' => 'Progressive Web App oluşturma eklentisi',
 	'tx_smtp_eklentisi_ile_birlikte_calisarak_otomatik' => 'SMTP eklentisi ile birlikte çalışarak otomatik mail gönderimleri sağlar.',
 	'tx_sitenizin_smtp_mail_ayarlarini_yapilandirin' => 'Sitenizin SMTP mail ayarlarını yapılandırın',

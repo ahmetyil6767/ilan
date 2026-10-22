@@ -685,7 +685,7 @@ if ($panel_sablon=="fullwidth") {
 						<?php } ?>
 				</div>
 				</form>
-				<div class="well well_limon">
+				<div class="well well_jaayquick">
 					<form action="" method="post">
 						<?php form_elemani("text","menu_baslik",_LANG('p_menu_title_label'),$menu,null,null,"required"); ?>
 						<?php $tema_menuleri_ayar[]=array("deger"=>"","baslik"=>_LANG('p_select')); select_olustur("menu_pozisyonu",_LANG('p_menu_position'),$tema_menuleri_ayar,menu_pozisyonu($menu_id)); ?>

@@ -1,5 +1,5 @@
 <?php if(count(get_included_files())==1) {die();} ?>
-<?php limon(@$panel_header_kod); ?>
+<?php jaayquick(@$panel_header_kod); ?>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&amp;subset=latin-ext" rel="stylesheet">
@@ -25,13 +25,13 @@
 <script type="text/javascript" src="js/bootstrap-tabdrop.js"></script>
 <link href="css/image-picker.css" rel="stylesheet">
 <script type="text/javascript" src="js/image-picker.min.js"></script>
-<script type="text/javascript" src="js/limoncms.js"></script>
+<script type="text/javascript" src="js/jaayquickcms.js"></script>
 <script type="text/javascript" src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places"></script>
 <script type="text/javascript" src="js/locationpicker.jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.mask.min.js"></script>
 <link rel="stylesheet" href="style.css">
-<?php if (_DIL_RTL_MI()) { echo '<link rel="stylesheet" href="../temalar/limon_ilan/dil-rtl.css?v=1984">'; } ?>
+<?php if (_DIL_RTL_MI()) { echo '<link rel="stylesheet" href="../temalar/jaayquick/dil-rtl.css?v=1984">'; } ?>
 <style>
 nav#menu, .sidebar, ul.thumbnails.image_picker_selector li .thumbnail.selected {background:<?php echo ayar_getir("panel_renk"); ?> !important;} 
 ul.thumbnails.image_picker_selector li .thumbnail.selected {border-color:<?php echo ayar_getir("panel_renk"); ?> !important;}

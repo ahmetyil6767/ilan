@@ -1,6 +1,6 @@
 <?php
 if(count(get_included_files())==1) {die();}
-$limonpanel_menu[]=array("baslik"=>"MySQL Yedekle","url"=>eklenti_sayfa_url("olustur","mysql_yedek"),"ikon"=>"database","sira"=>70);
+$jaayquickpanel_menu[]=array("baslik"=>"MySQL Yedekle","url"=>eklenti_sayfa_url("olustur","mysql_yedek"),"ikon"=>"database","sira"=>70);
 function EXPORT_TABLES($host,$user,$pass,$name,$tables=false,$backup_name=false){
     set_time_limit(3000); $mysqli = new mysqli($host,$user,$pass,$name); $mysqli->select_db($name); $mysqli->query("SET NAMES 'utf8mb4'");
     $queryTables = $mysqli->query('SHOW TABLES'); while($row = $queryTables->fetch_row()) { $target_tables[] = $row[0]; }   if($tables !== false) { $target_tables = array_intersect( $target_tables, $tables); } 

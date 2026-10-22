@@ -5,21 +5,21 @@
 $uzanti = "";
 
 
-function limonsoft()
+function yazilim_bilgisi()
 {
-	global $limonsoft_array;
-	global $limonsoft_bayi;
-	global $limonsoft_guncel_versiyon;
-	global $limonsoft_son_guncelleme;
-	global $limonsoft_remove_copyright;
-	@$limonsoft_json = ayar(__FUNCTION__);
+	global $yazilim_bilgisi_array;
+	global $yazilim_bilgisi_bayi;
+	global $yazilim_bilgisi_guncel_versiyon;
+	global $yazilim_bilgisi_son_guncelleme;
+	global $yazilim_bilgisi_remove_copyright;
+	@$yazilim_bilgisi_json = ayar(__FUNCTION__);
 
-	if (is_object(json_decode($limonsoft_json))) {
-		$limonsoft_array = json_decode($limonsoft_json, true);
-		@$limonsoft_bayi = $limonsoft_array['bayi'];
-		@$limonsoft_guncel_versiyon = $limonsoft_array['versiyon'];
-		@$limonsoft_son_guncelleme = $limonsoft_array['son_guncelleme'];
-		@$limonsoft_remove_copyright = $limonsoft_array['remove_copyright'];
+	if (is_object(json_decode($yazilim_bilgisi_json))) {
+		$yazilim_bilgisi_array = json_decode($yazilim_bilgisi_json, true);
+		@$yazilim_bilgisi_bayi = $yazilim_bilgisi_array['bayi'];
+		@$yazilim_bilgisi_guncel_versiyon = $yazilim_bilgisi_array['versiyon'];
+		@$yazilim_bilgisi_son_guncelleme = $yazilim_bilgisi_array['son_guncelleme'];
+		@$yazilim_bilgisi_remove_copyright = $yazilim_bilgisi_array['remove_copyright'];
 	}
 }
 
@@ -574,7 +574,7 @@ function tema_ayar_getir($ayar, $dil = null)
 		$dil = aktif_dil();
 	}
 	
-	// First try to get language-specific setting (e.g., limon_ilan-footer_metni_en)
+	// First try to get language-specific setting (e.g., jaayquick-footer_metni_en)
 	if ($dil !== 'tr') { // Turkish is source language, no _tr suffix needed
 		$anahtar_dil = $tema . '-' . $ayar . '_' . $dil;
 		$dizi = (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'") ? (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'") ? mysqli_fetch_array(mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'")) : null) : null);
@@ -583,7 +583,7 @@ function tema_ayar_getir($ayar, $dil = null)
 		}
 	}
 	
-	// Fall back to default setting (e.g., limon_ilan-footer_metni)
+	// Fall back to default setting (e.g., jaayquick-footer_metni)
 	$dizi = (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'") ? (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'") ? mysqli_fetch_array(mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'")) : null) : null);
 	if ($dizi && $dizi['deger'] !== null && $dizi['deger'] !== '') {
 		return tirnak_ekle($dizi['deger']);
@@ -1527,7 +1527,7 @@ function yorum_ekle($ad_soyad, $email_adresi, $yorum, $icerik_id, $cevap_id = 0,
 	}
 }
 
-function limon($cagir)
+function jaayquick($cagir)
 {
 	if ($cagir) {
 		foreach ($cagir as $yaz) {
@@ -1560,7 +1560,7 @@ function tema_header()
 	global $oturum_id;
 	global $yonetici_id;
 	$aktif_tema = tema_ne();
-	limon($header_kod);
+	jaayquick($header_kod);
 	include './' . $temalar_dizini . '/' . $aktif_tema . '/header.php';
 }
 
@@ -1572,7 +1572,7 @@ function tema_footer()
 	global $yonetici_id;
 	$aktif_tema = tema_ne();
 	include_once './' . $temalar_dizini . '/' . $aktif_tema . '/footer.php';
-	limon($footer_kod);
+	jaayquick($footer_kod);
 }
 
 function tema_head()
@@ -1581,7 +1581,7 @@ function tema_head()
 	global $oturum_id;
 	global $yonetici_id;
 	$aktif_tema = tema_ne();
-	limon($head_kod);
+	jaayquick($head_kod);
 }
 
 function tema_foot()
@@ -1590,7 +1590,7 @@ function tema_foot()
 	global $oturum_id;
 	global $yonetici_id;
 	$aktif_tema = tema_ne();
-	limon($foot_kod);
+	jaayquick($foot_kod);
 }
 
 function tema_dizini()
@@ -3543,7 +3543,7 @@ function api_token()
 {
 	$date = date('YmdH');
 	$domain = domain();
-	return strtoupper(md5(md5($domain . '-' . date('YmdH')) . md5('limonilan')));
+	return strtoupper(md5(md5($domain . '-' . date('YmdH')) . md5('jaayquickilan')));
 }
 
 /*
@@ -3576,10 +3576,10 @@ function sql_ad_guvenli($ad)
 }
 function copyright()
 {
-	global $limonsoft_remove_copyright;
+	global $yazilim_bilgisi_remove_copyright;
 	global $foot_kod;
 
-	if ($limonsoft_remove_copyright != 1) {
+	if ($yazilim_bilgisi_remove_copyright != 1) {
 		// ilanpiyasasi.com artik kullanilmiyor; telif modulunden cikti beklenmiyor.
 	}
 }
@@ -3590,7 +3590,7 @@ if (count(get_included_files()) == 1) {
 
 $include_dizin = include_dizin();
 $admin_dizini = admin_dizini();
-limonsoft();
+yazilim_bilgisi();
 copyright();
 
 ?>

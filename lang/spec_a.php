@@ -183,4 +183,8 @@ return array(
 	'Durée' => array('Duration', 'Durée', 'المدة'),
 	'Année' => array('Year', 'Année', 'السنة'),
 	'Diğer' => array('Other', 'Autre', 'أخرى'),
+	'Km' => array('Km', 'Km', 'كم'),
+	'Seri' => array('Series', 'Serie', 'سلسلة'),
+	'Model' => array('Model', 'Modèle', 'موديل'),
+	'Model Yılı' => array('Model Year', 'Année du modèle', 'سنة الموديل'),
 );

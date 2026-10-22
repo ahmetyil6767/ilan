@@ -868,10 +868,10 @@ return array(
 	'p_hosting_yenilenmedi' => 'إذا لم يتم تجديد خدمة الاستضافة،',
 	'p_panel_erisim_yok' => 'لن تتمكن من الوصول إلى لوحة الإدارة اعتبارا من هذا التاريخ.',
 	'p_uye' => 'عضو',
-	'p_limontasarim' => 'Limontasarım',
+	'p_jaayquick' => 'JaayQuick',
 	'e_adminbar_ac' => 'ينشئ رابطا إلى لوحة الإدارة وروابط سريعة في واجهة موقعك.',
 	'e_adminbar_ekle_butonlari' => 'إنشاء أزرار إضافة لهذه أنواع المحتوى',
-	'e_adminbar_link_bicimi' => 'افصل عنوان الرابط والرابط وفئة الأيقونة بفاصلة. مثال: (Limonwp,http://www.limonwp.com,fa fa-lemon-o)',
+	'e_adminbar_link_bicimi' => 'افصل عنوان الرابط والرابط وفئة الأيقونة بفاصلة. مثال: (JaayQuickWP,http://www.jaayquickwp.com,fa fa-lemon-o)',
 	'e_adminbar_secilen' => 'ستظهر أزرار الإضافة لأنواع المحتوى التي تحددها.',
 	'e_arkaplan_gorsel' => 'صورة الخلفية',
 	'e_aylik' => 'شهري',
@@ -880,13 +880,13 @@ return array(
 	'e_bugun' => 'اليوم',
 	'e_db_guncelle' => 'تحديث قاعدة البيانات',
 	'e_db_guncelle_gerek' => 'تحديث قاعدة البيانات مطلوب',
-	'e_db_optimize_ac' => 'أداة تحسين قاعدة البيانات الموصى بها عند الانتقال إلى Limonsoft 1.9.3.',
-	'e_db_optimize_bir_kez' => 'يكفي استخدام هذه الإضافة مرة واحدة عند الانتقال إلى Limonsoft 1.9.3.',
+	'e_db_optimize_ac' => 'أداة تحسين قاعدة البيانات الموصى بها عند الانتقال إلى yazilim_bilgisi 1.9.3.',
+	'e_db_optimize_bir_kez' => 'يكفي استخدام هذه الإضافة مرة واحدة عند الانتقال إلى yazilim_bilgisi 1.9.3.',
 	'e_db_optimize_calistir' => 'تحسين الجداول',
 	'e_db_optimize_sonra' => 'بعد تشغيل الأداة يمكنك تعطيل الإضافة أو حتى حذفها.',
 	'e_db_optimize_tamam' => 'تم تحسين قاعدة البيانات.',
-	'e_db_update_1_9_7' => 'يجب تحسين قاعدة البيانات مرة واحدة عند التحديث إلى Limonsoft 1.9.7.',
-	'e_db_update_bir_kez' => 'تُستخدم مرة واحدة لتحديث قاعدة البيانات عند الانتقال إلى Limonsoft 1.9.4.',
+	'e_db_update_1_9_7' => 'يجب تحسين قاعدة البيانات مرة واحدة عند التحديث إلى yazilim_bilgisi 1.9.7.',
+	'e_db_update_bir_kez' => 'تُستخدم مرة واحدة لتحديث قاعدة البيانات عند الانتقال إلى yazilim_bilgisi 1.9.4.',
 	'e_db_zaten_guncel' => 'قاعدة البيانات محدثة بالفعل.',
 	'e_dun' => 'أمس',
 	'e_dun_gore' => 'مقارنةً بالأمس',
@@ -1610,7 +1610,7 @@ return array(
 	'ust_location' => 'غامبيا',
 	/*
 	 * Giris / kayit sayfalari: etiketler, karsilama mesajlari ve
-	 * e-posta sablonlari (bkz. temalar/limon_ilan/sayfa/giris-yap.php
+	 * e-posta sablonlari (bkz. temalar/jaayquick/sayfa/giris-yap.php
 	 * ve kayit-ol.php). %s yer tutuculari _LANG icinde vsprintf ile
 	 * doldurulur.
 	 */
@@ -2549,7 +2549,7 @@ return array(
 	'p_yazilim_indir_onay' => 'سيتم تنزيل أحدث إصدار من البرنامج من الخادم البعيد وتهيئته للتحديث.',
 	'p_yazilim_yeniden_indir_onay' => 'سيتم تنزيل إصدار البرنامج الحالي مرة أخرى من الخادم البعيد وتهيئته للتحديث.',
 	'p_lokal_sunucu_uyari' => 'لا يمكنك استخدام هذه الخدمة. قد يكون السبب أن تعمل على خادم محلي أو أنك لا تملك ترخيصًا صالحاً. تواصل معنا لمزيد من التفاصيل.',
-	'p_garanti_sona_erdi_uyari' => 'انتهت ضمانة التحديث المجانية في %s، لذلك لا يمكنك استخدام هذه الخدمة. يرجى <a href=\'https://www.limontasarim.com\' target=\'_blank\' class=\'alert-link\'>التواصل معنا</a> لمزيد من التفاصيل.',
+	'p_garanti_sona_erdi_uyari' => 'انتهت ضمانة التحديث المجانية في %s، لذلك لا يمكنك استخدام هذه الخدمة. يرجى <a href=\'https://jaayquick.com\' target=\'_blank\' class=\'alert-link\'>التواصل معنا</a> لمزيد من التفاصيل.',
 	'p_guncelleme_devam_uyari' => 'ما زلنا نعمل على تحديث البرنامج، وستتمكن من استخدام هذه الخدمة بمجرد اكتمال كل شيء.',
 	'p_yukleme_ipucu_1' => 'إذا انتهت مهلة الرفع وبقي وضع الصيانة مفعلاً، اضبط إعداد <strong>وضع الصيانة</strong> على "لا" في صفحة الإعدادات واحفظ. المشكلة من الخادم.',
 	'p_yukleme_ipucu_2' => 'إذا لم يفتح موقعك بعد الرفع وتم تنزيل ملف PHP، احذف السطر "AddHandler application/x-httpd-php72 .php" في أسفل ملف public_html/.htaccess عبر cPanel أو مدير الملفات أو برنامج FTP.',
@@ -3287,8 +3287,8 @@ return array(
 	'tx_sectiginiz_icerik_tipleri_icin_okunma_sayilari' => 'لا يتم تحديث عدد المشاهدات لأنواع المحتوى التي حددتها.',
 	'tx_citroen_kategorilerindeki_url_problemini_gider' => 'كُتب لإصلاح مشكلة الروابط في فئات سيتروين.',
 	'tx_google_ve_diger_arama_motorlari_icin_standartl' => 'ينشئ خريطة موقع xml متوافقة مع معايير جوجل ومحركات البحث الأخرى.',
-	'tx_limonsoft_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'أداة لتحسين قاعدة البيانات يُنصح باستخدامها مرة واحدة عند الترقية إلى Limonsoft 1.9.3.',
-	'tx_limonsoft_1_9_4_surumu_gecisinde_veritabani_gu' => 'يجب استخدامه مرة واحدة لتحديث قاعدة البيانات عند الترقية إلى Limonsoft 1.9.4.',
+	'tx_yazilim_bilgisi_1_9_3_versiyon_gecisinde_bir_kez_kul' => 'أداة لتحسين قاعدة البيانات يُنصح باستخدامها مرة واحدة عند الترقية إلى yazilim_bilgisi 1.9.3.',
+	'tx_yazilim_bilgisi_1_9_4_surumu_gecisinde_veritabani_gu' => 'يجب استخدامه مرة واحدة لتحديث قاعدة البيانات عند الترقية إلى yazilim_bilgisi 1.9.4.',
 	'tx_progressive_web_app_olusturma_eklentisi' => 'إضافة لإنشاء تطبيق ويب تقدمي',
 	'tx_smtp_eklentisi_ile_birlikte_calisarak_otomatik' => 'يوفر إرسال بريد إلكتروني تلقائي بالتعاون مع إضافة SMTP.',
 	'tx_sitenizin_smtp_mail_ayarlarini_yapilandirin' => 'اضبط إعدادات بريد SMTP لموقعك',

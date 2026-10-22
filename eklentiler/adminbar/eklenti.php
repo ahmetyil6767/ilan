@@ -44,8 +44,8 @@ function admin_bar() {
 			@$magaza=$_GET["magaza"];
 			if ($magaza) {
 				$admin_bar.="
-				<li class='visible-lg visible-md visible-sm'><a href='$site_url/$admin_dizini/temalar.php?tema=limon_ilan&sayfa=panel&islem=magaza-guncelle&id=$magaza'><span class='glyphicon glyphicon-pencil'></span>Güncelle</a></li>
-				<li class='visible-xs'><a href='$site_url/$admin_dizini/temalar.php?tema=limon_ilan&sayfa=panel&islem=magaza-guncelle&id=$magaza'><span class='glyphicon glyphicon-pencil'></span>Güncelle</a></li>
+				<li class='visible-lg visible-md visible-sm'><a href='$site_url/$admin_dizini/temalar.php?tema=jaayquick&sayfa=panel&islem=magaza-guncelle&id=$magaza'><span class='glyphicon glyphicon-pencil'></span>Güncelle</a></li>
+				<li class='visible-xs'><a href='$site_url/$admin_dizini/temalar.php?tema=jaayquick&sayfa=panel&islem=magaza-guncelle&id=$magaza'><span class='glyphicon glyphicon-pencil'></span>Güncelle</a></li>
 				";
 			}			
 		}

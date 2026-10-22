@@ -5,7 +5,7 @@ $bilgi=array(
 "aciklama"=>_LANG('tx_citroen_kategorilerindeki_url_problemini_gider'),
 "fonksiyon"=>"eklenti.php",
 "gelistirici"=>_LANG('tx_goksel_toprak'),
-"gelistirici_url"=>"http://www.limontasarim.com",
+"gelistirici_url"=>"http://jaayquick.com",
 "ayar"=>0,
 );
 ?>

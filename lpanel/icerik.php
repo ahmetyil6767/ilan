@@ -214,7 +214,7 @@ if ($buton or $buton_yayinla) {
 			ekstra_bilgi_guncelle("custom_url",$custom_url,$eklenen_id,$tip);
 		}
 		if ($tip_gorsel==1 or $tip_gorsel=="") {
-			$resim_dizisi=$_FILES["resim_limon"];
+			$resim_dizisi=$_FILES["resim_jaayquick"];
 			$resim_adi=$resim_dizisi["name"];
 			if ($resim_adi!="") {
 				$resim_url=yukle($resim_dizisi,array("dizin"=>"$tip_gorsel_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
@@ -224,7 +224,7 @@ if ($buton or $buton_yayinla) {
 			}
 		}
 		if ($tip_galeri==1 or $tip_galeri=="") {
-			$resim_dizisi=$_FILES["limon_galeri"]; 
+			$resim_dizisi=$_FILES["jaayquick_galeri"]; 
 			$resim_sayisi=count($resim_dizisi["name"]);		
 			$yuklenenler=yukle($resim_dizisi,array("dizin"=>"$tip_galeri_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
 			if (is_array($yuklenenler) and count($yuklenenler)>0) {
@@ -411,7 +411,7 @@ if ($buton or $buton_yayinla) {
 			}
 		}	
 		if ($tip_gorsel==1 or $tip_gorsel=="") {
-			$resim_dizisi=$_FILES["resim_limon"];
+			$resim_dizisi=$_FILES["resim_jaayquick"];
 			$resim_adi=$resim_dizisi["name"];
 			if ($resim_adi!="") {
 				$resim_url=yukle($resim_dizisi,array("dizin"=>"$tip_gorsel_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
@@ -429,7 +429,7 @@ if ($buton or $buton_yayinla) {
 		}
 		
 		if ($tip_galeri==1 or $tip_galeri=="") {
-			$resim_dizisi=$_FILES["limon_galeri"]; 
+			$resim_dizisi=$_FILES["jaayquick_galeri"]; 
 			$resim_sayisi=count($resim_dizisi["name"]);		
 			$yuklenenler=yukle($resim_dizisi,array("dizin"=>"$tip_galeri_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
 			if (is_array($yuklenenler) and count($yuklenenler)>0) {
@@ -1190,11 +1190,11 @@ if ($toplu_buton) {
 			<h3 class="pull-left bolum-baslik text-uppercase"><?php echo $tip_baslik; ?> <?php echo _LANG('p_ekle_buyuk'); ?></h3>
 			<a href="icerik.php?tip=<?php echo $tip; ?>" class="btn btn-default"><?php echo $tip_baslik_cogul; ?></a>
 			<div class="clearfix mb20"></div>
-			<?php limon(@$panel_icerik_ust_kod); ?>
+			<?php jaayquick(@$panel_icerik_ust_kod); ?>
 			<div class="row">
 			<form method="post" action="" enctype="multipart/form-data">
 				<div class="<?php echo $icerik_sol_div; ?>">
-					<?php limon(@$panel_icerik_sol_kod); ?>
+					<?php jaayquick(@$panel_icerik_sol_kod); ?>
 							<?php if ($tip_baslik_yok!="1") {form_elemani("text","baslik",$tip_baslik,@$baslik,null,null,1); } ?>
 							<?php if ($tip_url==1 or $tip_url=="") { ?>
 							<label for="url"><?php echo _LANG('p_kalici_baglanti'); ?></label>
@@ -1229,7 +1229,7 @@ if ($toplu_buton) {
 					
 				
 						<?php if ($tip_galeri==1 or $tip_galeri=="") { ?>
-							<div class="icerik_galeri"><input type="file" name="limon_galeri" id="limon_galeri" accept="image/*" multiple="multiple"></div>
+							<div class="icerik_galeri"><input type="file" name="jaayquick_galeri" id="jaayquick_galeri" accept="image/*" multiple="multiple"></div>
 						<?php } else {
 							if ($tip_icerik!=0) {
 								echo "<div class='clearfix mb15'></div>";
@@ -1375,10 +1375,10 @@ if ($toplu_buton) {
 					</div>
 				</div>
 			<?php }} ?>
-				<?php limon(@$panel_icerik_sol_alt_kod); ?>
+				<?php jaayquick(@$panel_icerik_sol_alt_kod); ?>
 				</div>
 				<div class="<?php echo $icerik_sag_div; ?>">
-					<?php limon(@$panel_icerik_sag_kod); ?>
+					<?php jaayquick(@$panel_icerik_sag_kod); ?>
 
 					<?php if ($tip_kategori==1 or $tip_kategori=="") {
 					$sinif_name="kategori";
@@ -1575,7 +1575,7 @@ if ($toplu_buton) {
 							<?php if ($tip_etiket==1 or $tip_etiket=="") { textarea_olustur("etiket","etiketler","Etiketler",null,3); } ?>
 							<?php if ($tip_gizli!=1) {textarea_olustur("seo_title","seo_title","SEO Title",null,2);} ?>
 							<?php if ($tip_gizli!=1) {textarea_olustur("seo_aciklama","seo_aciklama",_LANG("p_seo_aciklama"),null,3);} ?>
-							<?php limon(@$panel_icerik_sag_buton_ustu_kod); ?>
+							<?php jaayquick(@$panel_icerik_sag_buton_ustu_kod); ?>
 							<?php if ($tip_gizli!=1) { ?>
 							<div class="row">
 								<div class="col-md-30 btn_ikili_sol">
@@ -1595,12 +1595,12 @@ if ($toplu_buton) {
 					<div class="panel panel-default">
 						<div class="panel-heading"><?php echo _LANG('p_gorsel'); ?></div>
 						<div class="panel-body">
-							<input type="file" name="resim_limon" id="one_cikarilan_gorsel">
+							<input type="file" name="resim_jaayquick" id="one_cikarilan_gorsel">
 						</div>
 					</div>
 					<?php } ?>		
 				
-				<?php limon(@$panel_icerik_sag_alt_kod); ?>
+				<?php jaayquick(@$panel_icerik_sag_alt_kod); ?>
 				</div>
 				<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 				</form>	
@@ -1618,12 +1618,12 @@ if ($toplu_buton) {
 			
 			
 			<div class="clearfix mb20"></div>
-			<?php limon(@$panel_icerik_ust_kod); ?>
+			<?php jaayquick(@$panel_icerik_ust_kod); ?>
 			<div class="row">
 			<form method="post" action="" enctype="multipart/form-data">
 				<input type="submit" name="buton" style="display:none;" value="default">
 				<div class="<?php echo $icerik_sol_div; ?>">
-					<?php limon(@$panel_icerik_sol_kod); ?>
+					<?php jaayquick(@$panel_icerik_sol_kod); ?>
 					
 							<?php if ($tip_baslik_yok!="1") {form_elemani("text","baslik",$tip_baslik,bilgi_getir("icerik","baslik",$id),null,null,1);} ?>
 							<?php if ($tip_url==1 or $tip_url=="") { ?>
@@ -1697,7 +1697,7 @@ if ($toplu_buton) {
 						</tbody>
 						</table>		
 						<?php } ?>
-						<input type="file" name="limon_galeri" id="limon_galeri" accept="image/*" multiple="multiple">
+						<input type="file" name="jaayquick_galeri" id="jaayquick_galeri" accept="image/*" multiple="multiple">
 					</div>
 					<?php } else {
 						if ($tip_icerik!=0) {
@@ -1847,7 +1847,7 @@ if ($toplu_buton) {
 							</div>
 						</div>
 			<?php } } ?>
-					<?php limon(@$panel_icerik_sol_alt_kod); ?>
+					<?php jaayquick(@$panel_icerik_sol_alt_kod); ?>
 					
 				<!-- GELÄ°ÅTÄ°RÄ°CÄ° PANELÄ° BAÅLADI -->
 				<button type="button" id="gelistirici_ac" class="btn btn-default"><i class="fa fa-toggle-off"></i><?php echo _LANG('p_dev_mod_ac'); ?></button>			
@@ -1879,7 +1879,7 @@ if ($toplu_buton) {
 
 				</div>
 				<div class="<?php echo $icerik_sag_div; ?>">
-					<?php limon(@$panel_icerik_sag_kod); ?>
+					<?php jaayquick(@$panel_icerik_sag_kod); ?>
 
 					<?php if ($tip_kategori==1 or $tip_kategori=="") { 
 					$sinif_name="kategori"; 
@@ -2090,7 +2090,7 @@ if ($toplu_buton) {
 						<?php if ($tip_gizli!=1) { textarea_olustur("seo_title","seo_title","SEO Title",ekstra_bilgi_getir("seo_title",$id,$tip),2); } ?>
 						<?php if ($tip_gizli!=1) { textarea_olustur("seo_aciklama","seo_aciklama",_LANG("p_seo_aciklama"),ekstra_bilgi_getir("seo_aciklama",$id,$tip),3); } ?>
 						
-						<?php limon(@$panel_icerik_sag_buton_ustu_kod); ?>
+						<?php jaayquick(@$panel_icerik_sag_buton_ustu_kod); ?>
 
 						<?php if ($tip_gizli!=1) { if ($yazi_durumu==1) {
 						form_buton("buton",_LANG("p_isaret_guncelle", array($tip_baslik_isaret)),"primary btn-block btn-lg btn-icerik-ozel");						
@@ -2121,7 +2121,7 @@ if ($toplu_buton) {
 								</label>
 								<div class="clearfix"></div>
 							<?php } ?>							
-							<input type="file" name="resim_limon" id="one_cikarilan_gorsel">
+							<input type="file" name="resim_jaayquick" id="one_cikarilan_gorsel">
 						</div>
 					</div>
 					<?php } ?>
@@ -2159,7 +2159,7 @@ if ($toplu_buton) {
 					</div>
 			<?php } } } ?>
 					
-					<?php limon(@$panel_icerik_sag_alt_kod); ?>
+					<?php jaayquick(@$panel_icerik_sag_alt_kod); ?>
 				</div>
 				<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 				</form>	

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Rounded App Icon Background -->
+  <rect width="512" height="512" rx="112" fill="#0B2545"/>
+
+  <!-- Subtle Gambia Flag Top-Left Corner Ribbon Accent -->
+  <g transform="translate(56, 52)">
+    <rect x="0" y="0" width="18" height="92" rx="6" fill="#DF1623"/>
+    <rect x="26" y="0" width="18" height="92" rx="6" fill="#0047AB"/>
+    <rect x="52" y="0" width="18" height="92" rx="6" fill="#3A7D44"/>
+  </g>
+
+  <!-- Main Centerpiece: "Q" Shopping Bag + Location Pin -->
+  <g transform="translate(116, 48)">
+    <!-- Shopping Bag Handle -->
+    <path d="M 88,78 C 88,20 192,20 192,78" fill="none" stroke="#7BB31A" stroke-width="24" stroke-linecap="round"/>
+
+    <!-- Pin Body -->
+    <path d="M 140,64 C 60,64 4,120 4,194 C 4,262 66,328 112,380 L 168,380 C 214,328 276,262 276,194 C 276,120 220,64 140,64 Z" fill="#7BB31A"/>
+
+    <!-- Inner White Circle Cutout (forms the 'O/Q' counter) -->
+    <circle cx="140" cy="192" r="64" fill="#FFFFFF"/>
+
+    <!-- Mini Parcel Box inside the white cutout for unmistakable brand identity -->
+    <rect x="112" y="166" width="56" height="44" rx="6" fill="#F28C28"/>
+    <rect x="108" y="160" width="64" height="12" rx="3" fill="#D97415"/>
+    <rect x="131" y="160" width="6" height="28" fill="#DF1623"/>
+    <rect x="137" y="160" width="6" height="28" fill="#0047AB"/>
+    <rect x="143" y="160" width="6" height="28" fill="#3A7D44"/>
+
+    <!-- Gambia Flag Segmented Tip at Bottom of Pin -->
+    <polygon points="105,374 175,374 164,396 116,396" fill="#DF1623"/>
+    <polygon points="113,402 167,402 156,424 124,424" fill="#0047AB"/>
+    <polygon points="121,430 159,430 140,460" fill="#3A7D44"/>
+  </g>
+
+  <!-- Speed Lines on Bottom Right (Quick accent) -->
+  <g stroke="#F28C28" stroke-width="14" stroke-linecap="round">
+    <line x1="376" y1="360" x2="436" y2="360"/>
+    <line x1="356" y1="390" x2="426" y2="390"/>
+    <line x1="386" y1="420" x2="436" y2="420"/>
+  </g>
+</svg>

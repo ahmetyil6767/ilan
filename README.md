@@ -1,12 +1,12 @@
 # JaayQuick (jaayquick.com)
 
-Gambiya için ücretsiz ilan panosu. PHP 8.4 + MySQL, "Limon CMS" altyapısı.
+Gambiya için ücretsiz ilan panosu. PHP 8.4 + MySQL, "JaayQuick" altyapısı.
 Ziyaretçi arayüzü ve yönetim paneli tek kod tabanında; Composer/npm yoktur.
 
 ## Kurulum (Windows / WAMP)
 
-1. **WAMP** kurulu olmalı. Proje kökü: `C:\wamp64\www\ilan.limontasarim.net`
-2. **Veritabanı:** `jaayko_limon` adlı boş bir şema oluştur, `SQL/localhost.sql`
+1. **WAMP** kurulu olmalı. Proje kökü: `C:\wamp64\www\jaayquick.com`
+2. **Veritabanı:** `jaayquick` adlı boş bir şema oluştur, `SQL/localhost.sql`
    içe aktar (dosya `.gitignore`'da olduğu için repoda yoktur).
 3. **DB ayarları:** `config/db.php` yok → `config/db.php.example` dosyasını kopyala
    ve host/veritabanı/kullanıcı/parola alanlarını doldur.
@@ -30,7 +30,7 @@ powershell -ExecutionPolicy Bypass -File otomatik_yedek.ps1   # yedek (2 günlü
 | `loader.php` | Bootstrap (DB, oturum, dil, tema) |
 | `config/` | Çekirdek fonksiyonlar, dil altyapısı, ayar şemaları |
 | `lang/` | tr / en / fr / ar sözlükleri + kategori terimleri (`spec_*.php`) |
-| `temalar/limon_ilan/` | Aktif tema, bileşenler, tema paneli, pasif iyzico SDK'sı |
+| `temalar/jaayquick/` | Aktif tema, bileşenler, tema paneli, pasif iyzico SDK'sı |
 | `lpanel/` | Çekirdek yönetim paneli |
 | `eklentiler/` | Eklenti modülleri (auto_mail, sitemap, favoriler, yedek…) |
 | `uploads/` | Kullanıcı yüklemeleri |

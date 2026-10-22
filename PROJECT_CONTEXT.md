@@ -14,7 +14,7 @@ Yeni bir ajan/insan bu projeye başlarken: önce `AGENTS.md`, sonra bu dosya.
 |---|---|
 | Backend | PHP 8.4 (hedef), `mysqli`, MariaDB/MySQL `utf8mb4` |
 | Şablon | Kendi yazdığımız (Twig benzeri) — `tema_header()`, `tema_footer()` |
-| Yönetim | `lpanel/` (çekirdek panel) + `temalar/limon_ilan/panel/` (tema paneli) |
+| Yönetim | `lpanel/` (çekirdek panel) + `temalar/jaayquick/panel/` (tema paneli) |
 | Frontend | Bootstrap 4, jQuery, CKEditor, DataTables, ionicons, FontAwesome |
 | Harita | Google Maps JS (koordinat `lat,lon`; Gambiya batı boylamı **negatif**) |
 | Ödeme | Havale/EFT (manuel onay) — iyzico SDK pasif |
@@ -22,13 +22,13 @@ Yeni bir ajan/insan bu projeye başlarken: önce `AGENTS.md`, sonra bu dosya.
 | Bağımlılık | Composer/npm **yok** — hepsi klasör içinde kopyalanmış |
 
 İstek akışı: `index.php` (yönlendirme) → `loader.php` (bootstrap) →
-`config/dil.php` → tema dosyası (`temalar/limon_ilan/...`).
+`config/dil.php` → tema dosyası (`temalar/jaayquick/...`).
 
 ## 2. Veri modeli (26 tablo)
 
 | Tablo | İçerik | Notlar |
 |---|---|---|
-| `ayarlar` | Site/tema ayarları (`anahtar`/`deger`) | Dil varyantları `tema-ayar_dil` son ekiyle: `limon_ilan-footer_1_baslik_en` |
+| `ayarlar` | Site/tema ayarları (`anahtar`/`deger`) | Dil varyantları `tema-ayar_dil` son ekiyle: `jaayquick-footer_1_baslik_en` |
 | `icerik` | Hem ilanlar hem statik sayfalar (`tip='ilan'|'sayfa'`) | `url` slug'ı; `/sayfa/<slug>-<id>` |
 | `kategoriler` | Kategori ağacı (`ust_kategori` hiyerarşi) | `baslik_en/fr/ar` çevirileri `ekstra_bilgi` içinde |
 | `ekstra_bilgi` | Esnek alan deposu (`tip`, `id`, `anahtar`, `deger`) | Çeviriler de burada: `baslik_en`, `icerik_en`, `ozel_alanlar_en`… |
@@ -110,7 +110,7 @@ yönetici paneli  →  ?onay=<id>  →  durum=1 + özelliklerin aktive edilmesi
 | `kategori_link_getir($id)` | `config/fonksiyonlar_url.php` | Kategori adresi |
 | `birim_goster($gmd)` | `config/dil.php` | GMD → ziyaretçi birimi |
 
-## 7. Tema dosya haritası (`temalar/limon_ilan/`)
+## 7. Tema dosya haritası (`temalar/jaayquick/`)
 
 | Yol | İçerik |
 |---|---|
@@ -129,7 +129,7 @@ yönetici paneli  →  ?onay=<id>  →  durum=1 + özelliklerin aktive edilmesi
 
 ## 8. Yönetim paneli akışları (sipariş onayı)
 
-- Panel dosyaları: `temalar/limon_ilan/panel/siparisler-{doping,get,magaza,paket}.php`
+- Panel dosyaları: `temalar/jaayquick/panel/siparisler-{doping,get,magaza,paket}.php`
 - Onay: `?onay=<siparis_id>` → `durum=1` + ilgili özelliğin aktive edilmesi +
   üyeye `bildirim_ekle()` + e-posta (`auto_mail_add`).
 - Bildirim: `ajax.php?islem=odeme_bildirimi` (kullanıcı ödeme bildirir → yöneticiye).
@@ -167,8 +167,8 @@ git status && git add <spesifik dosyalar> && git commit -m "Türkçe tek cümle"
 | Alan adı | `jaayquick.com` — `ayarlar` tablosunda `site_url` |
 | Marka adı | `JaayQuick` — `ayarlar.site_baslik` |
 | İletişim | `info@jaayquick.com`, `220 267 74 08` (+220) |
-| Yedek alan adı / eski marka | `jaayko.gm` **kullanılmıyor** (tüm DB + kod temizlendi) |
-| Veritabanı adı | `jaayko_limon` (yerel `config/db.php` içinde; kullanıcıya görünmez) |
+| Yedek alan adı / eski marka | `jaayquick.com` **kullanılmıyor** (tüm DB + kod temizlendi) |
+| Veritabanı adı | `jaayquick` (yerel `config/db.php` içinde; kullanıcıya görünmez) |
 
 **Logo dosyaları** (hepsi `uploads/images/` altında, GD + FreeType ile üretildi):
 

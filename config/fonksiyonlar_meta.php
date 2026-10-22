@@ -24,11 +24,38 @@ function spec_etiket($etiket)
 	}
 	$etiket = trim((string)$etiket);
 	if ($etiket === '' || aktif_dil() == 'tr') { return $etiket; }
+	$idx = aktif_dil() == 'en' ? 0 : (aktif_dil() == 'fr' ? 1 : 2);
 	if (isset($sozluk[$etiket])) {
-		$idx = aktif_dil() == 'en' ? 0 : (aktif_dil() == 'fr' ? 1 : 2);
 		$deger = $sozluk[$etiket][$idx];
 		if (is_string($deger) && trim($deger) !== '') { return $deger; }
 	}
+	/*
+	 * BILESIK_KELIMELER: sozlukte tam karsiligi olmayan bilesik degerler
+	 * icindeki kelimeleri cevirir ("1 Ay" -> "1 Month", "15-20 arası" ->
+	 * "15-20 between"). Tam kelime eslesmesi kullanilir.
+	 */
+	static $kelimeler = array(
+		'Ay' => array('Month', 'Mois', 'شهر'),
+		'Aylık' => array('Monthly', 'Mensuel', 'شهري'),
+		'Gün' => array('Day', 'Jour', 'يوم'),
+		'Hafta' => array('Week', 'Semaine', 'أسبوع'),
+		'arası' => array('between', 'entre', 'بين'),
+		've altı' => array('and below', 'et en dessous', 'وما دون'),
+		'Altı' => array('and below', 'et en dessous', 'وما دون'),
+		've üzeri' => array('and above', 'et au-dessus', 'فأكثر'),
+		'Üzeri' => array('and above', 'et au-dessus', 'فأكثر'),
+		'üzeri' => array('and above', 'et au-dessus', 'فأكثر'),
+		'e kadar' => array('up to', 'jusqu\'à', 'حتى'),
+	);
+	$sonuc = $etiket;
+	foreach ($kelimeler as $kelime => $diller) {
+		$sonuc = preg_replace(
+			'/(?<![\p{L}\p{N}])' . preg_quote($kelime, '/') . '(?![\p{L}\p{N}])/u',
+			$diller[$idx],
+			$sonuc
+		);
+	}
+	if ($sonuc !== $etiket) { return $sonuc; }
 	return $etiket;
 }
 

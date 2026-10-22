@@ -178,23 +178,23 @@ if (strstr(browser_url(), "/$admin_dizini/")) {
 	yetki_kontrol();
 	$tema_menu_sayisi=count($tema_menuleri);
 	if ($tema_menu_sayisi>0) {
-		$limonpanel_menu[]=array("baslik"=>_LANG('tx_menuler'),"url"=>"menuler.php","ikon"=>"link","sira"=>35,"yetki"=>"admin");
+		$jaayquickpanel_menu[]=array("baslik"=>_LANG('tx_menuler'),"url"=>"menuler.php","ikon"=>"link","sira"=>35,"yetki"=>"admin");
 	}
 	if ($tema_destegi==1) {
-		$limonpanel_menu[]=array("baslik"=>"Temalar","url"=>"temalar.php","ikon"=>"tv","sira"=>45,"yetki"=>"admin");
+		$jaayquickpanel_menu[]=array("baslik"=>"Temalar","url"=>"temalar.php","ikon"=>"tv","sira"=>45,"yetki"=>"admin");
 	}
 	if (count($bilesen_alani)) {
-		$limonpanel_menu[]=array("baslik"=>_LANG('tx_bilesenler'),"url"=>"bilesenler.php","ikon"=>"window-restore","sira"=>40,"yetki"=>"admin");
+		$jaayquickpanel_menu[]=array("baslik"=>_LANG('tx_bilesenler'),"url"=>"bilesenler.php","ikon"=>"window-restore","sira"=>40,"yetki"=>"admin");
 	}
 	if (count($liste)) {
-		$limonpanel_menu[]=array("baslik"=>"Listeler","url"=>"listeler.php","ikon"=>"list-ul","sira"=>42,"yetki"=>"admin");
+		$jaayquickpanel_menu[]=array("baslik"=>"Listeler","url"=>"listeler.php","ikon"=>"list-ul","sira"=>42,"yetki"=>"admin");
 	}
 	$sistem_hata_sayisi=mysqli_num_rows(mysqli_query($baglan,"select id from bildirimler where tip='2'"));
 	if ($sistem_hata_sayisi>0) {
 		$hizli_linkler[]=array("baslik"=>"Hata Raporları <div class='badge'>$sistem_hata_sayisi</div>","url"=>"bildirimler.php?tip=hata","ikon"=>"code","sira"=>1000,"yetki"=>"admin");
 	}
 	if (ayar("sistem_guncellemeleri")!="0") {
-		$limonpanel_menu[]=array("baslik"=>_LANG('tx_sistem_guncellemeleri'),"url"=>"guncellemeler.php","ikon"=>"refresh","sira"=>5000,"yetki"=>"admin");
+		$jaayquickpanel_menu[]=array("baslik"=>_LANG('tx_sistem_guncellemeleri'),"url"=>"guncellemeler.php","ikon"=>"refresh","sira"=>5000,"yetki"=>"admin");
 	}
 	if (ayar("bakim_modu")==1) {
 		$panel_header_alt_kod[]="<div class='alert alert-danger' style='border-radius:0 !important;margin-bottom:0 !important;'><i class='fa fa-exclamation'></i>Dikkat! Bakım modu açık olduğu için sitenize erişilemez. Bakım modunu kapatmak için <a href='ayarlar.php' class='alert-link' style='color:#fff;'>Ayarlar</a> sayfasına göz atın.</div>";
@@ -280,10 +280,10 @@ if (@$_SESSION["oturum_degistir"]) {
 			$panel_bg=ayar("panel_renk");
 			$oturum_switcher_html=null;
 			$oturum_switcher_html.="
-			<form method='post' action='' class='limonsoft_oturum_switcher'><button type='submit' name='oturum_switch_button' value='Değiştir' onclick='return confirm(\"$oturum_degistir_eski_ad_soyad oturumuna geçmek istediğinizden emin misiniz?\");'>$oturum_degistir_eski_ad_soyad oturumuna geçiş yap. (Mevcut oturum: $oturum_degistir_yeni_ad_soyad, Son aktivite: $tarih_saat)</button></form>
+			<form method='post' action='' class='yazilim_bilgisi_oturum_switcher'><button type='submit' name='oturum_switch_button' value='Değiştir' onclick='return confirm(\"$oturum_degistir_eski_ad_soyad oturumuna geçmek istediğinizden emin misiniz?\");'>$oturum_degistir_eski_ad_soyad oturumuna geçiş yap. (Mevcut oturum: $oturum_degistir_yeni_ad_soyad, Son aktivite: $tarih_saat)</button></form>
 			<style>
-			.limonsoft_oturum_switcher button {position:fixed;z-index:9999999;top:0;left:0;padding:0;box-shadow:none !important;background:$panel_bg;color:#fff;display:block;width:100%;border:0;margin:0 auto;font-size:13px;height:36px;transition:.1s;}
-			.limonsoft_oturum_switcher button:hover {background:#fff;color:$panel_bg;}
+			.yazilim_bilgisi_oturum_switcher button {position:fixed;z-index:9999999;top:0;left:0;padding:0;box-shadow:none !important;background:$panel_bg;color:#fff;display:block;width:100%;border:0;margin:0 auto;font-size:13px;height:36px;transition:.1s;}
+			.yazilim_bilgisi_oturum_switcher button:hover {background:#fff;color:$panel_bg;}
 			.adminbar {display:none;}
 			body {position:relative;top:36px;}
 			</style>

@@ -3,7 +3,7 @@
 #   - Calistiginda DB dump'i + proje dosyalarinin ziplerini SQL/yedekler/ altina yazar (otomatik_*.sql|zip).
 #   - 2 günden eski otomatik_* dosyalarini siler (manuel yedek_yedek_*.sql dosyalarina dokunmaz).
 #   - Ise: manuel "powershell -ExecutionPolicy Bypass -File otomatik_yedek.ps1"
-#          veya gunluk zamanlanmis gorev "LimonYedek" (schtasks).
+#          veya gunluk zamanlanmis gorev "JaayQuickYedek" (schtasks).
 # Log: SQL/yedekler/yedek_log.txt
 
 $ErrorActionPreference = "Stop"
@@ -23,13 +23,13 @@ if (-not $mysqlBin) { throw "mysqldump bulunamadi" }
 $dump = Join-Path $hedef ("otomatik_db_" + $damga + ".sql")
 # NOT: Dogrudan redirect kullanilir (Out-File UTF-8 BOM ekliyordu ve
 # BOM'lu dump dosyalari mysql'e geri yuklenemiyordu).
-cmd /c "`"$mysqlBin`" -u root --single-transaction --quick --default-character-set=utf8mb4 jaayko_limon > `"$dump`" 2>nul"
+cmd /c "`"$mysqlBin`" -u root --single-transaction --quick --default-character-set=utf8mb4 jaayquick > `"$dump`" 2>nul"
 $boyut = (Get-Item $dump).Length
 if ($boyut -lt 1MB) { Log "HATA: DB dump cok kucuk ($boyut bayt)"; throw "DB yedeği güvenilir degil" }
 Log ("DB yedegi: " + (Split-Path -Leaf $dump) + " (" + [math]::Round($boyut/1MB,1) + " MB)")
 
 # 2) Dosya yedegi (zip): proje, .git ve SQL/yedekler haric (uploads dahil)
-$gecici = Join-Path $env:TEMP "limon_yedek_zip_kok"
+$gecici = Join-Path $env:TEMP "jaayquick_yedek_zip_kok"
 if (Test-Path $gecici) { Remove-Item $gecici -Recurse -Force }
 New-Item -ItemType Directory -Force $gecici | Out-Null
 robocopy $kok $gecici /MIR /NFL /NDL /NJH /NJS /XD .git yedekler /XF yedek_log.txt | Out-Null

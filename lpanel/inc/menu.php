@@ -75,8 +75,8 @@ foreach ($icerik_tipleri as $yaz => $x) {
 	}
 }
 if ($_SESSION["oturum_yetki"]!="yazar") { 
-	sksort($limonpanel_menu,"sira",true);
-	foreach ($limonpanel_menu as $yaz => $x) {
+	sksort($jaayquickpanel_menu,"sira",true);
+	foreach ($jaayquickpanel_menu as $yaz => $x) {
 		@$lp_url=$x["url"];
 		@$lp_url=site_url()."/$admin_dizini/".$lp_url;
 		@$lp_text=$x["baslik"];

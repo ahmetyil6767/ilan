@@ -23,7 +23,7 @@ $(document).ready(function() {
 	});
 
 	// enable fileuploader plugin
-	$('input#limon_galeri').fileuploader({
+	$('input#jaayquick_galeri').fileuploader({
         changeInput: '<div class="fileuploader-input">' +
 					      '<div class="fileuploader-input-inner">' +
 							  '<h3 class="fileuploader-input-caption"><span>Galeri görsellerini sürükle bırak</span></h3>' +

@@ -6,12 +6,12 @@ Depoya commit edilir; herkes aynı kuralları alır.
 ## Proje nedir
 
 **JaayQuick** (`jaayquick.com`) — PHP + MySQL tabanlı **ilan / classified ads** uygulaması.
-"Limon CMS" altyapısı üzerine kurulu; ziyaretçi arayüzü ve yönetim paneli
+"JaayQuick" altyapısı üzerine kurulu; ziyaretçi arayüzü ve yönetim paneli
 **tek kod tabanında** duruyor. Composer, npm, paket yöneticisi **yoktur** —
 bağımlılıklar klasör içine kopyalanmış halde gelir.
 
 - **PHP:** 7.2 için yazıldı, hedef sürüm **8.4** (yerelde 8.4.15 CLI kurulu)
-- **DB:** MariaDB / MySQL, `mysqli` eklentisi, `utf8mb4`, veritabanı `jaayko_limon`
+- **DB:** MariaDB / MySQL, `mysqli` eklentisi, `utf8mb4`, veritabanı `jaayquick`
 - **Ölçek:** ~228 PHP dosyası (3. parti hariç), ~56.000 satır, 26 tablo
 - **URL:** Apache `mod_rewrite` ile SEO dostu (`.htaccess`)
 
@@ -27,7 +27,7 @@ Site **Gambiya** için çalışır; Türkiye'ye özgü hiçbir veri kalmamalıd�
 | Kur kaynağı | `open.er-api.com` (1 USD = kaç GMD); eski TCMB/TRY kaynağı **kaldırıldı** |
 | Telefon | `+220`; yerel numara 7 hane, ülke kodu **girdiğinde** yazılmaz (`s_telefon_sifir` ipucu) |
 | Konum | `iller` = 8 Gambia bölgesi (Banjul, Kanifing, West/North Bank, Lower/Central/Upper River, Kuntaur), `ilceler` = 33 ilçe, **`mahalleler` boş — mahalle özelliği kaldırıldı** |
-| Ülke kodu kaynakları | `temalar/limon_ilan/iyzico/**` içindeki `setCountry("Turkey")` gibi eski değerler temizlendi |
+| Ülke kodu kaynakları | `temalar/jaayquick/iyzico/**` içindeki `setCountry("Turkey")` gibi eski değerler temizlendi |
 
 **Kural:** Yeni kodu yazarken Türkiye'ye özgü varsayımlar kullanma (+90, TRY, "İl/İlçe/Mahalle"
 terminolojisi, Türk bankası/IBAN'ı, Türkçe para birimi). Bölge: **Region / District**.
@@ -66,7 +66,7 @@ her zaman çevrilir.
   (`?onay=<id>`) → ilan/mağaza/doping/paket özellikleri aktive olur.
 - Havale hesap bilgileri `listeler` tablosunda `tip='hesaplar'` kayıtlarında
   (`banka_adi`, `ad_soyad`, `iban`) — yönetim panelden güncellenir.
-- **İyzico SDK'sı pasif durumda** (`temalar/limon_ilan/iyzico/`). Kod
+- **İyzico SDK'sı pasif durumda** (`temalar/jaayquick/iyzico/`). Kod
   `siparis.php` içinde hâlâ var ama `online_odeme=aktif` değilse çalışmaz.
 
 ## Çalıştırma ve doğrulama
@@ -111,7 +111,7 @@ powershell -ExecutionPolicy Bypass -File otomatik_yedek.ps1
   `.git` ve `SQL/yedekler` hariç, `uploads` dahil) → `SQL\yedekler\` altına yazar.
 - `otomatik_*` dosyalarını kendisi 2 güne kadar tutar, eskisini siler
   (`yedek_*.sql` adlı manuel geri yükleme noktalarına **dokunmaz**).
-- Kayıt: `SQL\yedekler\yedek_log.txt`. Günlük zamanlanmış görev `LimonYedek`
+- Kayıt: `SQL\yedekler\yedek_log.txt`. Günlük zamanlanmış görev `JaayQuickYedek`
   (her gün 03:30) da aynı script'i koşturur.
 - Ek olarak **her DB'de veri değiştiren adımdan önce** o adımı etkileyen tabloların
   ayrı `yedek_<isim>.sql` yedeği alınır.
@@ -140,7 +140,7 @@ Tema ayarları `tema_ayar("anahtar")` ile okunur; API anahtarları de oradan gel
 | `config/` | `db.php` (gizli), `yapilandir.php`, `fonksiyonlar*.php` (çekirdek), `dil.php`, `fonksiyonlar_meta.php` (SEO/çeviri yardımcıları) |
 | `lang/` | `tr.php`, `en.php`, `fr.php`, `ar.php` + `spec_a|b|c.php` (sözlük) |
 | `lpanel/` | Yönetim paneli. `admin_dizini` ayarıyla adı değiştirilebilir (varsayılan `lpanel`) |
-| `temalar/limon_ilan/` | Aktif tema + `bilesen/` + `panel/` (tema içi yönetim) + `iyzico/` (pasif SDK) |
+| `temalar/jaayquick/` | Aktif tema + `bilesen/` + `panel/` (tema içi yönetim) + `iyzico/` (pasif SDK) |
 | `eklentiler/` | Eklenti modülleri (auto_mail, xml_sitemap, mysql_yedek, favoriler...) |
 | `uploads/` | Kullanıcı yüklemeleri. PHP çalıştırma `.htaccess` ile kapalı. |
 | `SQL/` | Şema/dump + `SQL/yedekler/` (otomatik + manuel yedekler) |
@@ -152,7 +152,7 @@ Tema ayarları `tema_ayar("anahtar")` ile okunur; API anahtarları de oradan gel
 
 **Üçüncü parti kod — elle değiştirme:**
 `lpanel/js/ckeditor/**`, `eklentiler/smtp/phpmailer/**`,
-`temalar/limon_ilan/iyzico/src/**`.
+`temalar/jaayquick/iyzico/src/**`.
 
 ## Kod kuralları
 

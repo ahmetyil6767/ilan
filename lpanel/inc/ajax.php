@@ -61,11 +61,11 @@ if ($islem=="kategori_secimi_sifirla") {
 		mysqli_stmt_close($sifirla_sorgu);
 	}
 }
-if ($islem=="limonsoft_duyurular") {
+if ($islem=="yazilim_bilgisi_duyurular") {
 	if ($lpanel_duyurular==1) {
 		$site=getenv("HTTP_HOST"); 
 		if (substr($site, 0, 4) == "www.") {$site=substr($site,4);} 
-		$sidebar_mesaj=file_get_contents("http://www.limontasarim.com/limonsoft.php?ref=panel"); 
+		$sidebar_mesaj=file_get_contents("http://jaayquick.com/yazilim_bilgisi.php?ref=panel"); 
 		if ($sidebar_mesaj) {
 			echo "<div class='home_sidebar mesaj'>".$sidebar_mesaj."</div>";
 		}

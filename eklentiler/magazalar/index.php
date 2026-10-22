@@ -5,7 +5,7 @@ $bilgi=array(
 "aciklama"=>_LANG('tx_ilan_yazilimlarindaki_magaza_sistemi_icin_gere'),
 "fonksiyon"=>"eklenti.php",
 "gelistirici"=>_LANG('tx_goksel_toprak'),
-"gelistirici_url"=>"http://www.limontasarim.com",
+"gelistirici_url"=>"http://jaayquick.com",
 "ayar"=>0,
 );
 ?>

@@ -5,7 +5,7 @@ $bilgi=array(
 "aciklama"=>_LANG('tx_sitenizin_veritabani_yedegini_yonetim_paneli_u'),
 "fonksiyon"=>"eklenti.php",
 "gelistirici"=>_LANG('tx_goksel_toprak'),
-"gelistirici_url"=>"http://www.limontasarim.com",
+"gelistirici_url"=>"http://jaayquick.com",
 "ayar"=>0,
 );
 ?>

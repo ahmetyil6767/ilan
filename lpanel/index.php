@@ -25,10 +25,10 @@ if ($logout==1) {
 		<div id="page-content-wrapper" class="<?php echo $sag_div; ?>">
 			<?php include("inc/ust.php"); ?>
 			<div class="content">
-			<?php limon(@$panel_anasayfa_ust_kod); ?>
+			<?php jaayquick(@$panel_anasayfa_ust_kod); ?>
 				<div class="row">
 					<div class="col-md-40">
-						<?php limon(@$panel_anasayfa_sol_kod); ?>
+						<?php jaayquick(@$panel_anasayfa_sol_kod); ?>
 						<div class="hizli_linkler">
 							<div class="row">
 							<?php
@@ -93,14 +93,14 @@ if ($logout==1) {
 							<div class="panel-footer"><a href="bildirimler.php"><?php echo _LANG('p_tumunu_goruntule'); ?></a></div>
 						</div>	
 						<?php } ?>
-					<?php limon(@$panel_anasayfa_sol_alt_kod); ?>						
+					<?php jaayquick(@$panel_anasayfa_sol_alt_kod); ?>						
 					</div>
 					<div class="col-md-20">
-						<?php limon(@$panel_anasayfa_sag_kod); ?>
+						<?php jaayquick(@$panel_anasayfa_sag_kod); ?>
 						
 						<?php
 						$domain=domain();
-						$lisans_bitis_tarih_saat=isset($limonsoft_array["lisans_bitis_tarih_saat"]) ? $limonsoft_array["lisans_bitis_tarih_saat"] : null;
+						$lisans_bitis_tarih_saat=isset($yazilim_bilgisi_array["lisans_bitis_tarih_saat"]) ? $yazilim_bilgisi_array["lisans_bitis_tarih_saat"] : null;
 						if ($lisans_bitis_tarih_saat) {
 							$lisans_kalan_gun=kac_gun_kaldi($lisans_bitis_tarih_saat);
 							$lisans_son_odeme_tarihi=tarih_saat_hesapla("+15 days",$lisans_bitis_tarih_saat);
@@ -113,11 +113,11 @@ if ($logout==1) {
 							}
 							?>
 							<div class="alert <?php echo $alert; ?>">
-								<p data-toggle="tooltip" title="<?php echo _LANG('p_lisans_yenileme_uyarisi', array($lisans_son_odeme_tarihi)); ?>"><i class="fa fa-info-circle"></i><?php echo _LANG('p_lisansiniz'); ?> <strong><?php echo $lisans_kalan_gun; ?> <?php echo _LANG('p_gun_ici'); ?></strong> <?php echo _LANG('p_uyelik_bitti'); ?> <?php if (!$limonsoft_bayi) { ?><a href="https://www.limontasarim.com/yonlendir.php?r=lisans&domain=<?php echo $domain; ?>" class="alert-link" target="_blank"><?php echo _LANG('p_sure_uzat'); ?></a><?php } ?></p>
+								<p data-toggle="tooltip" title="<?php echo _LANG('p_lisans_yenileme_uyarisi', array($lisans_son_odeme_tarihi)); ?>"><i class="fa fa-info-circle"></i><?php echo _LANG('p_lisansiniz'); ?> <strong><?php echo $lisans_kalan_gun; ?> <?php echo _LANG('p_gun_ici'); ?></strong> <?php echo _LANG('p_uyelik_bitti'); ?> <?php if (!$yazilim_bilgisi_bayi) { ?><a href="https://jaayquick.com/yonlendir.php?r=lisans&domain=<?php echo $domain; ?>" class="alert-link" target="_blank"><?php echo _LANG('p_sure_uzat'); ?></a><?php } ?></p>
 							</div>
 						<?php }	
 						
-						$garanti_bitis_tarih_saat=isset($limonsoft_array["garanti_bitis_tarih_saat"])?$limonsoft_array["garanti_bitis_tarih_saat"]:null;
+						$garanti_bitis_tarih_saat=isset($yazilim_bilgisi_array["garanti_bitis_tarih_saat"])?$yazilim_bilgisi_array["garanti_bitis_tarih_saat"]:null;
 						if ($garanti_bitis_tarih_saat) {
 							$garanti_kalan_gun=kac_gun_kaldi($garanti_bitis_tarih_saat);
 							$garanti_son_odeme_tarihi=tarih_saat_hesapla("+15 days",$garanti_bitis_tarih_saat);
@@ -130,12 +130,12 @@ if ($logout==1) {
 							}
 							?>
 							<div class="alert <?php echo $alert; ?>">
-								<p data-toggle="tooltip" title="<?php echo _LANG('p_garanti_kapsam_ipucu', array($garanti_bitis_tarih_saat)); ?>"><i class="fa fa-info-circle"></i><?php if ($garanti_kalan_gun<0) {echo _LANG('p_garanti_sona_ermis', array($garanti_bitis_tarih_saat));} else {echo _LANG('p_garanti_gun_kaldi', array($garanti_kalan_gun));} ?> <?php if (!$limonsoft_bayi) { ?><a href="https://www.limontasarim.com/yonlendir.php?r=garanti&domain=<?php echo $domain; ?>" class="alert-link" target="_blank"><?php echo _LANG('p_sure_uzat'); ?></a><?php } ?></p>
+								<p data-toggle="tooltip" title="<?php echo _LANG('p_garanti_kapsam_ipucu', array($garanti_bitis_tarih_saat)); ?>"><i class="fa fa-info-circle"></i><?php if ($garanti_kalan_gun<0) {echo _LANG('p_garanti_sona_ermis', array($garanti_bitis_tarih_saat));} else {echo _LANG('p_garanti_gun_kaldi', array($garanti_kalan_gun));} ?> <?php if (!$yazilim_bilgisi_bayi) { ?><a href="https://jaayquick.com/yonlendir.php?r=garanti&domain=<?php echo $domain; ?>" class="alert-link" target="_blank"><?php echo _LANG('p_sure_uzat'); ?></a><?php } ?></p>
 							</div>
 							<?php
 						}
 						
-						$hosting_bitis_tarih=isset($limonsoft_array["hosting"]["bitis_tarih"]) ? $limonsoft_array["hosting"]["bitis_tarih"] : null;
+						$hosting_bitis_tarih=isset($yazilim_bilgisi_array["hosting"]["bitis_tarih"]) ? $yazilim_bilgisi_array["hosting"]["bitis_tarih"] : null;
 						if ($hosting_bitis_tarih) {
 							$hosting_kalan_gun=kac_gun_kaldi($hosting_bitis_tarih);
 							$hosting_son_odeme_tarihi=tarih_saat_hesapla("+15 days","$hosting_bitis_tarih 00:00:00");
@@ -148,7 +148,7 @@ if ($logout==1) {
 							}
 							?>
 							<div class="alert <?php echo $alert; ?>">
-							<p data-toggle="tooltip" title="<?php echo _LANG('p_hosting_uyarisi', array($hosting_bitis_tarih, $hosting_son_odeme_tarihi)); ?>"><i class="fa fa-info-circle"></i><?php if ($hosting_kalan_gun<0) {echo _LANG('p_hosting_sona_ermis', array($hosting_bitis_tarih));} else {echo _LANG('p_hosting_gun_kaldi', array($hosting_kalan_gun));} ?> <?php if (!$limonsoft_bayi) { ?><a href="https://www.limontasarim.com/yonlendir.php?r=hosting&domain=<?php echo $domain; ?>" class="alert-link" target="_blank"><?php echo _LANG('p_sure_uzat'); ?></a><?php } ?></p>
+							<p data-toggle="tooltip" title="<?php echo _LANG('p_hosting_uyarisi', array($hosting_bitis_tarih, $hosting_son_odeme_tarihi)); ?>"><i class="fa fa-info-circle"></i><?php if ($hosting_kalan_gun<0) {echo _LANG('p_hosting_sona_ermis', array($hosting_bitis_tarih));} else {echo _LANG('p_hosting_gun_kaldi', array($hosting_kalan_gun));} ?> <?php if (!$yazilim_bilgisi_bayi) { ?><a href="https://jaayquick.com/yonlendir.php?r=hosting&domain=<?php echo $domain; ?>" class="alert-link" target="_blank"><?php echo _LANG('p_sure_uzat'); ?></a><?php } ?></p>
 							</div>
 							<?php
 						}
@@ -187,20 +187,20 @@ if ($logout==1) {
 							<div class="clearfix mb10"></div>
 							<p><?php if ($tema_destegi==1) { ?><i class="fa fa-tv" aria-hidden="true"></i><?php echo _LANG('p_aktif_tema'); ?>: <a href="temalar.php"><?php echo $tema_ne; ?></a> <?php echo _LANG('p_ve'); ?> <?php } else {echo "<i class='fa fa-plug' aria-hidden='true'></i>";} ?><a href="eklentiler.php"><?php echo $aktif_eklentiler; ?> <?php echo _LANG('p_aktif_eklenti'); ?></a></p>
 							<div class="clearfix"></div>
-							<p style="margin-bottom:0 !important;" class="pull-left"><?php echo _LANG('p_altyapi'); ?>: <a href="http://www.limontasarim.com/?ref_url=<?php echo site_url(); ?>" target="_blank"><?php echo $lpanel_baslik; ?> <?php $versiyon=ayar_getir("versiyon"); echo $versiyon; ?></a></p>
+							<p style="margin-bottom:0 !important;" class="pull-left"><?php echo _LANG('p_altyapi'); ?>: <a href="http://jaayquick.com/?ref_url=<?php echo site_url(); ?>" target="_blank"><?php echo $lpanel_baslik; ?> <?php $versiyon=ayar_getir("versiyon"); echo $versiyon; ?></a></p>
 							<?php
-							$guncel_versiyon=isset($limonsoft_array["versiyon"])?$limonsoft_array["versiyon"]:"19.8.64"; 
+							$guncel_versiyon=isset($yazilim_bilgisi_array["versiyon"])?$yazilim_bilgisi_array["versiyon"]:"19.8.64"; 
 							if ($guncel_versiyon) {
 								$versiyon=ayar_getir("versiyon");
 								if (str_replace(".",null,$versiyon)<str_replace(".",null,$guncel_versiyon)) {
 									$sistem_guncellemeleri=ayar("sistem_guncellemeleri");
 									if ($sistem_guncellemeleri==1) {
-										echo "<div id='limonsoft_versiyon' class='pull-left' style='margin-left:15px;'><a href='guncellemeler.php' class='tdn'><span class='label label-danger'><i class='fa fa-refresh'></i>"._LANG('p_ilan_yazilimi_yayinlandi', array($guncel_versiyon))."</span></a></div>";
+										echo "<div id='yazilim_bilgisi_versiyon' class='pull-left' style='margin-left:15px;'><a href='guncellemeler.php' class='tdn'><span class='label label-danger'><i class='fa fa-refresh'></i>"._LANG('p_ilan_yazilimi_yayinlandi', array($guncel_versiyon))."</span></a></div>";
 									} else {
-										if ($limonsoft_bayi) {
-											echo "<div id='limonsoft_versiyon' class='pull-left' style='margin-left:15px;'><span class='label label-danger'><i class='fa fa-refresh'></i>"._LANG('p_ilan_yazilimi_yayinlandi', array($guncel_versiyon))."</span></div>";
+										if ($yazilim_bilgisi_bayi) {
+											echo "<div id='yazilim_bilgisi_versiyon' class='pull-left' style='margin-left:15px;'><span class='label label-danger'><i class='fa fa-refresh'></i>"._LANG('p_ilan_yazilimi_yayinlandi', array($guncel_versiyon))."</span></div>";
 										} else {
-											echo "<div id='limonsoft_versiyon' class='pull-left' style='margin-left:15px;'><a href='https://www.limontasarim.com' class='tdn' target='_blank'><span class='label label-danger'><i class='fa fa-refresh'></i>"._LANG('p_ilan_yazilimi_yayinlandi', array($guncel_versiyon))."</span></a></div>";
+											echo "<div id='yazilim_bilgisi_versiyon' class='pull-left' style='margin-left:15px;'><a href='https://jaayquick.com' class='tdn' target='_blank'><span class='label label-danger'><i class='fa fa-refresh'></i>"._LANG('p_ilan_yazilimi_yayinlandi', array($guncel_versiyon))."</span></a></div>";
 										}
 									}
 								}
@@ -210,8 +210,8 @@ if ($logout==1) {
 							<div class="clearfix"></div>
 						</div>
 						<?php } ?>
-						<?php limon(@$panel_anasayfa_sag_alt_kod); ?>
-						<div id="limonsoft_duyurular"></div>
+						<?php jaayquick(@$panel_anasayfa_sag_alt_kod); ?>
+						<div id="yazilim_bilgisi_duyurular"></div>
 					</div>
 				</div>
 			</div>
@@ -225,9 +225,9 @@ if ($logout==1) {
 $(function(){
 	$.ajax({
 		type:"post",
-		url:"inc/ajax.php?islem=limonsoft_duyurular",
+		url:"inc/ajax.php?islem=yazilim_bilgisi_duyurular",
 		success: function(cevap){
-			$("#limonsoft_duyurular").html(cevap);
+			$("#yazilim_bilgisi_duyurular").html(cevap);
 		}
 	});
 });

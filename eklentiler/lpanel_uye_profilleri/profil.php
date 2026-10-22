@@ -50,7 +50,7 @@ $id=$_GET["id"];
 					<td><?php if ($ilan_durum==0) {echo "<span class='label label-danger'>Taslak</span>";} else if ($ilan_durum==1) {echo "<span class='label label-success'>Yayında</span>";} else if ($ilan_durum==2) {echo "<span class='label label-info'>Onay Bekliyor</span>";} else if ($ilan_durum==3) {echo "<span class='label label-warning'>Yayından kaldırılmış</span>";} else if ($ilan_durum==4) {echo "<span class='label label-danger'>Süresi dolmuş</span>";} ?></td>
 					<td><a href="icerik.php?tip=ilan&islem=guncelle&id=<?php echo $ilan_id; ?>">Güncelle</a>
 					<?php if ($aktif_magaza_sayisi>0) { ?>
-						<a href="temalar.php?tema=limon_ilan&sayfa=panel&islem=magazaya-aktar&id=<?php echo $ilan_id; ?>" target="_blank">Mağazaya aktar</a>
+						<a href="temalar.php?tema=jaayquick&sayfa=panel&islem=magazaya-aktar&id=<?php echo $ilan_id; ?>" target="_blank">Mağazaya aktar</a>
 					<?php } ?>
 					</td>
 				</tr>
@@ -223,7 +223,7 @@ $magaza_link=$magaza_id?magaza_link_getir($magaza_id):"";
 						<td><a href="<?php echo $magaza_link; ?>" target="_blank"><?php echo $baslik; ?></a></td>
 						<td><?php echo $magaza_tarih_saat; ?></td>
 						<td><?php if ($magaza_durum==0) {echo "<span class='label label-danger'>Onay Bekliyor</span>";} else if ($magaza_durum==1) {echo "<span class='label label-success'>Onaylandı</span>";} ?></td>
-						<td><a href="temalar.php?tema=limon_ilan&sayfa=panel&islem=magaza-guncelle&id=<?php echo $magaza_id; ?>">Güncelle</a></td>
+						<td><a href="temalar.php?tema=jaayquick&sayfa=panel&islem=magaza-guncelle&id=<?php echo $magaza_id; ?>">Güncelle</a></td>
 					</tr>
 					<?php } ?>
 				</tbody>
@@ -269,7 +269,7 @@ $magaza_link=$magaza_id?magaza_link_getir($magaza_id):"";
 						<td><?php echo $tip; ?></td>
 						<td><?php echo $tarih_saat; ?></td>
 						<td><?php echo $durum; ?></td>
-						<td><a href="temalar.php?tema=limon_ilan&sayfa=panel&islem=magaza-guncelle&id=<?php echo $magaza_id; ?>">Güncelle</a></td>
+						<td><a href="temalar.php?tema=jaayquick&sayfa=panel&islem=magaza-guncelle&id=<?php echo $magaza_id; ?>">Güncelle</a></td>
 					</tr>
 					<?php } ?>
 				</tbody>

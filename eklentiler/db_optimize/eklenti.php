@@ -1,4 +1,4 @@
 <?php
 if(count(get_included_files())==1) {die();}
-$limonpanel_menu[]=array("baslik"=>"DB Optimize","url"=>eklenti_sayfa_url("islem","db_optimize"),"ikon"=>"database","sira"=>70);
+$jaayquickpanel_menu[]=array("baslik"=>"DB Optimize","url"=>eklenti_sayfa_url("islem","db_optimize"),"ikon"=>"database","sira"=>70);
 ?>

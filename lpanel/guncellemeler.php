@@ -26,32 +26,32 @@ if ($paket_id) {
 @$islem=$_GET["islem"];
 $domain=domain();
 $token=api_token();
-$guncelleme_sorgula=curl_get_contents("https://www.limontasarim.com/api/v1/yukle.php?domain=$domain&token=$token");
+$guncelleme_sorgula=curl_get_contents("https://jaayquick.com/api/v1/yukle.php?domain=$domain&token=$token");
 if (is_object(json_decode($guncelleme_sorgula))) {
 	$guncelleme_array=json_decode($guncelleme_sorgula,true);
 }
 
-@$limonsoft_hata=$guncelleme_array["hata"];
-@$limonsoft_lisans=$guncelleme_array["lisans"];
-@$limonsoft_garanti=$guncelleme_array["garanti"];
-@$limonsoft_garanti_bitis_tarih_saat=$guncelleme_array["garanti_bitis_tarih_saat"];
-@$limonsoft_guncel_versiyon=$guncelleme_array["versiyon"];
-@$limonsoft_son_guncelleme=$guncelleme_array["son_guncelleme"];
-@$limonsoft_remove_copyright=$guncelleme_array["remove_copyright"];
+@$yazilim_bilgisi_hata=$guncelleme_array["hata"];
+@$yazilim_bilgisi_lisans=$guncelleme_array["lisans"];
+@$yazilim_bilgisi_garanti=$guncelleme_array["garanti"];
+@$yazilim_bilgisi_garanti_bitis_tarih_saat=$guncelleme_array["garanti_bitis_tarih_saat"];
+@$yazilim_bilgisi_guncel_versiyon=$guncelleme_array["versiyon"];
+@$yazilim_bilgisi_son_guncelleme=$guncelleme_array["son_guncelleme"];
+@$yazilim_bilgisi_remove_copyright=$guncelleme_array["remove_copyright"];
 
-if ($limonsoft_hata) {
-	echo $limonsoft_hata;
+if ($yazilim_bilgisi_hata) {
+	echo $yazilim_bilgisi_hata;
 	exit;
 }
 
-@$limonsoft_indir=$_POST["limonsoft_indir"];
-if ($limonsoft_indir) {
-	if ($limonsoft_garanti!=1) {
+@$yazilim_bilgisi_indir=$_POST["yazilim_bilgisi_indir"];
+if ($yazilim_bilgisi_indir) {
+	if ($yazilim_bilgisi_garanti!=1) {
 		yenile();
 		exit;
 	}
 	/* Yazılım güncelleniyor */
-	$zip_sorgula=curl_get_contents("https://www.limontasarim.com/api/v1/indir.php?tip=limonilan&domain=$domain&token=$token");
+	$zip_sorgula=curl_get_contents("https://jaayquick.com/api/v1/indir.php?tip=jaayquickilan&domain=$domain&token=$token");
 	$zip_array=json_decode($zip_sorgula,true);
 	$zip_url=$zip_array["zip"];
 	if (!url_kontrol($zip_url)) {
@@ -81,9 +81,9 @@ if ($limonsoft_indir) {
 
 
 
-@$limonsoft_yukle=$_POST["limonsoft_yukle"];
-if ($limonsoft_yukle and $paket_url) {
-	if ($limonsoft_garanti!=1) {
+@$yazilim_bilgisi_yukle=$_POST["yazilim_bilgisi_yukle"];
+if ($yazilim_bilgisi_yukle and $paket_url) {
+	if ($yazilim_bilgisi_garanti!=1) {
 		yenile();
 		exit;
 	}
@@ -130,18 +130,18 @@ if ($limonsoft_yukle and $paket_url) {
 	}
 	bakim_modu_kapat();
 	guncelleme_paketi_sil();
-	limonsoft_sorgula(true);
+	yazilim_bilgisi_sorgula(true);
 	yenile();
 }
 
-$limonsoft_sil=$_POST["limonsoft_sil"];
-if ($limonsoft_sil) {
+$yazilim_bilgisi_sil=$_POST["yazilim_bilgisi_sil"];
+if ($yazilim_bilgisi_sil) {
 	guncelleme_paketi_sil();
 	$_SESSION["mesaj"]=array(_LANG("p_update_package_deleted"),"success");
 	yenile();
 }
 
-$limonsoft_versiyon=ayar("versiyon");
+$yazilim_bilgisi_versiyon=ayar("versiyon");
 ?>
 <!DOCTYPE HTML>
 <html lang="<?php echo _DIL_HTML_LANG(); ?>" dir="<?php echo _DIL_HTML_YON(); ?>">
@@ -162,7 +162,7 @@ $limonsoft_versiyon=ayar("versiyon");
 			<div class="content">
 			<h3 class="pull-left bolum-baslik"><?php echo _LANG('p_guncellemeler_basligi'); ?></h3>
 			<div class="clearfix mb20"></div>
-			<?php if ($limonsoft_garanti==1) { ?>
+			<?php if ($yazilim_bilgisi_garanti==1) { ?>
 			<form action="" method="post" id="form">
 				
 				<?php if ($paket_id) { ?>
@@ -180,8 +180,8 @@ $limonsoft_versiyon=ayar("versiyon");
 								<td><?php echo _LANG('p_paket_hazir'); ?></td>
 								<td><?php echo $paket_tarih_saat; ?></td>
 								<td class="butonlar">
-									<button type="submit" name="limonsoft_yukle" value="1" class="btn btn-success btn-xs ajax_buton" onclick="return onayla('<?php echo _LANG("p_yukleme_onay"); ?>');"><i class="fa fa-refresh"></i><?php echo _LANG('p_yuklemeyi_baslat'); ?></button>
-									<button type="submit" name="limonsoft_sil" value="1" class="btn btn-danger btn-xs" onclick="return confirm('<?php echo _LANG("p_yukleme_paketi_sil_onay"); ?>');"><i class="fa fa-trash"></i><?php echo _LANG('p_sil'); ?></button>
+									<button type="submit" name="yazilim_bilgisi_yukle" value="1" class="btn btn-success btn-xs ajax_buton" onclick="return onayla('<?php echo _LANG("p_yukleme_onay"); ?>');"><i class="fa fa-refresh"></i><?php echo _LANG('p_yuklemeyi_baslat'); ?></button>
+									<button type="submit" name="yazilim_bilgisi_sil" value="1" class="btn btn-danger btn-xs" onclick="return confirm('<?php echo _LANG("p_yukleme_paketi_sil_onay"); ?>');"><i class="fa fa-trash"></i><?php echo _LANG('p_sil'); ?></button>
 								</td>
 							</tr>
 						</tbody>
@@ -202,15 +202,15 @@ $limonsoft_versiyon=ayar("versiyon");
 						</thead>
 						<tbody>
 							<tr>
-								<td><?php echo $limonsoft_versiyon; ?></td>
-								<td><?php if ($limonsoft_versiyon<$limonsoft_guncel_versiyon) {echo "<div class='label label-danger'>" . _LANG("p_update_required") . "</div>";} else {echo "<div class='label label-success'>" . _LANG("p_system_up_to_date") . "</div>";} ?></td>
-								<td><?php echo $limonsoft_guncel_versiyon; ?></td>
-								<td><?php echo $limonsoft_son_guncelleme; ?></td>
+								<td><?php echo $yazilim_bilgisi_versiyon; ?></td>
+								<td><?php if ($yazilim_bilgisi_versiyon<$yazilim_bilgisi_guncel_versiyon) {echo "<div class='label label-danger'>" . _LANG("p_update_required") . "</div>";} else {echo "<div class='label label-success'>" . _LANG("p_system_up_to_date") . "</div>";} ?></td>
+								<td><?php echo $yazilim_bilgisi_guncel_versiyon; ?></td>
+								<td><?php echo $yazilim_bilgisi_son_guncelleme; ?></td>
 								<td class="butonlar">
-									<?php if ($limonsoft_versiyon<$limonsoft_guncel_versiyon) { ?>
-										<button type="submit" name="limonsoft_indir" value="1" class="btn btn-success btn-xs ajax_buton" onclick="return onayla('<?php echo _LANG("p_yazilim_indir_onay"); ?>',1);"><i class="fa fa-refresh"></i><?php echo _LANG('p_yazilimi_indir'); ?></button>
+									<?php if ($yazilim_bilgisi_versiyon<$yazilim_bilgisi_guncel_versiyon) { ?>
+										<button type="submit" name="yazilim_bilgisi_indir" value="1" class="btn btn-success btn-xs ajax_buton" onclick="return onayla('<?php echo _LANG("p_yazilim_indir_onay"); ?>',1);"><i class="fa fa-refresh"></i><?php echo _LANG('p_yazilimi_indir'); ?></button>
 									<?php } else { ?>
-										<button type="submit" name="limonsoft_indir" value="1" class="btn btn-danger btn-xs ajax_buton" onclick="return onayla('<?php echo _LANG("p_yazilim_yeniden_indir_onay"); ?>',1);"><i class="fa fa-undo"></i><?php echo _LANG('p_yeniden_indir'); ?></button>
+										<button type="submit" name="yazilim_bilgisi_indir" value="1" class="btn btn-danger btn-xs ajax_buton" onclick="return onayla('<?php echo _LANG("p_yazilim_yeniden_indir_onay"); ?>',1);"><i class="fa fa-undo"></i><?php echo _LANG('p_yeniden_indir'); ?></button>
 									<?php } ?>
 								</td>
 							</tr>
@@ -224,17 +224,17 @@ $limonsoft_versiyon=ayar("versiyon");
 					<div class="mesaj"></div>
 				</div>
 				<?php } else {
-					if (!$limonsoft_garanti_bitis_tarih_saat) {
+					if (!$yazilim_bilgisi_garanti_bitis_tarih_saat) {
 							echo "<div class='alert alert-danger'>" . _LANG('p_lokal_sunucu_uyari') . "</div>";
 					} else {
-						if ($limonsoft_garanti_bitis_tarih_saat<tarih_saat()) {
-							echo "<div class='alert alert-danger'>" . _LANG('p_garanti_sona_erdi_uyari'), array($limonsoft_garanti_bitis_tarih_saat) . "</div>";
+						if ($yazilim_bilgisi_garanti_bitis_tarih_saat<tarih_saat()) {
+							echo "<div class='alert alert-danger'>" . _LANG('p_garanti_sona_erdi_uyari'), array($yazilim_bilgisi_garanti_bitis_tarih_saat) . "</div>";
 						} else {
 							echo "<div class='alert alert-warning'>" . _LANG('p_guncelleme_devam_uyari') . "</div>";
 						}
 					}
 				} ?>
-				<?php // print_r($limonsoft_array); ?>
+				<?php // print_r($yazilim_bilgisi_array); ?>
 				
 				<div class="uyarilar" style="padding:20px;background:#ffe0e0;border:1px solid #ffa3a3;margin-top:50px;">
 					<h4><?php echo _LANG('p_olasi_hatalar'); ?></h4>

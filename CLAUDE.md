@@ -11,7 +11,7 @@ Bu depo için geçerli talimatlar **`AGENTS.md`** dosyasındadır. Onu oku ve uy
 - **Doğrulama:** `php -l <dosya>` → `php tests/LanguageSystemTest.php` → 4 dilli link
   taraması (PHP hatası 0 olmalı) → `otomatik_yedek.ps1` → Türkçe commit.
 - **Dokunma:** `config/db.php`, `SQL/*.sql`, `lisans.php`, üçüncü parti kod
-  (`lpanel/js/ckeditor/**`, `eklentiler/smtp/phpmailer/**`, `temalar/limon_ilan/iyzico/src/**`).
+  (`lpanel/js/ckeditor/**`, `eklentiler/smtp/phpmailer/**`, `temalar/jaayquick/iyzico/src/**`).
 - **Mimari ve iş akışları:** `PROJECT_CONTEXT.md`.
 
 Bilinen tuzaklar: sayfa cache'i bayatlar (`cache/` sil), dil çerezle değişir

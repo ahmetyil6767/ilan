@@ -107,7 +107,7 @@ if (!$islem) {
 }
 if ($islem=="sil") {
 	$anahtar=bilgi_getir("ayarlar","anahtar",$id);
-	if ($anahtar!="site_url" and $anahtar!="site_baslik" and $anahtar!="site_email" and $anahtar!="limonsoft" and $anahtar!="panel_renk" and $anahtar!="versiyon" and $anahtar!="basliga_ekle" and $anahtar!="tema" and $anahtar!="bildirimler" and $anahtar!="datatable" and $anahtar!="panel_sablon") {
+	if ($anahtar!="site_url" and $anahtar!="site_baslik" and $anahtar!="site_email" and $anahtar!="yazilim_bilgisi" and $anahtar!="panel_renk" and $anahtar!="versiyon" and $anahtar!="basliga_ekle" and $anahtar!="tema" and $anahtar!="bildirimler" and $anahtar!="datatable" and $anahtar!="panel_sablon") {
 		$sil_id_int=(int)$id;
 		$sql=mysqli_prepare($baglan,"delete from ayarlar where id=?");
 		mysqli_stmt_bind_param($sql,"i",$sil_id_int);

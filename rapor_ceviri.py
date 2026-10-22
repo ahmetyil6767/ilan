@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import re, os
 
-base = r"C:\wamp64\www\ilan.limontasarim.net"
+base = r"C:\wamp64\www\jaayquick.com"
 files = {
   'tr': open(os.path.join(base, 'lang', 'tr.php'), encoding='utf-8').read(),
   'en': open(os.path.join(base, 'lang', 'en.php'), encoding='utf-8').read(),

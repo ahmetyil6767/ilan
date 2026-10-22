@@ -18,7 +18,7 @@
       </ul>
     </div><!-- /.navbar-collapse -->
 </div>
-<?php limon(@$panel_header_alt_kod); ?>
+<?php jaayquick(@$panel_header_alt_kod); ?>
 <?php
 if (isset($_SESSION["mesaj"]) and is_array($_SESSION["mesaj"]) and isset($_SESSION["mesaj"][0])) {
 $mesaj_kaynak = $_SESSION["mesaj"][0];

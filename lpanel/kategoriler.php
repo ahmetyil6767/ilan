@@ -366,7 +366,7 @@ if ($islem=="sil") {
 			<h3 class="pull-left bolum-baslik text-uppercase"><?php echo $sinif_baslik_cogul; ?> <small>/ <?php echo $tip_baslik; ?></small></h3>
 			<a href="icerik.php?tip=<?php echo $tip; ?>" class="btn btn-default"><?php echo $tip_baslik_cogul; ?></a>
 			<div class="clearfix mb25"></div>
-			<?php limon(@$panel_kategori_ust_kod); ?>
+			<?php jaayquick(@$panel_kategori_ust_kod); ?>
 			<div class="row">
 				<div class="col-md-20">
 					
@@ -546,7 +546,7 @@ if ($islem=="sil") {
 								</div>
 							</div>
 						<?php } } ?>
-						<?php limon(@$panel_kategori_form_kod); ?>
+						<?php jaayquick(@$panel_kategori_form_kod); ?>
 						<?php form_buton("buton",_LANG('p_ekle'),"primary btn-lg"); ?>
 					</form>
 					<?php } else { ?>
@@ -803,7 +803,7 @@ if ($islem=="sil") {
 								</div>
 							</div>
 						<?php } ?>
-						<?php limon(@$panel_kategori_form_kod); ?>
+						<?php jaayquick(@$panel_kategori_form_kod); ?>
 						<?php form_buton("buton",_LANG('p_ekle'),"primary btn-lg"); ?>
 					</form>					
 
@@ -812,7 +812,7 @@ if ($islem=="sil") {
 				</div>
 				<div class="clearfix mb20 visible-xs"></div>
 				<div class="col-md-40">
-				<?php limon(@$panel_kategori_sag_kod); ?>
+				<?php jaayquick(@$panel_kategori_sag_kod); ?>
 				
 				<?php if ($kategori_ekle_stil==1) { ?>
 					<div class="table-responsive">
@@ -931,7 +931,7 @@ if ($islem=="sil") {
 					</table>				
 					</div>				
 				<?php } ?>
-				<?php limon(@$panel_kategori_sag_alt_kod); ?>
+				<?php jaayquick(@$panel_kategori_sag_alt_kod); ?>
 				</div>
 			</div>
 			<?php } else { ?>
@@ -1123,13 +1123,13 @@ if ($islem=="sil") {
 							</div>
 						</div>
 					<?php } ?>
-					<?php limon(@$panel_kategori_form_kod); ?>
+					<?php jaayquick(@$panel_kategori_form_kod); ?>
 					<?php form_buton("buton",_LANG('p_guncelle'),"primary"); ?>
 					<?php form_elemani("hidden","aktif_tab",_LANG('p_aktif_tab')); ?>
 				</form>				
 			</div>
 			<div class="col-md-25">
-			<?php limon(@$panel_kategori_guncelle_sag_kod); ?>
+			<?php jaayquick(@$panel_kategori_guncelle_sag_kod); ?>
 			</div>
 		</div>
 		<?php } ?>

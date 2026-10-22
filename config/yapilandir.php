@@ -3,7 +3,7 @@ if(count(get_included_files())==1) {die();}
 $tema_destegi=1;
 $eklentiler_dizini="eklentiler";
 $temalar_dizini="temalar";
-$default_tema="limon_ilan";
+$default_tema="jaayquick";
 $lpanel_baslik=_LANG('p_lpanel_baslik');
 $lpanel_ust_baslik=_LANG('p_lpanel_ust_baslik');
 $resize_kalite=90;
@@ -106,7 +106,7 @@ array("deger"=>"yazar","baslik"=>_LANG('y_yazar')),
 array("deger"=>"kullanici","baslik"=>_LANG('y_kullanici')),
 );
 // Yönetim paneli sidebar linkleri
-$limonpanel_menu=array(
+$jaayquickpanel_menu=array(
 array("baslik"=>_LANG('y_uyeler'),"url"=>"uyeler.php","ikon"=>"users","sira"=>30,"yetki"=>"admin,editor","alt_linkler"=>array(array("baslik"=>_LANG('y_uye_ekle'),"url"=>"uyeler.php?islem=ekle","yetki"=>"admin,editor","yetki"=>"admin,editor"))),
 array("baslik"=>_LANG('y_eklentiler'),"url"=>"eklentiler.php","ikon"=>"circle","sira"=>49,"yetki"=>"admin,editor"),
 array("baslik"=>_LANG('y_ayarlar'),"url"=>"ayarlar.php","ikon"=>"cog","sira"=>100,"yetki"=>"admin")
@@ -119,7 +119,7 @@ if (@$toplam_yorum>0) {
 	if ($yeni_yorum>0) {
 		$yeni_yorum_badge="<div class='badge'>$yeni_yorum</div>";
 	}
-	$limonpanel_menu[]=array("baslik"=>"Yorumlar $yeni_yorum_badge","url"=>"yorumlar.php","ikon"=>"comments","sira"=>20);	
+	$jaayquickpanel_menu[]=array("baslik"=>"Yorumlar $yeni_yorum_badge","url"=>"yorumlar.php","ikon"=>"comments","sira"=>20);	
 }
 $hizli_linkler=array(
 array("baslik"=>_LANG('y_tum_yazilar'),"url"=>"icerik.php?tip=yazi","ikon"=>"pencil","sira"=>20),

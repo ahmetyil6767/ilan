@@ -566,7 +566,7 @@ if ($panel_sablon=="fullwidth") {
 				</div>
 				<div class="col-md-30">
 					<?php if (count($bilesen)>0) { foreach ($bilesen as $x) {@$bilesen_value=$x["id"]; @$bilesen_baslik=$x["baslik"]; @$bilesen_aciklama=$x["aciklama"]; @$bilesen_resim=$x["resim"]; ?>
-						<div class="well well_limon">
+						<div class="well well_jaayquick">
 							<div class="bilesen_liste_ust">
 								<h4 class="pull-left"><?php echo e($bilesen_baslik); ?></h4>
 								<?php if ($bilesen_resim) { ?><a href="<?php echo $bilesen_resim; ?>" target="_blank" style="margin-left:15px;" data-toggle="tooltip" title="<?php echo _LANG("p_bilesen_gorseli"); ?>" class="bilesen_resim"><i class="fa fa-photo mr0"></i></a><?php } ?> <a href="bilesenler.php?islem=ekle&alan=<?php echo $bilesen_alani; ?>&bilesen=<?php echo $bilesen_value; ?>" class="pull-right btn btn-primary btn-xs"><?php echo _LANG('gen_add'); ?></a>

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import re, os
-base = r"C:\wamp64\www\ilan.limontasarim.net"
+base = r"C:\wamp64\www\jaayquick.com"
 files = {c: open(os.path.join(base,"lang",c+".php"), encoding="utf-8").read() for c in ["tr","en","ar","fr"]}
 keys = {}
 for c, content in files.items():

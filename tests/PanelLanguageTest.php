@@ -18,7 +18,7 @@ function istek($url, $ciz, $post = null, $dil = null)
 	return array($kod, $h);
 }
 
-list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', $ciz, 'kullanici=info%40jaayquick.com&parola=Jaayko%232026&buton=1');
+list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', $ciz, 'kullanici=info%40jaayquick.com&parola=JaayQuick%232026&buton=1');
 echo "giris: HTTP $kod\n\n";
 
 $diller = array('tr' => 'Türkçe', 'en' => 'English', 'fr' => 'Français', 'ar' => 'العربية');

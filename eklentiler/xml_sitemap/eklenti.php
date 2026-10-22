@@ -1,6 +1,6 @@
 <?php
 if(count(get_included_files())==1) {die();}
-$limonpanel_menu[]=array("baslik"=>"XML Sitemap","url"=>"eklentiler.php?eklenti=xml_sitemap&sayfa=olustur","ikon"=>"sitemap","sira"=>70);
+$jaayquickpanel_menu[]=array("baslik"=>"XML Sitemap","url"=>"eklentiler.php?eklenti=xml_sitemap&sayfa=olustur","ikon"=>"sitemap","sira"=>70);
 function sitemap_guncelleme_kontrol() {
 	$sitemap_url=eklenti_ayar_getir("sitemap_url","xml_sitemap");
 	$son_guncelleme=strtotime(eklenti_ayar_getir("son_guncelleme","xml_sitemap"));
