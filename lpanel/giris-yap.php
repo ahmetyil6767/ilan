@@ -27,11 +27,12 @@ if ($logout==1) {
 	<style>
 		/* === JAAYQUICK ADMIN LOGIN :: SURPRISE REDESIGN === */
 		:root {
-			--deep: #0b1023;
-			--navy: #14224a;
-			--indigo: #2c3f8f;
-			--amber: #f5b841;
-			--cyan: #6dd5ed;
+			--deep: #061021;
+			--navy: #0B2545;
+			--indigo: #123a63;
+			--brand: #7BB31A;
+			--brand2: #DF1623;
+			--amber: #7BB31A;
 			--danger: #ff4d6d;
 			--glass: rgba(255,255,255,0.07);
 			--glass2: rgba(255,255,255,0.14);
@@ -40,9 +41,9 @@ if ($logout==1) {
 		html, body { height: 100%; margin: 0; padding: 0; }
 		body.giris {
 			font-family: "Inter","Segoe UI","Roboto",sans-serif;
-			background: radial-gradient(1200px 700px at 15% 20%, #1f3a8a 0%, transparent 60%),
-			            radial-gradient(900px 600px at 90% 75%, #7c3aed 0%, transparent 55%),
-			            linear-gradient(135deg, #070a14 0%, #111a33 50%, #0b1023 100%);
+			background: radial-gradient(1200px 700px at 15% 20%, #123a63 0%, transparent 60%),
+			            radial-gradient(900px 600px at 90% 75%, #3A7D44 0%, transparent 55%),
+			            linear-gradient(135deg, #061021 0%, #0B2545 55%, #0a1c34 100%) !important;
 			color: #e8ecf7;
 			overflow: hidden;
 			position: relative;
@@ -50,14 +51,14 @@ if ($logout==1) {
 		/* floating blobs */
 		.blob {
 			position: fixed; border-radius: 50%; filter: blur(40px);
-			opacity: 0.55; mix-blend-mode: screen; pointer-events: none;
+			opacity: 0.16; mix-blend-mode: normal; pointer-events: none;
 			animation: drift 14s ease-in-out infinite alternate;
 		}
-		.b1 { width: 380px; height: 380px; background: #3b82f6; top: -80px; left: -60px; }
-		.b2 { width: 420px; height: 420px; background: #f59e0b; bottom: -120px; right: -80px; animation-delay: -6s;
-		       opacity: 0.4; }
-		.b3 { width: 260px; height: 260px; background: #22d3ee; top: 40%; left: 45%; animation-delay: -3s;
-		       opacity: 0.35; mix-blend-mode: normal; }
+		.b1 { width: 380px; height: 380px; background: #0047AB; top: -80px; left: -60px; opacity: 0.22; }
+		.b2 { width: 420px; height: 420px; background: #7BB31A; bottom: -120px; right: -80px; animation-delay: -6s;
+		       opacity: 0.14; }
+		.b3 { width: 260px; height: 260px; background: #DF1623; top: 40%; left: 45%; animation-delay: -3s;
+		       opacity: 0.10; }
 		@keyframes drift {
 			0%   { transform: translate(0,0) scale(1); }
 			50%  { transform: translate(40px,-30px) scale(1.12); }
@@ -94,7 +95,7 @@ if ($logout==1) {
 		/* left brand side */
 		.brand-side {
 			position: relative; padding: 52px 46px;
-			background: linear-gradient(160deg, rgba(59,130,246,0.25), rgba(245,158,11,0.08));
+			background: linear-gradient(160deg, rgba(123,179,26,0.10), rgba(11,37,69,0.55));
 			border-right: 1px solid rgba(255,255,255,0.08);
 			display: flex; flex-direction: column; justify-content: space-between; min-height: 460px;
 		}
@@ -103,16 +104,15 @@ if ($logout==1) {
 		}
 		.logo-mark {
 			width: 46px; height: 46px; border-radius: 12px;
-			background: linear-gradient(135deg, #f5b841, #fb923c);
-			display: grid; place-items: center;
-			font-weight: 900; color: #0b1023; font-size: 22px;
-			box-shadow: 0 8px 24px rgba(245,184,65,0.45);
+			overflow: hidden; display: grid; place-items: center;
+			box-shadow: 0 8px 24px rgba(0,0,0,0.45);
 		}
+		.logo-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
 		.logo span { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
 		.brand-side h1 {
 			font-size: 42px; line-height: 1.05; margin: 0 0 16px;
 			font-weight: 800; letter-spacing: -1px;
-			background: linear-gradient(90deg, #ffffff, #93c5fd);
+			background: linear-gradient(90deg, #ffffff, #9fd14a);
 			-webkit-background-clip: text; background-clip: text; color: transparent;
 		}
 		.brand-side p { color: #b6bed6; font-size: 15px; line-height: 1.6; margin: 0 0 26px; }
@@ -130,7 +130,7 @@ if ($logout==1) {
 		.form-side { padding: 46px 44px; background: rgba(7,10,20,0.5); position: relative; }
 		.form-side h2 {
 			font-size: 26px; font-weight: 700; margin: 0 0 6px;
-			background: linear-gradient(90deg, #fff, #a78bfa);
+			background: linear-gradient(90deg, #fff, #7BB31A);
 			-webkit-background-clip: text; background-clip: text; color: transparent;
 		}
 		.form-side .sub { color: #8a93b5; font-size: 13px; margin-bottom: 26px; }
@@ -164,14 +164,14 @@ if ($logout==1) {
 		}
 		.btn-submit {
 			width: 100%; padding: 15px; border: none; border-radius: 14px;
-			background: linear-gradient(90deg, #f5b841, #f97316);
-			color: #0b1023; font-weight: 800; font-size: 15px; letter-spacing: 0.5px;
+			background: linear-gradient(90deg, #8DCB22, #5E9A12);
+			color: #061021; font-weight: 800; font-size: 15px; letter-spacing: 0.5px;
 			cursor: pointer; position: relative; overflow: hidden;
-			box-shadow: 0 10px 28px rgba(245,184,65,0.35);
+			box-shadow: 0 10px 28px rgba(123,179,26,0.35);
 			transition: transform .15s ease, box-shadow .25s ease;
 		}
 		.btn-submit:hover {
-			transform: translateY(-2px); box-shadow: 0 16px 36px rgba(245,184,65,0.5);
+			transform: translateY(-2px); box-shadow: 0 16px 36px rgba(123,179,26,0.5);
 		}
 		.btn-submit:active { transform: translateY(0); }
 		.btn-submit::after {
@@ -225,7 +225,7 @@ if ($logout==1) {
 		<div class="shell">
 			<aside class="brand-side">
 				<div class="logo">
-					<div class="logo-mark">J</div>
+					<div class="logo-mark"><img src="/uploads/images/jaayquick-icon.png" alt="JaayQuick" /></div>
 					<span>JaayQuick Admin</span>
 				</div>
 				<div>
