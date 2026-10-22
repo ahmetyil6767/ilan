@@ -1,9 +1,9 @@
 ﻿<?php
 include("../loader.php");
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
-$tip=$_GET["tip"];
+$tip=isset($_GET["tip"])?$_GET["tip"]:"";
 if ($tip=="") {$tip="yazi";}
-$tip_ozellikleri=$icerik_tipleri[$tip];
+$tip_ozellikleri=isset($icerik_tipleri[$tip])?$icerik_tipleri[$tip]:array();
 $tip_baslik=$tip_ozellikleri["baslik"];
 $tip_baslik_cogul=$tip_ozellikleri["baslik_cogul"];
 $tip_baslik_isaret=$tip_ozellikleri["baslik_isaret"];

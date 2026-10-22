@@ -123,7 +123,8 @@ function bilgi_getir($table, $bilgi, $id = NULL)
 	if ($id < 1) {
 		return NULL;
 	}
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select ' . $bilgi . ' from ' . $table . ' where id=' . $id));
+	$sorgu = mysqli_query($baglan, 'select ' . $bilgi . ' from ' . $table . ' where id=' . $id);
+	$dizi = $sorgu ? mysqli_fetch_array($sorgu) : null;
 	if (!$dizi) {
 		return NULL;
 	}
@@ -281,7 +282,7 @@ function uye_bilgi_getir($anahtar, $uye_id = NULL)
 	}
 
 	global $baglan;
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\''));
+	$dizi = (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\'') ? (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=' . (int) $uye_id . ' and tip=\'uye\'')) : null) : null);
 	if ($dizi && $dizi['deger'] !== null) {
 		return tirnak_ekle($dizi['deger']);
 	}
@@ -363,7 +364,7 @@ function ekstra_bilgi_id_getir($anahtar, $icerik_id, $tip = 'yazi')
 	$say = mysqli_num_rows(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\''));
 
 	if ($say == 1) {
-		$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\''));
+		$dizi = (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\'') ? (mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where anahtar=\'' . $anahtar . '\' and id=\'' . $icerik_id . '\' and tip=\'' . $tip . '\'')) : null) : null);
 		return $dizi['b_id'];
 	}
 }
@@ -377,14 +378,14 @@ function ekstra_bilgi_sil($id)
 function idden_ekstra_bilgi_getir($id, $bilgi)
 {
 	global $baglan;
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\''));
+	$dizi = (mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\'') ? (mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ekstra_bilgi where b_id=\'' . $id . '\'')) : null) : null);
 	return tirnak_ekle($dizi[$bilgi]);
 }
 
 function kategori_id_getir($url)
 {
 	global $baglan;
-	$sor = mysqli_fetch_array(mysqli_query($baglan, 'select * from kategoriler where url=\'' . $url . '\''));
+	$sor = (mysqli_query($baglan, 'select * from kategoriler where url=\'' . $url . '\'') ? (mysqli_query($baglan, 'select * from kategoriler where url=\'' . $url . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from kategoriler where url=\'' . $url . '\'')) : null) : null);
 	return $sor['id'];
 }
 
@@ -456,7 +457,7 @@ function icerik_getir($id = NULL)
 function ayar_getir($ayar)
 {
 	global $baglan;
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $ayar . '\''));
+	$dizi = (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $ayar . '\'') ? (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $ayar . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $ayar . '\'')) : null) : null);
 	if (!$dizi) { return ''; }
 	return tirnak_ekle($dizi['deger']);
 }
@@ -510,14 +511,14 @@ function tema_ayar_getir($ayar, $dil = null)
 	// First try to get language-specific setting (e.g., limon_ilan-footer_metni_en)
 	if ($dil !== 'tr') { // Turkish is source language, no _tr suffix needed
 		$anahtar_dil = $tema . '-' . $ayar . '_' . $dil;
-		$dizi = mysqli_fetch_array(mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'"));
+		$dizi = (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'") ? (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'") ? mysqli_fetch_array(mysqli_query($baglan, "select * from ayarlar where anahtar='" . $anahtar_dil . "'")) : null) : null);
 		if ($dizi && $dizi['deger'] !== '') {
 			return tirnak_ekle($dizi['deger']);
 		}
 	}
 	
 	// Fall back to default setting (e.g., limon_ilan-footer_metni)
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'"));
+	$dizi = (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'") ? (mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'") ? mysqli_fetch_array(mysqli_query($baglan, "select * from ayarlar where anahtar='" . $tema . '-' . $ayar . "'")) : null) : null);
 	if ($dizi && $dizi['deger'] !== null && $dizi['deger'] !== '') {
 		return tirnak_ekle($dizi['deger']);
 	}
@@ -545,7 +546,7 @@ function eklenti_ayar_getir($ayar, $eklenti = NULL)
 	}
 
 	global $baglan;
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $eklenti . '-' . $ayar . '\''));
+	$dizi = (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $eklenti . '-' . $ayar . '\'') ? (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $eklenti . '-' . $ayar . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'' . $eklenti . '-' . $ayar . '\'')) : null) : null);
 	if ($dizi && $dizi['deger'] !== null) {
 		return tirnak_ekle($dizi['deger']);
 	}
@@ -598,7 +599,7 @@ function eklenti_pasiflestir($eklenti)
 function site_url()
 {
 	global $baglan;
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\''));
+	$dizi = (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\'') ? (mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where anahtar=\'site_url\'')) : null) : null);
 	return $dizi['deger'];
 }
 
@@ -620,7 +621,7 @@ function alt_kategori_sayisi($kategori_id)
 function kategori_adi_getir($kategori_id)
 {
 	global $baglan;
-	$kategori_dizi = mysqli_fetch_array(mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\''));
+	$kategori_dizi = (mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\'') ? (mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\'')) : null) : null);
 	return $kategori_adi = $kategori_dizi['baslik'];
 }
 
@@ -1358,9 +1359,9 @@ function uye_id_getir($login)
 	global $baglan;
 	$login = mysqli_real_escape_string($baglan, $login);
 	if (strpos($login, '@') !== false) {
-		$dizi = mysqli_fetch_array(mysqli_query($baglan, "select * from uyeler where email_adresi='$login'"));
+		$dizi = (mysqli_query($baglan, "select * from uyeler where email_adresi='$login'") ? (mysqli_query($baglan, "select * from uyeler where email_adresi='$login'") ? mysqli_fetch_array(mysqli_query($baglan, "select * from uyeler where email_adresi='$login'")) : null) : null);
 	} else {
-		$dizi = mysqli_fetch_array(mysqli_query($baglan, "select u.* from uyeler u inner join ekstra_bilgi eb on eb.id=u.id where eb.anahtar='cep_tel' and eb.tip='uye' and eb.deger='$login'"));
+		$dizi = (mysqli_query($baglan, "select u.* from uyeler u inner join ekstra_bilgi eb on eb.id=u.id where eb.anahtar='cep_tel' and eb.tip='uye' and eb.deger='$login'") ? (mysqli_query($baglan, "select u.* from uyeler u inner join ekstra_bilgi eb on eb.id=u.id where eb.anahtar='cep_tel' and eb.tip='uye' and eb.deger='$login'") ? mysqli_fetch_array(mysqli_query($baglan, "select u.* from uyeler u inner join ekstra_bilgi eb on eb.id=u.id where eb.anahtar='cep_tel' and eb.tip='uye' and eb.deger='$login'")) : null) : null);
 	}
 	return isset($dizi['id']) ? $dizi['id'] : null;
 }
@@ -1371,7 +1372,7 @@ function uye_ad_soyad_getir($uye_id = NULL)
 	}
 
 	global $baglan;
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from uyeler where id=\'' . $uye_id . '\''));
+	$dizi = (mysqli_query($baglan, 'select * from uyeler where id=\'' . $uye_id . '\'') ? (mysqli_query($baglan, 'select * from uyeler where id=\'' . $uye_id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from uyeler where id=\'' . $uye_id . '\'')) : null) : null);
 	return $uye_ad_soyad = $dizi['ad_soyad'];
 }
 
@@ -1543,7 +1544,7 @@ function ozet_olustur($metin, $kelime_sayisi = 20)
 function menu_pozisyonu($menu_id)
 {
 	global $baglan;
-	$menu_id_hazirlik = mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\''));
+	$menu_id_hazirlik = (mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\'') ? (mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\'')) : null) : null);
 	return $menu_id = $menu_id_hazirlik['anahtar'];
 }
 
@@ -2542,7 +2543,7 @@ function galeri_ilk_resim($icerik_id = NULL)
 		$icerik_id = $_GET['id'];
 	}
 
-	$dizi = mysqli_fetch_array(mysqli_query($baglan, 'select * from galeri where icerik_id=\'' . $icerik_id . '\' order by sira asc limit 1'));
+	$dizi = (mysqli_query($baglan, 'select * from galeri where icerik_id=\'' . $icerik_id . '\' order by sira asc limit 1') ? (mysqli_query($baglan, 'select * from galeri where icerik_id=\'' . $icerik_id . '\' order by sira asc limit 1') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from galeri where icerik_id=\'' . $icerik_id . '\' order by sira asc limit 1')) : null) : null);
 	return $dizi['id'];
 }
 
@@ -3390,7 +3391,7 @@ function galeri_ekle($url, $icerik_id, $sira = NULL)
 	global $baglan;
 
 	if (!$sira) {
-		$say = mysqli_fetch_array(mysqli_query($baglan, 'select COUNT(id) from galeri where icerik_id=\'' . $icerik_id . '\''))[0];
+		$say = (mysqli_query($baglan, 'select COUNT(id) from galeri where icerik_id=\'' . $icerik_id . '\'') ? (mysqli_query($baglan, 'select COUNT(id) from galeri where icerik_id=\'' . $icerik_id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select COUNT(id) from galeri where icerik_id=\'' . $icerik_id . '\'')) : null) : null)[0];
 		$sira = $say * 10;
 	}
 

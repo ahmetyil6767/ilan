@@ -174,7 +174,8 @@ $id=$_GET["id"];
 					$durum=$dizi["durum"];
 					$doping_tarih_saat=$dizi["tarih_saat"];
 					$doping_bitis_tarih_saat=$dizi["bitis_tarih_saat"];
-					$magaza_link=magaza_link_getir($magaza_id);
+					$magaza_id=isset($magaza_id)?$magaza_id:0;
+$magaza_link=$magaza_id?magaza_link_getir($magaza_id):"";
 					?>
 					<tr>
 						<th><?php echo $doping_id; ?></th>
@@ -214,7 +215,8 @@ $id=$_GET["id"];
 					$baslik=$dizi["baslik"];
 					$magaza_durum=$dizi["durum"];
 					$magaza_tarih_saat=$dizi["tarih_saat"];
-					$magaza_link=magaza_link_getir($magaza_id);
+					$magaza_id=isset($magaza_id)?$magaza_id:0;
+$magaza_link=$magaza_id?magaza_link_getir($magaza_id):"";
 					?>
 					<tr>
 						<th><?php echo $magaza_id; ?></th>
@@ -257,7 +259,8 @@ $id=$_GET["id"];
 					$tutar=$dizi["tutar"];
 					$tarih_saat=$dizi["tarih_saat"];
 					$durum=$dizi["durum"];
-					$magaza_link=magaza_link_getir($magaza_id);
+					$magaza_id=isset($magaza_id)?$magaza_id:0;
+$magaza_link=$magaza_id?magaza_link_getir($magaza_id):"";
 					?>
 					<tr>
 						<th><?php echo $siparis_id; ?></th>

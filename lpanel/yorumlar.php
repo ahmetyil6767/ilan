@@ -28,13 +28,13 @@ if ($islem=="guncelle") {
 /* DATATABLE PASİF */
 $datatable=ayar_getir("datatable");
 if ($datatable==0) {
-$page=$_GET["p"];
-$kacarli_buton=$_POST["kacarli_buton"];
+$page=isset($_GET["p"])?$_GET["p"]:1;
+$kacarli_buton=isset($_POST["kacarli_buton"])?$_POST["kacarli_buton"]:"";
 if ($kacarli_buton) {
-	$kacarli=$_POST["kacarli"];
+	$kacarli=isset($_POST["kacarli"])?$_POST["kacarli"]:"";
 	$_SESSION["kacarli"]=$kacarli;
 }
-if (!$_SESSION["kacarli"]) {
+if (empty($_SESSION["kacarli"])) {
 	$kacarli=30;
 } else {
 	$kacarli=$_SESSION["kacarli"];

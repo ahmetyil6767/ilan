@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include("../loader.php");
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$islem=$_GET["islem"];
@@ -45,8 +45,7 @@ if ($islem=="menuleri_olustur") {
 if ($islem=="sil") {
 	// Linkler siliniyor
 	$menu_sil=mysqli_query($baglan,"delete from linkler where menu_id='$menu_id'");
-	// MenÃ¼ siliniyor.
-	$menu_sil=mysqli_query($baglan,"delete from ayarlar where id='$menu_id'");
+	// MenÃ¼ siliniyor. (is_array($menu_sil) ? implode(", ", $menu_sil) : $menu_sil)=mysqli_query($baglan,"delete from ayarlar where id='$menu_id'");
 	$menu_iliski_sil=mysqli_query($baglan,"delete from ayarlar where deger='menu-$menu_id'");
 	$_SESSION["mesaj"]=array(_LANG('p_menu_links_deleted'),"success");
 	yonlendir("menuler.php");
@@ -192,17 +191,17 @@ if ($panel_sablon=="fullwidth") {
 <html lang="<?php echo _DIL_HTML_LANG(); ?>" dir="<?php echo _DIL_HTML_YON(); ?>">
 <head>
 	<meta charset="UTF-8">
-			<title><?php echo _LANG("p_menuler"); ?> - <?php echo $lpanel_baslik; ?></title>
+			<title><?php echo _LANG("p_menuler"); ?> - <?php echo is_array($lpanel_baslik) ? implode(", ", $lpanel_baslik) : $lpanel_baslik; ?></title>
 	<?php include("inc/header-kod.php"); ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<div id="wrapper" class="<?php echo $kapsa_container; ?>">
+<div id="wrapper" class="<?php echo is_array($kapsa_container) ? implode(", ", $kapsa_container) : $kapsa_container; ?>">
 	<div class="row">
-		<div id="sidebar-wrapper" class="<?php echo $sidebar_div; ?>">
+		<div id="sidebar-wrapper" class="<?php echo is_array($sidebar_div) ? implode(", ", $sidebar_div) : $sidebar_div; ?>">
 		<?php include("inc/sidebar.php"); ?>
 		</div>
-		<div id="page-content-wrapper" class="<?php echo $sag_div; ?>">
+		<div id="page-content-wrapper" class="<?php echo is_array($sag_div) ? implode(", ", $sag_div) : $sag_div; ?>">
 		<?php include("inc/ust.php"); ?>
 			<div class="content">
 			<?php if (!$islem) { ?>
@@ -213,8 +212,8 @@ if ($panel_sablon=="fullwidth") {
 			<div class="alert alert-primary"><?php echo _LANG('p_menu_destekliyor'), array($v_say); ?>
 			<?php
 			$v=1; foreach ($tema_menuleri as $yaz => $x) {
-			if ($v==$v_say) {echo "<strong>".$x["id"]."</strong>";}
-			else {echo "<strong>".$x["id"]."</strong>, ";}
+			if ($v==$v_say) {echo "<strong>". (is_array($x) ? implode(", ", $x) : $x)["id"]."</strong>";}
+			else {echo "<strong>". (is_array($x) ? implode(", ", $x) : $x)["id"]."</strong>, ";}
 			$menude_ara[]=$x["id"];
 			$v++; }
 			?>
@@ -240,9 +239,9 @@ if ($panel_sablon=="fullwidth") {
 				$menu_tema_destegi=0;
 			}
 			?>
-			<div class="<?php echo $div_class; ?>">
+			<div class="<?php echo is_array($div_class) ? implode(", ", $div_class) : $div_class; ?>">
 			<div class="panel <?php if ($menu_pozisyonu!="") { if ($menu_tema_destegi==0) {echo "panel-danger";} else {echo "panel-default";} } else {echo "panel-dark";} ?>">
-			<div class="panel-heading"><?php echo $menu_baslik; ?></div>
+			<div class="panel-heading"><?php echo is_array($menu_baslik) ? implode(", ", $menu_baslik) : $menu_baslik; ?></div>
 				<table class="table table-bordered table-hover">
 					<tbody>
 						<tr>
@@ -257,20 +256,20 @@ if ($panel_sablon=="fullwidth") {
 						</tr>
 						<tr>
 							<th><?php echo _LANG('p_link_sayisi'); ?></th>
-							<td><?php echo $link_sayisi; ?></td>
+							<td><?php echo is_array($link_sayisi) ? implode(", ", $link_sayisi) : $link_sayisi; ?></td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="panel-footer">
 					<!-- Split button -->
 					<div class="btn-group pull-right">
-					  <a href="menuler.php?islem=linkler&menu_id=<?php echo $menu_id; ?>" class="btn btn-sm btn-default"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo _LANG('p_guncelle'); ?></a>
+					  <a href="menuler.php?islem=linkler&menu_id=<?php echo is_array($menu_id) ? implode(", ", $menu_id) : $menu_id; ?>" class="btn btn-sm btn-default"><i class="fa fa-pencil" aria-hidden="true"></i><?php echo _LANG('p_guncelle'); ?></a>
 					  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<span class="caret"></span>
 						<span class="sr-only"><?php echo _LANG('p_toggle_dropdown'); ?></span>
 					  </button>
 					  <ul class="dropdown-menu dropdown-menu-right">
-						<li><a href="menuler.php?islem=sil&menu_id=<?php echo $menu_id; ?>" onclick="return confirm('<?php echo $menu_baslik; ?> <?php echo _LANG("p_menu_sil_onay"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_kaldir'); ?></a></li>
+						<li><a href="menuler.php?islem=sil&menu_id=<?php echo is_array($menu_id) ? implode(", ", $menu_id) : $menu_id; ?>" onclick="return confirm('<?php echo is_array($menu_baslik) ? implode(", ", $menu_baslik) : $menu_baslik; ?> <?php echo _LANG("p_menu_sil_onay"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_kaldir'); ?></a></li>
 					  </ul>
 					</div>
 					<div class="clearfix"></div>
@@ -317,7 +316,7 @@ if ($panel_sablon=="fullwidth") {
 									$l_id=$dizi["id"];
 									$baslik=$dizi["baslik"];
 								?>
-								<option value="<?php echo $l_id; ?>"><?php echo $baslik; ?> </option>
+								<option value="<?php echo is_array($l_id) ? implode(", ", $l_id) : $l_id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?> </option>
 								<?php alt_link_listele_select($l_id,5,null,$menu_id); ?>
 								<?php } ?>
 								</select>
@@ -338,25 +337,25 @@ if ($panel_sablon=="fullwidth") {
 					if ($tip_gizli!=1) {
 				 ?>
 					<div class="panel panel-default">
-						<div class="panel-heading"><?php echo $tip_baslik; ?></div>
+						<div class="panel-heading"><?php echo is_array($tip_baslik) ? implode(", ", $tip_baslik) : $tip_baslik; ?></div>
 						<div class="panel-body">
 						<ul class="nav nav-tabs" role="tablist">
-										<li role="presentation" class="active"><a href="#icerik_<?php echo $tip_name; ?>" aria-controls="icerik_<?php echo $tip_name; ?>" role="tab" data-toggle="tab"><?php echo _LANG("p_icerik"); ?></a></li>
+										<li role="presentation" class="active"><a href="#icerik_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" aria-controls="icerik_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" role="tab" data-toggle="tab"><?php echo _LANG("p_icerik"); ?></a></li>
 							<?php if ($tip_kategori==1) { 
 							
 							
-							?><li role="presentation"><a href="#kategori_<?php echo $tip_name; ?>" aria-controls="kategori_<?php echo $tip_name; ?>" role="tab" data-toggle="tab"><?php echo _LANG('p_kategoriler'); ?></a></li><?php } ?>
+							?><li role="presentation"><a href="#kategori_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" aria-controls="kategori_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" role="tab" data-toggle="tab"><?php echo _LANG('p_kategoriler'); ?></a></li><?php } ?>
 							<?php if ($tip_ekstra_siniflar) { 
 							foreach ($tip_ekstra_siniflar as $sinif) {
 								$sinif_name=$sinif["id"];
 								$sinif_baslik=$sinif["baslik"];
 								$sinif_baslik_cogul=$sinif["baslik_cogul"];
 							?>
-							<li role="presentation"><a href="#<?php echo $sinif_name; ?>_<?php echo $tip_name; ?>" aria-controls="<?php echo $sinif_name; ?>_<?php echo $tip_name; ?>" role="tab" data-toggle="tab"><?php echo $sinif_baslik_cogul; ?></a></li>
+							<li role="presentation"><a href="#<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" aria-controls="<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" role="tab" data-toggle="tab"><?php echo is_array($sinif_baslik_cogul) ? implode(", ", $sinif_baslik_cogul) : $sinif_baslik_cogul; ?></a></li>
 							<?php } } ?>
 						</ul>
 						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="icerik_<?php echo $tip_name; ?>">
+							<div role="tabpanel" class="tab-pane active" id="icerik_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 								<form method="post" action="">
 								<div class="multiple_checkbox_group">
 									<?php
@@ -367,13 +366,13 @@ if ($panel_sablon=="fullwidth") {
 									$tip=$dizi["tip"];
 									?>
 									<div class="checkbox">
-									  <label class="unselect"><input class="isaret_<?php echo $tip_name; ?>" type="checkbox" name="<?php echo $tip_name; ?>[]" value="<?php echo $id; ?>"><?php echo $baslik; ?></label>
+									  <label class="unselect"><input class="isaret_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" type="checkbox" name="<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>[]" value="<?php echo is_array($id) ? implode(", ", $id) : $id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?></label>
 									</div>
 									<?php } ?>
 								</div>
 								<div class="form-group">
 									<label for='ust_link'><?php echo _LANG('p_ust_link'); ?></label>
-									<select name="ust_link_<?php echo $tip_name; ?>" class="form-control" id="ust_link_<?php echo $tip_name; ?>">
+									<select name="ust_link_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" class="form-control" id="ust_link_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 									<option value="0"><?php echo _LANG('p_yok'); ?></option>
 									<?php
 									$sql=mysqli_query($baglan,"select * from linkler where ust_link='0' and menu_id='$menu_id'");
@@ -381,31 +380,31 @@ if ($panel_sablon=="fullwidth") {
 										$l_id=$dizi["id"];
 										$baslik=$dizi["baslik"];
 									?>
-									<option value="<?php echo $l_id; ?>"><?php echo $baslik; ?> </option>
+									<option value="<?php echo is_array($l_id) ? implode(", ", $l_id) : $l_id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?> </option>
 									<?php alt_link_listele_select($l_id,5,null,$menu_id); ?>
 									<?php } ?>
 									</select>
 								</div>								
 									<?php form_buton($tip_name."_link_ekle_buton",_LANG('p_ekle'),"primary"); ?>
-											<a id="tumunu_sec_<?php echo $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_tumunu_sec"); ?></a>
-											<a id="secimleri_kaldir_<?php echo $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_secimleri_kaldir"); ?></a>
+											<a id="tumunu_sec_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_tumunu_sec"); ?></a>
+											<a id="secimleri_kaldir_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_secimleri_kaldir"); ?></a>
 									<script type="text/javascript">
-									$("#secimleri_kaldir_<?php echo $tip_name; ?>").hide();
-									$("#tumunu_sec_<?php echo $tip_name; ?>").click(function(){
-										$(".isaret_<?php echo $tip_name; ?>").prop("checked",true);
-										$("#tumunu_sec_<?php echo $tip_name; ?>").hide();
-										$("#secimleri_kaldir_<?php echo $tip_name; ?>").show();
+									$("#secimleri_kaldir_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").hide();
+									$("#tumunu_sec_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").click(function(){
+										$(".isaret_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").prop("checked",true);
+										$("#tumunu_sec_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").hide();
+										$("#secimleri_kaldir_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").show();
 									});
-									$("#secimleri_kaldir_<?php echo $tip_name; ?>").click(function(){
-										$(".isaret_<?php echo $tip_name; ?>").prop("checked",false);
-										$("#secimleri_kaldir_<?php echo $tip_name; ?>").hide();
-										$("#tumunu_sec_<?php echo $tip_name; ?>").show();
+									$("#secimleri_kaldir_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").click(function(){
+										$(".isaret_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").prop("checked",false);
+										$("#secimleri_kaldir_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").hide();
+										$("#tumunu_sec_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").show();
 									});
 									</script>
 								</form>
 							</div>
 							<?php if ($tip_kategori==1) { ?>
-							<div role="tabpanel" class="tab-pane" id="kategori_<?php echo $tip_name; ?>">
+							<div role="tabpanel" class="tab-pane" id="kategori_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 								<?php
 								$sql=mysqli_query($baglan,"select * from kategoriler where tip='$tip_kategori_name' and sinif='kategori' order by baslik asc");
 								$toplam=mysqli_num_rows($sql);
@@ -419,14 +418,14 @@ if ($panel_sablon=="fullwidth") {
 									$tip=$dizi["tip"];
 									?>
 									<div class="checkbox">
-									  <label class="unselect"><input class="isaret_k_<?php echo $tip_name; ?>" type="checkbox" name="<?php echo $tip_name; ?>[]" value="<?php echo $id; ?>"><?php echo $baslik; ?></label>
+									  <label class="unselect"><input class="isaret_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" type="checkbox" name="<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>[]" value="<?php echo is_array($id) ? implode(", ", $id) : $id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?></label>
 									</div>
 									<?php alt_kategori_listele_checbox($id,5,null,$tip_kategori_name,"kategori"); ?>
 									<?php } ?>
 								</div>
 								<div class="form-group">
 									<label for='ust_link'><?php echo _LANG('p_ust_link'); ?></label>
-									<select name="ust_link_<?php echo $tip_name; ?>" class="form-control" id="ust_link_<?php echo $tip_name; ?>">
+									<select name="ust_link_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" class="form-control" id="ust_link_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 									<option value="0"><?php echo _LANG('p_yok'); ?></option>
 									<?php
 									$sql=mysqli_query($baglan,"select * from linkler where ust_link='0' and menu_id='$menu_id'");
@@ -434,25 +433,25 @@ if ($panel_sablon=="fullwidth") {
 										$l_id=$dizi["id"];
 										$baslik=$dizi["baslik"];
 									?>
-									<option value="<?php echo $l_id; ?>"><?php echo $baslik; ?> </option>
+									<option value="<?php echo is_array($l_id) ? implode(", ", $l_id) : $l_id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?> </option>
 									<?php alt_link_listele_select($l_id,5,null,$menu_id); ?>
 									<?php } ?>
 									</select>
 								</div>
 								<?php form_buton($tip_name."_kategori_ekle_buton",_LANG('p_ekle'),"primary"); ?>
-											<a id="tumunu_sec_k_<?php echo $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_tumunu_sec"); ?></a>
-											<a id="secimleri_kaldir_k_<?php echo $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_secimleri_kaldir"); ?></a>
+											<a id="tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_tumunu_sec"); ?></a>
+											<a id="secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_secimleri_kaldir"); ?></a>
 								<script type="text/javascript">
-								$("#secimleri_kaldir_k_<?php echo $tip_name; ?>").hide();
-								$("#tumunu_sec_k_<?php echo $tip_name; ?>").click(function(){
-									$(".isaret_k_<?php echo $tip_name; ?>").prop("checked",true);
-									$("#tumunu_sec_k_<?php echo $tip_name; ?>").hide();
-									$("#secimleri_kaldir_k_<?php echo $tip_name; ?>").show();
+								$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").hide();
+								$("#tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").click(function(){
+									$(".isaret_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").prop("checked",true);
+									$("#tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").hide();
+									$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").show();
 								});
-								$("#secimleri_kaldir_k_<?php echo $tip_name; ?>").click(function(){
-									$(".isaret_k_<?php echo $tip_name; ?>").prop("checked",false);
-									$("#secimleri_kaldir_k_<?php echo $tip_name; ?>").hide();
-									$("#tumunu_sec_k_<?php echo $tip_name; ?>").show();
+								$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").click(function(){
+									$(".isaret_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").prop("checked",false);
+									$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").hide();
+									$("#tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>").show();
 								});
 								</script>
 								</form>
@@ -465,7 +464,7 @@ if ($panel_sablon=="fullwidth") {
 								$sinif_baslik=$sinif["baslik"];
 								$sinif_baslik_cogul=$sinif["baslik_cogul"];
 							?>
-							<div role="tabpanel" class="tab-pane" id="<?php echo $sinif_name; ?>_<?php echo $tip_name; ?>">
+							<div role="tabpanel" class="tab-pane" id="<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 							<?php 
 							$sql=mysqli_query($baglan,"select * from kategoriler where ust_kategori='0' and tip='$tip_kategori_name' and sinif='$sinif_name' order by baslik asc");
 							$toplam=mysqli_num_rows($sql);
@@ -481,14 +480,14 @@ if ($panel_sablon=="fullwidth") {
 									$tip=$dizi["tip"];
 									?>
 									<div class="checkbox">
-									  <label class="unselect"><input class="isaret_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>" type="checkbox" name="<?php echo $tip_name; ?>[]" value="<?php echo $id; ?>"><?php echo $baslik; ?></label>
+									  <label class="unselect"><input class="isaret_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>" type="checkbox" name="<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>[]" value="<?php echo is_array($id) ? implode(", ", $id) : $id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?></label>
 									</div>
 									<?php alt_kategori_listele_checbox($id,5,null,$tip_name,$sinif_name); ?>	
 									<?php } ?>
 								</div>
 								<div class="form-group">
 									<label for='ust_link'><?php echo _LANG('p_ust_link'); ?></label>
-									<select name="ust_link_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>" class="form-control" id="ust_link_<?php echo $tip_name; ?>">
+									<select name="ust_link_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>" class="form-control" id="ust_link_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 									<option value="0"><?php echo _LANG('p_yok'); ?></option>
 									<?php
 									$sql=mysqli_query($baglan,"select * from linkler where ust_link='0' and menu_id='$menu_id'");
@@ -496,25 +495,25 @@ if ($panel_sablon=="fullwidth") {
 										$l_id=$dizi["id"];
 										$baslik=$dizi["baslik"];
 									?>
-									<option value="<?php echo $l_id; ?>"><?php echo $baslik; ?></option>
+									<option value="<?php echo is_array($l_id) ? implode(", ", $l_id) : $l_id; ?>"><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?></option>
 									<?php alt_link_listele_select($l_id,5,null,$menu_id); ?>
 									<?php } ?>
 									</select>
 								</div>
 								<?php form_buton($tip_name."_kategori_ekle_buton",_LANG('p_ekle'),"primary"); ?>
-											<a id="tumunu_sec_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_tumunu_sec"); ?></a>
-											<a id="secimleri_kaldir_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_secimleri_kaldir"); ?></a>
+											<a id="tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_tumunu_sec"); ?></a>
+											<a id="secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>" class="pull-right" style="cursor:pointer;"><?php echo _LANG("p_secimleri_kaldir"); ?></a>
 								<script type="text/javascript">
-								$("#secimleri_kaldir_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").hide();
-								$("#tumunu_sec_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").click(function(){
-									$(".isaret_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").prop("checked",true);
-									$("#tumunu_sec_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").hide();
-									$("#secimleri_kaldir_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").show();
+								$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").hide();
+								$("#tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").click(function(){
+									$(".isaret_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").prop("checked",true);
+									$("#tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").hide();
+									$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").show();
 								});
-								$("#secimleri_kaldir_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").click(function(){
-									$(".isaret_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").prop("checked",false);
-									$("#secimleri_kaldir_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").hide();
-									$("#tumunu_sec_k_<?php echo $tip_name; ?>_<?php echo $sinif_name; ?>").show();
+								$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").click(function(){
+									$(".isaret_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").prop("checked",false);
+									$("#secimleri_kaldir_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").hide();
+									$("#tumunu_sec_k_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>_<?php echo is_array($sinif_name) ? implode(", ", $sinif_name) : $sinif_name; ?>").show();
 								});
 								</script>
 								</form>
@@ -545,7 +544,7 @@ if ($panel_sablon=="fullwidth") {
 									$baslik=$dizi["baslik"];
 								if ($guncelle_ust_link==$id) {$selected="selected='selected'";} else {$selected="";}
 								?>
-								<option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $baslik; ?></option>
+								<option value="<?php echo is_array($id) ? implode(", ", $id) : $id; ?>" <?php echo is_array($selected) ? implode(", ", $selected) : $selected; ?>><?php echo is_array($baslik) ? implode(", ", $baslik) : $baslik; ?></option>
 								<?php alt_link_listele_select($id,5,$guncelle_ust_link,$menu_id); ?>
 								<?php } ?>
 								</select>
@@ -560,7 +559,7 @@ if ($panel_sablon=="fullwidth") {
 				<?php } ?>
 			<form action="" method="post">
 					<div class="panel panel-default">
-						<div class="panel-heading"><?php echo $menu; ?></div>
+						<div class="panel-heading"><?php echo is_array($menu) ? implode(", ", $menu) : $menu; ?></div>
 						<?php if ($link_sayisi==0) {echo "<div class='panel-body'>" . _LANG('p_no_links') . "</div>";} else { ?>
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -584,18 +583,18 @@ if ($panel_sablon=="fullwidth") {
 								$link_class=$link_dizisi["class"];
 								?>
 								<tr>
-									<td><input class="isaret" type="checkbox" name="toplu_sil[<?php echo $link_id; ?>]" value="<?php echo $link_id; ?>" /></td>
-									<td><input type="text" class="form-control input-sm" name="toplu_baslik[<?php echo $link_id; ?>]" value="<?php echo $link_baslik; ?>" /></td>
-									<td><input type="text" class="form-control input-sm" name="toplu_url[<?php echo $link_id; ?>]" value="<?php echo $link_url; ?>" /></td>
-									<td><input type="text" class="form-control input-sm" name="toplu_sira[<?php echo $link_id; ?>]" value="<?php echo $link_sira; ?>" /></td>
-									<td><input type="text" class="form-control input-sm" name="toplu_ikon[<?php echo $link_id; ?>]" value="<?php echo $link_ikon; ?>" /></td>
-									<td><input type="text" class="form-control input-sm" name="toplu_class[<?php echo $link_id; ?>]" value="<?php echo $link_class; ?>" /></td>
+									<td><input class="isaret" type="checkbox" name="toplu_sil[<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>]" value="<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>" /></td>
+									<td><input type="text" class="form-control input-sm" name="toplu_baslik[<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>]" value="<?php echo is_array($link_baslik) ? implode(", ", $link_baslik) : $link_baslik; ?>" /></td>
+									<td><input type="text" class="form-control input-sm" name="toplu_url[<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>]" value="<?php echo is_array($link_url) ? implode(", ", $link_url) : $link_url; ?>" /></td>
+									<td><input type="text" class="form-control input-sm" name="toplu_sira[<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>]" value="<?php echo is_array($link_sira) ? implode(", ", $link_sira) : $link_sira; ?>" /></td>
+									<td><input type="text" class="form-control input-sm" name="toplu_ikon[<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>]" value="<?php echo is_array($link_ikon) ? implode(", ", $link_ikon) : $link_ikon; ?>" /></td>
+									<td><input type="text" class="form-control input-sm" name="toplu_class[<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>]" value="<?php echo is_array($link_class) ? implode(", ", $link_class) : $link_class; ?>" /></td>
 									<td>
 									<!-- Split button -->
 									<div class="btn-group">
-									  <a href="menuler.php?islem=linkler&menu_id=<?php echo $menu_id; ?>&link_guncelle=<?php echo $link_id; ?>" class="btn btn-default"><i class="fa fa-refresh mr0" aria-hidden="true"></i></a>
-									  <a href="<?php echo $link_url; ?>" target="_blank" class="btn btn-default"><i class="fa fa-external-link mr0" aria-hidden="true"></i></a>
-									  <a href="menuler.php?islem=linkler&menu_id=<?php echo $menu_id; ?>&link_sil=<?php echo $link_id; ?>" class="btn btn-danger"><i class="fa fa-trash mr0" aria-hidden="true"></i></a>
+									  <a href="menuler.php?islem=linkler&menu_id=<?php echo is_array($menu_id) ? implode(", ", $menu_id) : $menu_id; ?>&link_guncelle=<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>" class="btn btn-default"><i class="fa fa-refresh mr0" aria-hidden="true"></i></a>
+									  <a href="<?php echo is_array($link_url) ? implode(", ", $link_url) : $link_url; ?>" target="_blank" class="btn btn-default"><i class="fa fa-external-link mr0" aria-hidden="true"></i></a>
+									  <a href="menuler.php?islem=linkler&menu_id=<?php echo is_array($menu_id) ? implode(", ", $menu_id) : $menu_id; ?>&link_sil=<?php echo is_array($link_id) ? implode(", ", $link_id) : $link_id; ?>" class="btn btn-danger"><i class="fa fa-trash mr0" aria-hidden="true"></i></a>
 									</div>
 								</tr>
 								<?php alt_link_listele($link_id,30,$menu_id);?>
