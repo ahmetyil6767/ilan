@@ -41,18 +41,18 @@ if ($toplam>0) {
 			$kat_baslik=$dizi["baslik"];
 			if (strstr($mevcut_kategoriler,"(".$kat_id.")")) {$selected="selected='selected'";} else {$selected="";}
 		?>
-		<option value="<?php echo $kat_id; ?>" <?php echo $selected; ?>><?php echo $kat_baslik; ?></option>
+		<option value="<?php echo $kat_id; ?>" <?php echo $selected; ?>><?php echo e($kat_baslik); ?></option>
 		<?php } ?>
 	</select>
 </div>
-<?php } else {echo "<div class='alert alert-success'>Kategori seçimi tamamlandı</div>";} ?>
+<?php } else {echo "<div class='alert alert-success'>" . _LANG('p_kategori_secimi_tamamlandi') . "</div>";} ?>
 <div id="<?php echo $sinif; ?>-alt"></div>
 
 <script type="text/javascript">
 $(function(){
 	$("body").on("change","#<?php echo $sinif; ?>_tip_2",function(){
 		deger=$(this).val();
-		if (deger!='Seçiniz') {
+		if (deger!=<?php echo json_encode(_LANG("filter_select")); ?>) {
 			$(this).attr("disabled","disabled");
 			$("#<?php echo $sinif; ?>-alt").append("<div id='alt_kategori_"+deger+"'></div>");
 			$("#alt_kategori_"+deger).load("inc/ajax/kategori_ekle_stil_2.php?id=<?php echo $id; ?>&tip=<?php echo $tip; ?>&sinif=<?php echo $sinif; ?>&ust_kategori="+deger);

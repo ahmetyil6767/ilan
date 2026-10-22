@@ -470,12 +470,12 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 				?>
 					<tr> 
 						<th scope="row"><?php echo $id; ?></th>
-				    <td><a href="uyeler.php?islem=guncelle&id=<?php echo $id; ?>"><?php echo $ad_soyad; ?></a> <?php if (function_exists('lpanel_uye_profil_link')) {$panel_profil_url=lpanel_uye_profil_url($id); echo "<a href='$panel_profil_url'><i class='fa fa-user'></i></a>";} ?> <a href="<?php echo profil_link_getir($id); ?>"><i class="fa fa-external-link"></i></a>
+				    <td><a href="uyeler.php?islem=guncelle&id=<?php echo $id; ?>"><?php echo e($ad_soyad); ?></a> <?php if (function_exists('lpanel_uye_profil_link')) {$panel_profil_url=lpanel_uye_profil_url($id); echo "<a href='$panel_profil_url'><i class='fa fa-user'></i></a>";} ?> <a href="<?php echo profil_link_getir($id); ?>"><i class="fa fa-external-link"></i></a>
 				    
-						<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')" data-toggle="tooltip" title="<?php echo _LANG("p_oturum_ac_olarak_baslik", array($ad_soyad)); ?>"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i></a><?php } ?>
+						<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo ejs(_LANG("p_oturum_ac_olarak_onay", array(e($ad_soyad)))); ?>')" data-toggle="tooltip" title="<?php echo e(_LANG("p_oturum_ac_olarak_baslik", array(e($ad_soyad)))); ?>"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i></a><?php } ?>
 
 				    </td>
-						<td><?php echo $email_adresi; ?></td><?php echo "  "; ?><td><?php echo $cep_tel; ?></td>
+						<td><?php echo e($email_adresi); ?></td><?php echo "  "; ?><td><?php echo e($cep_tel); ?></td>
 						<?php if (is_array($uye_ekstra_detaylar)) {foreach ($uye_ekstra_detaylar as $yaz => $x) {
 							@$detay_name=$x["id"];
 							@$detay_tip=$x["tip"];
@@ -508,7 +508,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 							  <ul class="dropdown-menu dropdown-menu-right">
 								<?php $g=0; if (function_exists('lpanel_uye_profil_url')) { $g=1; ?><li><a href="<?php echo lpanel_uye_profil_url($id); ?>"><i class="fa fa-tv fa-fw" aria-hidden="true"></i><?php echo _LANG('p_goruntule'); ?></a></li><?php } ?>
 								<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><li><a href="uyeler.php?islem=sil&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_emi_misiniz"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li><?php } ?>
-								<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><li><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i><?php echo $ad_soyad; ?> <?php echo _LANG('p_giris_yap_olarak'); ?></a></li><?php } ?>
+								<?php if ($id!=1 and $id!=$oturum_id) { $g=isset($g)?$g+1:1; ?><li><a href="uyeler.php?islem=oturum_degistir&id=<?php echo $id; ?>" onclick="return confirm('<?php echo _LANG("p_oturum_ac_olarak_onay", array($ad_soyad)); ?>')"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i><?php echo e($ad_soyad); ?> <?php echo _LANG('p_giris_yap_olarak'); ?></a></li><?php } ?>
 								<?php if ($g==0) {echo "<li><a href=''>" . _LANG('p_islem_yok') . "</a></li>";}?>
 							  </ul>
 							</div>

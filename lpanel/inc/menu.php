@@ -34,13 +34,13 @@ foreach ($icerik_tipleri as $yaz => $x) {
 			if ($t_ekle_link!="0") {
 				$ekle_url="$son_url_tip&islem=ekle";
 				if ($ekle_url==$browser_url or strstr($browser_url,$ekle_url)) {$active_alt_yaz="active";$alt_link_active=1;} else {$active_alt_yaz="";}
-				$alt_linkler_kod.="<li class='$active_alt_yaz'><a href='$ekle_url'>$t_baslik ekle</a></li>";
+				$alt_linkler_kod.="<li class='$active_alt_yaz'><a href='$ekle_url'>" . e($t_baslik) . " " . _LANG('p_ekle') . "</a></li>";
 			}
 			if ($t_kategori=="1" and !$t_kategori_ortak and $t_kategori_link!="0") {
 				$k_url="kategoriler.php?tip=$t_kategori_name&sinif=kategori";
 				$son_url_kat=site_url()."/$admin_dizini/".$k_url;
 				if ($son_url_kat==$browser_url or strstr($browser_url,$son_url_kat)) {$active_alt_yaz="class='active'";$alt_link_active=1;} else {$active_alt_yaz="";}
-				$alt_linkler_kod.="<li $active_alt_yaz><a href='$son_url_kat'>Kategoriler</a></li>";
+				$alt_linkler_kod.="<li $active_alt_yaz><a href='$son_url_kat'>" . _LANG('p_kategoriler') . "</a></li>";
 			}
 			if ($t_ekstra_siniflar) {
 				foreach ($t_ekstra_siniflar as $sinif) {

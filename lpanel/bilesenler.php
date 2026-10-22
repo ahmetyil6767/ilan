@@ -239,7 +239,7 @@ if ($panel_sablon=="fullwidth") {
 					<?php foreach($bilesen_alani as $yaz) { $alan_value=$yaz["id"]; $alan_baslik=$yaz["baslik"]; $alan_aciklama=$yaz["aciklama"]; $alan_resim=$yaz["resim"]; ?>
 						<div class="<?php echo $div_class; ?>">
 							<div class="panel panel-default">
-								<div class="panel-heading"><?php echo $alan_baslik; ?></div>
+								<div class="panel-heading"><?php echo e($alan_baslik); ?></div>
 								<table class="table table-bordered table-hover">
 									<tbody>
 										<?php if ($alan_resim) { ?>
@@ -269,7 +269,7 @@ if ($panel_sablon=="fullwidth") {
 												<div class="input-group">
 												  <select name="bilesen_<?php echo $alan_value; ?>" class="form-control">
 													<?php foreach ($bilesen as $x) {$bilesen_value=$x["id"]; $bilesen_baslik=$x["baslik"]; ?>
-													<option value="<?php echo $bilesen_value; ?>"><?php echo $bilesen_baslik; ?></option>
+													<option value="<?php echo e($bilesen_value); ?>"><?php echo e($bilesen_baslik); ?></option>
 													<?php } ?>
 												  </select>
 												  <span class="input-group-btn"><button type="submit" name="ekle_buton" class="btn btn-default" value="<?php echo $alan_value; ?>"><?php echo _LANG('gen_add'); ?></button></span>
@@ -316,8 +316,8 @@ if ($panel_sablon=="fullwidth") {
 							?>					
 								<tr <?php if ($id==$l_id) {echo "class='success'";} ?>>
 									<th><?php echo $l_id; ?></th>
-									<td><?php echo $l_bilesen; ?></td>
-									<td><?php if ($l_baslik) {echo $l_baslik;} else {echo "<span class='text-muted'>" . _LANG('p_unnamed') . "</span>";} ?></td>
+									<td><?php echo e($l_bilesen); ?></td>
+									<td><?php if ($l_baslik) {echo e($l_baslik);} else {echo "<span class='text-muted'>" . _LANG('p_unnamed') . "</span>";} ?></td>
 									<td><?php echo $l_sira; ?></td>
 									<td>
 										<!-- Split button -->
@@ -328,7 +328,7 @@ if ($panel_sablon=="fullwidth") {
 											<span class="sr-only"><?php echo _LANG('p_toggle_dropdown'); ?></span>
 										  </button>
 										  <ul class="dropdown-menu dropdown-menu-right">
-											<li><a href="bilesenler.php?islem=sil&bilesen=<?php echo $l_id; ?>&alan=<?php echo $bilesen_alani; ?>" onclick="return confirm('<?php if ($l_baslik) {echo $l_baslik." - ";} echo $l_bilesen; ?> <?php echo _LANG("p_bilesen_sil_onay"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li>
+											<li><a href="bilesenler.php?islem=sil&bilesen=<?php echo $l_id; ?>&alan=<?php echo $bilesen_alani; ?>" onclick="return confirm('<?php if ($l_baslik) {echo ejs($l_baslik)." - ";} echo ejs($l_bilesen); ?> <?php echo _LANG("p_bilesen_sil_onay"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li>
 										  </ul>
 										</div>
 									</td>
@@ -540,8 +540,8 @@ if ($panel_sablon=="fullwidth") {
 							?>					
 								<tr <?php if (isset($id) and $id==$l_id) {echo "class='success'";} ?>>
 									<th><?php echo $l_id; ?></th>
-									<td><?php echo $l_bilesen; ?></td>
-									<td><?php if ($l_baslik) {echo $l_baslik;} else {echo "<span class='text-muted'>" . _LANG('p_unnamed') . "</span>";} ?></td>
+									<td><?php echo e($l_bilesen); ?></td>
+									<td><?php if ($l_baslik) {echo e($l_baslik);} else {echo "<span class='text-muted'>" . _LANG('p_unnamed') . "</span>";} ?></td>
 									<td><?php echo $l_sira; ?></td>
 									<td>
 										<!-- Split button -->
@@ -552,7 +552,7 @@ if ($panel_sablon=="fullwidth") {
 											<span class="sr-only"><?php echo _LANG('p_toggle_dropdown'); ?></span>
 										  </button>
 										  <ul class="dropdown-menu dropdown-menu-right">
-											<li><a href="bilesenler.php?islem=sil&bilesen=<?php echo $l_id; ?>&alan=<?php echo $bilesen_alani; ?>" onclick="return confirm('<?php if ($l_baslik) {echo $l_baslik." - ";} echo $l_bilesen; ?> <?php echo _LANG("p_bilesen_sil_onay"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li>
+											<li><a href="bilesenler.php?islem=sil&bilesen=<?php echo $l_id; ?>&alan=<?php echo $bilesen_alani; ?>" onclick="return confirm('<?php if ($l_baslik) {echo ejs($l_baslik)." - ";} echo ejs($l_bilesen); ?> <?php echo _LANG("p_bilesen_sil_onay"); ?>')"><i class="fa fa-trash fa-fw" aria-hidden="true"></i><?php echo _LANG('p_sil'); ?></a></li>
 										  </ul>
 										</div>
 									</td>
@@ -568,7 +568,7 @@ if ($panel_sablon=="fullwidth") {
 					<?php if (count($bilesen)>0) { foreach ($bilesen as $x) {@$bilesen_value=$x["id"]; @$bilesen_baslik=$x["baslik"]; @$bilesen_aciklama=$x["aciklama"]; @$bilesen_resim=$x["resim"]; ?>
 						<div class="well well_limon">
 							<div class="bilesen_liste_ust">
-								<h4 class="pull-left"><?php echo $bilesen_baslik; ?></h4>
+								<h4 class="pull-left"><?php echo e($bilesen_baslik); ?></h4>
 								<?php if ($bilesen_resim) { ?><a href="<?php echo $bilesen_resim; ?>" target="_blank" style="margin-left:15px;" data-toggle="tooltip" title="<?php echo _LANG("p_bilesen_gorseli"); ?>" class="bilesen_resim"><i class="fa fa-photo mr0"></i></a><?php } ?> <a href="bilesenler.php?islem=ekle&alan=<?php echo $bilesen_alani; ?>&bilesen=<?php echo $bilesen_value; ?>" class="pull-right btn btn-primary btn-xs"><?php echo _LANG('gen_add'); ?></a>
 								<div class="clearfix"></div>
 							</div>

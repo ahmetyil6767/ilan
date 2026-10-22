@@ -3464,4 +3464,5 @@ return array(
 	'p_liste_alan_yok'      => 'لم يتم العثور على حقل قائمة قابل للتعديل.',
 
 	'p_erisim_engellendi' => 'تم رفض الوصول.',
+	'p_kategori_secimi_tamamlandi' => 'اكتمل اختيار الفئة',
 );

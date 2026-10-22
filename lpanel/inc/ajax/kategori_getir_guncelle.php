@@ -27,7 +27,7 @@ while ($dizi=mysqli_fetch_array($sonuc)) {
 if (strstr($mevcut_kategoriler,"(".$kat_id.")")) {$checked="checked='checked'";} else {$checked="";}
 ?>
 <div class="checkbox" id="kategori">
-  <label><input type="checkbox" name="kategori[]" value="<?php echo $kat_id; ?>" <?php echo $checked; ?>><?php echo $kat_baslik; ?></label>
+  <label><input type="checkbox" name="kategori[]" value="<?php echo $kat_id; ?>" <?php echo $checked; ?>><?php echo e($kat_baslik); ?></label>
 </div>	
 <?php alt_kategori_listele_checbox($kat_id,5,$mevcut_kategoriler,$tip,$sinif); ?>								
 <?php } ?>

@@ -153,8 +153,8 @@ $yorum_sayisi=mysqli_num_rows($sql);
 				?>
 					<tr> 
 						<th scope="row"><?php echo $id; ?></th>
-						<td><?php if (function_exists('lpanel_uye_profil_link') and $uye_id) {lpanel_uye_profil_link($uye_id);} else {echo $ad_soyad;} ?></td>
-						<td><?php echo ozet_olustur($yorum,15); ?></td>
+						<td><?php if (function_exists('lpanel_uye_profil_link') and $uye_id) {lpanel_uye_profil_link($uye_id);} else {echo e($ad_soyad);} ?></td>
+						<td><?php echo e(ozet_olustur($yorum,15)); ?></td>
 						<td><a href="<?php echo $icerik_url; ?>"><?php echo $icerik_baslik; ?></a></td>
 						<td><?php if ($durum==0) {echo "<div class='label label-danger'>Pasif</div>";} else if ($durum==1) {echo "<div class='label label-success'>Aktif</div>";} ?></td>
 						<td>

@@ -3467,6 +3467,25 @@ function api_token()
 	return strtoupper(md5(md5($domain . '-' . date('YmdH')) . md5('limonilan')));
 }
 
+/*
+ * HTML cikti kacisi. Panelde ve temada kullanici kaynakli veriler
+ * (uye adi, e-posta, yorum metni, kategori basligi vb.) ekrana
+ * basilirken kullanilir.
+ */
+function e($deger)
+{
+	return htmlspecialchars((string)$deger, ENT_QUOTES, 'UTF-8');
+}
+
+/*
+ * JavaScript baglaminda cikti kacisi (onclick="return confirm('...')").
+ * HTML ozel karakterleri once kacirilir, ardindan tirnak ve ters
+ * slash karakterleri JS dizisi icin kacirilir.
+ */
+function ejs($deger)
+{
+	return addslashes(htmlspecialchars((string)$deger, ENT_QUOTES, 'UTF-8'));
+}
 function copyright()
 {
 	global $limonsoft_remove_copyright;

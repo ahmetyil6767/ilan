@@ -24,7 +24,7 @@ while ($dizi=mysqli_fetch_array($sonuc)) {
 	$kat_baslik=$dizi["baslik"];
 ?>
 <div class="checkbox" id="kategori">
-  <label><input type="checkbox" name="kategori[]" value="<?php echo $kat_id; ?>"><?php echo $kat_baslik; ?></label>
+  <label><input type="checkbox" name="kategori[]" value="<?php echo $kat_id; ?>"><?php echo e($kat_baslik); ?></label>
 </div>	
 <?php alt_kategori_listele_checbox($kat_id,5,null,$tip,$sinif); ?>								
 <?php }
