@@ -31,7 +31,7 @@ if ($islem=="etkinlestir") {
 }
 if ($islem=="pasiflestir") {
 	eklenti_pasiflestir($eklenti);
-	$_SESSION["mesaj"]=array("Eklenti pasiflestirildi: $eklenti","success");
+	$_SESSION["mesaj"]=array(sprintf(_LANG('p_eklenti_pasiflestirildi'), $eklenti),"success");
 	yonlendir("eklentiler.php");	
 }
 if ($islem=="ayar") {

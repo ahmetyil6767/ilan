@@ -2692,6 +2692,7 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'p_seo_aciklama' => 'Description SEO',
 	'p_plugin_settings_updated' => 'Paramètres du plugin mis à jour',
 	'p_plugin_enabled' => 'Plugin enabled: %s',
+	'p_eklenti_pasiflestirildi' => 'Extension désactivée : %s',
 	'p_plugin_info_not_found' => 'Fichier d\'information du plugin introuvable',
 	'p_plugin_function_not_found' => 'Fichier de fonctions du plugin introuvable',
 	'p_no_plugin_matching' => 'Aucun plugin correspondant',

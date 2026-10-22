@@ -32,8 +32,9 @@ if ($buton) {
 		if ($uye_mevcut_mu==1) {
 		$_SESSION["mesaj"]=array(_LANG('p_email_kullaniluyor'), array($email_adresi),"danger");
 		} else {		
-		$sql=mysqli_query($baglan,"insert into uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', cep_tel='$cep_tel', parola='$parola_kripto', tarih_saat='$tarih_saat', yetki='$yetki', durum='$durum'");
+		$sql=mysqli_query($baglan,"insert into uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', parola='$parola_kripto', tarih_saat='$tarih_saat', yetki='$yetki', durum='$durum'");
 		$eklenen_id=mysqli_insert_id($baglan);
+		if ($cep_tel!="") { uye_bilgi_guncelle("cep_tel", $cep_tel, $eklenen_id); }
 		foreach ($uye_ekstra_bilgiler as $yaz => $x) {
 			$eb_type=$x["tip"];
 			$eb_name=$x["id"];
@@ -98,7 +99,8 @@ if ($buton) {
 		if ($_SESSION["oturum_yetki"]!="admin") {
 			$yetki=$_SESSION["oturum_yetki"];
 		}
-		$sql=mysqli_query($baglan,"update uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', cep_tel='$cep_tel', durum='$durum', yetki='$yetki' where id='$id'");
+		$sql=mysqli_query($baglan,"update uyeler set ad_soyad='$ad_soyad', url='$url', email_adresi='$email_adresi', durum='$durum', yetki='$yetki' where id='$id'");
+		if ($cep_tel!="") { uye_bilgi_guncelle("cep_tel", $cep_tel, $id); }
 		if ($parola!="") {$sql=mysqli_query($baglan,"update uyeler set parola='$parola_kripto' where id='$id'");}
 		foreach ($uye_ekstra_bilgiler as $yaz => $x) {
 			$eb_type=$x["tip"];

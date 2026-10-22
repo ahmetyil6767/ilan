@@ -2672,6 +2672,7 @@ return array(
 	'p_seo_aciklama' => 'وصف SEO',
 	'p_plugin_settings_updated' => 'تم تحديث إعدادات الإضافة',
 	'p_plugin_enabled' => 'تم تفعيل الإضافة: %s',
+	'p_eklenti_pasiflestirildi' => 'تم تعطيل الإضافة: %s',
 	'p_plugin_info_not_found' => 'لم يتم العثور على ملف معلومات الإضافة',
 	'p_plugin_function_not_found' => 'لم يتم العثور على ملف دوال الإضافة',
 	'p_no_plugin_matching' => 'لا توجد إضافات مطابقة لبحثك',

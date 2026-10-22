@@ -2698,6 +2698,7 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'p_seo_aciklama' => 'Seo Açıklama',
 	'p_plugin_settings_updated' => 'Eklenti ayarları güncellendi',
 	'p_plugin_enabled' => 'Plugin enabled: %s',
+	'p_eklenti_pasiflestirildi' => 'Eklenti pasifleştirildi: %s',
 	'p_plugin_info_not_found' => 'Eklenti bilgi dosyası bulunamadı',
 	'p_plugin_function_not_found' => 'Eklenti fonksiyon dosyası bulunamadı',
 	'p_no_plugin_matching' => 'Aramanıza uygun eklenti bulunamadı',

@@ -45,7 +45,7 @@ if ($islem=="menuleri_olustur") {
 if ($islem=="sil") {
 	// Linkler siliniyor
 	$menu_sil=mysqli_query($baglan,"delete from linkler where menu_id='$menu_id'");
-	// MenÃ¼ siliniyor. (is_array($menu_sil) ? implode(", ", $menu_sil) : $menu_sil)=mysqli_query($baglan,"delete from ayarlar where id='$menu_id'");
+	$menu_sil=mysqli_query($baglan,"delete from ayarlar where id='$menu_id'");
 	$menu_iliski_sil=mysqli_query($baglan,"delete from ayarlar where deger='menu-$menu_id'");
 	$_SESSION["mesaj"]=array(_LANG('p_menu_links_deleted'),"success");
 	yonlendir("menuler.php");

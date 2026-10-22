@@ -2715,6 +2715,7 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'p_seo_aciklama' => 'SEO Description',
 	'p_plugin_settings_updated' => 'Plugin settings updated',
 	'p_plugin_enabled' => 'Plugin enabled: %s',
+	'p_eklenti_pasiflestirildi' => 'Plugin disabled: %s',
 	'p_plugin_info_not_found' => 'Plugin info file not found',
 	'p_plugin_function_not_found' => 'Plugin function file not found',
 	'p_no_plugin_matching' => 'No plugins matching your search',
