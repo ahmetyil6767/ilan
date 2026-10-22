@@ -28,7 +28,12 @@ if ($get_liste) {
 		if (!$sira) {
 			$sira=50;
 		}
-		$ekle=mysqli_query($baglan,"insert into listeler set sira='$sira', tip='$get_liste', id='$get_icerik_id'");
+		$ekle=mysqli_prepare($baglan,"insert into listeler set sira=?, tip=?, id=?");
+  	$sira_int=(int)$sira;
+  	$get_icerik_id_int=(int)$get_icerik_id;
+  	mysqli_stmt_bind_param($ekle,"isi",$sira_int,$get_liste,$get_icerik_id_int);
+  	mysqli_stmt_execute($ekle);
+  	mysqli_stmt_close($ekle);
 		$id=mysqli_insert_id($baglan);
 		foreach ($ayar as $yaz => $x) {	
 			$eb_type=$x["tip"];
@@ -112,7 +117,12 @@ if ($guncelle_buton) {
 		$sira=($toplam+1)*10;
 	}
 	// Sıra güncelleme
-	mysqli_query($baglan,"update listeler set sira='$sira' where l_id='$id'");
+	$liste_sorgu=mysqli_prepare($baglan,"update listeler set sira=? where l_id=?");
+  	$sira_int=(int)$sira;
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($liste_sorgu,"ii",$sira_int,$id_int);
+  	mysqli_stmt_execute($liste_sorgu);
+  	mysqli_stmt_close($liste_sorgu);
 	foreach ($ayar as $yaz => $x) {	
 		$eb_type=$x["tip"];
 		$eb_name=$x["id"];
@@ -205,8 +215,16 @@ if ($guncelle_buton) {
 } // islem=="guncelle"
 if ($islem=="sil") {
 	$id=$_GET["id"];
-	$liste_sil=mysqli_query($baglan,"delete from listeler where l_id='$id'");
-	$ekstra_bilgi_sil=mysqli_query($baglan,"delete * from ekstra_bilgi where id='$id' and tip='liste'");
+	$liste_sil=mysqli_prepare($baglan,"delete from listeler where l_id=?");
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($liste_sil,"i",$id_int);
+  	mysqli_stmt_execute($liste_sil);
+  	mysqli_stmt_close($liste_sil);
+	$ekstra_bilgi_sil=mysqli_prepare($baglan,"delete from ekstra_bilgi where id=? and tip='liste'");
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($ekstra_bilgi_sil,"i",$id_int);
+  	mysqli_stmt_execute($ekstra_bilgi_sil);
+  	mysqli_stmt_close($ekstra_bilgi_sil);
 	$_SESSION["mesaj"]=array(_LANG('p_list_item_deleted'),"success");
 	if ($get_icerik_id) {
 		yonlendir("listeler.php?liste=$get_liste&icerik_id=$get_icerik_id");
@@ -229,7 +247,12 @@ if ($islem=="yukari_kaydir") {
 	}
 	$olmasi_gereken_sira=$kacinci_sirada-1;
 	$yeni_sira=$olmasi_gereken_sira*10;
-	mysqli_query($baglan,"update listeler set sira='$yeni_sira' where l_id='$id'");
+	$sorgu=mysqli_prepare($baglan,"update listeler set sira=? where l_id=?");
+  	$yeni_sira_int=(int)$yeni_sira;
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($sorgu,"ii",$yeni_sira_int,$id_int);
+  	mysqli_stmt_execute($sorgu);
+  	mysqli_stmt_close($sorgu);
 	$z=1;
 	$sql=mysqli_query($baglan,"select * from listeler where tip='$get_liste' and l_id!='$id' order by sira asc");
 	while ($dizi=mysqli_fetch_array($sql)) {
@@ -238,7 +261,12 @@ if ($islem=="yukari_kaydir") {
 			$z++;
 		}
 		$sira=$z*10;
-		mysqli_query($baglan,"update listeler set sira='$sira' where l_id='$liste_id'");
+		$sorgu=mysqli_prepare($baglan,"update listeler set sira=? where l_id=?");
+  	$sira_int=(int)$sira;
+  	$liste_id_int=(int)$liste_id;
+  	mysqli_stmt_bind_param($sorgu,"ii",$sira_int,$liste_id_int);
+  	mysqli_stmt_execute($sorgu);
+  	mysqli_stmt_close($sorgu);
 		$z++;
 	}
 	$_SESSION["mesaj"]=array(_LANG('p_list_item_moved_up'),"success");
@@ -263,7 +291,12 @@ if ($islem=="asagi_kaydir") {
 	}
 	$olmasi_gereken_sira=$kacinci_sirada+1;
 	$yeni_sira=$olmasi_gereken_sira*10;
-	mysqli_query($baglan,"update listeler set sira='$yeni_sira' where l_id='$id'");
+	$sorgu=mysqli_prepare($baglan,"update listeler set sira=? where l_id=?");
+	$yeni_sira_int=(int)$yeni_sira;
+	$id_int=(int)$id;
+	mysqli_stmt_bind_param($sorgu,"ii",$yeni_sira_int,$id_int);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_close($sorgu);
 	$z=1;
 	$sql=mysqli_query($baglan,"select * from listeler where tip='$get_liste' and l_id!='$id' order by sira asc");
 	while ($dizi=mysqli_fetch_array($sql)) {
@@ -272,7 +305,12 @@ if ($islem=="asagi_kaydir") {
 			$z++;
 		}
 		$sira=$z*10;
-		mysqli_query($baglan,"update listeler set sira='$sira' where l_id='$liste_id'");
+		$sorgu=mysqli_prepare($baglan,"update listeler set sira=? where l_id=?");
+	$sira_int=(int)$sira;
+	$liste_id_int=(int)$liste_id;
+	mysqli_stmt_bind_param($sorgu,"ii",$sira_int,$liste_id_int);
+	mysqli_stmt_execute($sorgu);
+	mysqli_stmt_close($sorgu);
 		$z++;
 	}
 	$_SESSION["mesaj"]=array(_LANG('p_list_item_moved_down'),"success");

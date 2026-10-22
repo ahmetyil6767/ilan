@@ -9,7 +9,11 @@ if ($ekle_buton) {
 	$bilesen_value=$_POST["bilesen_$alan_value"];
 	$kac_bilesen_var=mysqli_num_rows(mysqli_query($baglan,"select * from bilesenler where alan='$alan_value'"));
 	$sira=$kac_bilesen_var*10;
-	$bilesen_ekle=mysqli_query($baglan,"insert into bilesenler set alan='$alan_value', bilesen='$bilesen_value', sira='$sira'");
+	$bilesen_ekle=mysqli_prepare($baglan,"insert into bilesenler set alan=?, bilesen=?, sira=?");
+  	$sira_int=(int)$sira;
+  	mysqli_stmt_bind_param($bilesen_ekle,"ssi",$alan_value,$bilesen_value,$sira_int);
+  	mysqli_stmt_execute($bilesen_ekle);
+  	mysqli_stmt_close($bilesen_ekle);
 	$eklenen_id=mysqli_insert_id($baglan);	
 	
 	$ayarlar=$bilesen[$bilesen_value]["ayarlar"];
@@ -37,10 +41,19 @@ $tip="bilesen";
 		$baslik_yeni=$_POST["baslik"];
 		$sira_yeni=$_POST["sira"];
 		if ($baslik!=$baslik_yeni) {
-			mysqli_query($baglan,"update bilesenler set baslik='$baslik_yeni' where id='$id'");
+			$baslik_sorgu=mysqli_prepare($baglan,"update bilesenler set baslik=? where id=?");
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($baslik_sorgu,"si",$baslik_yeni,$id_int);
+  	mysqli_stmt_execute($baslik_sorgu);
+  	mysqli_stmt_close($baslik_sorgu);
 		}
 		if ($sira!=$sira_yeni) {
-			mysqli_query($baglan,"update bilesenler set sira='$sira_yeni' where id='$id'");
+			$sira_sorgu=mysqli_prepare($baglan,"update bilesenler set sira=? where id=?");
+  	$sira_yeni_int=(int)$sira_yeni;
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($sira_sorgu,"ii",$sira_yeni_int,$id_int);
+  	mysqli_stmt_execute($sira_sorgu);
+  	mysqli_stmt_close($sira_sorgu);
 		}
 		$ayar=$bilesen[$bilesen_value]["ayarlar"];
 		foreach ($ayar as $yaz => $x) {
@@ -136,8 +149,15 @@ $tip="bilesen";
 		}
 	}
 	if ($sil_buton) {
-		mysqli_query($baglan,"delete from ekstra_bilgi where id='$id' and tip='bilesen'");
-		mysqli_query($baglan,"delete from bilesenler where id='$id'");
+		$id_int=(int)$id;
+  	$eb_sorgu=mysqli_prepare($baglan,"delete from ekstra_bilgi where id=? and tip='bilesen'");
+  	mysqli_stmt_bind_param($eb_sorgu,"i",$id_int);
+  	mysqli_stmt_execute($eb_sorgu);
+  	mysqli_stmt_close($eb_sorgu);
+  	$bilesen_sorgu=mysqli_prepare($baglan,"delete from bilesenler where id=?");
+  	mysqli_stmt_bind_param($bilesen_sorgu,"i",$id_int);
+  	mysqli_stmt_execute($bilesen_sorgu);
+  	mysqli_stmt_close($bilesen_sorgu);
 		$_SESSION["mesaj"]=array(_LANG('p_component_removed'),"success");
 		yonlendir("bilesenler.php?islem=goruntule&alan=$bilesen_alani");	
 	}
@@ -148,8 +168,15 @@ if ($islem=="goruntule") {
 if ($islem=="sil") {
 	$id=$_GET["bilesen"];
 	$bilesen_alani=$_GET["alan"];
-	mysqli_query($baglan,"delete from ekstra_bilgi where id='$id' and tip='bilesen'");
-	mysqli_query($baglan,"delete from bilesenler where id='$id'");
+	$id_int=(int)$id;
+  	$eb_sorgu=mysqli_prepare($baglan,"delete from ekstra_bilgi where id=? and tip='bilesen'");
+  	mysqli_stmt_bind_param($eb_sorgu,"i",$id_int);
+  	mysqli_stmt_execute($eb_sorgu);
+  	mysqli_stmt_close($eb_sorgu);
+  	$bilesen_sorgu=mysqli_prepare($baglan,"delete from bilesenler where id=?");
+  	mysqli_stmt_bind_param($bilesen_sorgu,"i",$id_int);
+  	mysqli_stmt_execute($bilesen_sorgu);
+  	mysqli_stmt_close($bilesen_sorgu);
 	$_SESSION["mesaj"]=array(_LANG('p_component_removed'),"success");
 	yonlendir("bilesenler.php?islem=goruntule&alan=$bilesen_alani");	
 }
@@ -158,7 +185,11 @@ if ($islem=="ekle") {
 	$bilesen_value=$_GET["bilesen"];
 	$kac_bilesen_var=mysqli_num_rows(mysqli_query($baglan,"select * from bilesenler where alan='$alan_value'"));
 	$sira=$kac_bilesen_var*10;
-	$bilesen_ekle=mysqli_query($baglan,"insert into bilesenler set alan='$alan_value', bilesen='$bilesen_value', sira='$sira'");
+	$bilesen_ekle=mysqli_prepare($baglan,"insert into bilesenler set alan=?, bilesen=?, sira=?");
+  	$sira_int=(int)$sira;
+  	mysqli_stmt_bind_param($bilesen_ekle,"ssi",$alan_value,$bilesen_value,$sira_int);
+  	mysqli_stmt_execute($bilesen_ekle);
+  	mysqli_stmt_close($bilesen_ekle);
 	$eklenen_id=mysqli_insert_id($baglan);	
 	$_SESSION["mesaj"]=array(_LANG('p_component_added'),"success");
 	

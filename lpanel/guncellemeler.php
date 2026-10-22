@@ -8,7 +8,11 @@ function guncelleme_paketi_sil() {
 	if ($paket_id) {
 		$paket_url=getir("kayitlar","veri_1",$paket_id);
 		sil($paket_url);
-		$kayit_sil=mysqli_query($baglan,"delete from kayitlar where tip='guncelleme' and id='$paket_id'");
+		$kayit_sil=mysqli_prepare($baglan,"delete from kayitlar where tip='guncelleme' and id=?");
+  	$paket_id_int=(int)$paket_id;
+  	mysqli_stmt_bind_param($kayit_sil,"i",$paket_id_int);
+  	mysqli_stmt_execute($kayit_sil);
+  	mysqli_stmt_close($kayit_sil);
 	}
 }
 
@@ -60,7 +64,10 @@ if ($limonsoft_indir) {
 	if ($yuklenen) {
 		guncelleme_paketi_sil();
 		$tarih_saat=tarih_saat();
-		$ekle=mysqli_query($baglan,"insert into kayitlar set uye_id='0', veri_1='$yuklenen', tip='guncelleme', tarih_saat='$tarih_saat'");
+		$ekle=mysqli_prepare($baglan,"insert into kayitlar set uye_id=0, veri_1=?, tip='guncelleme', tarih_saat=?");
+  	mysqli_stmt_bind_param($ekle,"ss",$yuklenen,$tarih_saat);
+  	mysqli_stmt_execute($ekle);
+  	mysqli_stmt_close($ekle);
 		if ($ekle) {
 			$_SESSION["mesaj"]=array(_LANG("p_package_downloaded_ready"),"success");
 		} else {

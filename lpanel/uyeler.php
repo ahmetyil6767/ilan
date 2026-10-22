@@ -229,7 +229,10 @@ if ($islem=="oturum_degistir") {
 	$oturum_yetki=getir("uyeler","yetki",$oturum_id);
 	if ($oturum_yetki=="admin") {
 		$baz_tarih_saat=tarih_saat_hesapla("-15 minutes");
-		mysqli_query($baglan,"delete from kayitlar where tip='oturum_degistir' and tarih_saat<='$baz_tarih_saat'");
+		$kayit_sil=mysqli_prepare($baglan,"delete from kayitlar where tip='oturum_degistir' and tarih_saat<=?");
+  	mysqli_stmt_bind_param($kayit_sil,"s",$baz_tarih_saat);
+  	mysqli_stmt_execute($kayit_sil);
+  	mysqli_stmt_close($kayit_sil);
 		if (ref_url()) {
 			$redirect_url=ref_url();
 		} else {
@@ -246,7 +249,12 @@ if ($islem=="oturum_degistir") {
 					session_destroy();
 					setcookie("auto_login",null,-60*60*24*365*5,"/");
 					session_start();
-					mysqli_query($baglan,"insert into kayitlar set veri_2='$benzersiz', uye_id='$admin_oturum_id', veri_1='$login_uye_id', tip='oturum_degistir'"); 
+					$kayit_ekle=mysqli_prepare($baglan,"insert into kayitlar set veri_2=?, uye_id=?, veri_1=?, tip='oturum_degistir'");
+  	$admin_oturum_id_int=(int)$admin_oturum_id;
+  	$login_uye_id_int=(int)$login_uye_id;
+  	mysqli_stmt_bind_param($kayit_ekle,"sii",$benzersiz,$admin_oturum_id_int,$login_uye_id_int);
+  	mysqli_stmt_execute($kayit_ekle);
+  	mysqli_stmt_close($kayit_ekle); 
 					$_SESSION["oturum_id"]=$login_uye_id;
 					$_SESSION["oturum_site_url"]=site_url();
 					$_SESSION["oturum_degistir"]=array($benzersiz,$admin_oturum_id,$login_uye_id,$redirect_url);

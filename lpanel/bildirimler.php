@@ -25,11 +25,15 @@ if ($sil) {
 }
 if ($islem=="tumunu_sil") {
 	if (!$tip) {
-		$sql=mysqli_query($baglan,"delete from bildirimler where tip='0'");
+		$sql=mysqli_prepare($baglan,"delete from bildirimler where tip=0");
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 		$_SESSION["mesaj"]=array(_LANG('p_all_notifications_deleted'),"success");
 		yonlendir("bildirimler.php");
 	} else if ($tip=="hata") {
-		$sql=mysqli_query($baglan,"delete from bildirimler where tip='2'");
+		$sql=mysqli_prepare($baglan,"delete from bildirimler where tip=2");
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 		$_SESSION["mesaj"]=array(_LANG('p_all_error_reports_deleted'),"success");		
 		yonlendir("bildirimler.php?tip=hata");
 	}

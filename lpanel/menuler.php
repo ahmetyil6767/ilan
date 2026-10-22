@@ -35,7 +35,10 @@ if ($islem=="menuleri_olustur") {
 	foreach ($tema_menuleri as $x) {
 		$id=$x["id"];
 		$baslik=$x["baslik"];
-		$sql=mysqli_query($baglan,"insert into ayarlar set anahtar='menu', deger='$baslik'");
+		$sql=mysqli_prepare($baglan,"insert into ayarlar set anahtar='menu', deger=?");
+  	mysqli_stmt_bind_param($sql,"s",$baslik);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 		$eklenen_id=mysqli_insert_id($baglan);
 		if ($id) {
 			ayar_guncelle("$id","menu-$eklenen_id");
@@ -95,7 +98,13 @@ if ($ozel_link_ekle_buton) {
 	if ($baslik or $url) {
 	$kac_link_var=mysqli_num_rows(mysqli_query($baglan,"select * from linkler where menu_id='$menu_id'"));
 	$sira=$kac_link_var*10;
-	$sql=mysqli_query($baglan,"insert into linkler set baslik='$baslik', url='$url', ust_link='$ust_link', ikon='$ikon', sira='$sira', menu_id='$menu_id'");
+	$sql=mysqli_prepare($baglan,"insert into linkler set baslik=?, url=?, ust_link=?, ikon=?, sira=?, menu_id=?");
+  	$ust_link_int=(int)$ust_link;
+  	$sira_int=(int)$sira;
+  	$menu_id_int=(int)$menu_id;
+  	mysqli_stmt_bind_param($sql,"ssssis",$baslik,$url,$ust_link_int,$ikon,$sira_int,$menu_id_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('p_link_added'),"success");
 	} else {
 	$_SESSION["mesaj"]=array(_LANG('p_link_title_or_url_required'),"danger");
@@ -116,7 +125,13 @@ foreach ($secilen_linkler as $link) {
 $sira=$kac_link_var*10;
 $baslik=bilgi_getir("icerik","baslik",$link);
 $url=link_getir($link);
-$link_ekle_sql=mysqli_query($baglan,"insert into linkler set baslik='$baslik', url='$url', menu_id='$menu_id', sira='$sira', ust_link='$ust_link'");
+$link_ekle_sql=mysqli_prepare($baglan,"insert into linkler set baslik=?, url=?, menu_id=?, sira=?, ust_link=?");
+  	$menu_id_int=(int)$menu_id;
+  	$sira_int=(int)$sira;
+  	$ust_link_int=(int)$ust_link;
+  	mysqli_stmt_bind_param($link_ekle_sql,"ssiii",$baslik,$url,$menu_id_int,$sira_int,$ust_link_int);
+  	mysqli_stmt_execute($link_ekle_sql);
+  	mysqli_stmt_close($link_ekle_sql);
 $kac_link_var++;
 }
 $_SESSION["mesaj"]=array(_LANG('p_links_added'),"success");
@@ -131,7 +146,13 @@ yonlendir("menuler.php?islem=linkler&menu_id=$menu_id");
 		$sira=$kac_link_var*10;
 		$baslik=bilgi_getir("kategoriler","baslik",$link);
 		$url=kategori_link_getir($link);
-		$link_ekle_sql=mysqli_query($baglan,"insert into linkler set baslik='$baslik', url='$url', menu_id='$menu_id', ust_link='$ust_link', sira='$sira'");
+		$link_ekle_sql=mysqli_prepare($baglan,"insert into linkler set baslik=?, url=?, menu_id=?, ust_link=?, sira=?");
+  	$menu_id_int=(int)$menu_id;
+  	$ust_link_int=(int)$ust_link;
+  	$sira_int=(int)$sira;
+  	mysqli_stmt_bind_param($link_ekle_sql,"ssiii",$baslik,$url,$menu_id_int,$ust_link_int,$sira_int);
+  	mysqli_stmt_execute($link_ekle_sql);
+  	mysqli_stmt_close($link_ekle_sql);
 		$kac_link_var++;
 		}
 		$_SESSION["mesaj"]=array(_LANG('p_links_added'),"success");
@@ -142,8 +163,15 @@ yonlendir("menuler.php?islem=linkler&menu_id=$menu_id");
 } }
 @$link_sil=$_GET["link_sil"];
 if ($link_sil) {
-	$alt_linkler_update=mysqli_query($baglan,"update linkler set ust_link='0' where ust_link='$link_sil'");
-	$sql=mysqli_query($baglan,"delete from linkler where id='$link_sil'");
+	$link_sil_int=(int)$link_sil;
+  	$alt_linkler_update=mysqli_prepare($baglan,"update linkler set ust_link=0 where ust_link=?");
+  	mysqli_stmt_bind_param($alt_linkler_update,"i",$link_sil_int);
+  	mysqli_stmt_execute($alt_linkler_update);
+  	mysqli_stmt_close($alt_linkler_update);
+  	$sql=mysqli_prepare($baglan,"delete from linkler where id=?");
+  	mysqli_stmt_bind_param($sql,"i",$link_sil_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('p_link_deleted'),"success");
 	yonlendir("menuler.php?islem=linkler&menu_id=$menu_id");
 }
@@ -164,7 +192,13 @@ if ($link_guncelle) {
 	$guncelle_ikon=$_POST["ikon"];
 	$guncelle_class=$_POST["class"];
 	$guncelle_ust_link=$_POST["ust_link"];
-	$sql=mysqli_query($baglan,"update linkler set baslik='$guncelle_baslik', url='$guncelle_url', sira='$guncelle_sira', ikon='$guncelle_ikon', class='$guncelle_class', ust_link='$guncelle_ust_link' where id='$link_guncelle'");
+	$sql=mysqli_prepare($baglan,"update linkler set baslik=?, url=?, sira=?, ikon=?, class=?, ust_link=? where id=?");
+  	$guncelle_sira_int=(int)$guncelle_sira;
+  	$guncelle_ust_link_int=(int)$guncelle_ust_link;
+  	$link_guncelle_int=(int)$link_guncelle;
+  	mysqli_stmt_bind_param($sql,"ssssiii",$guncelle_baslik,$guncelle_url,$guncelle_sira_int,$guncelle_ikon,$guncelle_class,$guncelle_ust_link_int,$link_guncelle_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('p_link_updated'),"success");
 	yonlendir("menuler.php?islem=linkler&menu_id=$menu_id");
 	}
@@ -179,22 +213,47 @@ $menu_url_dizisi=$_POST["toplu_url"];
 $menu_ikon_dizisi=$_POST["toplu_ikon"];
 $menu_class_dizisi=$_POST["toplu_class"];
 foreach ($menu_baslik_dizisi as $link_id=>$yeni_baslik) {
-	$guncelle = mysqli_query($baglan,"update linkler set baslik='$yeni_baslik' where id='$link_id'");
+	$guncelle = mysqli_prepare($baglan,"update linkler set baslik=? where id=?");
+  	$link_id_int=(int)$link_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_baslik,$link_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 }
 foreach ($menu_sira_dizisi as $link_id=>$yeni_sira) {
-	$guncelle = mysqli_query($baglan,"update linkler set sira='$yeni_sira' where id='$link_id'");
+	$guncelle = mysqli_prepare($baglan,"update linkler set sira=? where id=?");
+  	$yeni_sira_int=(int)$yeni_sira;
+  	$link_id_int=(int)$link_id;
+  	mysqli_stmt_bind_param($guncelle,"ii",$yeni_sira_int,$link_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 }
 foreach ($menu_sil_dizisi as $link_id=>$sil_id) {
-	$guncelle = mysqli_query($baglan,"delete from linkler where id='$sil_id'");
+	$guncelle = mysqli_prepare($baglan,"delete from linkler where id=?");
+  	$sil_id_int=(int)$sil_id;
+  	mysqli_stmt_bind_param($guncelle,"i",$sil_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 }
 foreach ($menu_url_dizisi as $link_id=>$yeni_url) {
-	$guncelle = mysqli_query($baglan,"update linkler set url='$yeni_url' where id='$link_id'");
+	$guncelle = mysqli_prepare($baglan,"update linkler set url=? where id=?");
+  	$link_id_int=(int)$link_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_url,$link_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 }
 foreach ($menu_ikon_dizisi as $link_id=>$yeni_ikon) {
-	$guncelle = mysqli_query($baglan,"update linkler set ikon='$yeni_ikon' where id='$link_id'");
+	$guncelle = mysqli_prepare($baglan,"update linkler set ikon=? where id=?");
+  	$link_id_int=(int)$link_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_ikon,$link_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 }
 foreach ($menu_class_dizisi as $link_id=>$yeni_class) {
-	$guncelle = mysqli_query($baglan,"update linkler set class='$yeni_class' where id='$link_id'");
+	$guncelle = mysqli_prepare($baglan,"update linkler set class=? where id=?");
+  	$link_id_int=(int)$link_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_class,$link_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 }
 }
 }

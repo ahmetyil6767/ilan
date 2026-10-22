@@ -128,7 +128,12 @@ if ($buton or $buton_yayinla) {
 	if ($islem=="ekle") {
 
 		if ($buton_yayinla) {$durum=1;}
-		$sql=mysqli_query($baglan,"insert into icerik set baslik='$baslik', url='$url', icerik='$icerik', kategori='$kategori', tarih_saat='$tarih_saat', yazar='$yazar', durum='$durum', tip='$tip'");
+		$sql=mysqli_prepare($baglan,"insert into icerik set baslik=?, url=?, icerik=?, kategori=?, tarih_saat=?, yazar=?, durum=?, tip=?");
+  	$yazar_int=(int)$yazar;
+  	$durum_int=(int)$durum;
+  	mysqli_stmt_bind_param($sql,"sssssiis",$baslik,$url,$icerik,$kategori,$tarih_saat,$yazar_int,$durum_int,$tip);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 		$eklenen_id=mysqli_insert_id($baglan);
 		foreach ($kategori_dizisi as $kat_yaz) {
 			kategori_icerik_sayisi_guncelle($kat_yaz);
@@ -264,9 +269,19 @@ if ($buton or $buton_yayinla) {
 		}
 
 		if ($buton) {
-			$sql=mysqli_query($baglan,"update icerik set baslik='$baslik', url='$url', icerik='$icerik', durum='$durum', g_tarih_saat='$tarih_saat' where id='$id'");
+			$sql=mysqli_prepare($baglan,"update icerik set baslik=?, url=?, icerik=?, durum=?, g_tarih_saat=? where id=?");
+  	$durum_int=(int)$durum;
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($sql,"ssssii",$baslik,$url,$icerik,$durum_int,$tarih_saat,$id_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 		} else if ($buton_yayinla) {
-			$sql=mysqli_query($baglan,"update icerik set baslik='$baslik', url='$url', icerik='$icerik', durum='$durum', g_tarih_saat='$tarih_saat' where id='$id'");
+			$sql=mysqli_prepare($baglan,"update icerik set baslik=?, url=?, icerik=?, durum=?, g_tarih_saat=? where id=?");
+  	$durum_int=(int)$durum;
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($sql,"ssssii",$baslik,$url,$icerik,$durum_int,$tarih_saat,$id_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 			$ilan_suresi=tema_ayar("ilan_suresi");
 			if ($ilan_suresi==2) {
 				$ilan_gun_sayisi=tema_ayar("gun");
@@ -430,24 +445,45 @@ if ($buton or $buton_yayinla) {
 				@$resim_sira_dizisi=$_POST["galeri_sira"];
 				@$resim_sil_dizisi=$_POST["galeri_sil"];
 				foreach ($resim_baslik_dizisi as $resim_id=>$yeni_baslik) {
-					$guncelle = mysqli_query($baglan,"update galeri set baslik='$yeni_baslik' where id='$resim_id'");
+					$guncelle = mysqli_prepare($baglan,"update galeri set baslik=? where id=?");
+  	$resim_id_int=(int)$resim_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_baslik,$resim_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 				}
 				foreach ($resim_url_dizisi as $resim_id=>$yeni_url) {
 					if (!$yeni_url) {
 						$yeni_url=url_olustur(getir("galeri","baslik",$resim_id));
 					}
-					$guncelle = mysqli_query($baglan,"update galeri set url='$yeni_url' where id='$resim_id'");
+					$guncelle = mysqli_prepare($baglan,"update galeri set url=? where id=?");
+  	$resim_id_int=(int)$resim_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_url,$resim_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 				}	
 				foreach ($resim_icerik_dizisi as $resim_id=>$yeni_icerik) {
-					$guncelle = mysqli_query($baglan,"update galeri set icerik='$yeni_icerik' where id='$resim_id'");
+					$guncelle = mysqli_prepare($baglan,"update galeri set icerik=? where id=?");
+  	$resim_id_int=(int)$resim_id;
+  	mysqli_stmt_bind_param($guncelle,"si",$yeni_icerik,$resim_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 				}	
 				foreach ($resim_sira_dizisi as $resim_id=>$yeni_sira) {
-					$guncelle = mysqli_query($baglan,"update galeri set sira='$yeni_sira' where id='$resim_id'");
+					$guncelle = mysqli_prepare($baglan,"update galeri set sira=? where id=?");
+  	$yeni_sira_int=(int)$yeni_sira;
+  	$resim_id_int=(int)$resim_id;
+  	mysqli_stmt_bind_param($guncelle,"ii",$yeni_sira_int,$resim_id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 				}	
 				foreach ($resim_sil_dizisi as $resim_sil_id=>$sil_id) {
 					$image_url=getir("galeri","resim",$resim_sil_id);
 					tumunu_sil($image_url,$tip_galeri_boyutlandir);				
-					$sil = mysqli_query($baglan,"delete from galeri where id='$resim_sil_id'");
+					$sil = mysqli_prepare($baglan,"delete from galeri where id=?");
+  	$resim_sil_id_int=(int)$resim_sil_id;
+  	mysqli_stmt_bind_param($sil,"i",$resim_sil_id_int);
+  	mysqli_stmt_execute($sil);
+  	mysqli_stmt_close($sil);
 				}
 				// Toplu resim sil
 			}			
@@ -524,7 +560,11 @@ if ($islem=="sil") {
 			$thumbnail_url=thumbnail_url($yaz,$image_url);
 			sil($thumbnail_url);
 		} 					
-		$sil = mysqli_query($baglan,"delete from galeri where id='$resim_sil_id'");
+		$sil = mysqli_prepare($baglan,"delete from galeri where id=?");
+  	$resim_sil_id_int=(int)$resim_sil_id;
+  	mysqli_stmt_bind_param($sil,"i",$resim_sil_id_int);
+  	mysqli_stmt_execute($sil);
+  	mysqli_stmt_close($sil);
 		}
 	}
 	$silinen_baslik=bilgi_getir("icerik","baslik",$id);
@@ -536,8 +576,15 @@ if ($islem=="sil") {
 		$eski_kategori_dizisi=explode(",",str_replace($bul,$degistir,$eski_kategoriler));
 	}	
 	
-	$icerik_sil=mysqli_query($baglan,"delete from icerik where id='$id'");
-	$ekstra_bilgi_sil=mysqli_query($baglan,"delete from ekstra_bilgi where id='$id' and tip='$tip'");
+	$id_int=(int)$id;
+  	$icerik_sil=mysqli_prepare($baglan,"delete from icerik where id=?");
+  	mysqli_stmt_bind_param($icerik_sil,"i",$id_int);
+  	mysqli_stmt_execute($icerik_sil);
+  	mysqli_stmt_close($icerik_sil);
+  	$ekstra_bilgi_sil=mysqli_prepare($baglan,"delete from ekstra_bilgi where id=? and tip=?");
+  	mysqli_stmt_bind_param($ekstra_bilgi_sil,"is",$id_int,$tip);
+  	mysqli_stmt_execute($ekstra_bilgi_sil);
+  	mysqli_stmt_close($ekstra_bilgi_sil);
 	
 	if ($tip_baslik_yok=="1") {
 		$_SESSION["mesaj"]=array(_LANG('p_icerik_silindi'),"success");
@@ -568,7 +615,11 @@ if ($islem=="yayinla") {
 		$kategori_dizisi=explode(",",str_replace($bul,$degistir,$kategoriler));
 	}
 	
-	$guncelle=mysqli_query($baglan,"update icerik set durum='1', g_tarih_saat='$tarih_saat' where id='$id'");
+	$guncelle=mysqli_prepare($baglan,"update icerik set durum=1, g_tarih_saat=? where id=?");
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($guncelle,"si",$tarih_saat,$id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
 	$ilan_suresi=tema_ayar("ilan_suresi");
 	if ($ilan_suresi==2) {
 		$ilan_gun_sayisi=tema_ayar("gun");
@@ -618,7 +669,11 @@ if ($islem=="gorsel_sil") {
 @$sil_eb_id=$_GET["sil_eb_id"];
 @$guncelle_eb_id=$_GET["guncelle_eb_id"];
 if ($sil_eb_id) {
-	$sql=mysqli_query($baglan,"delete from ekstra_bilgi where b_id='$sil_eb_id'");
+	$sql=mysqli_prepare($baglan,"delete from ekstra_bilgi where b_id=?");
+  	$sil_eb_id_int=(int)$sil_eb_id;
+  	mysqli_stmt_bind_param($sql,"i",$sil_eb_id_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 	$_SESSION["mesaj"]=array(_LANG('msj_ekstra_bilgi_silindi'),"success");
 	yonlendir("icerik.php?tip=$tip&islem=guncelle&id=$id");		
 }
@@ -628,7 +683,11 @@ if ($guncelle_eb_id) {
 	@$deger=addslashes($_POST["deger"]);
 	if ($bilgi_guncelle_buton) {
 		if ($anahtar!="") {
-		$sql=mysqli_query($baglan,"update ekstra_bilgi set anahtar='$anahtar', deger='$deger' where b_id='$guncelle_eb_id'");
+		$sql=mysqli_prepare($baglan,"update ekstra_bilgi set anahtar=?, deger=? where b_id=?");
+  	$guncelle_eb_id_int=(int)$guncelle_eb_id;
+  	mysqli_stmt_bind_param($sql,"ssi",$anahtar,$deger,$guncelle_eb_id_int);
+  	mysqli_stmt_execute($sql);
+  	mysqli_stmt_close($sql);
 		$_SESSION["mesaj"]=array(_LANG('p_ekstra_bilgi_guncellendi'),"success");
 		yonlendir("icerik.php?tip=$tip&islem=guncelle&id=$id");
 		} else {
@@ -708,7 +767,11 @@ if ($toplu_buton) {
                     $kategori_dizisi=explode(",",str_replace($bul,$degistir,$kategoriler));
                 }
 
-                $guncelle=mysqli_query($baglan,"update icerik set durum='1', g_tarih_saat='$tarih_saat' where id='$id'");
+                $guncelle=mysqli_prepare($baglan,"update icerik set durum=1, g_tarih_saat=? where id=?");
+  	$id_int=(int)$id;
+  	mysqli_stmt_bind_param($guncelle,"si",$tarih_saat,$id_int);
+  	mysqli_stmt_execute($guncelle);
+  	mysqli_stmt_close($guncelle);
                 foreach($kategori_dizisi as $yaz) {
                     kategori_icerik_sayisi_guncelle($yaz);
                 }	
@@ -752,7 +815,11 @@ if ($toplu_buton) {
                         $thumbnail_url=thumbnail_url($yaz,$image_url);
                         sil($thumbnail_url);
                     } 					
-                    $sil = mysqli_query($baglan,"delete from galeri where id='$resim_sil_id'");
+                    $sil = mysqli_prepare($baglan,"delete from galeri where id=?");
+  	$resim_sil_id_int=(int)$resim_sil_id;
+  	mysqli_stmt_bind_param($sil,"i",$resim_sil_id_int);
+  	mysqli_stmt_execute($sil);
+  	mysqli_stmt_close($sil);
                     }
                 }
                 $silinen_baslik=bilgi_getir("icerik","baslik",$id);
@@ -763,8 +830,15 @@ if ($toplu_buton) {
                     $degistir=array(null,null);
                     $eski_kategori_dizisi=explode(",",str_replace($bul,$degistir,$eski_kategoriler));
                 }	
-                $icerik_sil=mysqli_query($baglan,"delete from icerik where id='$id'");
-                $ekstra_bilgi_sil=mysqli_query($baglan,"delete from ekstra_bilgi where id='$id' and tip='$tip'");
+                $id_int=(int)$id;
+  	$icerik_sil=mysqli_prepare($baglan,"delete from icerik where id=?");
+  	mysqli_stmt_bind_param($icerik_sil,"i",$id_int);
+  	mysqli_stmt_execute($icerik_sil);
+  	mysqli_stmt_close($icerik_sil);
+  	$ekstra_bilgi_sil=mysqli_prepare($baglan,"delete from ekstra_bilgi where id=? and tip=?");
+  	mysqli_stmt_bind_param($ekstra_bilgi_sil,"is",$id_int,$tip);
+  	mysqli_stmt_execute($ekstra_bilgi_sil);
+  	mysqli_stmt_close($ekstra_bilgi_sil);
             }
         
             $_SESSION["mesaj"]=array(_LANG('p_icerikler_kalici_silindi'),"success");
