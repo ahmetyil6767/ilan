@@ -551,7 +551,7 @@ tema_header(); ?>
 				<?php if (tema_ayar("ilan_yorumlari")=="Açık") { ?>
 				<div class="yorumlar">
 					<div class="panel panel-default beyaz">
-						<div class="panel-heading">Yorumlar</div>
+						<div class="panel-heading"><?php echo _LANG('p_yorumlar'); ?></div>
 						<div class="panel-body">							
 							<div class="fb-comments" data-href="<?php echo link_getir($id); ?>" data-numposts="5" data-width="100%"></div>
 						</div>
