@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
  * Türkçe çeviriler - KAYNAK DİL.
  *

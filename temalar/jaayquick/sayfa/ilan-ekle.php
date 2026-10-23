@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 if(count(get_included_files())==1) {die();}
 if (!$oturum_id) {
 	$_SESSION["mesaj"]=array(_LANG('msj_uye_girisi_gerekli'),"danger");

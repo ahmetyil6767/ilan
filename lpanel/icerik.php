@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include("../loader.php");
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 $tip=isset($_GET["tip"])?$_GET["tip"]:"";

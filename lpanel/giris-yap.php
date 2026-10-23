@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include("../loader.php");
 if (@$_SESSION["yonetici_id"]) {
 	if (yonetici_mi($_SESSION["yonetici_id"])!=true) {
