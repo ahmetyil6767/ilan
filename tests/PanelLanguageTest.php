@@ -38,6 +38,15 @@ $sayfalar = array(
 );
 
 $toplam_hata = 0;
+/*
+ * Hatalar artik ekrana yazilmaz (loader.php hata yakalayici + php.ini/vhost
+ * display_errors Off). Bu yuzden hata tespiti HTML yerine PHP hata
+ * logundan yapilir: test oncesi log boyutu olculur, sonra yeni
+ * kayitlar okunur.
+ */
+$hata_logu = 'C:/wamp64/logs/php_error.log';
+$log_baslangic = file_exists($hata_logu) ? filesize($hata_logu) : 0;
+
 foreach ($diller as $dil => $ad) {
 	echo "=== $dil ($ad) ===\n";
 	foreach ($sayfalar as $s => $yol) {
@@ -56,3 +65,25 @@ foreach ($diller as $dil => $ad) {
 	echo "\n";
 }
 echo "toplam sorunlu sayfa-dil: $toplam_hata\n";
+
+/* --- log tabanli hata tespiti (hatalar ekrana yazilmadigi icin) --- */
+clearstatcache();
+$log_son = file_exists($hata_logu) ? filesize($hata_logu) : 0;
+if ($log_son > $log_baslangic) {
+	$f = fopen($hata_logu, 'r');
+	fseek($f, $log_baslangic);
+	$yeni = fread($f, $log_son - $log_baslangic);
+	fclose($f);
+	$log_hatalari = array();
+	foreach (explode("\n", $yeni) as $satir) {
+		$satir = trim($satir);
+		if ($satir === '' or strpos($satir, '[JaayQuick]') === false) { continue; }
+		$log_hatalari[] = $satir;
+	}
+	echo "logdaki yeni hata: " . count($log_hatalari) . "\n";
+	foreach (array_slice($log_hatalari, 0, 8) as $h) { echo "  " . $h . "\n"; }
+	if (count($log_hatalari)) { $toplam_hata += count($log_hatalari); }
+} else {
+	echo "logdaki yeni hata: 0\n";
+}
+echo "SONUC: " . ($toplam_hata ? "SORUN VAR ($toplam_hata)" : "TEMIZ") . "\n";

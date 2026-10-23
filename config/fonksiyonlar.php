@@ -701,7 +701,7 @@ function kategori_adi_getir($kategori_id)
 {
 	global $baglan;
 	$kategori_dizi = (mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\'') ? (mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select baslik from kategoriler where id=\'' . $kategori_id . '\'')) : null) : null);
-	return $kategori_adi = $kategori_dizi['baslik'];
+	return $kategori_adi = ($kategori_dizi and isset($kategori_dizi['baslik'])) ? $kategori_dizi['baslik'] : '';
 }
 
 function alt_kat_idler($kat_id = NULL)
@@ -1625,7 +1625,7 @@ function menu_pozisyonu($menu_id)
 {
 	global $baglan;
 	$menu_id_hazirlik = (mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\'') ? (mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\'') ? mysqli_fetch_array(mysqli_query($baglan, 'select * from ayarlar where deger=\'menu-' . $menu_id . '\'')) : null) : null);
-	return $menu_id = $menu_id_hazirlik['anahtar'];
+	return $menu_id = ($menu_id_hazirlik and isset($menu_id_hazirlik['anahtar'])) ? $menu_id_hazirlik['anahtar'] : 0;
 }
 
 function link_sayisi($menu_id)

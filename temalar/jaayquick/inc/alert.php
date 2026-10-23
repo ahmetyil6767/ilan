@@ -6,8 +6,8 @@
  * uyarisi uretmemek icin isset kontrolu yapilir.
  */
 if (isset($_SESSION["mesaj"]) and is_array($_SESSION["mesaj"]) and isset($_SESSION["mesaj"][0]) and $_SESSION["mesaj"][0]!=="") {
-$mesaj_mesaj=stripslashes($_SESSION["mesaj"][0]);
-$mesaj_bicim=isset($_SESSION["mesaj"][1]) ? $_SESSION["mesaj"][1] : "";
+$mesaj_mesaj=stripslashes((string)$_SESSION["mesaj"][0]);
+$mesaj_bicim=(isset($_SESSION["mesaj"][1]) and is_string($_SESSION["mesaj"][1])) ? $_SESSION["mesaj"][1] : "";
 echo "<div class='alert alert-$mesaj_bicim autoclose' >
 $mesaj_mesaj
 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>

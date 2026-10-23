@@ -175,11 +175,28 @@ Mevcut üslubu koru. Refactor gereksiz yere genişletme.
   kırar. **Yeni dosyaya BOM ekleme**, mevcutlara dokunma.
 - Dosyayı kaydederken `charset`'i değiştirme.
 
-### Hata ayarı — üretim farkı
+### Hata ayarı — hatalar ekrana yazılmaz
 
-`loader.php` **debug modunda**: `display_errors=1`, `memory_limit=-1`.
-Sunucuya yüklemeden önce `display_errors` **0** olmalı; bunu ayrı ve bilinçli
-bir adım olarak yap.
+**Kural: hiçbir PHP hatası ekrana basılmaz.** Tüm hatalar sunucu loguna yazılır.
+
+| Katman | Ayar | Nerede |
+|---|---|---|
+| Çalışma zamanı | `display_errors=0`, `html_errors=0`, `log_errors=1` + özel hata yakalayıcı | `loader.php` (ilk satırlar) |
+| php.ini | `display_errors = Off`, `display_startup_errors = Off`, `html_errors = Off`, `xdebug.display_errors=0` | `C:\wamp64\bin\php\php8.4.15\php.ini` |
+| WAMP vhost | `php_admin_value display_errors Off` + `display_startup_errors Off` + `html_errors Off` | `conf/extra/httpd-vhosts-ilan.conf` |
+
+- `php_admin_value` **`ini_set()` ile ezilemez**; bu yüzden vhost ve php.ini
+  mutlaka yukarıdaki gibi ayarlanmış olmalı. `loader.php` içindeki hata
+  yakalayıcı ise Apache yeniden başlatılana kadar ekranı temiz tutar.
+- Hata günlüğü: `C:\wamp64\logs\php_error.log` (paylaşılan; bu projenin
+  kayıtları `[JaayQuick]` etiketiyle ayrılır).
+- **Hata tespiti artık HTML'e değil loga bakarak yapılır:**
+  `tests/PanelLanguageTest.php` testi logu okur ve yeni hataları raporlar.
+- Geliştirme sırasında hataları görmek istersen
+  `config/hata_goster.php` dosyası oluşturup içine
+  `<?php define('JAÄYQUICK_HATA_EKRANA', true);` yaz (vhost/php.ini de
+  `display_errors` açık olmalı).
+- CLI (geliştirme araçları) hataları ekranda görmeye devam eder.
 
 ## Güvenlik kuralları
 

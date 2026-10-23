@@ -39,9 +39,9 @@ if ($buton) {
 		$eklenen_id=mysqli_insert_id($baglan);
 		if ($cep_tel!="") { uye_bilgi_guncelle("cep_tel", $cep_tel, $eklenen_id); }
 		foreach ($uye_ekstra_bilgiler as $yaz => $x) {
-			$eb_type=$x["tip"];
-			$eb_name=$x["id"];
-			$deger=$_POST["$eb_name"];
+			$eb_type=($x["tip"] ?? '');
+			$eb_name=($x["id"] ?? '');
+			$deger=isset($_POST[$eb_name]) ? $_POST[$eb_name] : '';
 			if ($eb_type!="multiple_checkbox" and $eb_type!="upload") {
 				
 				if ($eb_type=="location") {
@@ -66,10 +66,10 @@ if ($buton) {
 				$diziden_cikart=null;
 			}
 			else if ($eb_type=="upload") {
-				$eb_boyutlar=$x["boyutlar"];
-				$eb_dizin=$x["dizin"];
-				$eb_orijinali_sil=$x["orijinali_sil"];
-				$eb_gecerli_boyut=$x["gecerli_boyut"];		
+				$eb_boyutlar=($x["boyutlar"] ?? '');
+				$eb_dizin=($x["dizin"] ?? '');
+				$eb_orijinali_sil=($x["orijinali_sil"] ?? '');
+				$eb_gecerli_boyut=($x["gecerli_boyut"] ?? '');		
 				
 				// v2 resim upload remove güncellemesi başladı.
 				$secenekler=array();
@@ -85,8 +85,8 @@ if ($buton) {
 				if ($eb_gecerli_boyut) {
 					$secenekler["cikti"]=$eb_gecerli_boyut;
 				}
-				$resim_dizisi=$_FILES["$eb_name"];
-				$resim_adi=$resim_dizisi["name"];
+				$resim_dizisi=(isset($_FILES[$eb_name]) and is_array($_FILES[$eb_name])) ? $_FILES[$eb_name] : array();
+				$resim_adi=(isset($resim_dizisi["name"]) and is_array($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 				if ($resim_adi!="") {
 					$resim_url=yukle($resim_dizisi,$secenekler);
 					$mevcut_deger=ekstra_bilgi_getir($eb_name,$eklenen_id,$tip);
@@ -115,9 +115,9 @@ if ($buton) {
 		mysqli_stmt_close($parola_sorgu);
 	}
 		foreach ($uye_ekstra_bilgiler as $yaz => $x) {
-			$eb_type=$x["tip"];
-			$eb_name=$x["id"];
-			$deger=$_POST["$eb_name"];
+			$eb_type=($x["tip"] ?? '');
+			$eb_name=($x["id"] ?? '');
+			$deger=isset($_POST[$eb_name]) ? $_POST[$eb_name] : '';
 			$mevcut_deger=ekstra_bilgi_getir($eb_name,$id,$tip);
 			if ($eb_type!="multiple_checkbox" and $eb_type!="upload") {
 				
@@ -143,10 +143,10 @@ if ($buton) {
 				$diziden_cikart=null;
 			}
 			else if ($eb_type=="upload") {
-				$eb_boyutlar=$x["boyutlar"];
-				$eb_dizin=$x["dizin"];
-				$eb_orijinali_sil=$x["orijinali_sil"];
-				$eb_gecerli_boyut=$x["gecerli_boyut"];		
+				$eb_boyutlar=($x["boyutlar"] ?? '');
+				$eb_dizin=($x["dizin"] ?? '');
+				$eb_orijinali_sil=($x["orijinali_sil"] ?? '');
+				$eb_gecerli_boyut=($x["gecerli_boyut"] ?? '');		
 				
 				// v2 resim upload remove güncellemesi başladı.
 				$secenekler=array();
@@ -162,8 +162,8 @@ if ($buton) {
 				if ($eb_gecerli_boyut) {
 					$secenekler["cikti"]=$eb_gecerli_boyut;
 				}
-				$resim_dizisi=$_FILES["$eb_name"];
-				$resim_adi=$resim_dizisi["name"];
+				$resim_dizisi=(isset($_FILES[$eb_name]) and is_array($_FILES[$eb_name])) ? $_FILES[$eb_name] : array();
+				$resim_adi=(isset($resim_dizisi["name"]) and is_array($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 				if ($resim_adi!="") {
 					$resim_url=yukle($resim_dizisi,$secenekler);
 					$mevcut_deger=ekstra_bilgi_getir($eb_name,$id,$tip);
@@ -173,7 +173,7 @@ if ($buton) {
 							$mevcut_deger=thumbnail_url("full",$mevcut_deger,$eb_gecerli_boyut);
 						}
 						sil($mevcut_deger);
-						foreach ($x["boyutlar"] as $yaz) {
+						foreach ((isset($x["boyutlar"]) and is_array($x["boyutlar"])) ? $x["boyutlar"] : array() as $yaz) {
 							$thumbnail_url=thumbnail_url($yaz,$mevcut_deger);
 							sil($thumbnail_url);
 						}
@@ -565,8 +565,8 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 					$say=1;
 					$tab_sayisi=0;
 					foreach ($uye_ekstra_bilgiler as $yaz => $x) {
-						$eb_type=$x["tip"];
-						@$eb_name=$x["id"];
+						$eb_type=($x["tip"] ?? '');
+						@$eb_name=($x["id"] ?? '');
 						@$eb_text=$x["baslik"];
 						if ($say==1) {
 							$active="class='active'";
@@ -586,8 +586,8 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 					echo "<div class='tab-content'>";
 					$tab_say=1;
 					foreach ($uye_ekstra_bilgiler as $yaz => $x) {
-					$eb_type=$x["tip"];
-					@$eb_name=$x["id"];
+					$eb_type=($x["tip"] ?? '');
+					@$eb_name=($x["id"] ?? '');
 					@$eb_text=$x["baslik"];
 					@$eb_options=$x["secenekler"];
 					@$eb_required=$x["gerekli"];
@@ -741,8 +741,8 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 					$say=1;
 					$tab_sayisi=0;
 					foreach ($uye_ekstra_bilgiler as $yaz => $x) {
-						$eb_type=$x["tip"];
-						@$eb_name=$x["id"];
+						$eb_type=($x["tip"] ?? '');
+						@$eb_name=($x["id"] ?? '');
 						@$eb_text=$x["baslik"];
 						if ($say==1) {
 							$active="class='active'";
@@ -762,8 +762,8 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 					echo "<div class='tab-content'>";
 					$tab_say=1;
 					foreach ($uye_ekstra_bilgiler as $yaz => $x) {
-					$eb_type=$x["tip"];
-					@$eb_name=$x["id"];
+					$eb_type=($x["tip"] ?? '');
+					@$eb_name=($x["id"] ?? '');
 					@$eb_text=$x["baslik"];
 					@$eb_options=$x["secenekler"];
 					@$eb_required=$x["gerekli"];

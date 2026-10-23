@@ -90,7 +90,12 @@ if ($logout==1) {
 		}
 		@media (max-width: 780px) {
 			.shell { grid-template-columns: 1fr; max-width: 440px; }
-			.brand-side { display: none; }
+			/* .brand-side temel kurali (display:flex) bu blogdan SONRA tanimli;
+			   cascade'de kazanip display:none'i eziyordu. Ozel seciciyle gecilir. */
+			.shell .brand-side { display: none; }
+			.shell .form-side { padding: 30px 22px; }
+			/* iOS odak zoom'unu engellemek icin giris alanlari en az 16px */
+			.field .input-wrap input { font-size: 16px; }
 		}
 		/* left brand side */
 		.brand-side {

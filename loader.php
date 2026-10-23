@@ -1,17 +1,46 @@
 <?php
 if(count(get_included_files())==1) exit("Bu bolgeye girmek tehlikeli ve yasaktir.");
 ob_start();
-// Error Reporting - hatalar sadece yerel gelistirme ortaminda gosterilir.
-// Uretimde (gercek domain) display_errors kapali kalir, hatalar sunucu loguna yazilir.
-$gelistirme_hostlari = array('ilan', 'localhost', '127.0.0.1', '::1');
-$su_ana_konuk = isset($_SERVER['HTTP_HOST']) ? strtolower(explode(':', $_SERVER['HTTP_HOST'])[0]) : '';
-$gelistirme_modu = in_array($su_ana_konuk, $gelistirme_hostlari, true);
-ini_set('display_errors', $gelistirme_modu ? '1' : '0');
-ini_set('display_startup_errors', $gelistirme_modu ? '1' : '0');
+// Error Reporting - hicbir hata ekrana yazilmaz.
+// Tum hatalar sunucu loguna (error_log) yazilir; kullaniciya yalnizca
+// genel bir mesaj gosterilir. Geliştirme icin gecici olarak ekrana
+// yazilmasini isterseniz config/hata_goster.php dosyasi olusturup
+// define('JAÄYQUICK_HATA_EKRANA', true); icermesi yeterlidir.
+if (!defined('JAÄYQUICK_HATA_EKRANA')) {
+	define('JAÄYQUICK_HATA_EKRANA', false);
+}
+ini_set('display_errors', JAÄYQUICK_HATA_EKRANA ? '1' : '0');
+ini_set('display_startup_errors', JAÄYQUICK_HATA_EKRANA ? '1' : '0');
+ini_set('html_errors', '0');
 ini_set('log_errors', '1');
 // E_STRICT sabiti PHP 8.4'te kullanimdan kalkti; referans almak kendisi bir
 // deprecation uyarisina neden oluyor. PHP 8'de de anlamsiz, bu yuzden kaldirildi.
 error_reporting(E_ALL & ~E_DEPRECATED);
+/*
+ * Hata yakalayici: PHP'nin varsayilan "ekrana yaz + logla" davranisi yerine
+ * hata yalnizca loga yazilir. Bu, vhost'ta php_admin_value display_errors On
+ * olsa bile ekranda hata gosterilmesini engeller (php_admin_value ini_set ile
+ * ezilemez). Yalnizca web isteklerinde devreye girer; CLI (gelistirme
+ * araclari) hatalari ekranda gostermeye devam eder.
+ */
+if (PHP_SAPI !== 'cli' and !JAÄYQUICK_HATA_EKRANA) {
+	set_error_handler(function ($seviye, $mesaj, $dosya = '', $satir = 0) {
+		if (!(error_reporting() & $seviye)) { return false; }
+		$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '-';
+		error_log(sprintf('[JaayQuick][%d] %s in %s:%d | IP: %s', $seviye, $mesaj, $dosya, $satir, $ip));
+		return true;
+	});
+	set_exception_handler(function ($e) {
+		$ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '-';
+		error_log(sprintf('[JaayQuick][HATA] %s: %s in %s:%d | IP: %s', get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), $ip));
+		if (!headers_sent()) {
+			http_response_code(500);
+			header('Content-Type: text/html; charset=utf-8');
+			echo '<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hata</title></head><body><h1>Bir hata oluştu</h1><p>İsteğiniz işlenirken beklenmeyen bir hata oluştu. Sorun devam ederse yöneticimize bildirin.</p></body></html>';
+		}
+		exit(1);
+	});
+}
 // Define
 define('ROOT_DIR', dirname( __FILE__ ));
 ini_set('memory_limit','-1');
@@ -21,7 +50,20 @@ ini_set('date.timezone', "Europe/Istanbul");
 if (file_exists(ROOT_DIR."/config/db.php")) {
 	require(ROOT_DIR."/config/db.php");
 	if (@$host and @$kullanici and @$veritabani) {
+		/* Connect'ten ONCE rapor kapatilir: PHP 8.1+ varsayilan strict modda
+		   baglanti hatasini exception olarak firlatiyor; 7.2 davranisi
+		   (false + log) icin bu satir connect'ten once olmali. */
+		mysqli_report(MYSQLI_REPORT_OFF);
 		@$baglan=mysqli_connect("$host","$kullanici","$parola","$veritabani");
+		if (!$baglan) {
+			/* Veritabani baglantisi kurulamadi: kullanicida PHP hatasi gorunmesi
+			   yerine anlasilir bir bakim sayfasi gosterilir; ayrinti loga yazilir. */
+			error_log('[JaayQuick][DB] Veritabani baglantisi kurulamadi: ' . mysqli_connect_error());
+			http_response_code(503);
+			header('Content-Type: text/html; charset=utf-8');
+			echo '<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JaayQuick</title></head><body style="font-family:sans-serif;text-align:center;padding:60px 20px;color:#0B2545"><h1>JaayQuick</h1><p>Veritabanı bağlantısı kurulamadı. Sistem kısa süre içinde düzelecektir; sorun devam ederse yöneticime bilgi verin.</p></body></html>';
+			exit(1);
+		}
 		mysqli_query($baglan,"set names utf8mb4");
 		date_default_timezone_set('Europe/Istanbul');
 		/*
