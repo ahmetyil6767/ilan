@@ -25,7 +25,9 @@ $dump = Join-Path $hedef ("otomatik_db_" + $damga + ".sql")
 # BOM'lu dump dosyalari mysql'e geri yuklenemiyordu).
 cmd /c "`"$mysqlBin`" -u root --single-transaction --quick --default-character-set=utf8mb4 jaayquick > `"$dump`" 2>nul"
 $boyut = (Get-Item $dump).Length
-if ($boyut -lt 1MB) { Log "HATA: DB dump cok kucuk ($boyut bayt)"; throw "DB yedeği güvenilir degil" }
+# Esik: marka temizliginden sonra (fazla demo kategori/silme) DB dogal olarak
+# ~950 KB'a dustu; 26 tablo dogrulandi. 700 KB alti gercek sau degil varsayilir.
+if ($boyut -lt 700KB) { Log "HATA: DB dump cok kucuk ($boyut bayt)"; throw "DB yedeği güvenilir degil" }
 Log ("DB yedegi: " + (Split-Path -Leaf $dump) + " (" + [math]::Round($boyut/1MB,1) + " MB)")
 
 # 2) Dosya yedegi (zip): proje, .git ve SQL/yedekler haric (uploads dahil)
