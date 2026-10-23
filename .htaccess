@@ -21,7 +21,7 @@ RewriteEngine On
 
 # HTTPS yonlendirmesi (localhost gelistirme ortaminda devre disi)
 RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:|$) [NC]
+RewriteCond %{HTTP_HOST} !^(ilan|localhost|127\.0\.0\.1)(:|$) [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
