@@ -19,6 +19,11 @@ ErrorDocument 404 /404.php
 Options -MultiViews
 RewriteEngine On
 
+# HTTPS yonlendirmesi (localhost gelistirme ortaminda devre disi)
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:|$) [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^/]+)-([0-9]+)/([^/]+)-([0-9]+) icerik.php?id=$2&g=$4 [QSA,L]
 RewriteRule ^([^/]+)-([0-9]+)/([^/]+) icerik.php?id=$2&sayfa=$3 [QSA,L]
