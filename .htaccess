@@ -25,10 +25,16 @@ RewriteCond %{HTTP_HOST} !^(ilan|localhost|127\.0\.0\.1)(:|$) [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
+# Sayfa rotalari (temiz URL'ler - /sayfa/ olmadan)
+RewriteRule ^(login|register|forgot-password|profile-update|my-profile|urgent|price-drops|featured-ads|get-ads|stores|last-48-hours|last-1-week|last-1-month|about-us|contact|posting-rules|terms-of-use|privacy-policy|advertising|faq|how-to-open-store|store-requirements|corporate-store-packages|profile)/?$ index.php?p=$1 [QSA,L]
+
+# Eski sayfa rotalari (geri uyumluluk icin)
+RewriteRule ^sayfa/([^/]+) index.php?p=$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^/]+)-([0-9]+)/([^/]+)-([0-9]+) icerik.php?id=$2&g=$4 [QSA,L]
 RewriteRule ^([^/]+)-([0-9]+)/([^/]+) icerik.php?id=$2&sayfa=$3 [QSA,L]
 RewriteRule ^([^/]+)-([0-9]+) icerik.php?id=$2 [QSA,L]
-RewriteRule ^sayfa/([^/]+) index.php?p=$1 [QSA,L]
 RewriteRule ^magaza/([^/]+)-([0-9]+) magaza.php?id=$2 [QSA,L]
 RewriteRule ^([0-9]+)/([^/]+)/([0-9]+) kategori.php?id=$1&sayfa=$3 [QSA,L]
 RewriteRule ^([0-9]+)/([^/]+) kategori.php?id=$1 [QSA,L]
