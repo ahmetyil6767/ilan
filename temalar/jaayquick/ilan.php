@@ -113,7 +113,7 @@ tema_header(); ?>
 <div class="gri">
 	<div class="container">
 		<ol class="breadcrumb">
-		  <li><a href="<?php echo site_url(); ?>">Anasayfa</a></li>
+		  <li><a href="<?php echo site_url(); ?>"><?php echo _LANG('p_menu_anasayfa'); ?></a></li>
 		  <?php 
 			foreach ($kategoriler as $kategori) {
 				$kat_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kategori), $kategori, "kategori");

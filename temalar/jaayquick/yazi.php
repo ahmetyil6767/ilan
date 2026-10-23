@@ -9,7 +9,7 @@ $kategoriler=kategori_getir($id);
 <div class="gri">
 	<div class="container">
 		<ol class="breadcrumb">
-		  <li><a href="<?php echo site_url(); ?>">Anasayfa</a></li>
+		  <li><a href="<?php echo site_url(); ?>"><?php echo _LANG('p_menu_anasayfa'); ?></a></li>
 		  <li><a href="<?php echo site_url(); ?>/sayfa/yazilar/"><?php echo _LANG("y_yazilar"); ?></a></li>
 		  <?php 
 			foreach ($kategoriler as $kategori) {
