@@ -1,7 +1,8 @@
-<?php 
+﻿<?php 
 if(count(get_included_files())==1) {die();}
 global $baglan;
 if (@$_POST["ara_buton"]) {search_yonlendir();}
+require_once ROOT_DIR . '/config/seo.php';
 ?>
 <!DOCTYPE HTML>
 <html lang="<?php echo _DIL_HTML_LANG(); ?>" dir="<?php echo _DIL_HTML_YON(); ?>">
@@ -61,6 +62,7 @@ if ($site_font=="Work Sans") { ?>
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="<?php echo meta_title(); ?>" />
 <meta name="twitter:description" content="<?php echo meta_description(); ?>" />
+<?php echo seo_hreflang_tags(); ?>
 <?php $sayfa=@$_GET["sayfa"]; if ($sayfa>1) { ?>
 <meta name="robots" content="noindex">
 <?php } ?>
@@ -78,6 +80,7 @@ if ($pwa_aktif==1) { ?>
 <link rel="manifest" href="/manifest.json">
 <script>navigator.serviceWorker.register('sw.js');</script>
 <?php } ?>
+<?php echo seo_json_ld(); ?>
 <style type="text/css">
 <?php
 $ana_renk=tema_ayar("ana_renk");
@@ -164,7 +167,7 @@ header {padding-top:0;}
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <?php 
-// Header şablonu
+// Header ┼şablonu
 $site_header=tema_ayar("header");
 if (!$site_header) {
 	$site_header="standart";
@@ -280,3 +283,10 @@ if (!$site_header) {
 		</div>
 	</form>
 </div>
+
+
+
+
+
+
+

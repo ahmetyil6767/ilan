@@ -73,8 +73,8 @@ function sitemap_guncelle() {
 		}
 
 	}
-	$inc_dizin=include_dizin();
-	if ($inc_dizin=="..") {$inc_dizin.="/";}
+	$inc_dizin=ROOT_DIR . "/"; // sitemap dosyasi web kokune yazilir
+	if (!is_dir($inc_dizin)) { return; }
 	$olustur=fopen($inc_dizin.$dosya_adi, "w"); // dosyamızı açıtık	
 	fwrite($olustur,$basla.$satirlar.$bitir);// dosya içeriğimizi oluşturduk.
 	fclose($olustur); // dosya mızı kapattık yazma işlemini bitirdik.

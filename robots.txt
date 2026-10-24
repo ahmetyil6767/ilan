@@ -1,0 +1,54 @@
+# robots.txt for jaayquick.com
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /lpanel/
+Disallow: /config/
+Disallow: /eklentiler/
+Disallow: /SQL/
+Disallow: /*.php$
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.bak2$
+Disallow: /cache/
+Disallow: /uploads/ajax/
+Disallow: /sayfa/giris-yap/
+Disallow: /sayfa/kayit-ol/
+Disallow: /sayfa/sifremi-unuttum/
+Disallow: /sayfa/profil-guncelle/
+Disallow: /sayfa/profil-bilgilerim/
+Disallow: /sayfa/mesajlarim/
+Disallow: /sayfa/bildirimlerim/
+Disallow: /sayfa/favori-ilanlarim/
+Disallow: /sayfa/ilanlarim/
+Disallow: /sayfa/magazalarim/
+Disallow: /sayfa/siparislerim/
+Disallow: /sayfa/get-satislarim/
+Disallow: /sayfa/siparis/
+Disallow: /sayfa/profil-guncelle/
+Disallow: /sayfa/profil-gorseli/
+Disallow: /sayfa/magaza-profil-gorseli/
+Disallow: /sayfa/magaza-kapak-gorseli/
+Disallow: /sayfa/ilan-ekle/
+Disallow: /sayfa/mesaj-gonder/
+Disallow: /sayfa/sikayet/
+Disallow: /sayfa/get-siparis/
+Disallow: /ara/
+Disallow: /ara.php
+Disallow: /profil/
+Disallow: /magaza/
+Disallow: /siparis.php
+
+# Sitemap
+Sitemap: https://jaayquick.com/sitemap.xml
+Sitemap: https://jaayquick.com/sitemap_stores.xml
+Sitemap: https://jaayquick.com/sitemap_categories.xml
+Sitemap: https://jaayquick.com/sitemap_pages.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 10
+
+# Host
+Host: jaayquick.com
