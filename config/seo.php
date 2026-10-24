@@ -15,12 +15,8 @@ function seo_get_page_type() {
     $php_self = $_SERVER["PHP_SELF"];
     $request_uri = $_SERVER["REQUEST_URI"];
     
-    // DEBUG
-    error_log('[SEO] PHP_SELF: ' . $php_self . ' | REQUEST_URI: ' . $request_uri);
-    
     // Check for rewritten ad URL pattern: /{slug}-{id} where id is numeric
     if (preg_match('/^\/([^\/]+)-(\d+)(?:\/|$)/', $request_uri, $m)) {
-        error_log('[SEO] Matched ad pattern, id: ' . $m[2]);
         $icerik_id = $m[2];
         $icerik_tip = bilgi_getir("icerik", "tip", $icerik_id);
         return array('type' => 'ad', 'id' => $icerik_id, 'tip' => $icerik_tip);
