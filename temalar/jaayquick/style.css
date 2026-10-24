@@ -953,3 +953,14 @@ ul#sortable li {padding:10px;margin-bottom:5px;background:#aaa;}
 	}
 }
 
+
+/* ---- Kampanya bandi (Gambiya amber) ---- */
+.kampanya-band { background: linear-gradient(90deg, #F4A261 0%, #E76F51 100%); color: #1F2937; padding: 10px 16px; }
+.kampanya-band .container { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.kampanya-band .kampanya-metin { font-weight: 600; font-size: 14px; }
+.kampanya-band .kampanya-btn { background: #1a2b7a; color: #fff; padding: 6px 14px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 13px; white-space: nowrap; }
+.kampanya-band .kampanya-btn:hover { background: #2a3fa8; color: #fff; }
+@media (max-width: 767px) {
+	.kampanya-band .container { justify-content: center; text-align: center; }
+	.kampanya-band .kampanya-metin { font-size: 13px; }
+}

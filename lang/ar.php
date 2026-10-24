@@ -3466,4 +3466,5 @@ return array(
 	'p_erisim_engellendi' => 'تم رفض الوصول.',
 	'p_kategori_secimi_tamamlandi' => 'اكتمل اختيار الفئة',
 	'p_class' => 'فئة CSS',
+	'campaign_band_text' => 'أعلن مجانًا في غامبيا - ابدأ الآن!',
 );

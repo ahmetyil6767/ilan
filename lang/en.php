@@ -3513,4 +3513,5 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'p_erisim_engellendi' => 'Access denied.',
 	'p_kategori_secimi_tamamlandi' => 'Category selection completed',
 	'p_class' => 'CSS Class',
+	'campaign_band_text' => 'Post your ads in The Gambia for free - get started today!',
 );
