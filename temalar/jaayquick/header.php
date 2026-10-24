@@ -16,11 +16,11 @@ require_once ROOT_DIR . '/config/seo.php';
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/lightbox.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/js/trumbowyg/ui/trumbowyg.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/sidr.bare.min.css"/>
-<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261023"/>
+<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261024"/>
 <?php 
 // Load RTL CSS for Arabic language
 if (_DIL_RTL_MI()) {
-	echo '<link rel="stylesheet" href="' . tema_dizini() . '/dil-rtl.css?v=20261023"/>';
+	echo '<link rel="stylesheet" href="' . tema_dizini() . '/dil-rtl.css?v=20261024"/>';
 }
 $site_font=tema_ayar("font"); 
 if (!$site_font) {$site_font="Work Sans";}
@@ -275,7 +275,7 @@ if (!$site_header) {
 		</div>
 	</div>
 	<form action="" method="post">
-<?php include_once('bilesen/ust-bar-araclar.php'); ?>
+<?php include('bilesen/ust-bar-araclar.php'); ?>
 		<div class="mobil_ara">
 		  <input style="width:88%;border-left:0;" type="text" id="m_ara_input" class="form-control pull-left" name="s" placeholder="<?php echo _LANG('search_placeholder'); ?>" value="<?php if (!strstr(browser_url(),"siparis")) {echo isset($_GET["s"]) ? htmlspecialchars($_GET["s"], ENT_QUOTES, 'UTF-8') : '';} ?>" required>
 		  <button style="width:12%;" class="btn btn-default pull-left" name="ara_buton" type="submit" value="Ara"><i class="ion-search mr0"></i></button>

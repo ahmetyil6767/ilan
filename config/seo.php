@@ -171,7 +171,14 @@ function seo_json_ld_ad($id, $tip) {
     $kullanici_id = bilgi_getir('icerik', 'yazar', $id);
     $yazar_ad = getir('uyeler', 'ad_soyad', $kullanici_id);
     $ilan_url = link_getir($id);
-    $resimler = galeri_getir($id);
+    // Galeri resimleri (galeri tablosu) — resim yolları
+    $resimler = array();
+    $galeri_sorgu = mysqli_query($baglan, "select resim from galeri where icerik_id='" . intval($id) . "' order by sira asc");
+    if ($galeri_sorgu) {
+        while ($galeri_dizi = mysqli_fetch_assoc($galeri_sorgu)) {
+            $resimler[] = $galeri_dizi;
+        }
+    }
     
     $product = array(
         '@context' => 'https://schema.org',
@@ -223,8 +230,8 @@ function seo_json_ld_ad($id, $tip) {
             '@type' => 'Place',
             'address' => array(
                 '@type' => 'PostalAddress',
-                'addressLocality' => $ilce ? getir('ilceler', 'baslik', $ilce) : '',
-                'addressRegion' => $il ? getir('iller', 'baslik', $il) : '',
+                'addressLocality' => $ilce ? getir('ilceler', 'ilce_adi', $ilce) : '',
+                'addressRegion' => $il ? getir('iller', 'il_adi', $il) : '',
                 'addressCountry' => 'GM',
             ),
         );
@@ -271,8 +278,8 @@ function seo_json_ld_store($id) {
     $baslik = getir("magazalar", "baslik", $magaza_id);
     $alt_domain = getir("magazalar", "subdomain", $magaza_id);
     $url = magaza_link_getir($magaza_id);
-    $aciklama = getir("magazalar", "aciklama", $magaza_id);
-    $profil_resim = magaza_bilgi("profil_gorseli", $magaza_id);
+    $aciklama = ekstra_bilgi_getir('aciklama', $magaza_id, 'magaza');
+    $profil_resim = ekstra_bilgi_getir('profil_gorseli', $magaza_id, 'magaza');
     
     $store = array(
         '@context' => 'https://schema.org',
