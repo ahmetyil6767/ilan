@@ -21,6 +21,7 @@ require_once ROOT_DIR . '/config/seo.php';
 // Load RTL CSS for Arabic language
 if (_DIL_RTL_MI()) {
 	echo '<link rel="stylesheet" href="' . tema_dizini() . '/dil-rtl.css?v=20261024"/>';
+	echo '<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">';
 }
 $site_font=tema_ayar("font"); 
 if (!$site_font) {$site_font="Work Sans";}
@@ -38,6 +39,8 @@ if ($site_font=="Work Sans") { ?>
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&amp;subset=latin-ext" rel="stylesheet">
 <?php } else if ($site_font=="Ubuntu") { ?>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
+<?php } else if ($site_font=="Poppins") { ?>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <?php } ?>
 <?php $script_name=$_SERVER["SCRIPT_NAME"]; $og_url=site_url() . (isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : ''); $og_image=""; ?>
 <meta property="og:type" content="website" />
@@ -112,7 +115,7 @@ if (!$mobil_menu_hover_bg) {$mobil_menu_hover_bg="#3f475f";}
 <?php if ($site_font=="Arial") { ?>
 	body {font-family: Arial,Helvetica Neue,Helvetica,sans-serif;}
 <?php } else { ?>
-	body {font-family:"<?php echo $site_font; ?>", sans-serif;}
+	body {font-family:"<?php echo $site_font; ?>", <?php echo _DIL_RTL_MI() ? '"Noto Sans Arabic", ' : ''; ?>sans-serif;}
 <?php } ?>
 header, header .sticky, .yazi .bilgi ul li a, #magaza_bilgi, ul.magaza_sec li a:hover, ul.magaza_sec li.active a, .mobil_header {background: <?php echo $ana_renk; ?>;}
 #mmu_panel, .mm#mmu_panel ul li a {background: <?php echo $mobil_menu_bg; ?> !important;}
