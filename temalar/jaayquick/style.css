@@ -1,4 +1,4 @@
-body {background:#fff;}
+﻿body {background:#fff;}
 i {margin-right:5px;}
 a {color:#003399;}
 label {font-weight:600;}
@@ -927,4 +927,28 @@ ul#sortable li {padding:10px;margin-bottom:5px;background:#aaa;}
 	input[type="date"], input[type="url"], select, textarea {
 		font-size: 16px !important;
 	}
+	/* Mobile dropdown fix - prevent dropdown from going off-screen */
+	.dropdown-menu-right {
+		left: auto;
+		right: 0;
+	}
+	.ust-bar-araclar .dropdown-menu {
+		min-width: 140px;
+	}
+	.dropdown-menu {
+		position: absolute;
+		z-index: 1000;
+	}
+	/* Ensure dropdown is visible on hover/focus for mobile testing */
+	.btn-group:hover .dropdown-menu,
+	.btn-group:focus .dropdown-menu,
+	.btn-group:focus-within .dropdown-menu {
+		display: block !important;
+	}
+	/* FOR TESTING: Make dropdown always visible on mobile */
+	.dropdown-menu-right {
+		display: block !important;
+		position: static !important;
+	}
 }
+
