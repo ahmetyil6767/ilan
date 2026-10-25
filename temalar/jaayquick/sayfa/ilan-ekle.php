@@ -202,11 +202,18 @@ if ($buton==_LANG('tx_ilani_kaydet') or $buton==_LANG('tx_ilani_yayinla') or $bu
 $kat_agac_sql=mysqli_query($baglan,"select id,baslik,ust_kategori from kategoriler where tip='ilan' order by baslik asc");
 $kat_children=array();
 $kat_baslik=array();
+$kat_baslik_en=array();
+$kat_baslik_fr=array();
+$kat_baslik_ar=array();
 while ($kd=mysqli_fetch_array($kat_agac_sql)) {
-	$kat_children[(int)$kd['ust_kategori']][]=(int)$kd['id'];
-	$kat_baslik[(int)$kd['id']]=$kd['baslik'];
+    $kat_children[(int)$kd['ust_kategori']][]=(int)$kd['id'];
+    $kat_baslik[(int)$kd['id']]=$kd['baslik'];
+    // Çeviriler _DIL_BASLIK fonksiyonu ile alınır (ekstra_bilgi tablosunda baslik_en/fr/ar)
+    $kat_baslik_en[(int)$kd['id']]=_DIL_BASLIK($kd['baslik'], $kd['id'], 'kategori', 'en');
+    $kat_baslik_fr[(int)$kd['id']]=_DIL_BASLIK($kd['baslik'], $kd['id'], 'kategori', 'fr');
+    $kat_baslik_ar[(int)$kd['id']]=_DIL_BASLIK($kd['baslik'], $kd['id'], 'kategori', 'ar');
 }
-$kat_agac_json=json_encode(array('children'=>$kat_children,'baslik'=>$kat_baslik), JSON_UNESCAPED_UNICODE);
+$kat_agac_json=json_encode(array('children'=>$kat_children,'baslik'=>$kat_baslik,'baslik_en'=>$kat_baslik_en,'baslik_fr'=>$kat_baslik_fr,'baslik_ar'=>$kat_baslik_ar), JSON_UNESCAPED_UNICODE);
 
 // Secili yol (ust -> alt) hesapla ($kat varsa)
 $secili_yol=array();
@@ -686,13 +693,20 @@ var KAT_TREE = <?php echo $kat_agac_json; ?>;
 var SECILI_YOL = <?php echo $secili_yol_json; ?>;
 var MAGAZA_MODE = <?php echo $magaza_id ? 'true' : 'false'; ?>;
 var SERVER_KAT = <?php echo (int)$kat; ?>;
+var AKTIF_DIL = "<?php echo aktif_dil(); ?>"; // tr, en, fr, ar
 
 var catPath = [];
 var columnsCache = {};
 var maxColumns = 5;
 
 function katChildren(pid){ return (KAT_TREE.children && KAT_TREE.children[pid]) ? KAT_TREE.children[pid] : []; }
-function katTitle(id){ return (KAT_TREE.baslik && KAT_TREE.baslik[id]) ? KAT_TREE.baslik[id] : ('#'+id); }
+function katTitle(id){
+    var baslikKey = 'baslik';
+    if (AKTIF_DIL === 'en') baslikKey = 'baslik_en';
+    else if (AKTIF_DIL === 'fr') baslikKey = 'baslik_fr';
+    else if (AKTIF_DIL === 'ar') baslikKey = 'baslik_ar';
+    return (KAT_TREE[baslikKey] && KAT_TREE[baslikKey][id]) ? KAT_TREE[baslikKey][id] : ('#'+id);
+}
 function isLeaf(id){ return katChildren(id).length === 0; }
 
 function updateHidden(path){
