@@ -91,7 +91,7 @@ tema_header(); ?>
 					<p><?php echo _LANG('hb_yukleyeceginiz_profil_gorseli_en_az_150px_geni'); ?></p>
 
 					<div class="form-group">
-						<label for="gorsel">Profil Görseli <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<label for="gorsel"><?php echo _LANG('s_profil_gorseli'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 						<input type="file" id="gorsel" name="gorsel" accept="image/*"/>
 					</div>
 				</div>

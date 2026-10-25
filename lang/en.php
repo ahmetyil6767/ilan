@@ -1114,6 +1114,7 @@ return array(
 	's_kapak_boyut'           => 'The cover photo you upload must be 1140px wide and 200px high.',
 	's_kapak_degistir'        => 'Change Cover Photo',
 	's_kapak_gorseli'         => 'Cover Photo',
+	's_galeri_gorselleri'     => 'Gallery Images (Multiple Selection)',
 	's_kargo_adresi'          => 'Shipping address for your purchases.',
 	's_kargo_fatura_adresi'   => 'Shipping and billing address for your purchases.',
 	's_kargo_firmasi'         => 'Courier Company',

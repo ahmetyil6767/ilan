@@ -1101,6 +1101,7 @@ return array(
 	's_kapak_boyut' => 'Yükleyeceğiniz kapak görseli 1140px genişliğinde ve 200px yüksekliğinde olmalıdır.',
 	's_kapak_degistir' => 'Kapak Görseli Değiştir',
 	's_kapak_gorseli' => 'Kapak Görseli',
+	's_galeri_gorselleri'     => 'Galeri Görselleri (Çoklu Seçim)',
 	's_kargo_adresi' => 'Ürün satın alımlarınız için kargo adresi.',
 	's_kargo_fatura_adresi' => 'Ürün satın alımlarınız için kargo ve fatura adresi.',
 	's_kargo_firmasi' => 'Kargo Firması',

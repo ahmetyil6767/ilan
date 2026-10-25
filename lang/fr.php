@@ -1096,6 +1096,7 @@ return array(
 	's_kapak_boyut' => 'La photo de couverture doit faire 1140 px de large et 200 px de haut.',
 	's_kapak_degistir' => 'Changer la photo de couverture',
 	's_kapak_gorseli' => 'Photo de couverture',
+	's_galeri_gorselleri'     => 'Images de la galerie (sélection multiple)',
 	's_kargo_adresi' => 'Adresse de livraison pour vos achats.',
 	's_kargo_fatura_adresi' => 'Adresse de livraison et de facturation.',
 	's_kargo_firmasi' => 'Société de transport',

@@ -1099,6 +1099,7 @@ return array(
 	's_kapak_boyut' => 'يجب أن تكون صورة الغلاف بعرض 1140 بكسل وارتفاع 200 بكسل.',
 	's_kapak_degistir' => 'تغيير صورة الغلاف',
 	's_kapak_gorseli' => 'صورة الغلاف',
+	's_galeri_gorselleri'     => 'صور المعرض (اختيار متعدد)',
 	's_kargo_adresi' => 'عنوان الشحن لمشترياتك.',
 	's_kargo_fatura_adresi' => 'عنوان الشحن والفوترة لمشترياتك.',
 	's_kargo_firmasi' => 'شركة الشحن',

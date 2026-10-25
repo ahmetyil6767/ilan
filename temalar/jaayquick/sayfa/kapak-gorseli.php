@@ -58,7 +58,7 @@ tema_header(); ?>
 				<div class="panel-body">
 					<p><?php echo _LANG('hb_yukleyeceginiz_kapak_gorseli_1140px_genisligin'); ?></p>
 					<div class="form-group">
-						<label for="gorsel">Kapak Görseli <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<label for="gorsel"><?php echo _LANG('s_kapak_gorseli'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 						<input type="file" id="gorsel" name="gorsel" accept="image/*"/>
 					</div>
 				</div>

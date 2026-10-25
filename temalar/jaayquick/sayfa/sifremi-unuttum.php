@@ -76,8 +76,8 @@ tema_header(); ?>
 					</div>
 					
 					<div class="form-group">
-						<label for="parola">Parola Tekrar</label>
-						<input type="password" class="form-control" id="parola_tekrar" name="parola_tekrar" placeholder="Parola Tekrar">
+						<label for="parola"><?php echo _LANG('account_password_repeat'); ?></label>
+						<input type="password" class="form-control" id="parola_tekrar" name="parola_tekrar" placeholder="<?php echo _LANG('account_password_repeat'); ?>">
 					</div>
 					
 					<button type="submit" name="olustur_buton" class="btn btn-primary" value="<?php echo _LANG('post_submit'); ?>"><i class="fa fa-lock"></i><?php echo _LANG('post_submit'); ?></button>

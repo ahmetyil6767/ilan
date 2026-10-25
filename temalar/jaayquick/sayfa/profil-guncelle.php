@@ -189,10 +189,10 @@ tema_header(); ?>
 						<div role="tabpanel" class="tab-pane fade" id="iletisim">
 						
 						<div class="form-group">
-							<label for="cep_tel">Cep Telefonu</label>
+							<label for="cep_tel"><?php echo _LANG('p_cep_telefonu'); ?></label>
 							<div class="input-group">
 								<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;border-color:#ddd;">+220</span>
-								<input type="text" class="form-control cannot_start_with_zero" id="cep_tel" name="cep_tel" value="<?php echo uye_bilgi("cep_tel",$oturum_id); ?>" placeholder="Cep Telefonu" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
+								<input type="text" class="form-control cannot_start_with_zero" id="cep_tel" name="cep_tel" value="<?php echo uye_bilgi("cep_tel",$oturum_id); ?>" placeholder="<?php echo _LANG('p_cep_telefonu'); ?>" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
 							</div>
 	<p class="text-muted" style="font-size:13px;margin-top:5px;"><?php echo _LANG("pg_telefon_sifir"); ?></p>
 						</div>
@@ -204,10 +204,10 @@ tema_header(); ?>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="ev_tel">Ev Telefonu</label>
+							<label for="ev_tel"><?php echo _LANG('s_ev_telefonu'); ?></label>
 							<div class="input-group">
 								<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;border-color:#ddd;">+220</span>
-								<input type="text" class="form-control cannot_start_with_zero" id="ev_tel" name="ev_tel" value="<?php echo uye_bilgi("ev_tel",$oturum_id); ?>" placeholder="Ev Telefonu" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
+								<input type="text" class="form-control cannot_start_with_zero" id="ev_tel" name="ev_tel" value="<?php echo uye_bilgi("ev_tel",$oturum_id); ?>" placeholder="<?php echo _LANG('s_ev_telefonu'); ?>" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
 							</div>
 						</div>
 
@@ -221,10 +221,10 @@ tema_header(); ?>
 							form_group(array("tip"=>"text","id"=>"firma_adi","baslik"=>_LANG('s_firma_unvani'),"deger"=>$firma_adi));
 						?>
 						<div class="form-group">
-							<label for="firma_tel">Firma Telefonu</label>
+							<label for="firma_tel"><?php echo _LANG('s_firma_telefonu'); ?></label>
 							<div class="input-group">
 								<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;border-color:#ddd;">+220</span>
-								<input type="text" class="form-control cannot_start_with_zero" id="firma_tel" name="firma_tel" value="<?php echo $firma_tel; ?>" placeholder="Firma Telefonu" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
+								<input type="text" class="form-control cannot_start_with_zero" id="firma_tel" name="firma_tel" value="<?php echo $firma_tel; ?>" placeholder="<?php echo _LANG('s_firma_telefonu'); ?>" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;">
 							</div>
 							<p><?php echo _LANG('hb_lutfen_telefonunuzu_basinda_sifir_olmadan_tusl'); ?></p>
 						</div>						

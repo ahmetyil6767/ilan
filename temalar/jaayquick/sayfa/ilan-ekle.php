@@ -313,7 +313,7 @@ tema_header(); ?>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Yetkili Telefon</label>
+									<label><?php echo _LANG('p_cep_telefonu'); ?></label>
 									<input type="text" class="form-control" name="yetkili_tel" value="<?php echo @htmlspecialchars($_POST['yetkili_tel']); ?>">
 								</div>
 							</div>
@@ -375,11 +375,11 @@ tema_header(); ?>
 							<label><?php echo _LANG('post_photos'); ?></label>
 							<div class="row">
 								<div class="col-md-6">
-									<label class="text-muted small">Kapak Görseli (Ana Görsel)</label>
+									<label class="text-muted small"><?php echo _LANG('s_kapak_gorseli'); ?></label>
 									<input type="file" class="form-control" name="gorsel" accept="image/*">
 								</div>
 								<div class="col-md-6">
-									<label class="text-muted small">Galeri Görselleri (Çoklu Seçim)</label>
+									<label class="text-muted small"><?php echo _LANG('s_galeri_gorselleri'); ?></label>
 									<input type="file" class="form-control" name="galeri[]" multiple accept="image/*">
 								</div>
 							</div>

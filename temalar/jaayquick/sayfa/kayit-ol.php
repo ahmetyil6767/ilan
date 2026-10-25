@@ -135,27 +135,27 @@ $uye_mevcut_mu = ($email_adresi !== '' && $email_adresi !== null) ? uye_mevcut_m
 						<input type="hidden" class="form-control" id="uyelik_tip" name="uyelik_tip" value="Bireysel">
 					<?php } ?>
 					<div class="form-group">
-						<label for="ad_soyad">Ad Soyad <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-						<input type="text" class="form-control" id="ad_soyad" name="ad_soyad" placeholder="Ad Soyad" required>
+						<label for="ad_soyad"><?php echo _LANG('p_ad_soyad'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<input type="text" class="form-control" id="ad_soyad" name="ad_soyad" placeholder="<?php echo _LANG('p_ad_soyad'); ?>" required>
 					</div>		
 
 					<div class="form-group">
-						<label for="email_adresi">E-posta Adresi</label>
-						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="E-posta Adresi">
+						<label for="email_adresi"><?php echo _LANG('p_email_adresi'); ?></label>
+						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="<?php echo _LANG('p_email_adresi'); ?>">
 					</div>
 					
 					<div class="form-group">
-						<label for="cep_tel">Cep Telefonu <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<label for="cep_tel"><?php echo _LANG('p_cep_telefonu'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 						<div class="input-group">
 							<span class="input-group-addon" style="border-top-right-radius:0;border-bottom-right-radius:0;color:#e74c3c;border-color:#ddd;">+220</span>
-							<input type="text" class="form-control cannot_start_with_zero" id="cep_tel" name="cep_tel" placeholder="Cep Telefonu" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;" required>
+							<input type="text" class="form-control cannot_start_with_zero" id="cep_tel" name="cep_tel" placeholder="<?php echo _LANG('p_cep_telefonu'); ?>" style="border-top-left-radius:0 !important;border-bottom-left-radius:0 !important;" required>
 						</div>
 	<p class="text-muted" style="font-size:13px;margin-top:5px;color:#e74c3c;"><?php echo _LANG("ko_telefon_sifir"); ?></p>
 					</div>
 					
 					<div class="form-group">
-						<label for="parola">Parola <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-						<input type="password" class="form-control" id="parola" name="parola" placeholder="Parola" required>
+						<label for="parola"><?php echo _LANG('p_parola'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<input type="password" class="form-control" id="parola" name="parola" placeholder="<?php echo _LANG('p_parola'); ?>" required>
 					</div>
 
 					
@@ -186,22 +186,22 @@ $uye_mevcut_mu = ($email_adresi !== '' && $email_adresi !== null) ? uye_mevcut_m
 
 						<div class="col-md-21">
 							<div class="form-group">
-								<label for="vergi_no">Vergi No <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-								<input type="text" class="form-control" id="vergi_no" name="vergi_no" placeholder="Vergi No">
+								<label for="vergi_no"><?php echo _LANG('s_vergi_no'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+								<input type="text" class="form-control" id="vergi_no" name="vergi_no" placeholder="<?php echo _LANG('s_vergi_no'); ?>">
 							</div>
 						</div>
 						
 						<div class="col-md-21">
 							<div class="form-group">
-								<label for="vergi_dairesi">Vergi Dairesi <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-								<input type="text" class="form-control" id="vergi_dairesi" name="vergi_dairesi" placeholder="Vergi Dairesi">
+								<label for="vergi_dairesi"><?php echo _LANG('s_vergi_dairesi'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+								<input type="text" class="form-control" id="vergi_dairesi" name="vergi_dairesi" placeholder="<?php echo _LANG('s_vergi_dairesi'); ?>">
 							</div>
 						</div>
 					</div>
 				
 					<div class="form-group">
-						<label for="firma_adres">Firma Adresi <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-						<textarea name="firma_adres" id="firma_adres" class="form-control" rows="4" placeholder="Firma Adresi"></textarea>
+						<label for="firma_adres"><?php echo _LANG('s_firma_adresi'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
+						<textarea name="firma_adres" id="firma_adres" class="form-control" rows="4" placeholder="<?php echo _LANG('s_firma_adresi'); ?>"></textarea>
 					</div>
 					
 					</div>
