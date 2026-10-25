@@ -282,7 +282,7 @@ tema_header(); ?>
 							</div>
 							<div class="row mt10" id="fiyat_alanlari">
 								<div class="col-md-6" id="fiyat_gmd_alan" style="display:block;">
-									<input type="text" class="form-control" name="fiyat" placeholder="Fiyat (GMD)" value="<?php echo @htmlspecialchars($_POST['fiyat']); ?>">
+									<input type="text" class="form-control" name="fiyat" placeholder="<?php echo _LANG('post_price'); ?> (GMD)" value="<?php echo @htmlspecialchars($_POST['fiyat']); ?>">
 								</div>
 								<div class="col-md-6" id="fiyat_usd_alan" style="display:none;">
 									<input type="text" class="form-control" name="fiyat_usd" placeholder="Price (USD)" value="<?php echo @htmlspecialchars($_POST['fiyat_usd']); ?>">

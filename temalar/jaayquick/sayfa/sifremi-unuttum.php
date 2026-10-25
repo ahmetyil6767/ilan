@@ -121,8 +121,8 @@ tema_header(); ?>
 
 	<p><?php echo _LANG("su_eposta_girin"); ?></p>
 					<div class="form-group">
-						<label for="email_adresi">E-posta Adresi</label>
-						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="E-posta Adresi" required>
+						<label for="email_adresi"><?php echo _LANG('p_email_adresi'); ?></label>
+						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="<?php echo _LANG('p_email_adresi'); ?>" required>
 					</div>
 					
 					<button type="submit" name="buton" class="btn btn-primary" value=" . _LANG('post_submit') . "><i class="fa fa-lock"></i>Gönder</button>
