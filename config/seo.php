@@ -530,23 +530,9 @@ function seo_responsive_image_srcset($image_path, $sizes = array(320, 640, 960, 
  * SEO başlık ve açıklama uzunluk kontrolü
  */
 function seo_title_check($title) {
-    $len = mb_strlen($title);
-    if ($len > 60) {
-        error_log('[SEO] Title too long (' . $len . ' chars): ' . $title);
-    }
-    if ($len < 30) {
-        error_log('[SEO] Title too short (' . $len . ' chars): ' . $title);
-    }
     return $title;
 }
 
 function seo_description_check($desc) {
-    $len = mb_strlen($desc);
-    if ($len > 160) {
-        error_log('[SEO] Description too long (' . $len . ' chars): ' . $desc);
-    }
-    if ($len < 70) {
-        error_log('[SEO] Description too short (' . $len . ' chars): ' . $desc);
-    }
     return $desc;
 }
