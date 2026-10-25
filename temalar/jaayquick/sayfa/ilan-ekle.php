@@ -659,7 +659,7 @@ function initCascade(){
 	}
 }
 document.getElementById('catBackBtn').addEventListener('click', catGoBack);
-document.addEventListener('DOMContentLoaded', initCascade);
+initCascade();
 
 // Wizard
 var currentStep = 1;
