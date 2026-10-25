@@ -10,13 +10,14 @@ require_once ROOT_DIR . '/config/seo.php';
 <meta charset="UTF-8">
 <title><?php echo meta_title(); ?></title>
 <meta name="description" content="<?php echo meta_description(); ?>">
+<meta name="google-site-verification" content="google673bba54dc6bca9d" />
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/font-awesome.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/ionicons.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/lightbox.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/js/trumbowyg/ui/trumbowyg.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/sidr.bare.min.css"/>
-<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261034"/>
+<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261035"/>
 <?php 
 // Load RTL CSS for Arabic language
 if (_DIL_RTL_MI()) {
