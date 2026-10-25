@@ -189,7 +189,7 @@ tema_header(); ?>
 					$resim_sayisi=resim_sayisi($id);
 					?>
 					<div class="prelative visible-md visible-lg">
-						<img id="genis_gorsel" src="<?php echo $gorsel; ?>" class="img-responsive visible-md visible-lg <?php if (@$resim_sayisi>1) {echo "c_pointer";} ?>" />
+						<img id="genis_gorsel" src="<?php echo $gorsel; ?>" alt="<?php echo htmlspecialchars($baslik, ENT_QUOTES, 'UTF-8'); ?>" class="img-responsive visible-md visible-lg <?php if (@$resim_sayisi>1) {echo "c_pointer";} ?>" />
 						<?php if (@$resim_sayisi>1) { ?>
 						<a id="onceki" class="onceki ileri_geri_buton galeri_gorsel c_pointer"><i class="ion-chevron-left"></i></a>
 						<a id="sonraki" class="sonraki ileri_geri_buton galeri_gorsel c_pointer"><i class="ion-chevron-right"></i></a>
@@ -223,7 +223,7 @@ tema_header(); ?>
 							$active_yaz=null;
 						}
 						?>
-						<a id="resim_<?php echo $galeri_id; ?>" class="galeri_gorsel <?php echo $active_yaz; ?> c_pointer" data-url="<?php echo $galeri_resim_buyuk; ?>" data-id="<?php echo $galeri_id; ?>"><img src="<?php echo $galeri_resim; ?>" /></a>
+						<a id="resim_<?php echo $galeri_id; ?>" class="galeri_gorsel <?php echo $active_yaz; ?> c_pointer" data-url="<?php echo $galeri_resim_buyuk; ?>" data-id="<?php echo $galeri_id; ?>"><img src="<?php echo $galeri_resim; ?>" alt="<?php echo htmlspecialchars($baslik, ENT_QUOTES, 'UTF-8'); ?>" /></a>
 						<a href="<?php echo $galeri_resim_full; ?>" id="lightbox-<?php echo $galeri_id; ?>" data-lightbox="mega_new"></a>
 						<?php 
 						$x++;} ?>
@@ -244,7 +244,7 @@ tema_header(); ?>
 							$galeri_url=galeri_url($galeri_id);
 							$galeri_resim_buyuk=thumbnail_url("530_393",$galeri_dizisi["resim"]);
 							$galeri_baslik=$galeri_dizisi["baslik"];
-							echo "<img src='$galeri_resim_buyuk' class='img-responsive'>";
+							echo "<img src='$galeri_resim_buyuk' class='img-responsive' alt='" . htmlspecialchars($baslik, ENT_QUOTES, 'UTF-8') . "'>";
 							$x++;}
 							?>
 							

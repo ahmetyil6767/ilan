@@ -16,7 +16,7 @@ require_once ROOT_DIR . '/config/seo.php';
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/lightbox.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/js/trumbowyg/ui/trumbowyg.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/sidr.bare.min.css"/>
-<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261025"/>
+<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261033"/>
 <?php 
 // Load RTL CSS for Arabic language
 if (_DIL_RTL_MI()) {
@@ -193,7 +193,7 @@ if (!$site_header) {
 <div class="container">
 	<div class="row">
 		<div class="col-md-9 col-sm-12 yukseklik_h">
-			<div class="logo noselect"><a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" class="img-responsive" /></a></div>
+			<div class="logo noselect"><a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" alt="JaayQuick" class="img-responsive" /></a></div>
 		</div>
 		<div class="ortala_h">
 			<div class="col-md-14 col-md-offset-2 visible-md visible-lg">
@@ -201,7 +201,7 @@ if (!$site_header) {
 					<div class="input-group ara <?php if (@$_GET["s"]) {echo "focus";} ?>">
 					  <input type="text" id="ara_input" class="form-control" name="s" placeholder="<?php echo _LANG('search_placeholder'); ?>" value="<?php if (!strstr(browser_url(),"siparis")) {echo isset($_GET["s"]) ? htmlspecialchars($_GET["s"], ENT_QUOTES, 'UTF-8') : '';} ?>" required>
 					  <span class="input-group-btn">
-						<button class="btn btn-default" name="ara_buton" type="submit" value="Ara"><i class="ion-search"></i></button>
+						<button class="btn btn-default" name="ara_buton" type="submit" value="Ara" aria-label="Search"><i class="ion-search"></i></button>
 					  </span>
 					</div>
 				</form>
@@ -218,7 +218,7 @@ if (!$site_header) {
 				$get_satis=mysqli_num_rows(mysqli_query($baglan,"select id from siparisler where tip='get' and satici_id='$oturum_id'"));
 				?>
 				<div class="btn-group">
-				<a class="btn btn-xs dropdown-toggle header_link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:14px;"><?php if ($uye_resim) { ?><img src="<?php echo $kucuk_resim; ?>" alt="<?php echo $ad_soyad; ?>" class="img-circle beyaz-shadow" style="width:32px;height:auto;margin:0 8px 0 0;"/><?php } ?><?php echo $ad_soyad; ?><span class="caret"></span></a>
+				<a class="btn btn-xs dropdown-toggle header_link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:14px;"><?php if ($uye_resim) { ?><img src="<?php echo $kucuk_resim; ?>" alt="<?php echo $ad_soyad; ?>" class="img-circle beyaz-shadow" style="width:32px;height:auto;margin:0 8px 0 0;"/><?php } ?><?php echo $ad_soyad; ?><span class="caret"></span></a>
 
 			  <ul class="dropdown-menu">
 				<li><a href="<?php echo $profil_url; ?>"><i class="ion-person"></i><?php echo _LANG('nav_my_profile'); ?></a></li>
@@ -266,19 +266,19 @@ if (!$site_header) {
 		<a class="kampanya-btn" href="<?php echo ozel_url("ilan-ekle"); ?>"><?php echo _LANG('nav_free_post'); ?></a>
 	</div>
 </div>
-<div class="visible-sm visible-xs">
+<main id="main-content">
 	<div class="mobil_header">
 		<div class="container">
 			<div class="row">
 				<?php $mbmt=tema_ayar("mobil_buton_mt"); ?>
 				<div class="col-xs-8 text-center" <?php if ($mbmt) {echo "style='margin-top:".$mbmt."px';";} ?>>
-					<button type="button" class="pull-left" id="mm_buton" href="#mm_panel"><i class="ion-navicon-round mr0"></i></button>
+					<button type="button" class="pull-left" id="mm_buton" href="#mm_panel" aria-label="Menu"><i class="ion-navicon-round mr0"></i></button>
 				</div>
 				<div class="col-xs-26 yukseklik_h">
-					<a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" class="img-responsive img-center mobil_logo"/></a>
+					<a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" alt="JaayQuick" class="img-responsive img-center mobil_logo"/></a>
 				</div>
 				<div class="col-xs-8 text-center" <?php if ($mbmt) {echo "style='margin-top:".$mbmt."px';";} ?>>
-					<button type="button" class="pull-right" id="mmu_buton" href="#mmu_panel"><i class="ion-person-stalker mr0"></i></button>
+					<button type="button" class="pull-right" id="mmu_buton" href="#mmu_panel" aria-label="Account menu"><i class="ion-person-stalker mr0"></i></button>
 				</div>
 			</div>
 		</div>
@@ -287,7 +287,7 @@ if (!$site_header) {
 <?php include('bilesen/ust-bar-araclar.php'); ?>
 		<div class="mobil_ara">
 		  <input style="width:88%;border-left:0;" type="text" id="m_ara_input" class="form-control pull-left" name="s" placeholder="<?php echo _LANG('search_placeholder'); ?>" value="<?php if (!strstr(browser_url(),"siparis")) {echo isset($_GET["s"]) ? htmlspecialchars($_GET["s"], ENT_QUOTES, 'UTF-8') : '';} ?>" required>
-		  <button style="width:12%;" class="btn btn-default pull-left" name="ara_buton" type="submit" value="Ara"><i class="ion-search mr0"></i></button>
+		  <button style="width:12%;" class="btn btn-default pull-left" name="ara_buton" type="submit" value="Ara" aria-label="Search"><i class="ion-search mr0"></i></button>
 		  <div class="clearfix"></div>
 		</div>
 	</form>

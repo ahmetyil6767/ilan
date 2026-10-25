@@ -93,7 +93,7 @@ function harita_listeleme($id) {
 			title: '$ilan_baslik',
 		});
 		marker_$ilan_id.setMap(map_$id);
-		var contentString_$ilan_id ='<a href=".$ilan_link."><img src=".$ilan_resim." /></a><h5><a href=".$ilan_link.">".$ilan_baslik."</a></h5><h6 style=\"font-weight:700;font-size:14px;color:#e53935;\">".$ilan_fiyat." ".$para_birimi."</h6>';
+		var contentString_$ilan_id ='<a href=".$ilan_link."><img src=".$ilan_resim." alt=\"\" /></a><h5><a href=".$ilan_link.">".$ilan_baslik."</a></h5><h6 style=\"font-weight:700;font-size:14px;color:#e53935;\">".$ilan_fiyat." ".$para_birimi."</h6>';
 		var infowindow_$ilan_id = new google.maps.InfoWindow({
 			content: contentString_$ilan_id,
 			maxWidth: 160,

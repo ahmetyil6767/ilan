@@ -49,7 +49,7 @@ $paralar = array(
 </style>
 <div class="ust-bar-araclar">
 	<div class="btn-group">
-		<a class="btn btn-xs dropdown-toggle header_link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="btn btn-xs dropdown-toggle header_link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fa fa-globe"></i> <?php echo isset($diller[$aktif_dil]) ? $diller[$aktif_dil][0] : 'TR'; ?> <span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu dropdown-menu-right">
@@ -59,7 +59,7 @@ $paralar = array(
 		</ul>
 	</div>
 	<div class="btn-group">
-		<a class="btn btn-xs dropdown-toggle header_link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="btn btn-xs dropdown-toggle header_link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fa fa-money"></i> <?php echo isset($paralar[$aktif_para]) ? $paralar[$aktif_para] : 'GMD'; ?> <span class="caret"></span>
 		</a>
 		<ul class="dropdown-menu dropdown-menu-right">

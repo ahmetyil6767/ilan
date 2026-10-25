@@ -35,7 +35,7 @@ if ($slider_sayi>0) {
 		$gorsel=liste_bilgi("gorsel",$slider_id);
 		$url=liste_bilgi("url",$slider_id);
 		if ($url) {$cikti.="<a href='$url'>";}
-		$cikti.="<img src='$gorsel' class='img-responsive'>";
+		$cikti.="<img src='$gorsel' class='img-responsive' alt=''>";
 		if ($url) {$cikti.="</a>";}
 		echo $cikti;
 		$cikti=null;

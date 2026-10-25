@@ -3,6 +3,7 @@ if(count(get_included_files())==1) {die();}
 $footer_genis=tema_ayar("footer_genis");
 if ($footer_genis) {echo "<div class='container' style='margin-top:15px;'>$footer_genis</div>";}
 ?>
+</main>
 <footer>
 <div class="container">
 <?php 
@@ -66,8 +67,8 @@ $footer_5_baslik=tema_ayar("footer_5_baslik");
 </div>
 
 <div class="text-center">
-    <?php if ($play_store_url) { ?><a href="<?php echo $play_store_url; ?>" target="_blank"><img src="<?php echo tema_dizini(); ?>/img/play-store.png" style="width:150px;height:auto;margin-right:5px;"></a><?php } ?>
-    <?php if ($apple_store_url) { ?><a href="<?php echo $apple_store_url; ?>" target="_blank"><img src="<?php echo tema_dizini(); ?>/img/apple-store.png" style="width:150px;height:auto;"></a><?php } ?>
+    <?php if ($play_store_url) { ?><a href="<?php echo $play_store_url; ?>" target="_blank"><img src="<?php echo tema_dizini(); ?>/img/play-store.png" alt="Google Play" style="width:150px;height:auto;margin-right:5px;"></a><?php } ?>
+    <?php if ($apple_store_url) { ?><a href="<?php echo $apple_store_url; ?>" target="_blank"><img src="<?php echo tema_dizini(); ?>/img/apple-store.png" alt="App Store" style="width:150px;height:auto;"></a><?php } ?>
 </div>
 
 </div>
@@ -202,5 +203,8 @@ $footer_5_baslik=tema_ayar("footer_5_baslik");
 <script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/main.js?v=41"></script>
 <script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/jquery.sidr.min.js"></script>
 <?php tema_foot(); ?>
+<script>
+(function(){var o=new MutationObserver(function(m){m.forEach(function(x){x.addedNodes.forEach(function(n){if(n&&n.nodeType===1){if(n.classList&&n.classList.contains('lb-close'))n.setAttribute('href','#');if(n.querySelectorAll){n.querySelectorAll('.lb-close').forEach(function(e){e.setAttribute('href','#');});}}});});});if(document.body)o.observe(document.body,{childList:true,subtree:true});})();
+</script>
 </body>
 </html>
