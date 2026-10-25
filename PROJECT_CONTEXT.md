@@ -166,7 +166,7 @@ git status && git add <spesifik dosyalar> && git commit -m "Türkçe tek cümle"
 |---|---|
 | Alan adı | `jaayquick.com` — `ayarlar` tablosunda `site_url` |
 | Marka adı | `JaayQuick` — `ayarlar.site_baslik` |
-| İletişim | `info@jaayquick.com`, `220 267 74 08` (+220) |
+| İletişim | `info@jaayquick.com`, `220 251 38 47` (+220) |
 | Yedek alan adı / eski marka | `jaayquick.com` **kullanılmıyor** (tüm DB + kod temizlendi) |
 | Veritabanı adı | `jaayquick` (yerel `config/db.php` içinde; kullanıcıya görünmez) |
 

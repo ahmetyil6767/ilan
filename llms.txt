@@ -26,7 +26,7 @@
 
 - **Konum:** Banjul, Kanifing, West/North Bank, Lower/Central/Upper River, Kuntaur
 - **Para birimi:** GMD (Gambia dalasi); USD, EUR, GBP gösterim seçeneği
-- **İletişim:** info@jaayquick.com · 220 267 74 08 (WhatsApp destek)
+- **İletişim:** info@jaayquick.com · 220 251 38 47 (WhatsApp destek)
 - **Dil:** Türkçe (kaynak), English, Français, العربية — dil seçici üstte
 - **Ödeme:** Banka havalesi (EFT). Sipariş sonrası ödeme referansı `JA-<siparis_id>`
   verilir; ödeme yönetici tarafından doğrulanır.

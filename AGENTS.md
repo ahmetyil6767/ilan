@@ -22,7 +22,7 @@ Site **Gambiya** için çalışır; Türkiye'ye özgü hiçbir veri kalmamalıd�
 | Konu | Değer |
 |---|---|
 | Marka | JaayQuick (`jaayquick.com`) — `site_baslik` ayarı "JaayQuick" |
-| İletişim | `info@jaayquick.com`, `220 267 74 08` (uluslararası: `+220 267 74 08`) |
+| İletişim | `info@jaayquick.com`, `220 251 38 47` (uluslararası: `+220 251 38 47`) |
 | Para birimi | **GMD (dalasi)** — DB'deki tutarlar GMD; `birim_goster()` ziyaretçi birimine çevirir |
 | Kur kaynağı | `open.er-api.com` (1 USD = kaç GMD); eski TCMB/TRY kaynağı **kaldırıldı** |
 | Telefon | `+220`; yerel numara 7 hane, ülke kodu **girdiğinde** yazılmaz (`s_telefon_sifir` ipucu) |
