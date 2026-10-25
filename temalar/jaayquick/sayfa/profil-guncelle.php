@@ -164,11 +164,11 @@ tema_header(); ?>
 						$vergi_dairesi=uye_bilgi("vergi_dairesi",$oturum_id);
 						$adres=uye_bilgi("adres",$oturum_id);
 						
-						form_group(array("tip"=>"text","id"=>"ad_soyad","baslik"=>"Ad Soyad","deger"=>$ad_soyad,"gerekli"=>1));
-						form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"Email adresi","deger"=>$email_adresi,"gerekli"=>0));
+						form_group(array("tip"=>"text","id"=>"ad_soyad","baslik"=>_LANG('p_ad_soyad'),"deger"=>$ad_soyad,"gerekli"=>1));
+						form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>_LANG('p_email_adresi'),"deger"=>$email_adresi,"gerekli"=>0));
 						
 						form_group(array("tip"=>"text","id"=>"tc_no","baslik"=>_LANG("s_tc_no"),"deger"=>$tc_no));
-						form_group(array("tip"=>"textarea","id"=>"adres","baslik"=>"Adres","satir"=>3,"deger"=>uye_bilgi("adres",$oturum_id),"aciklama"=>_LANG('s_kargo_adresi')));
+						form_group(array("tip"=>"textarea","id"=>"adres","baslik"=>_LANG('s_adres'),"satir"=>3,"deger"=>uye_bilgi("adres",$oturum_id),"aciklama"=>_LANG('s_kargo_adresi')));
 						
 						$il_secenekleri[]=array("deger"=>null,"baslik"=>_LANG('filter_select'));
 						$il_secenekleri_getir=mysqli_query($baglan,"select il_adi from iller");
@@ -177,10 +177,10 @@ tema_header(); ?>
 						}
 						
 						form_group(array("tip"=>"select","id"=>"il","baslik"=>_LANG('addr_region'),"deger"=>uye_bilgi("il",$oturum_id),"secenekler"=>$il_secenekleri));
-						form_group(array("tip"=>"text","id"=>"posta_kodu","baslik"=>"Posta Kodu","deger"=>uye_bilgi("posta_kodu",$oturum_id)));						
+						form_group(array("tip"=>"text","id"=>"posta_kodu","baslik"=>_LANG('s_posta_kodu'),"deger"=>uye_bilgi("posta_kodu",$oturum_id)));						
 						
-						form_group(array("tip"=>"password","id"=>"yeni_parola","baslik"=>"Yeni Parola","aciklama"=>_LANG('s_parola_degistirme')));
-						form_group(array("tip"=>"password","id"=>"yeni_parola_tekrar","baslik"=>"Yeni Parola (Tekrar)"));
+						form_group(array("tip"=>"password","id"=>"yeni_parola","baslik"=>_LANG('s_yeni_parola'),"aciklama"=>_LANG('s_parola_degistirme')));
+						form_group(array("tip"=>"password","id"=>"yeni_parola_tekrar","baslik"=>_LANG('account_password_repeat')));
 						
 
 						?>
@@ -231,17 +231,17 @@ tema_header(); ?>
 						<?php 
 							form_group(array("tip"=>"select","id"=>"sirket","baslik"=>_LANG('s_sirket_turu'),"deger"=>$sirket,"secenekler"=>options("Şahıs:1|Limited veya Anonim Şirket:2","|",":")));
 							form_group(array("tip"=>"grup_ac"));	
-							form_group(array("tip"=>"text","id"=>"vergi_no","baslik"=>"Vergi No","deger"=>$vergi_no,"grup"=>2));	
-							form_group(array("tip"=>"text","id"=>"vergi_dairesi","baslik"=>"Vergi Dairesi","deger"=>$vergi_dairesi,"grup"=>2));	
+							form_group(array("tip"=>"text","id"=>"vergi_no","baslik"=>_LANG('s_vergi_no'),"deger"=>$vergi_no,"grup"=>2));	
+							form_group(array("tip"=>"text","id"=>"vergi_dairesi","baslik"=>_LANG('s_vergi_dairesi'),"deger"=>$vergi_dairesi,"grup"=>2));	
 							form_group(array("tip"=>"grup_kapat"));	
-							form_group(array("tip"=>"textarea","id"=>"firma_adres","baslik"=>"Firma Adresi","satir"=>3,"deger"=>uye_bilgi("firma_adres",$oturum_id)));	
+							form_group(array("tip"=>"textarea","id"=>"firma_adres","baslik"=>_LANG('s_firma_adresi'),"satir"=>3,"deger"=>uye_bilgi("firma_adres",$oturum_id)));	
 						?>
 						</div>					
 						</div>
 						<div role="tabpanel" class="tab-pane fade" id="satici">
 						<?php 
 						$banka_bilgileri=uye_bilgi("banka_bilgileri",$oturum_id);
-						form_group(array("tip"=>"textarea","id"=>"banka_bilgileri","baslik"=>"Banka Hesap Bilgileri","deger"=>$banka_bilgileri,"satir"=>5,"aciklama"=>_LANG('s_satici_odeme_noktasi')));
+						form_group(array("tip"=>"textarea","id"=>"banka_bilgileri","baslik"=>_LANG('s_banka_bilgileri'),"deger"=>$banka_bilgileri,"satir"=>5,"aciklama"=>_LANG('s_satici_odeme_noktasi')));
 						?>						
 						</div>
 						</div>
