@@ -547,6 +547,8 @@ return array(
 	'post_uploading'    => 'Uploading photos',
 	'post_submit'       => 'Submit',
 	'post_back'         => 'Go back',
+	'wiz_next'          => 'Next',
+	'wiz_back'          => 'Back',
 	'post_select_category' => 'Select a category',
 	'post_publish'      => 'Publish',
 	'post_unpublish'    => 'Unpublish',

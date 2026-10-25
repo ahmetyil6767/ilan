@@ -542,6 +542,8 @@ return array(
 	'post_uploading' => 'Fotoğraflar yükleniyor',
 	'post_submit' => 'Gönder',
 	'post_back' => 'Geri Dön',
+	'wiz_next' => 'İleri',
+	'wiz_back' => 'Geri',
 	'post_select_category' => 'Kategori seçiniz',
 	'post_publish' => 'Yayınla',
 	'post_unpublish' => 'Yayından Kaldır',

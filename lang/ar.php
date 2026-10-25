@@ -540,6 +540,8 @@ return array(
 	'post_uploading' => 'جارٍ رفع الصور',
 	'post_submit' => 'إرسال',
 	'post_back' => 'رجوع',
+	'wiz_next' => 'التالي',
+	'wiz_back' => 'رجوع',
 	'post_select_category' => 'اختر قسماً',
 	'post_publish' => 'نشر',
 	'post_unpublish' => 'إلغاء النشر',

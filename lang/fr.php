@@ -537,6 +537,8 @@ return array(
 	'post_uploading' => 'Téléversement des photos',
 	'post_submit' => 'Envoyer',
 	'post_back' => 'Retour',
+	'wiz_next' => 'Suivant',
+	'wiz_back' => 'Retour',
 	'post_select_category' => 'Choisissez une catégorie',
 	'post_publish' => 'Publier',
 	'post_unpublish' => 'Dépublier',
