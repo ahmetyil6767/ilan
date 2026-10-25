@@ -165,7 +165,7 @@ tema_header(); ?>
 						$adres=uye_bilgi("adres",$oturum_id);
 						
 						form_group(array("tip"=>"text","id"=>"ad_soyad","baslik"=>"Ad Soyad","deger"=>$ad_soyad,"gerekli"=>1));
-						form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"Email adresi","deger"=>$email_adresi,"gerekli"=>1));
+						form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"Email adresi","deger"=>$email_adresi,"gerekli"=>0));
 						
 						form_group(array("tip"=>"text","id"=>"tc_no","baslik"=>_LANG("s_tc_no"),"deger"=>$tc_no));
 						form_group(array("tip"=>"textarea","id"=>"adres","baslik"=>"Adres","satir"=>3,"deger"=>uye_bilgi("adres",$oturum_id),"aciklama"=>_LANG('s_kargo_adresi')));

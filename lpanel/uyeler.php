@@ -28,7 +28,7 @@ if ($buton) {
 	$yetki=$_POST["yetki"];
 	$tarih_saat=tarih_saat();
 	if ($islem=="ekle") {
-		$uye_mevcut_mu=uye_mevcut_mu($email_adresi);
+		$uye_mevcut_mu = ($email_adresi !== '' && $email_adresi !== null) ? uye_mevcut_mu($email_adresi) : false;
 		if ($uye_mevcut_mu==1) {
 		$_SESSION["mesaj"]=array(_LANG('p_email_kullaniluyor'), array($email_adresi),"danger");
 		} else {		

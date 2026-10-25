@@ -26,7 +26,7 @@ tema_header(); ?>
 				<?php
 				if ($buton) {
 					$cep_tel_form=telefon_format($cep_tel);
-					$uye_mevcut_mu=uye_mevcut_mu($email_adresi);
+$uye_mevcut_mu = ($email_adresi !== '' && $email_adresi !== null) ? uye_mevcut_mu($email_adresi) : false;
 					if ($uye_mevcut_mu==1) {
 	echo "<div class='alert alert-danger autoclose'>" . _LANG('ko_email_kullanimda') . "</div>";
 					} elseif ($cep_tel_form && cep_tel_mevcut_mu($cep_tel_form)) {
@@ -74,7 +74,9 @@ tema_header(); ?>
 						<p>" . _LANG('hb_web_sitemize_hos_geldiniz_sonraki_ziyaretlerin') . "</p>
 						<p>E-posta adresi: $email_adresi<br />Parola: $parola</p>
 						<p>Siteye giriş yapmak için <a href=\"" . sprintf(_LANG('tx_buraya_tiklayin3'), $site_url) . "";
-						auto_mail_add($ad_soyad,$email_adresi,"" . sprintf(_LANG('b_hosgeldiniz'), $mail_baslik, $ad_soyad) . "",$ileti);	
+						if ($email_adresi) {
+							auto_mail_add($ad_soyad,$email_adresi,"" . sprintf(_LANG('b_hosgeldiniz'), $mail_baslik, $ad_soyad) . "",$ileti);
+						}	
 						
 						$ileti_admin=_LANG('ko_yeni_uye_kaydi_bildirim', array($ad_soyad,$site_url,$admin_dizini));
 						bildirim_ekle($ileti_admin,$uye_id,0);
@@ -83,7 +85,7 @@ tema_header(); ?>
 						// E-posta gönderimi bitti
 						
 						$email_dogrulama=tema_ayar("email_dogrulama");
-						if ($email_dogrulama==1) {
+						if ($email_dogrulama==1 && $email_adresi) {
 							// E-posta gönderimi başladı
 							$mail_baslik=tema_ayar("mail_baslik");
 							$site_url=site_url();
@@ -138,8 +140,8 @@ tema_header(); ?>
 					</div>		
 
 					<div class="form-group">
-						<label for="email_adresi">E-posta Adresi <span style="color:#e74c3c;margin-left:3px;">*</span></label>
-						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="E-posta Adresi" required>
+						<label for="email_adresi">E-posta Adresi</label>
+						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="E-posta Adresi">
 					</div>
 					
 					<div class="form-group">
