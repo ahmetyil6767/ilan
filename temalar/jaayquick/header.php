@@ -16,7 +16,7 @@ require_once ROOT_DIR . '/config/seo.php';
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/lightbox.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/js/trumbowyg/ui/trumbowyg.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/sidr.bare.min.css"/>
-<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261033"/>
+<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261034"/>
 <?php 
 // Load RTL CSS for Arabic language
 if (_DIL_RTL_MI()) {
@@ -266,7 +266,7 @@ if (!$site_header) {
 		<a class="kampanya-btn" href="<?php echo ozel_url("ilan-ekle"); ?>"><?php echo _LANG('nav_free_post'); ?></a>
 	</div>
 </div>
-<main id="main-content">
+<div class="visible-sm visible-xs">
 	<div class="mobil_header">
 		<div class="container">
 			<div class="row">
@@ -292,6 +292,7 @@ if (!$site_header) {
 		</div>
 	</form>
 </div>
+<main id="main-content">
 
 
 
