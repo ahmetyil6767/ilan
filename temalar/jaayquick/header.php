@@ -203,7 +203,7 @@ if (!$site_header) {
 					<div class="input-group ara <?php if (@$_GET["s"]) {echo "focus";} ?>">
 					  <input type="text" id="ara_input" class="form-control" name="s" placeholder="<?php echo _LANG('search_placeholder'); ?>" value="<?php if (!strstr(browser_url(),"siparis")) {echo isset($_GET["s"]) ? htmlspecialchars($_GET["s"], ENT_QUOTES, 'UTF-8') : '';} ?>" required>
 					  <span class="input-group-btn">
-						<button class="btn btn-default" name="ara_buton" type="submit" value="Ara" aria-label="Search"><i class="ion-search"></i></button>
+						<button class="btn btn-default" name="ara_buton" type="submit" value="<?php echo _LANG('search_button'); ?>" aria-label="<?php echo _LANG('title_search'); ?>"><i class="ion-search"></i></button>
 					  </span>
 					</div>
 				</form>
@@ -289,7 +289,7 @@ if (!$site_header) {
 <?php include('bilesen/ust-bar-araclar.php'); ?>
 		<div class="mobil_ara">
 		  <input style="width:88%;border-left:0;" type="text" id="m_ara_input" class="form-control pull-left" name="s" placeholder="<?php echo _LANG('search_placeholder'); ?>" value="<?php if (!strstr(browser_url(),"siparis")) {echo isset($_GET["s"]) ? htmlspecialchars($_GET["s"], ENT_QUOTES, 'UTF-8') : '';} ?>" required>
-		  <button style="width:12%;" class="btn btn-default pull-left" name="ara_buton" type="submit" value="Ara" aria-label="Search"><i class="ion-search mr0"></i></button>
+		  <button style="width:12%;" class="btn btn-default pull-left" name="ara_buton" type="submit" value="<?php echo _LANG('search_button'); ?>" aria-label="<?php echo _LANG('title_search'); ?>"><i class="ion-search mr0"></i></button>
 		  <div class="clearfix"></div>
 		</div>
 	</form>

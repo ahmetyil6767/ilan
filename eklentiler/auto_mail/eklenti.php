@@ -43,6 +43,14 @@ function auto_mail_send($ad_soyad,$email_adresi,$baslik,$mesaj) {
 		$mail->Password = eklenti_ayar_getir("smtp_password","smtp");            			 // SMTP password
 		$mail->SMTPSecure = eklenti_ayar_getir("smtp_type","smtp");                    	 // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = eklenti_ayar_getir("smtp_port","smtp");                           	 // TCP port to connect to
+	} else if (!function_exists('mail')) {
+		/*
+		 * Bazi barindirmalarda mail() fonksiyonu disable_functions ile
+		 * kapali olur (canlida 2026-10-25 boyle). Bu durumda gonderim
+		 * hatasi dondurur, kuyruktaki kayit durum=2 yapilir ama sayfa
+		 * cocmez (500).
+		 */
+		return 'SMTP ayari tanimli degil ve yerel mail() fonksiyonu bu sunucuda kapali';
 	} else {
 		$mail->isMail();                                    // Yerel PHP mail() ile gonderim
 	}

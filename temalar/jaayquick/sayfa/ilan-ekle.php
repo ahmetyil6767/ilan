@@ -57,6 +57,7 @@ if ($buton==_LANG('tx_ilani_kaydet') or $buton==_LANG('tx_ilani_yayinla') or $bu
 	@$kategori_dizisi=$_POST["kategori"];
 	@$url=addslashes($_POST["url"]);
 	
+	$kategori='';
 	if (is_array($kategori_dizisi)) {
 		foreach ($kategori_dizisi as $yaz) {
 			if ($yaz!=_LANG('p_select')) {
@@ -104,11 +105,11 @@ if ($buton==_LANG('tx_ilani_kaydet') or $buton==_LANG('tx_ilani_yayinla') or $bu
 	
 	if ($baslik!="" and $kategori!="" and $icerik!="") {
 		// İlan limit kontrolü
-		$kalan_ilan_limit=uye_ilan_limiti("kalan",$oturum_id);
-		$kategori_ilan_limit=uye_ilan_limiti("kategori",$oturum_id);
-		$kategori_ilan_sayisi=mysqli_num_rows(mysqli_query($baglan,"select * from icerik where yazar='$oturum_id' and durum='1' and kategori like '%($kategori_dizisi[0])%'"));
+		$kalan_ilan_limit=(int)uye_ilan_limiti("kalan",$oturum_id);
+		$kategori_ilan_limit=(int)uye_ilan_limiti("kategori",$oturum_id);
+		$kategori_ilan_sayisi=(int)mysqli_num_rows(mysqli_query($baglan,"select * from icerik where yazar='$oturum_id' and durum='1' and kategori like '%($kategori_dizisi[0])%'"));
 		$kategori_kalan_ilan_limit=$kategori_ilan_limit-$kategori_ilan_sayisi;
-		$ilan_aninda_onay=uye_ilan_limiti("aninda_onay",$oturum_id);
+		$ilan_aninda_onay=(int)uye_ilan_limiti("aninda_onay",$oturum_id);
 		
 		$limit_kontrol=1;
 		if ($limit_politikasi==1) {
@@ -127,7 +128,7 @@ if ($buton==_LANG('tx_ilani_kaydet') or $buton==_LANG('tx_ilani_yayinla') or $bu
 				$durum=2; // Onay bekliyor
 			}
 			
-			$sql=mysqli_query($baglan,"insert into icerik set baslik='$baslik', url='$url', icerik='$icerik', kategori='$kategori', tarih_saat='$tarih_saat', yazar='$yazar', durum='$durum', tip='ilan', ozel_alanlar='$ozel_alanlar_str'");
+			$sql=mysqli_query($baglan,"insert into icerik set baslik='$baslik', url='$url', icerik='$icerik', kategori='$kategori', tarih_saat='$tarih_saat', yazar='$yazar', durum='$durum', tip='ilan'");
 			$eklenen_id=mysqli_insert_id($baglan);
 			
 			if ($eklenen_id) {
@@ -144,7 +145,8 @@ if ($buton==_LANG('tx_ilani_kaydet') or $buton==_LANG('tx_ilani_yayinla') or $bu
 					"para_birimi"=>$para_birimi,
 					"iletisim"=>$iletisim,
 					"yetkili"=>$yetkili,
-					"yetkili_tel"=>$yetkili_tel
+					"yetkili_tel"=>$yetkili_tel,
+					"ozel_alanlar"=>$ozel_alanlar_str
 				);
 				
 				foreach ($ekstra_bilgiler as $anahtar => $deger) {

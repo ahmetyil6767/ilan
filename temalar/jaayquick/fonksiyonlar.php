@@ -1164,18 +1164,18 @@ function uye_ilan_limiti($cikti,$uye_id=null) {
 	$uyeye_ozel_limitler=uye_bilgi("ozel_limitler",$uye_id);
     if ($limit_politikasi==1) {
         if ($uyeye_ozel_limitler) {
-            $uye_ilan_limit=uye_bilgi("uye_ilan_limit",$uye_id);	
-            $kategori_limit=uye_bilgi("uye_kategori_limit",$uye_id);	
-            $foto_limit=uye_bilgi("uye_foto_limit",$uye_id);	
-            $aninda_onay=uye_bilgi("uye_aninda_onay",$uye_id);
+            $uye_ilan_limit=(int)uye_bilgi("uye_ilan_limit",$uye_id);	
+            $kategori_limit=(int)uye_bilgi("uye_kategori_limit",$uye_id);	
+            $foto_limit=(int)uye_bilgi("uye_foto_limit",$uye_id);	
+            $aninda_onay=(int)uye_bilgi("uye_aninda_onay",$uye_id);
             $kalan_ilan=$uye_ilan_limit-$toplam_yayinda; 
         } else {
             $paket=uye_bilgi("paket",$uye_id);
             $paket_adi=liste_bilgi("paket_adi",$paket);
-            $uye_ilan_limit=liste_bilgi("ilan_limit",$paket);
-            $kategori_limit=liste_bilgi("kategori_limit",$paket);
-            $foto_limit=liste_bilgi("foto_limit",$paket);
-            $aninda_onay=liste_bilgi("aninda_onay",$paket);
+            $uye_ilan_limit=(int)liste_bilgi("ilan_limit",$paket);
+            $kategori_limit=(int)liste_bilgi("kategori_limit",$paket);
+            $foto_limit=(int)liste_bilgi("foto_limit",$paket);
+            $aninda_onay=(int)liste_bilgi("aninda_onay",$paket);
             $kalan_ilan=$uye_ilan_limit-$toplam_yayinda;
         }
         if ($cikti=="kalan" or !$cikti) {
@@ -1198,10 +1198,10 @@ function uye_ilan_limiti($cikti,$uye_id=null) {
             return $aninda_onay;
         }
 	} else {
-        $uye_ilan_limit=uye_bilgi("azalan_ilan_limit",$uye_id);
-        $kategori_limit=uye_bilgi("azalan_kategori_limit",$uye_id);
-        $foto_limit=uye_bilgi("azalan_foto_limit",$uye_id);
-        $aninda_onay=uye_bilgi("azalan_aninda_onay",$uye_id);
+        $uye_ilan_limit=(int)uye_bilgi("azalan_ilan_limit",$uye_id);
+        $kategori_limit=(int)uye_bilgi("azalan_kategori_limit",$uye_id);
+        $foto_limit=(int)uye_bilgi("azalan_foto_limit",$uye_id);
+        $aninda_onay=(int)uye_bilgi("azalan_aninda_onay",$uye_id);
         if ($cikti=="kalan" or !$cikti) {
             return $uye_ilan_limit;
         } else if ($cikti=="toplam") {
@@ -1228,10 +1228,10 @@ function uye_azalan_ilan_limiti($cikti,$uye_id=null) {
 	if (!$uye_id) {
 		$uye_id=$_SESSION["oturum_id"];
 	}
-    $uye_ilan_limit=uye_bilgi("azalan_ilan_limit",$uye_id);
-    $kategori_limit=uye_bilgi("azalan_kategori_limit",$uye_id);
-    $foto_limit=uye_bilgi("azalan_foto_limit",$uye_id);
-    $aninda_onay=uye_bilgi("azalan_aninda_onay",$uye_id);
+    $uye_ilan_limit=(int)uye_bilgi("azalan_ilan_limit",$uye_id);
+    $kategori_limit=(int)uye_bilgi("azalan_kategori_limit",$uye_id);
+    $foto_limit=(int)uye_bilgi("azalan_foto_limit",$uye_id);
+    $aninda_onay=(int)uye_bilgi("azalan_aninda_onay",$uye_id);
     if ($cikti=="kalan" or !$cikti or $cikti=="toplam") {
         return $uye_ilan_limit;
     } else if ($cikti=="kategori") {

@@ -100,7 +100,7 @@ $footer_5_baslik=tema_ayar("footer_5_baslik");
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _LANG('modal_close'); ?></button>
-		<button class="btn btn-primary" name="ara_buton" type="submit" value="Ara"><i class="ion-search"></i><?php echo _LANG('modal_search_button'); ?></button>
+		<button class="btn btn-primary" name="ara_buton" type="submit" value="<?php echo _LANG('modal_search_button'); ?>"><i class="ion-search"></i><?php echo _LANG('modal_search_button'); ?></button>
       </div>
     </div>
 	</form>
