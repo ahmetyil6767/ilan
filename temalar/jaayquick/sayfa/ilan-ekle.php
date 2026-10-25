@@ -501,8 +501,7 @@ tema_header(); ?>
 										</select>
 									</noscript>
 								</div>
-								<p class="help-block small text-muted" style="margin-top:8px;"><i class="fa fa-info-circle"></i> <?php echo _LANG('pn_ctrl_tusu_ile_coklu_secim'); ?></p>
-							</div>
+						</div>
 							<div class="wiz-nav">
 								<span></span>
 								<button type="button" class="btn btn-primary wiz-next" data-next="2"><i class="fa fa-arrow-right"></i> <?php echo _LANG('wiz_next'); ?></button>
