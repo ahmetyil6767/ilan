@@ -255,7 +255,7 @@ tema_header(); ?>
 								<?php while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) { 
 									$kat_id=$kategori_dizi["id"];
 									$kat_baslik=$kategori_dizi["baslik"];
-									$selected=(in_array($kat_id, @$_POST["kategori"])) ? "selected" : "";
+									$selected=(isset($_POST["kategori"]) && is_array($_POST["kategori"]) && in_array($kat_id, $_POST["kategori"])) ? "selected" : "";
 									echo "<option value='$kat_id' $selected>$kat_baslik</option>";
 								} ?>
 							</select>
