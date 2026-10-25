@@ -319,6 +319,7 @@ tema_header(); ?>
     max-height: 480px;
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
+    justify-content: flex-start;
 }
 .miller-columns-wrapper::-webkit-scrollbar { height: 6px; }
 .miller-columns-wrapper::-webkit-scrollbar-track { background: transparent; }
