@@ -245,20 +245,187 @@ tema_header(); ?>
 .form-section { margin-bottom:22px; }
 .form-section-title { font-size:15px; font-weight:600; color:#1a2b7a; margin:0 0 12px; padding-bottom:8px; border-bottom:2px solid #eef1f8; display:flex; align-items:center; gap:8px; }
 .form-section-title i { color:#d62828; }
-.kategori-cascade { background:#f7f9fc; border:1px dashed #c9d3ea; border-radius:10px; padding:14px; }
-.kategori-cascade .cascade-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
-.kategori-cascade .cascade-row:last-child { margin-bottom:0; }
-.kategori-cascade select { flex:1 1 220px; min-width:180px; }
-.kategori-cascade .cascade-arrow { color:#1a2b7a; font-size:18px; }
-.kategori-breadcrumb { margin-top:10px; padding:8px 12px; background:#fff; border-radius:8px; font-size:13px; color:#444; min-height:34px; }
-.kategori-breadcrumb .chip { display:inline-block; background:#eef1f8; color:#1a2b7a; padding:3px 10px; border-radius:14px; margin:2px 4px 2px 0; font-weight:500; }
-.kategori-breadcrumb .chip.leaf { background:#d62828; color:#fff; }
-.cat-wiz-progress { display:flex; gap:6px; margin-bottom:10px; }
-.cat-wiz-progress .step { flex:1; height:4px; background:#e6eaf2; border-radius:2px; transition:background .25s; }
-.cat-wiz-progress .step.active { background:#1a2b7a; }
-.cat-wiz-progress .step.done { background:#2d7a3e; }
-.cat-wiz-actions { display:flex; align-items:center; }
-@media (max-width:768px) { .ilan-card-body { padding:14px; } }
+
+/* ============================================
+   MILLER COLUMNS — Modern Category Selector
+   ============================================ */
+.miller-columns {
+    background: #fafbfc;
+    border: 1px solid #e8ebf0;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 420px;
+}
+
+.miller-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e8ebf0;
+    background: #fff;
+}
+
+.miller-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a2b7a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.miller-title i { color: #d62828; font-size: 16px; }
+
+.miller-breadcrumb {
+    margin-top: 10px;
+    min-height: 28px;
+    font-size: 13px;
+    color: #666;
+}
+
+.miller-crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: #f0f2f5;
+    border-radius: 6px;
+    color: #444;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+}
+.miller-crumb:hover { background: #e4e7ec; color: #1a2b7a; }
+.miller-crumb.active { background: #1a2b7a; color: #fff; cursor: default; }
+.miller-crumb.active:hover { background: #1a2b7a; }
+.miller-crumb i { font-size: 11px; color: #999; }
+.miller-crumb.active i { color: #fff; }
+.miller-crumb .crumb-sep { margin: 0 4px; color: #bbb; font-size: 10px; }
+
+/* Columns Wrapper — Horizontal Scroll */
+.miller-columns-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 16px 20px;
+    min-height: 400px;
+    max-height: 480px;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+.miller-columns-wrapper::-webkit-scrollbar { height: 6px; }
+.miller-columns-wrapper::-webkit-scrollbar-track { background: transparent; }
+.miller-columns-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* Column Card */
+.miller-column {
+    flex: 0 0 220px;
+    min-width: 220px;
+    max-width: 220px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 440px;
+    box-shadow: 0 1px 3px rgba(26,43,122,0.04);
+    display: flex;
+    flex-direction: column;
+}
+.miller-column:not(:last-child) { margin-right: 0; }
+
+.miller-column-header {
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #999;
+    background: #fafbfc;
+    border-bottom: 1px solid #eef1f8;
+}
+
+.miller-list {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+}
+
+.miller-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    margin: 2px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.12s;
+    font-size: 13.5px;
+    color: #2d3748;
+    font-weight: 500;
+    border: 1px solid transparent;
+    position: relative;
+}
+.miller-item:hover { background: #f0f3f8; color: #1a2b7a; }
+
+/* Selected State */
+.miller-item.selected {
+    background: #e2e8f0;
+    color: #1a2b7a;
+    border-color: #1a2b7a;
+}
+.miller-item.selected::after {
+    content: '\f105';
+    font-family: 'FontAwesome';
+    font-size: 11px;
+    color: #1a2b7a;
+    margin-left: auto;
+    padding-right: 4px;
+}
+
+.miller-item i.item-icon {
+    margin-right: 10px;
+    width: 16px;
+    text-align: center;
+    color: #aaa;
+    font-size: 12px;
+}
+.miller-item.selected i.item-icon { color: #1a2b7a; }
+
+.miller-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 200px;
+    color: #bbb;
+    font-size: 13px;
+    text-align: center;
+    padding: 20px;
+}
+
+.miller-column-divider {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, #e8ebf0 20%, #e8ebf0 80%, transparent);
+    margin: 0 4px;
+    flex-shrink: 0;
+}
+
+.cat-wiz-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #fafbfc;
+    border-top: 1px solid #e8ebf0;
+    border-radius: 0 0 12px 12px;
+}
+.cat-wiz-status { color: #2d7a3e; font-weight: 600; font-size: 13px; }
+
+@media (max-width: 768px) { 
+    .miller-column { flex: 0 0 180px; min-width: 180px; max-width: 180px; }
+    .miller-columns-wrapper { gap: 4px; padding: 12px; }
+}
 </style>
 
 <div class="container profil arsiv mt20">
@@ -301,14 +468,19 @@ tema_header(); ?>
 						<div class="wiz-step active" data-step="1">
 							<div class="form-section">
 								<div class="form-section-title"><i class="fa fa-sitemap"></i> <?php echo _LANG('post_category'); ?> <span style="color:#e74c3c;">*</span></div>
-								<div class="cat-wiz">
-									<div class="cat-wiz-progress" id="catWizProgress"></div>
-									<div class="kategori-breadcrumb" id="kategoriYol"></div>
-									<div class="kategori-cascade" id="kategoriCascade"></div>
+								<div class="miller-columns" id="millerColumns">
+									<div class="miller-header">
+										<h5 class="miller-title"><i class="fa fa-layer-group"></i> <?php echo _LANG('wiz_title_kategori'); ?></h5>
+										<div class="miller-breadcrumb" id="millerBreadcrumb">
+											<span class="miller-crumb root" data-level="0"><i class="fa fa-home"></i> <?php echo _LANG('miller_root'); ?></span>
+										</div>
+									</div>
+									<div class="miller-columns-wrapper" id="millerColumnsWrapper"></div>
 									<div id="kategoriHiddenWrap"></div>
-									<div class="cat-wiz-actions" id="catWizActions" style="margin-top:12px; display:none;">
+									<div class="cat-wiz-actions" id="catWizActions" style="margin-top:16px; display:none; justify-content:space-between; align-items:center;">
 										<button type="button" class="btn btn-default" id="catBackBtn"><i class="fa fa-arrow-left"></i> <?php echo _LANG('wiz_back'); ?></button>
-										<span class="cat-wiz-status" id="catWizStatus" style="margin-left:12px; color:#2d7a3e; font-weight:600;"></span>
+										<span class="cat-wiz-status" id="catWizStatus" style="color:#2d7a3e; font-weight:600;"></span>
+										<button type="button" class="btn btn-primary wiz-next" data-next="2" id="catConfirmBtn" disabled><i class="fa fa-arrow-right"></i> <?php echo _LANG('wiz_next'); ?></button>
 									</div>
 									<noscript>
 										<select class="form-control" name="kategori[]" multiple required style="height:150px;">
@@ -509,15 +681,15 @@ tema_header(); ?>
 </div>
 <?php tema_footer(); ?>
 <script>
+// === Miller Columns Kategori Seçici ===
 var KAT_TREE = <?php echo $kat_agac_json; ?>;
 var SECILI_YOL = <?php echo $secili_yol_json; ?>;
 var MAGAZA_MODE = <?php echo $magaza_id ? 'true' : 'false'; ?>;
 var SERVER_KAT = <?php echo (int)$kat; ?>;
 
-// === Kategori drill-down wizard ===
-var catPath = [];          // secili yol (id listesi, ust->alt)
-var catLevel = 0;          // su an gosterilen seviye (0 = kok)
-var catParent = 0;         // su an gosterilen seviyenin ust id'si
+var catPath = [];
+var columnsCache = {};
+var maxColumns = 5;
 
 function katChildren(pid){ return (KAT_TREE.children && KAT_TREE.children[pid]) ? KAT_TREE.children[pid] : []; }
 function katTitle(id){ return (KAT_TREE.baslik && KAT_TREE.baslik[id]) ? KAT_TREE.baslik[id] : ('#'+id); }
@@ -532,134 +704,216 @@ function updateHidden(path){
 		wrap.appendChild(inp);
 	});
 }
-function updateBreadcrumb(path){
-	var el = document.getElementById('kategoriYol');
-	if (!path.length){ el.innerHTML=''; return; }
-	el.innerHTML = path.map(function(id, idx){
-		var cls = (idx === path.length-1 && isLeaf(id)) ? 'chip leaf' : 'chip';
-		return '<span class="'+cls+'">'+katTitle(id)+'</span>';
-	}).join(' <i class="fa fa-chevron-right" style="color:#999;font-size:11px;"></i> ');
-}
-function updateProgress(path){
-	var box = document.getElementById('catWizProgress');
-	var depth = Math.max(1, (path.length || 0) + (path.length && isLeaf(path[path.length-1]) ? 0 : 1));
-	box.innerHTML = '';
-	for (var i=0; i<depth; i++){
-		var s = document.createElement('div');
-		s.className = 'step';
-		if (i < path.length) s.classList.add('done');
-		if (i === path.length && path.length < depth) s.classList.add('active');
-		box.appendChild(s);
-	}
-}
-function renderLevel(){
-	var container = document.getElementById('kategoriCascade');
-	container.innerHTML = '';
-	var opts = katChildren(catParent);
-	if (!opts.length) {
-		// yaprak: secim tamamlandi
-		var msg = document.createElement('div');
-		msg.style.cssText = 'padding:10px 14px;background:#eaf5ea;border:1px solid #bfe0c2;border-radius:8px;color:#2d7a3e;font-weight:600;';
-		msg.innerHTML = '<i class="fa fa-check-circle"></i> ' + (catPath.length ? katTitle(catPath[catPath.length-1]) : '');
-		container.appendChild(msg);
+
+function updateMillerBreadcrumb(path){
+	var el = document.getElementById('millerBreadcrumb');
+	if (!el) return;
+	if (!path.length) {
+		el.innerHTML = '<span class="miller-crumb root" data-level="0"><i class="fa fa-home"></i> ' + "<?php echo _LANG('miller_root'); ?>" + '</span>';
 		return;
 	}
-	var sel = document.createElement('select');
-	sel.className = 'form-control';
-	sel.id = 'catLevelSelect';
-	var ph = document.createElement('option');
-	ph.value = '';
-	ph.textContent = '<?php echo _LANG('filter_select'); ?>';
-	sel.appendChild(ph);
-	opts.forEach(function(id){
-		var o = document.createElement('option');
-		o.value = id;
-		o.textContent = katTitle(id);
-		sel.appendChild(o);
+	var html = '<span class="miller-crumb root" data-level="0"><i class="fa fa-home"></i> ' + "<?php echo _LANG('miller_root'); ?>" + '</span>';
+	path.forEach(function(id, idx){
+		var isLast = idx === path.length - 1;
+		var isLeafNode = isLeaf(id);
+		var cls = 'miller-crumb' + (isLast ? ' active' : '') + (isLeafNode && isLast ? ' leaf' : '');
+		html += '<span class="miller-crumb-sep">/</span><span class="'+cls+'" data-level="'+(idx+1)+'" data-id="'+id+'">'+katTitle(id)+'</span>';
 	});
-	sel.addEventListener('change', function(){
-		var v = parseInt(this.value);
-		if (!v) return;
-		catPath.push(v);
-		catParent = v;
-		catLevel++;
-		updateHidden(catPath);
-		updateBreadcrumb(catPath);
-		updateProgress(catPath);
-		// geri butonu goster
-		document.getElementById('catWizActions').style.display = 'flex';
-		if (isLeaf(v)) {
-			document.getElementById('catWizStatus').innerHTML = '<i class="fa fa-check"></i> Kategori seçildi';
-			document.getElementById('catConfirmBtn').disabled = false;
-			// ozel alanlar icin sayfayi yenile (?kat=leaf)
-			if (v !== SERVER_KAT) {
-				var url = new URL(window.location.href);
-				url.searchParams.set('kat', v);
-				window.location.href = url.toString();
+	el.innerHTML = html;
+	
+	el.querySelectorAll('.miller-crumb[data-level]').forEach(function(crumb){
+		crumb.addEventListener('click', function(){
+			var level = parseInt(this.dataset.level);
+			if (level < catPath.length) {
+				catPath = catPath.slice(0, level);
+				renderMillerColumns();
 			}
-		} else {
-			document.getElementById('catWizStatus').innerHTML = '';
-			document.getElementById('catConfirmBtn').disabled = true;
-		}
-		renderLevel();
+		});
 	});
-	container.appendChild(sel);
 }
-function catGoBack(){
-	if (!catPath.length) return;
-	catPath.pop();
-	catParent = catPath.length ? catPath[catPath.length-1] : 0;
-	catLevel = catPath.length;
+
+function renderMillerColumns(){
+	var wrapper = document.getElementById('millerColumnsWrapper');
+	if (!wrapper) return;
+	
+	var existingColumns = wrapper.querySelectorAll('.miller-column');
+	var currentColumns = existingColumns.length;
+	
+	var targetColumns = catPath.length + 1;
+	if (catPath.length > 0 && !isLeaf(catPath[catPath.length-1])) {
+		targetColumns++;
+	}
+	targetColumns = Math.min(targetColumns, maxColumns);
+	
+	for (var i = currentColumns; i < targetColumns; i++) {
+		var col = document.createElement('div');
+		col.className = 'miller-column';
+		col.dataset.level = i;
+		wrapper.appendChild(col);
+	}
+	
+	for (var i = targetColumns; i < currentColumns; i++) {
+		if (existingColumns[i]) existingColumns[i].remove();
+	}
+	
+	for (var level = 0; level < targetColumns; level++) {
+		var col = wrapper.querySelector('.miller-column[data-level="'+level+'"]');
+		if (!col) continue;
+		
+		var parentId = level === 0 ? 0 : catPath[level-1];
+		var items = katChildren(parentId);
+		var selectedId = catPath[level] || null;
+		
+		renderColumn(col, level, items, selectedId);
+	}
+	
+	updateMillerBreadcrumb(catPath);
 	updateHidden(catPath);
-	updateBreadcrumb(catPath);
-	updateProgress(catPath);
-	if (!catPath.length) {
-		document.getElementById('catWizActions').style.display = 'none';
-	}
-	var last = catPath.length ? catPath[catPath.length-1] : 0;
-	if (last && isLeaf(last)) {
-		document.getElementById('catWizStatus').innerHTML = '<i class="fa fa-check"></i> Kategori seçildi';
-		document.getElementById('catConfirmBtn').disabled = false;
-	} else {
-		document.getElementById('catWizStatus').innerHTML = '';
-		document.getElementById('catConfirmBtn').disabled = true;
-	}
-	renderLevel();
+	updateActions();
 }
-function initCascade(){
-	// onceden secili yol varsa yukle
+
+function renderColumn(col, level, items, selectedId){
+	var hasChildren = items.length > 0;
+	var headerText = level === 0 ? "<?php echo _LANG('miller_root'); ?>" : (katTitle(catPath[level-1]) || 'Seçim');
+	
+	var html = '<div class="miller-column-header">'+headerText+'</div>';
+	
+	if (!hasChildren) {
+		html += '<div class="miller-empty"><i class="fa fa-check-circle"></i> ' + "<?php echo _LANG('miller_kategori_secildi'); ?>" + '</div>';
+	} else {
+		html += '<ul class="miller-list">';
+		items.forEach(function(id){
+			var isSelected = id === selectedId;
+			var itemLeaf = isLeaf(id);
+			var hasChild = !itemLeaf;
+			var itemClass = 'miller-item' + (isSelected ? ' selected' : '') + (hasChild ? ' has-children' : '');
+			html += '<li class="'+itemClass+'" data-id="'+id+'" data-level="'+level+'">';
+			html += '<i class="item-icon fa '+ (isLeaf(id) ? 'fa-tag' : 'fa-folder') +'"></i>';
+			html += '<span>'+katTitle(id)+'</span>';
+			if (hasChild) html += '<i class="fa fa-chevron-right chevron"></i>';
+			html += '</li>';
+		});
+		html += '</ul>';
+	}
+	
+	col.innerHTML = html;
+	
+	col.querySelectorAll('.miller-item').forEach(function(item){
+		item.addEventListener('click', function(){
+			var id = parseInt(this.dataset.id);
+			var lvl = parseInt(this.dataset.level);
+			
+			catPath = catPath.slice(0, lvl);
+			catPath.push(id);
+			
+			var colItems = this.closest('.miller-column').querySelectorAll('.miller-item');
+			colItems.forEach(function(i){ i.classList.remove('selected'); });
+			this.classList.add('selected');
+			
+			var wrapper = document.getElementById('millerColumnsWrapper');
+			var allCols = wrapper.querySelectorAll('.miller-column');
+			for (var i = lvl + 1; i < allCols.length; i++) {
+				allCols[i].remove();
+			}
+			
+			if (isLeaf(id)) {
+				catPath = catPath.slice(0, lvl + 1);
+				renderMillerColumns();
+				updateActions();
+				if (id !== SERVER_KAT) {
+					var url = new URL(window.location.href);
+					url.searchParams.set('kat', id);
+					window.location.href = url.toString();
+				}
+			} else {
+				catPath = catPath.slice(0, lvl + 1);
+				renderMillerColumns();
+			}
+		});
+	});
+}
+
+function updateActions(){
+	var wrapper = document.getElementById('millerColumnsWrapper');
+	if (!wrapper) return;
+	
+	var hasSelection = catPath.length > 0;
+	var lastSelected = catPath.length > 0 ? catPath[catPath.length-1] : null;
+	var isLeafSelected = lastSelected && isLeaf(lastSelected);
+	
+	var actions = document.getElementById('catWizActions');
+	var status = document.getElementById('catWizStatus');
+	var confirmBtn = document.getElementById('catConfirmBtn');
+	var backBtn = document.getElementById('catBackBtn');
+	
+	if (actions) {
+		actions.style.display = catPath.length > 0 ? 'flex' : 'none';
+	}
+	
+	if (status) {
+		if (isLeafSelected) {
+			status.innerHTML = '<i class="fa fa-check-circle"></i> ' + "<?php echo _LANG('miller_kategori_secildi'); ?>" + ': <strong>'+katTitle(lastSelected)+'</strong>';
+		} else if (hasSelection) {
+			status.innerHTML = '<i class="fa fa-folder-open"></i> Seçili: <strong>'+katTitle(lastSelected)+'</strong> - ' + "<?php echo _LANG('miller_alt_kategori_sec'); ?>";
+		} else {
+			status.innerHTML = '';
+		}
+	}
+	
+	if (confirmBtn) {
+		confirmBtn.disabled = !isLeafSelected;
+	}
+	
+	if (backBtn) {
+		backBtn.style.display = catPath.length > 1 ? 'inline-flex' : 'none';
+	}
+}
+
+function catGoBack(){
+	if (catPath.length <= 1) return;
+	catPath.pop();
+	renderMillerColumns();
+}
+
+function initMillerColumns(){
+	var wrapper = document.getElementById('millerColumnsWrapper');
+	if (!wrapper) return;
+	
+	if (wrapper.children.length === 0) {
+		var col = document.createElement('div');
+		col.className = 'miller-column';
+		col.dataset.level = 0;
+		wrapper.appendChild(col);
+	}
+	
 	if (SECILI_YOL && SECILI_YOL.length) {
 		catPath = SECILI_YOL.slice();
-		catParent = catPath[catPath.length-1];
-		catLevel = catPath.length;
-		updateHidden(catPath);
-		updateBreadcrumb(catPath);
-		updateProgress(catPath);
-		document.getElementById('catWizActions').style.display = 'flex';
-		var last = catPath[catPath.length-1];
-		if (isLeaf(last)) {
-			document.getElementById('catWizStatus').innerHTML = '<i class="fa fa-check"></i> Kategori seçildi';
-			document.getElementById('catConfirmBtn').disabled = false;
-		}
-		// eger yaprak degilse bir sonraki seviyeyi goster
-		if (!isLeaf(last)) {
-			catParent = last;
-			renderLevel();
-		} else {
-			renderLevel(); // yaprak mesaji
-		}
 	} else {
 		catPath = [];
-		catParent = 0;
-		catLevel = 0;
-		updateHidden([]);
-		updateBreadcrumb([]);
-		updateProgress([]);
-		renderLevel();
 	}
+	
+	renderMillerColumns();
 }
-document.getElementById('catBackBtn').addEventListener('click', catGoBack);
-initCascade();
+
+document.addEventListener('DOMContentLoaded', function(){
+    var wrapper = document.getElementById('millerColumnsWrapper');
+    if (wrapper) {
+        initMillerColumns();
+    }
+    
+    var backBtn = document.getElementById('catBackBtn');
+    if (backBtn) {
+        backBtn.addEventListener('click', catGoBack);
+    }
+    
+    if (document.readyState === 'loading') {
+    } else {
+        var wrapper = document.getElementById('millerColumnsWrapper');
+        if (wrapper) { initMillerColumns(); }
+        var backBtn = document.getElementById('catBackBtn');
+        if (backBtn) { backBtn.addEventListener('click', catGoBack); }
+    }
+});;
 
 // Wizard
 var currentStep = 1;
@@ -700,7 +954,6 @@ document.querySelectorAll('.wiz-next').forEach(function(btn){
 document.querySelectorAll('.wiz-prev').forEach(function(btn){
 	btn.addEventListener('click', function(){ showStep(parseInt(this.dataset.prev)); });
 });
-// allow clicking progress dots to go back
 document.querySelectorAll('#wizProgress li').forEach(function(li){
 	li.style.cursor='pointer';
 	li.addEventListener('click', function(){ var st=parseInt(this.dataset.step); if (st < currentStep) showStep(st); });

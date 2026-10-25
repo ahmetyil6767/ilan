@@ -3467,7 +3467,12 @@ return array(
 	'p_liste_alan_yok'      => 'لم يتم العثور على حقل قائمة قابل للتعديل.',
 
 	'p_erisim_engellendi' => 'تم رفض الوصول.',
-	'p_kategori_secimi_tamamlandi' => 'اكتمل اختيار الفئة',
+	'p_kategori_secimi_tamamlandi' => 'اكتمل اختيار التصنيف',
+	'wiz_title_kategori' => 'اختيار التصنيف خطوة بخطوة',
+	'miller_root' => 'التصنيفات الرئيسية',
+	'miller_kategori_secildi' => 'تم اختيار التصنيف',
+	'miller_alt_kategori_sec' => 'اختر التصنيف الفرعي',
+
 	'p_class' => 'فئة CSS',
 	'campaign_band_text' => 'أعلن مجانًا في غامبيا - ابدأ الآن!',
 );

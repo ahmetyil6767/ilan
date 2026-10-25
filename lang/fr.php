@@ -3734,6 +3734,10 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 
 	'p_erisim_engellendi' => 'Accès refusé.',
 	'p_kategori_secimi_tamamlandi' => 'Sélection de catégorie terminée',
+	'wiz_title_kategori' => 'Sélection de catégorie étape par étape',
+	'miller_root' => 'Catégories principales',
+	'miller_kategori_secildi' => 'Catégorie sélectionnée',
+	'miller_alt_kategori_sec' => 'Sélectionnez une sous-catégorie',
 	'p_class' => 'Classe CSS',
 	'campaign_band_text' => 'Publiez vos annonces en Gambie gratuitement - commencez des maintenant !',
 );

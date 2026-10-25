@@ -3493,6 +3493,10 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'Evet' => 'Evet',
 	'p_erisim_engellendi' => 'Erişim engellendi.',
 	'p_kategori_secimi_tamamlandi' => 'Kategori seçimi tamamlandı',
+	'wiz_title_kategori' => 'Adım Adım Kategori Seç',
+	'miller_root' => 'Ana Kategoriler',
+	'miller_kategori_secildi' => 'Kategori seçildi',
+	'miller_alt_kategori_sec' => 'Alt kategori seçin',
 	'p_class' => 'CSS Sınıfı',
 	'campaign_band_text' => 'Gambiya\'daki ilanlarinizi ucretsiz yayinlayin - hemen baslayin!',
 );
