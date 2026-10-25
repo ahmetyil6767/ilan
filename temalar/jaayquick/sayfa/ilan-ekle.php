@@ -253,6 +253,11 @@ tema_header(); ?>
 .kategori-breadcrumb { margin-top:10px; padding:8px 12px; background:#fff; border-radius:8px; font-size:13px; color:#444; min-height:34px; }
 .kategori-breadcrumb .chip { display:inline-block; background:#eef1f8; color:#1a2b7a; padding:3px 10px; border-radius:14px; margin:2px 4px 2px 0; font-weight:500; }
 .kategori-breadcrumb .chip.leaf { background:#d62828; color:#fff; }
+.cat-wiz-progress { display:flex; gap:6px; margin-bottom:10px; }
+.cat-wiz-progress .step { flex:1; height:4px; background:#e6eaf2; border-radius:2px; transition:background .25s; }
+.cat-wiz-progress .step.active { background:#1a2b7a; }
+.cat-wiz-progress .step.done { background:#2d7a3e; }
+.cat-wiz-actions { display:flex; align-items:center; }
 @media (max-width:768px) { .ilan-card-body { padding:14px; } }
 </style>
 
@@ -296,7 +301,15 @@ tema_header(); ?>
 						<div class="wiz-step active" data-step="1">
 							<div class="form-section">
 								<div class="form-section-title"><i class="fa fa-sitemap"></i> <?php echo _LANG('post_category'); ?> <span style="color:#e74c3c;">*</span></div>
-								<div class="kategori-cascade" id="kategoriCascade">
+								<div class="cat-wiz">
+									<div class="cat-wiz-progress" id="catWizProgress"></div>
+									<div class="kategori-breadcrumb" id="kategoriYol"></div>
+									<div class="kategori-cascade" id="kategoriCascade"></div>
+									<div id="kategoriHiddenWrap"></div>
+									<div class="cat-wiz-actions" id="catWizActions" style="margin-top:12px; display:none;">
+										<button type="button" class="btn btn-default" id="catBackBtn"><i class="fa fa-arrow-left"></i> <?php echo _LANG('wiz_back'); ?></button>
+										<span class="cat-wiz-status" id="catWizStatus" style="margin-left:12px; color:#2d7a3e; font-weight:600;"></span>
+									</div>
 									<noscript>
 										<select class="form-control" name="kategori[]" multiple required style="height:150px;">
 											<?php
@@ -309,8 +322,6 @@ tema_header(); ?>
 										</select>
 									</noscript>
 								</div>
-								<div id="kategoriHiddenWrap"></div>
-								<div class="kategori-breadcrumb" id="kategoriYol"></div>
 								<p class="help-block small text-muted" style="margin-top:8px;"><i class="fa fa-info-circle"></i> <?php echo _LANG('pn_ctrl_tusu_ile_coklu_secim'); ?></p>
 							</div>
 							<div class="wiz-nav">
@@ -503,17 +514,15 @@ var SECILI_YOL = <?php echo $secili_yol_json; ?>;
 var MAGAZA_MODE = <?php echo $magaza_id ? 'true' : 'false'; ?>;
 var SERVER_KAT = <?php echo (int)$kat; ?>;
 
+// === Kategori drill-down wizard ===
+var catPath = [];          // secili yol (id listesi, ust->alt)
+var catLevel = 0;          // su an gosterilen seviye (0 = kok)
+var catParent = 0;         // su an gosterilen seviyenin ust id'si
+
 function katChildren(pid){ return (KAT_TREE.children && KAT_TREE.children[pid]) ? KAT_TREE.children[pid] : []; }
 function katTitle(id){ return (KAT_TREE.baslik && KAT_TREE.baslik[id]) ? KAT_TREE.baslik[id] : ('#'+id); }
 function isLeaf(id){ return katChildren(id).length === 0; }
 
-function currentPath(){
-	var c = document.getElementById('kategoriCascade');
-	var sels = Array.prototype.slice.call(c.querySelectorAll('select.kat-level')).sort(function(a,b){return (+a.dataset.level)-(+b.dataset.level);}));
-	var path=[];
-	sels.forEach(function(s){ if (s.value) path.push(parseInt(s.value)); });
-	return path;
-}
 function updateHidden(path){
 	var wrap = document.getElementById('kategoriHiddenWrap');
 	wrap.innerHTML='';
@@ -531,12 +540,33 @@ function updateBreadcrumb(path){
 		return '<span class="'+cls+'">'+katTitle(id)+'</span>';
 	}).join(' <i class="fa fa-chevron-right" style="color:#999;font-size:11px;"></i> ');
 }
-function buildSelect(level, parentId, selectedId){
-	var opts = katChildren(parentId);
-	if (!opts.length) return null;
+function updateProgress(path){
+	var box = document.getElementById('catWizProgress');
+	var depth = Math.max(1, (path.length || 0) + (path.length && isLeaf(path[path.length-1]) ? 0 : 1));
+	box.innerHTML = '';
+	for (var i=0; i<depth; i++){
+		var s = document.createElement('div');
+		s.className = 'step';
+		if (i < path.length) s.classList.add('done');
+		if (i === path.length && path.length < depth) s.classList.add('active');
+		box.appendChild(s);
+	}
+}
+function renderLevel(){
+	var container = document.getElementById('kategoriCascade');
+	container.innerHTML = '';
+	var opts = katChildren(catParent);
+	if (!opts.length) {
+		// yaprak: secim tamamlandi
+		var msg = document.createElement('div');
+		msg.style.cssText = 'padding:10px 14px;background:#eaf5ea;border:1px solid #bfe0c2;border-radius:8px;color:#2d7a3e;font-weight:600;';
+		msg.innerHTML = '<i class="fa fa-check-circle"></i> ' + (catPath.length ? katTitle(catPath[catPath.length-1]) : '');
+		container.appendChild(msg);
+		return;
+	}
 	var sel = document.createElement('select');
-	sel.className = 'form-control kat-level';
-	sel.dataset.level = level;
+	sel.className = 'form-control';
+	sel.id = 'catLevelSelect';
 	var ph = document.createElement('option');
 	ph.value = '';
 	ph.textContent = '<?php echo _LANG('filter_select'); ?>';
@@ -545,53 +575,90 @@ function buildSelect(level, parentId, selectedId){
 		var o = document.createElement('option');
 		o.value = id;
 		o.textContent = katTitle(id);
-		if (selectedId && id === selectedId) o.selected = true;
 		sel.appendChild(o);
 	});
-	if (MAGAZA_MODE) sel.disabled = true;
-	sel.addEventListener('change', function(){ onLevelChange(this); });
-	return sel;
-}
-function onLevelChange(changed){
-	var container = document.getElementById('kategoriCascade');
-	var lvl = parseInt(changed.dataset.level);
-	Array.prototype.slice.call(container.querySelectorAll('select.kat-level')).forEach(function(s){
-		if (parseInt(s.dataset.level) > lvl) s.remove();
+	sel.addEventListener('change', function(){
+		var v = parseInt(this.value);
+		if (!v) return;
+		catPath.push(v);
+		catParent = v;
+		catLevel++;
+		updateHidden(catPath);
+		updateBreadcrumb(catPath);
+		updateProgress(catPath);
+		// geri butonu goster
+		document.getElementById('catWizActions').style.display = 'flex';
+		if (isLeaf(v)) {
+			document.getElementById('catWizStatus').innerHTML = '<i class="fa fa-check"></i> Kategori seçildi';
+			document.getElementById('catConfirmBtn').disabled = false;
+			// ozel alanlar icin sayfayi yenile (?kat=leaf)
+			if (v !== SERVER_KAT) {
+				var url = new URL(window.location.href);
+				url.searchParams.set('kat', v);
+				window.location.href = url.toString();
+			}
+		} else {
+			document.getElementById('catWizStatus').innerHTML = '';
+			document.getElementById('catConfirmBtn').disabled = true;
+		}
+		renderLevel();
 	});
-	var path = currentPath();
-	var last = path.length ? path[path.length-1] : 0;
-	if (last && katChildren(last).length > 0) {
-		var ns = buildSelect(path.length, last, null);
-		if (ns) container.appendChild(ns);
+	container.appendChild(sel);
+}
+function catGoBack(){
+	if (!catPath.length) return;
+	catPath.pop();
+	catParent = catPath.length ? catPath[catPath.length-1] : 0;
+	catLevel = catPath.length;
+	updateHidden(catPath);
+	updateBreadcrumb(catPath);
+	updateProgress(catPath);
+	if (!catPath.length) {
+		document.getElementById('catWizActions').style.display = 'none';
 	}
-	updateHidden(path);
-	updateBreadcrumb(path);
-	if (last && katChildren(last).length === 0 && last !== SERVER_KAT) {
-		var url = new URL(window.location.href);
-		url.searchParams.set('kat', last);
-		window.location.href = url.toString();
+	var last = catPath.length ? catPath[catPath.length-1] : 0;
+	if (last && isLeaf(last)) {
+		document.getElementById('catWizStatus').innerHTML = '<i class="fa fa-check"></i> Kategori seçildi';
+		document.getElementById('catConfirmBtn').disabled = false;
+	} else {
+		document.getElementById('catWizStatus').innerHTML = '';
+		document.getElementById('catConfirmBtn').disabled = true;
 	}
+	renderLevel();
 }
 function initCascade(){
-	var container = document.getElementById('kategoriCascade');
-	container.innerHTML = '';
-	var level = 0;
-	var sel = buildSelect(level, 0, (SECILI_YOL && SECILI_YOL.length) ? SECILI_YOL[0] : null);
-	if (!sel) return;
-	container.appendChild(sel);
+	// onceden secili yol varsa yukle
 	if (SECILI_YOL && SECILI_YOL.length) {
-		for (var i=0; i<SECILI_YOL.length; i++) {
-			var id = SECILI_YOL[i];
-			if (katChildren(id).length > 0 && SECILI_YOL[i+1]) {
-				level++;
-				var ns = buildSelect(level, id, SECILI_YOL[i+1]);
-				if (ns) container.appendChild(ns);
-			}
+		catPath = SECILI_YOL.slice();
+		catParent = catPath[catPath.length-1];
+		catLevel = catPath.length;
+		updateHidden(catPath);
+		updateBreadcrumb(catPath);
+		updateProgress(catPath);
+		document.getElementById('catWizActions').style.display = 'flex';
+		var last = catPath[catPath.length-1];
+		if (isLeaf(last)) {
+			document.getElementById('catWizStatus').innerHTML = '<i class="fa fa-check"></i> Kategori seçildi';
+			document.getElementById('catConfirmBtn').disabled = false;
 		}
+		// eger yaprak degilse bir sonraki seviyeyi goster
+		if (!isLeaf(last)) {
+			catParent = last;
+			renderLevel();
+		} else {
+			renderLevel(); // yaprak mesaji
+		}
+	} else {
+		catPath = [];
+		catParent = 0;
+		catLevel = 0;
+		updateHidden([]);
+		updateBreadcrumb([]);
+		updateProgress([]);
+		renderLevel();
 	}
-	updateHidden(currentPath());
-	updateBreadcrumb(currentPath());
 }
+document.getElementById('catBackBtn').addEventListener('click', catGoBack);
 document.addEventListener('DOMContentLoaded', initCascade);
 
 // Wizard
