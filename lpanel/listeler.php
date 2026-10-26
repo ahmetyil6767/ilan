@@ -1,9 +1,14 @@
 <?php
 include("../loader.php");
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
+// Debug removed
 $l_say=count($liste);
 
 @$get_liste=$_GET["liste"];
+if (!$get_liste && isset($_POST["liste"])) {
+    $get_liste=$_POST["liste"];
+}
+// debug removed
 @$get_icerik_id=$_GET["icerik_id"];
 @$islem=$_GET["islem"];
 $tip="liste";
@@ -36,9 +41,10 @@ if ($get_liste) {
   	mysqli_stmt_close($ekle);
 		$id=mysqli_insert_id($baglan);
 		foreach ($ayar as $yaz => $x) {	
+			error_log("DEBUG4: loop iteration, eb_type=" . ($x["tip"] ?? 'null') . ", eb_name=" . ($x["id"] ?? 'null'));
 			$eb_type=($x["tip"] ?? '');
 			$eb_name=($x["id"] ?? '');
-			$deger=$_POST["$eb_name"];
+			$deger=isset($_POST["$eb_name"]) ? $_POST["$eb_name"] : '';
 			$mevcut_deger=ekstra_bilgi_getir($eb_name,$id,"liste");
 			if ($eb_type!="multiple_checkbox" and $eb_type!="upload") {
 				if ($eb_type=="location") {
@@ -82,9 +88,10 @@ if ($get_liste) {
 					$secenekler["cikti"]=$eb_gecerli_boyut;
 				}
 				$resim_dizisi=(isset($_FILES[$eb_name]) and is_array($_FILES[$eb_name])) ? $_FILES[$eb_name] : array();
-				$resim_adi=(isset($resim_dizisi["name"]) and is_array($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
+				$resim_adi=(isset($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 				if ($resim_adi!="") {
-					$resim_url=yukle($resim_dizisi,$secenekler);
+										$resim_url=yukle($resim_dizisi,$secenekler);
+					error_log("DEBUG3: yukle returned=" . var_export($resim_url, true));
 					$mevcut_deger=ekstra_bilgi_getir($eb_name,$id,$tip);
 					ekstra_bilgi_guncelle($eb_name,$resim_url,$id,$tip);
 					if ($mevcut_deger!=$resim_url) {
@@ -126,7 +133,7 @@ if ($guncelle_buton) {
 	foreach ($ayar as $yaz => $x) {	
 		$eb_type=($x["tip"] ?? '');
 		$eb_name=($x["id"] ?? '');
-		$deger=$_POST["$eb_name"];
+		$deger=isset($_POST["$eb_name"]) ? $_POST["$eb_name"] : '';
 		$mevcut_deger=ekstra_bilgi_getir($eb_name,$id,$tip);
 		if ($eb_type!="multiple_checkbox" and $eb_type!="upload") {
 			if ($eb_type=="location") {
@@ -170,9 +177,10 @@ if ($guncelle_buton) {
 				$secenekler["cikti"]=$eb_gecerli_boyut;
 			}
 			$resim_dizisi=(isset($_FILES[$eb_name]) and is_array($_FILES[$eb_name])) ? $_FILES[$eb_name] : array();
-			$resim_adi=(isset($resim_dizisi["name"]) and is_array($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
+			$resim_adi=(isset($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 			if ($resim_adi!="") {
-				$resim_url=yukle($resim_dizisi,$secenekler);
+								$resim_url=yukle($resim_dizisi,$secenekler);
+				error_log("DEBUG upload2: yukle returned=" . var_export($resim_url, true));
 				$mevcut_deger=ekstra_bilgi_getir($eb_name,$id,$tip);
 				ekstra_bilgi_guncelle($eb_name,$resim_url,$id,$tip);
 				if ($mevcut_deger!=$resim_url) {
@@ -190,6 +198,7 @@ if ($guncelle_buton) {
 	}
 	// Mevcut upload resmi sil düğmesi
 	@$upload_kaldir_dizisi=$_POST["upload_kaldir"];
+	if (is_array($upload_kaldir_dizisi)) {
 	foreach ($upload_kaldir_dizisi as $name) {
 		$mevcut_deger=ekstra_bilgi_getir($name,$id,$tip);
 		if ($eb_gecerli_boyut) {
@@ -202,6 +211,7 @@ if ($guncelle_buton) {
 		}
 		$ekstra_bilgi_id=ekstra_bilgi_id_getir($name,$id,$tip);
 		ekstra_bilgi_sil($ekstra_bilgi_id);
+	}
 	}
 	// v2 resim upload remove güncellemesi bitti.	
 	
@@ -425,6 +435,7 @@ if ($panel_sablon=="fullwidth") {
 					<div class="row">
 						<div class="col-md-20">
 						<form action="" method="post" enctype="multipart/form-data">
+<input type="hidden" name="liste" value="<?php echo htmlspecialchars($get_liste); ?>">
 							<div class="panel panel-default">
 							<div class="panel-heading"><?php if ($liste_baslik) {echo $liste_baslik;} else {echo _LANG('p_oge');} ?> <?php echo _LANG('p_ekle'); ?></div>
 							<?php 
@@ -580,6 +591,7 @@ if ($panel_sablon=="fullwidth") {
 							$sira=mysqli_fetch_array(mysqli_query($baglan,"select * from listeler where l_id='$id'"))["sira"];
 							?>
 							<form action="" method="post" enctype="multipart/form-data">
+<input type="hidden" name="liste" value="<?php echo htmlspecialchars($get_liste); ?>">
 							<div class="panel panel-default">
 								<div class="panel-heading"><?php if ($liste_baslik) {echo "$liste_baslik";} ?> #<?php echo $id; ?><?php echo _LANG('p_sira_ek'); ?> <?php echo $sira; ?></div>
 							<?php 

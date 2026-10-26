@@ -2567,16 +2567,18 @@ function resim_yukle($file, $klasor, $boyutlandir = NULL, $cikti = NULL, $orijin
 
 function sil($url)
 {
+	if (empty($url)) { return false; }
 	$ayir = explode('/uploads/', $url);
+	if (count($ayir) < 2 || empty($ayir[1])) { return false; }
 	$resim_adi = $ayir[1];
-	$sil = unlink(ROOT_DIR . ('/uploads/' . $resim_adi));
-
-	if ($sil) {
-		return true;
+	$tam_yol = ROOT_DIR . ('/uploads/' . $resim_adi);
+	if (is_file($tam_yol)) {
+		$sil = unlink($tam_yol);
+		if ($sil) {
+			return true;
+		}
 	}
-	else {
-		return false;
-	}
+	return false;
 }
 
 function galeri_id($offset = NULL)
@@ -2938,7 +2940,8 @@ function yukle($file, $secenekler = NULL)
 		}
 	}
 
-	$boyutlar = array_unique($boyutlar);
+	if (!is_array($boyutlar)) { $boyutlar = array(); }
+$boyutlar = array_unique($boyutlar);
 
 	if ($file) {
 		if (is_array($file['name'])) {
@@ -3139,7 +3142,8 @@ function cek($url, $secenekler = NULL)
 		}
 	}
 
-	$boyutlar = array_unique($boyutlar);
+	if (!is_array($boyutlar)) { $boyutlar = array(); }
+$boyutlar = array_unique($boyutlar);
 	$resim_uzanti = uzanti($orj_resim_adi);
 	$resim_adi_bol = explode((string) $resim_uzanti, $orj_resim_adi);
 	$resim_orijinal_ad = $resim_adi_bol[0];
