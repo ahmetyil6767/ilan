@@ -3025,7 +3025,7 @@ $boyutlar = array_unique($boyutlar);
 
 						// Otomatik boyutlandırma (resize option varsa)
 						if (isset($secenekler['resize']) && is_array($secenekler['resize']) && count($secenekler['resize']) >= 2) {
-							$resim->bestFit($secenekler['resize'][0], $secenekler['resize'][1]);
+							$resim->thumbnail($secenekler['resize'][0], $secenekler['resize'][1]);
 						}
 
 						if (@$filtre == 1) {
