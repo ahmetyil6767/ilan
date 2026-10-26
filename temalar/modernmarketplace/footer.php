@@ -6,6 +6,11 @@ if ($footer_genis) {echo "<div class='container' style='margin-top:15px;'>$foote
 </main>
 <footer>
 <div class="container">
+<div class="mk-footer-brand">
+	<?php $mk_f_logo = tema_ayar("logo_light"); if (!$mk_f_logo) { $mk_f_logo = "/uploads/images/jaayquick-logo-light.png"; } ?>
+	<a href="<?php echo site_url(); ?>"><img src="<?php echo $mk_f_logo; ?>" alt="JaayQuick"></a>
+	<div class="tagline"><?php echo _LANG('mk_logo_tagline'); ?></div>
+</div>
 <?php 
 $footer_menuleri=tema_ayar("footer_menuleri");
 if ($footer_menuleri!=2) { ?>
@@ -79,6 +84,10 @@ $footer_5_baslik=tema_ayar("footer_5_baslik");
 <img src="<?php echo tema_dizini(); ?>/img/logo-pack.png" alt="" class="img-responsive" style="margin-left:auto;margin-right:auto;margin-top:20px;" />
 <?php } ?>
 
+<div class="mk-footer-bottom">
+	<span>© <?php echo date('Y'); ?> Jaayquick.com. <?php echo _LANG('mk_all_rights'); ?></span>
+	<span><?php echo _LANG('mk_local_marketplace'); ?> <span class="flag">🇬🇲</span></span>
+</div>
 
 </div>
 </footer>

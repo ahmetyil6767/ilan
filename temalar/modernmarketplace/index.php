@@ -194,238 +194,212 @@ if ($page=="iframe") {
 
 tema_header();
 
-// Mobile Ã¶zel kategori menÃ¼sÃ¼ (legacy uyumluluk)
-$mobil_ozel_menu=tema_ayar("mobil_ozel_menu");
-if ($mobil_ozel_menu!=2) { ?>
-<div id="mobil_ozel_menu" class="container-fluid visible-xs visible-sm" style="padding:0;overflow:hidden;">
-<?php
-$kategori_iptal=tema_ayar("kategori_iptal");
-$kategori_iptal=rtrim($kategori_iptal,",");
-$kategori_iptal_sql="";
-if ($kategori_iptal) {$kategori_iptal_sql=" and id not in ($kategori_iptal)";}
-$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by baslik asc");
-while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) {
-	$kategori_id=$kategori_dizi["id"];
-	$kategori_baslik=_DIL_BASLIK($kategori_dizi["baslik"], $kategori_id, "kategori");
-	$kategori_ikon=kategori_bilgi("ikon",$kategori_id);
-	if (!$kategori_ikon) {$kategori_ikon="ion-folder";}
-	$kategori_link=kategori_link_getir($kategori_id);
-?>
-	<a href="<?php echo $kategori_link; ?>" class="mk-mobil-cat"><?php echo $kategori_baslik; ?></a>
-<?php } ?>
-</div>
-<?php } ?>
-
-<?php
-// Istatistikler (gercek veriler)
+// GerÃ§ek istatistikler
 $mk_uye_sayisi=(int)mysqli_fetch_array(mysqli_query($baglan,"select COUNT(id) from uyeler"))[0];
 $mk_ilan_sayisi=(int)mysqli_fetch_array(mysqli_query($baglan,"select COUNT(id) from icerik where tip='ilan' and durum='1'"))[0];
 $mk_magaza_sayisi=(int)mysqli_fetch_array(mysqli_query($baglan,"select COUNT(id) from magazalar"))[0];
 
-// Kategori ikon eslestirme (FA4)
+// Kategori ikon/renk eÅŸleÅŸtirme
 $mk_kat_ikon = array(
 	2=>'fa-car', 1=>'fa-home', 8=>'fa-briefcase', 4=>'fa-shopping-bag',
 	10=>'fa-paw', 5=>'fa-cogs', 6=>'fa-wrench', 7=>'fa-graduation-cap',
 	3=>'fa-cog', 9=>'fa-users', 17766=>'fa-plane', 17741=>'fa-leaf',
 	17779=>'fa-globe', 17792=>'fa-anchor',
 );
+$mk_kat_renk = array(2=>'c-orange',1=>'c-green',8=>'c-blue',4=>'c-sky',10=>'c-purple',5=>'c-teal',6=>'c-violet',7=>'c-pink');
+
+// Kart yardÄ±mcÄ±sÄ±
+function mk_kartlar($where_sql, $limit=5, $etiket='') {
+	global $baglan;
+	$q="select id from icerik where tip='ilan' and durum='1' $where_sql order by tarih_saat desc limit $limit";
+	$res=mysqli_query($baglan,$q);
+	$ids=array();
+	if ($res) { while ($r=mysqli_fetch_array($res)) { $ids[]=$r["id"]; } }
+	if (count($ids)==0) { return false; }
+	echo '<div class="mk-cards">';
+	foreach ($ids as $iid) {
+		$baslik=getir("icerik","baslik",$iid);
+		$link=link_getir($iid);
+		$resim=resim_getir("530_393",$iid);
+		$fiyat_str=fiyat($iid);
+		$bolge=il_getir($iid);
+		$favori=function_exists('favori_mi') ? (favori_mi($iid, isset($_SESSION["oturum_id"])?$_SESSION["oturum_id"]:null)?1:0) : 0;
+		$saat=getir("icerik","tarih_saat",$iid);
+		$gun=1;
+		if ($saat) { $fark=time()-strtotime($saat); if ($fark>0) { $gun=max(1,(int)round($fark/86400)); } }
+		$zaman=sprintf(_LANG('mk_days_ago'), $gun);
+		?>
+		<div class="mk-card">
+			<div class="img">
+				<a href="<?php echo $link; ?>"><img src="<?php echo $resim; ?>" alt="<?php echo htmlspecialchars($baslik,ENT_QUOTES,'UTF-8'); ?>" loading="lazy"></a>
+				<?php if ($etiket) { ?><span class="mk-badge <?php echo ($etiket=='jobs'?'mk-badge-jobs':''); ?>"><?php echo ($etiket=='jobs'?_LANG('mk_jobs'):_LANG('mk_for_sale')); ?></span><?php } ?>
+				<button type="button" class="fav <?php echo $favori?'on':''; ?>" data-id="<?php echo $iid; ?>" aria-label="Favori"><i class="ion-heart"></i></button>
+			</div>
+			<div class="body">
+				<h3 class="title"><a href="<?php echo $link; ?>"><?php echo htmlspecialchars($baslik,ENT_QUOTES,'UTF-8'); ?></a></h3>
+				<?php if ($fiyat_str) { ?><div class="price"><?php echo $fiyat_str; ?></div><?php } ?>
+				<div class="meta">
+					<span><i class="ion-clock"></i><?php echo $zaman; ?></span>
+					<?php if ($bolge) { ?><span><i class="ion-location"></i><?php echo htmlspecialchars($bolge,ENT_QUOTES,'UTF-8'); ?></span><?php } ?>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+	echo '</div>';
+	return true;
+}
 ?>
 
 <!-- HERO -->
 <section class="mk-hero">
-	<div class="container">
-		<h1><?php echo _LANG('mk_hero_title'); ?></h1>
-		<p><?php echo _LANG('mk_hero_desc'); ?></p>
-		<form method="post" action="" class="mk-hero-search">
-			<input type="hidden" name="mk_ara" value="1">
-			<div class="row">
-				<div class="col-md-5 col-sm-12">
-					<input type="text" name="s" class="form-control" placeholder="<?php echo _LANG('mk_hero_kw_ph'); ?>" value="">
+	<div class="mk-hero-bg" style="background-image:url('<?php echo tema_dizini(); ?>/img/hero-gambia.jpg');"></div>
+	<div class="container mk-hero-inner">
+		<div class="mk-hero-copy">
+			<span class="mk-eyebrow"><?php echo _LANG('mk_eyebrow'); ?></span>
+			<h1><span class="mk-h1-main"><?php echo _LANG('mk_hero_title_main'); ?></span><br><span class="mk-h1-accent"><?php echo _LANG('mk_hero_title_accent'); ?></span></h1>
+			<p><?php echo _LANG('mk_hero_desc'); ?></p>
+			<form method="post" action="" class="mk-hero-search">
+				<input type="hidden" name="mk_ara" value="1">
+				<div class="mk-search-fields">
+					<div class="mk-sf mk-sf-key">
+						<i class="ion-search"></i>
+						<input type="text" name="s" placeholder="<?php echo _LANG('mk_hero_kw_ph'); ?>" value="">
+					</div>
+					<div class="mk-sf mk-sf-select">
+						<i class="ion-grid"></i>
+						<select name="kat_id">
+							<option value=""><?php echo _LANG('mk_hero_all_cats'); ?></option>
+							<?php
+							$mk_kat_sql=mysqli_query($baglan,"select id,baslik,icerik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc");
+							while ($kd=mysqli_fetch_array($mk_kat_sql)) {
+								$kid=$kd["id"];
+								$kb=_DIL_BASLIK($kd["baslik"],$kid,"kategori");
+								echo "<option value='$kid'>".htmlspecialchars($kb,ENT_QUOTES,'UTF-8')."</option>";
+							}
+							?>
+						</select>
+					</div>
+					<div class="mk-sf mk-sf-select">
+						<i class="ion-location"></i>
+						<select name="il_id">
+							<option value=""><?php echo _LANG('mk_hero_all_regions'); ?></option>
+							<?php
+							$mk_il_sql=mysqli_query($baglan,"select id,il_adi from iller order by il_adi asc");
+							while ($idr=mysqli_fetch_array($mk_il_sql)) {
+								echo "<option value='".$idr["id"]."'>".htmlspecialchars($idr["il_adi"],ENT_QUOTES,'UTF-8')."</option>";
+							}
+							?>
+						</select>
+					</div>
+					<button type="submit" class="mk-search-btn"><i class="ion-search"></i><span><?php echo _LANG('mk_hero_search'); ?></span></button>
 				</div>
-				<div class="col-md-3 col-sm-6">
-					<select name="kat_id" class="form-control">
-						<option value=""><?php echo _LANG('mk_hero_all_cats'); ?></option>
-						<?php
-						$mk_kat_sql=mysqli_query($baglan,"select id,baslik,icerik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc");
-						while ($kd=mysqli_fetch_array($mk_kat_sql)) {
-							$kid=$kd["id"];
-							$kb=_DIL_BASLIK($kd["baslik"],$kid,"kategori");
-							echo "<option value='$kid'>".htmlspecialchars($kb,ENT_QUOTES,'UTF-8')."</option>";
-						}
-						?>
-					</select>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<select name="il_id" class="form-control">
-						<option value=""><?php echo _LANG('mk_hero_all_regions'); ?></option>
-						<?php
-						$mk_il_sql=mysqli_query($baglan,"select id,il_adi from iller order by il_adi asc");
-						while ($idr=mysqli_fetch_array($mk_il_sql)) {
-							echo "<option value='".$idr["id"]."'>".htmlspecialchars($idr["il_adi"],ENT_QUOTES,'UTF-8')."</option>";
-						}
-						?>
-					</select>
-				</div>
-				<div class="col-md-1 col-sm-12">
-					<button type="submit" class="mk-search-btn btn-block"><i class="ion-search"></i> <?php echo _LANG('mk_hero_search'); ?></button>
-				</div>
-			</div>
-		</form>
-		<div class="mk-hero-stats">
-			<div class="mk-hero-stat"><span class="n"><?php echo $mk_ilan_sayisi; ?></span><span class="l"><?php echo _LANG('mk_stat_ads'); ?></span></div>
-			<div class="mk-hero-stat"><span class="n"><?php echo $mk_uye_sayisi; ?></span><span class="l"><?php echo _LANG('mk_stat_members'); ?></span></div>
-			<div class="mk-hero-stat"><span class="n"><?php echo $mk_magaza_sayisi; ?></span><span class="l"><?php echo _LANG('mk_stat_stores'); ?></span></div>
+			</form>
+		</div>
+	</div>
+	<div class="mk-hero-stats-bar">
+		<div class="container">
+			<div class="mk-hs"><i class="ion-pricetags"></i><div><b><?php echo number_format($mk_ilan_sayisi); ?></b><span><?php echo _LANG('mk_stat_ads'); ?></span></div></div>
+			<div class="mk-hs"><i class="ion-person-stalker"></i><div><b><?php echo number_format($mk_uye_sayisi); ?></b><span><?php echo _LANG('mk_stat_members'); ?></span></div></div>
+			<div class="mk-hs"><i class="ion-shield-checkmark"></i><div><span><?php echo _LANG('mk_trust_safe'); ?></span></div></div>
+			<div class="mk-hs"><i class="ion-star"></i><div><span><?php echo _LANG('mk_trust_local'); ?></span></div></div>
 		</div>
 	</div>
 </section>
 
 <div class="container">
 
-	<!-- KATEGORILER -->
-	<section class="mk-section">
+	<!-- POPULAR CATEGORIES -->
+	<section class="mk-section" id="kategoriler">
 		<div class="mk-section-head">
-			<h2><?php echo _LANG('mk_sec_categories'); ?></h2>
+			<h2><i class="ion-grid mk-head-ic"></i> <?php echo _LANG('mk_sec_categories'); ?></h2>
+			<a href="<?php echo site_url(); ?>#kategoriler"><?php echo _LANG('mk_view_all_categories'); ?> <i class="ion-arrow-right-c"></i></a>
 		</div>
 		<div class="mk-cats">
 			<?php
 			$mk_kat2=mysqli_query($baglan,"select id,baslik,icerik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc");
 			$mk_cnt=0;
 			while ($kd=mysqli_fetch_array($mk_kat2)) {
-				if ($mk_cnt>=8) {break;}
-				$mk_cnt++;
+				if ($mk_cnt>=8) { break; }
 				$kid=$kd["id"];
 				$kb=_DIL_BASLIK($kd["baslik"],$kid,"kategori");
 				$kl=kategori_link_getir($kid);
 				$ki=isset($mk_kat_ikon[$kid])?$mk_kat_ikon[$kid]:'fa-folder-open';
+				$kc=isset($mk_kat_renk[$kid])?$mk_kat_renk[$kid]:('c-'.['orange','green','blue','sky','purple','teal','violet','pink'][$mk_cnt % 8]);
 				$ksayi=(int)$kd["icerik"];
+				$mk_cnt++;
 			?>
 			<a class="mk-cat" href="<?php echo $kl; ?>">
-				<span class="ic"><i class="fa <?php echo $ki; ?>"></i></span>
-				<span>
-					<div class="nm"><?php echo htmlspecialchars($kb,ENT_QUOTES,'UTF-8'); ?></div>
-					<div class="ct"><?php echo $ksayi; ?> <?php echo _LANG('mk_stat_ads'); ?></div>
-				</span>
+				<span class="mk-cat-ic <?php echo $kc; ?>"><i class="fa <?php echo $ki; ?>"></i></span>
+				<span class="mk-cat-nm"><?php echo htmlspecialchars($kb,ENT_QUOTES,'UTF-8'); ?></span>
+				<span class="mk-cat-ct"><?php echo number_format($ksayi); ?> <?php echo _LANG('mk_stat_ads'); ?></span>
 			</a>
 			<?php } ?>
 		</div>
 	</section>
 
-	<?php
-	// Yardimci: ilan kartlari render (belirli WHERE kosulu)
-	function mk_render_cards($where_sql, $limit=8) {
-		global $baglan;
-		$q="select id from icerik where tip='ilan' and durum='1' $where_sql order by tarih_saat desc limit $limit";
-		$res=mysqli_query($baglan,$q);
-		$ids=array();
-		if ($res) { while ($r=mysqli_fetch_array($res)) {$ids[]=$r["id"];} }
-		if (count($ids)==0) {return false;}
-		echo '<div class="mk-cards">';
-		foreach ($ids as $iid) {
-			$baslik=getir("icerik","baslik",$iid);
-			$link=link_getir($iid);
-			$resim=resim_getir("300_225",$iid);
-			$fiyat_str=fiyat($iid);
-			$bolge=il_getir($iid);
-			$favori=function_exists('favori_mi')? (favori_mi($iid, isset($_SESSION["oturum_id"])?$_SESSION["oturum_id"]:null)?1:0) : 0;
-			$saat=getir("icerik","tarih_saat",$iid);
-			?>
-			<div class="mk-card">
-				<div class="img">
-					<a href="<?php echo $link; ?>"><img src="<?php echo $resim; ?>" alt="<?php echo htmlspecialchars($baslik,ENT_QUOTES,'UTF-8'); ?>" loading="lazy"></a>
-					<button type="button" class="fav <?php echo $favori?'on':''; ?>" data-id="<?php echo $iid; ?>" aria-label="Favori"><i class="fa fa-heart"></i></button>
-				</div>
-				<div class="body">
-					<div class="title"><a href="<?php echo $link; ?>"><?php echo htmlspecialchars($baslik,ENT_QUOTES,'UTF-8'); ?></a></div>
-					<?php if ($fiyat_str) { ?><div class="price"><?php echo $fiyat_str; ?></div><?php } ?>
-					<div class="meta">
-						<span><i class="ion-location"></i><?php echo htmlspecialchars($bolge,ENT_QUOTES,'UTF-8'); ?></span>
-						<span><i class="ion-clock"></i><?php echo $saat?substr($saat,0,10):''; ?></span>
-					</div>
-				</div>
-			</div>
-			<?php
-		}
-		echo '</div>';
-		return true;
-	}
-	?>
-
-	<!-- VITRIN -->
-	<?php
-	$vitrin_ids_sql="SELECT i.id from icerik as i INNER JOIN dopingler as dp ON i.id=dp.ilan_id and dp.doping='anasayfa_vitrini' and dp.durum='1' and i.durum='1' order by dp.id desc limit 8";
-	$vr=mysqli_query($baglan,$vitrin_ids_sql);
-	$vids=array();
-	if ($vr) { while ($r=mysqli_fetch_array($vr)) {$vids[]=$r["id"];} }
-	if (count($vids)>0) {
-	?>
+	<!-- FEATURED: VEHICLES -->
+	<?php if ((int)mysqli_num_rows(mysqli_query($baglan,"select id from icerik where tip='ilan' and durum='1' and kategori like '%(2)%' limit 1"))>0) { ?>
 	<section class="mk-section">
 		<div class="mk-section-head">
-			<h2><?php echo _LANG('mk_sec_featured'); ?></h2>
-			<a href="<?php echo site_url(); ?>/vitrin-ilanlari"><?php echo _LANG('mk_view_all'); ?></a>
+			<h2><i class="fa fa-car mk-head-ic c-orange"></i> <?php echo _LANG('mk_sec_featured'); ?></h2>
+			<a href="<?php echo kategori_link_getir(2); ?>"><?php echo _LANG('mk_view_all'); ?> <?php echo _DIL_BASLIK(getir('kategoriler','baslik',2),2,'kategori'); ?> <i class="ion-arrow-right-c"></i></a>
 		</div>
-		<?php mk_render_cards(" and id in (".implode(",",$vids).")", 8); ?>
+		<?php mk_kartlar(" and kategori like '%(2)%'", 5, 'sale'); ?>
 	</section>
 	<?php } ?>
 
-	<!-- SON ILANLAR -->
+	<!-- FEATURED: PROPERTY -->
+	<?php if ((int)mysqli_num_rows(mysqli_query($baglan,"select id from icerik where tip='ilan' and durum='1' and kategori like '%(1)%' limit 1"))>0) { ?>
 	<section class="mk-section">
 		<div class="mk-section-head">
-			<h2><?php echo _LANG('mk_sec_latest'); ?></h2>
-			<a href="<?php echo site_url(); ?>"><?php echo _LANG('mk_view_all'); ?></a>
+			<h2><i class="fa fa-home mk-head-ic c-green"></i> <?php echo _LANG('mk_sec_featured'); ?></h2>
+			<a href="<?php echo kategori_link_getir(1); ?>"><?php echo _LANG('mk_view_all'); ?> <?php echo _DIL_BASLIK(getir('kategoriler','baslik',1),1,'kategori'); ?> <i class="ion-arrow-right-c"></i></a>
 		</div>
-		<?php mk_render_cards("", 8); ?>
-	</section>
-
-	<!-- VASITA -->
-	<?php
-	$vasita_where=" and kategori like '%(2)%'";
-	$vasita_ok = (mysqli_num_rows(mysqli_query($baglan,"select id from icerik where tip='ilan' and durum='1' and kategori like '%(2)%' limit 1"))>0);
-	if ($vasita_ok) { ?>
-	<section class="mk-section">
-		<div class="mk-section-head">
-			<h2><?php echo _LANG('mk_sec_vehicles'); ?></h2>
-			<a href="<?php echo kategori_link_getir(2); ?>"><?php echo _LANG('mk_view_all'); ?></a>
-		</div>
-		<?php mk_render_cards($vasita_where, 4); ?>
+		<?php mk_kartlar(" and kategori like '%(1)%'", 5, 'sale'); ?>
 	</section>
 	<?php } ?>
 
-	<!-- EMLAK -->
-	<?php
-	$emlak_where=" and kategori like '%(1)%'";
-	$emlak_ok = (mysqli_num_rows(mysqli_query($baglan,"select id from icerik where tip='ilan' and durum='1' and kategori like '%(1)%' limit 1"))>0);
-	if ($emlak_ok) { ?>
+	<!-- FEATURED: JOBS -->
+	<?php if ((int)mysqli_num_rows(mysqli_query($baglan,"select id from icerik where tip='ilan' and durum='1' and kategori like '%(8)%' limit 1"))>0) { ?>
 	<section class="mk-section">
 		<div class="mk-section-head">
-			<h2><?php echo _LANG('mk_sec_property'); ?></h2>
-			<a href="<?php echo kategori_link_getir(1); ?>"><?php echo _LANG('mk_view_all'); ?></a>
+			<h2><i class="fa fa-briefcase mk-head-ic c-blue"></i> <?php echo _LANG('mk_sec_featured'); ?></h2>
+			<a href="<?php echo kategori_link_getir(8); ?>"><?php echo _LANG('mk_view_all'); ?> <?php echo _DIL_BASLIK(getir('kategoriler','baslik',8),8,'kategori'); ?> <i class="ion-arrow-right-c"></i></a>
 		</div>
-		<?php mk_render_cards($emlak_where, 4); ?>
-	</section>
-	<?php } ?>
-
-	<!-- IS ILANLARI -->
-	<?php
-	$is_where=" and kategori like '%(8)%'";
-	$is_ok = (mysqli_num_rows(mysqli_query($baglan,"select id from icerik where tip='ilan' and durum='1' and kategori like '%(8)%' limit 1"))>0);
-	if ($is_ok) { ?>
-	<section class="mk-section">
-		<div class="mk-section-head">
-			<h2><?php echo _LANG('mk_sec_jobs'); ?></h2>
-			<a href="<?php echo kategori_link_getir(8); ?>"><?php echo _LANG('mk_view_all'); ?></a>
-		</div>
-		<?php mk_render_cards($is_where, 4); ?>
+		<?php mk_kartlar(" and kategori like '%(8)%'", 5, 'jobs'); ?>
 	</section>
 	<?php } ?>
 
 	<!-- CTA -->
-	<div class="mk-cta">
-		<div>
-			<h3><?php echo _LANG('mk_cta_title'); ?></h3>
-			<p><?php echo _LANG('mk_cta_desc'); ?></p>
+	<section class="mk-cta">
+		<div class="mk-cta-inner">
+			<div>
+				<h3><?php echo _LANG('mk_cta_title'); ?></h3>
+				<p><?php echo _LANG('mk_cta_desc'); ?></p>
+				<a class="mk-cta-btn" href="<?php echo ozel_url('ilan-ekle'); ?>"><?php echo _LANG('mk_cta_button'); ?> <i class="ion-arrow-right-c"></i></a>
+			</div>
+			<div class="mk-cta-badge"><?php echo _LANG('mk_cta_fast'); ?></div>
 		</div>
-		<a class="btn" href="<?php echo ozel_url('ilan-ekle'); ?>"><?php echo _LANG('mk_cta_button'); ?></a>
-	</div>
+	</section>
+
+	<?php
+	$mk_play=tema_ayar("play_store");
+	$mk_apple=tema_ayar("apple_store");
+	if ($mk_play or $mk_apple) {
+	?>
+	<!-- MOBILE APP -->
+	<section class="mk-app">
+		<div class="mk-app-txt">
+			<h3><?php echo _LANG('mk_app_title'); ?></h3>
+			<p><?php echo _LANG('mk_app_desc'); ?></p>
+			<div class="mk-app-badges">
+				<?php if ($mk_play) { ?><a href="<?php echo $mk_play; ?>" target="_blank" rel="noopener"><img src="<?php echo tema_dizini(); ?>/img/play-store.png" alt="Google Play"></a><?php } ?>
+				<?php if ($mk_apple) { ?><a href="<?php echo $mk_apple; ?>" target="_blank" rel="noopener"><img src="<?php echo tema_dizini(); ?>/img/apple-store.png" alt="App Store"></a><?php } ?>
+			</div>
+		</div>
+	</section>
+	<?php } ?>
 
 	<?php bilesen_alani("anasayfa"); ?>
 
@@ -445,7 +419,8 @@ $mk_kat_ikon = array(
 			xhr.onreadystatechange = function(){
 				if (xhr.readyState===4 && xhr.status===200) {
 					try {
-						var r = JSON.parse(xhr.responseText);
+						var txt = xhr.responseText.replace(/^\uFEFF/, '');
+						var r = JSON.parse(txt);
 						if (r.ok) {
 							if (r.state==='added') self.classList.add('on');
 							else self.classList.remove('on');

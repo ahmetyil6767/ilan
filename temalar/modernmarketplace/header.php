@@ -180,106 +180,70 @@ if (!$site_header) {
 }
 ?>
 <div class="mk-topbar visible-md visible-lg">
-	<div class="container">
+	<div class="container mk-topbar-inner">
 		<div class="mk-topbar-left">
-			<span class="mk-topbar-tag"><?php echo _LANG('mk_topbar_text'); ?></span>
-			<a href="mailto:info@jaayquick.com" class="mk-topbar-link"><i class="ion-help-buoy"></i> <?php echo _LANG('footer_whatsapp_support') ? _LANG('footer_whatsapp_support') : 'Destek'; ?></a>
-		</div>
-		<div class="mk-topbar-right">
 			<?php include_once('bilesen/ust-bar-araclar.php'); ?>
 		</div>
-	</div>
-</div>
-<header class="visible-md visible-lg <?php echo $site_header; ?>">
-<?php if (tema_ayar("en_ust_bolum")==1) { ?>
-<div id="en_ust">
-	<div class="container">
-		<ul class="ust_sol pull-left">
-		<?php menu_getir("ust_sol_menu",0,0); ?>
-		</ul>
-		<ul class="ust_sol pull-right">
-		<?php menu_getir("ust_sag_menu",0,0); ?>
-		</ul>
-	</div>
-</div>
-<?php } ?>
-<?php if ($sticky_header==1) { ?><div class="sticky"><?php } ?>
-<div class="container">
-	<div class="row">
-		<div class="col-md-9 col-sm-12 yukseklik_h">
-			<div class="logo noselect"><a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" alt="JaayQuick" class="img-responsive" /></a></div>
-		</div>
-		<div class="ortala_h">
-			<div class="col-md-14 col-md-offset-2 visible-md visible-lg">
-				<form action="" method="post">
-					<div class="input-group ara <?php if (@$_GET["s"]) {echo "focus";} ?>">
-					  <input type="text" id="ara_input" class="form-control" name="s" placeholder="<?php echo _LANG('search_placeholder'); ?>" value="<?php if (!strstr(browser_url(),"siparis")) {echo isset($_GET["s"]) ? htmlspecialchars($_GET["s"], ENT_QUOTES, 'UTF-8') : '';} ?>" required>
-					  <span class="input-group-btn">
-						<button class="btn btn-default" name="ara_buton" type="submit" value="<?php echo _LANG('search_button'); ?>" aria-label="<?php echo _LANG('title_search'); ?>"><i class="ion-search"></i></button>
-					  </span>
-					</div>
-				</form>
-			</div>
-			<div class="col-md-17 col-sm-30 text-right uyelik">
-				<?php 
-				global $baglan;
-				@$oturum_id=$_SESSION["oturum_id"];
-				if ($oturum_id) { 
-				$ad_soyad=getir("uyeler","ad_soyad",$oturum_id);
-				$uye_resim=uye_bilgi("profil_gorseli",$oturum_id);
-				$kucuk_resim=thumbnail_url("50_50",$uye_resim);
-				$profil_url=profil_link_getir($oturum_id);
-				$get_satis=mysqli_num_rows(mysqli_query($baglan,"select id from siparisler where tip='get' and satici_id='$oturum_id'"));
-				?>
-				<div class="btn-group">
-				<a class="btn btn-xs dropdown-toggle header_link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:14px;"><?php if ($uye_resim) { ?><img src="<?php echo $kucuk_resim; ?>" alt="<?php echo $ad_soyad; ?>" class="img-circle beyaz-shadow" style="width:32px;height:auto;margin:0 8px 0 0;"/><?php } ?><?php echo $ad_soyad; ?><span class="caret"></span></a>
-
-			  <ul class="dropdown-menu">
-				<li><a href="<?php echo $profil_url; ?>"><i class="ion-person"></i><?php echo _LANG('nav_my_profile'); ?></a></li>
-				<li><a href="<?php echo ozel_url("mesajlarim"); ?>"><i class="ion-paper-airplane"></i><?php echo _LANG("nav_my_messages"); ?></a></li>
-				<li><a href="<?php echo ozel_url("favori-ilanlarim"); ?>"><i class="ion-android-favorite"></i><?php echo _LANG("nav_my_favorites"); ?></a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="<?php echo ozel_url("ilanlarim"); ?>"><i class="ion-compose"></i><?php echo _LANG("nav_my_ads"); ?></a></li>
-				<li><a href="<?php echo ozel_url("magazalarim"); ?>"><i class="ion-bag"></i><?php echo _LANG("nav_my_stores"); ?></a></li>
-				<li><a href="<?php echo ozel_url("magazalarim"); ?>?islem=yeni"><i class="ion-plus"></i><?php echo _LANG("nav_create_store"); ?></a></li>
-				<li><a href="<?php echo ozel_url("siparislerim"); ?>"><i class="ion-cash"></i><?php echo _LANG("nav_my_orders"); ?></a></li>
-				<?php if ($get_satis>0) { ?><li><a href="<?php echo ozel_url("get-satislarim"); ?>"><i class="ion-android-cart"></i><?php echo _LANG("nav_sales"); ?></a></li><?php } ?>
-				<li role="separator" class="divider"></li>
-				<li><a href="<?php echo ozel_url("profil-guncelle"); ?>"><i class="ion-person"></i><?php echo _LANG("nav_update_profile"); ?></a></li>
-				<li role="separator" class="divider"></li>
-				<li><a href="<?php echo ozel_url("cikis-yap"); ?>"><i class="ion-power"></i><?php echo _LANG("nav_logout"); ?></a></li>
-			  </ul>
-			</div>
-				<?php
-				$okunmamis_mesaj_sql=mysqli_query($baglan,"select * from mesajlar where kime='$oturum_id' and okundu='0'");
-				$okunmamis_mesaj_sayisi=mysqli_num_rows($okunmamis_mesaj_sql);	
-				?>	
-				<a href="<?php echo ozel_url("mesajlarim"); ?>" class="btn btn-xs yeni_mesaj header_link"><i class="ion-chatbox" style="font-size:20px;"></i><?php if ($okunmamis_mesaj_sayisi>0) { ?><span class="badge"><?php echo $okunmamis_mesaj_sayisi; ?></span><?php } ?></a>	
-				<?php
-				$okunmamis_bildirim_sql=mysqli_query($baglan,"select * from bildirimler where uye_id='$oturum_id' and okundu='0' and tip='1'");
-				$okunmamis_bildirim_sayisi=mysqli_num_rows($okunmamis_bildirim_sql);	 
-				?>
-				<a href="<?php echo ozel_url("bildirimlerim"); ?>" class="btn btn-xs yeni_mesaj header_link"><i class="ion-ios-bell" style="font-size:20px;"></i><?php if ($okunmamis_bildirim_sayisi>0) { ?><span class="badge"><?php echo $okunmamis_bildirim_sayisi; ?></span><?php } ?></a>			
-				<a href="<?php echo ozel_url("ilan-ekle"); ?>" class="btn btn-primary btn-header"><?php echo _LANG("nav_free_post"); ?></a>			
-				<?php } else { ?>
-				<a href="<?php echo ozel_url("giris-yap"); ?>" class="btn header_link"><?php echo _LANG("nav_login"); ?></a>
-				<a href="<?php echo ozel_url("kayit-ol"); ?>" class="btn header_link"><?php echo _LANG("nav_register"); ?></a>
-				<a href="<?php echo ozel_url("giris-yap")."?r=ie"; ?>" class="btn btn-primary btn-header"><?php echo _LANG("nav_free_post"); ?></a>
-				<?php } ?>	
-				<a data-toggle="modal" data-target="#ara_modal" id="sm_ara_buton" class="btn btn-danger btn-header"><i class="ion-search mr0"></i></a>
-<?php include_once('bilesen/ust-bar-araclar.php'); ?>
-			</div>
+		<div class="mk-topbar-right">
+			<a href="mailto:info@jaayquick.com" class="mk-top-link"><i class="ion-help-buoy"></i> <?php echo _LANG('mk_help_support'); ?></a>
+			<span class="mk-top-sep"></span>
+			<?php $oturum_id = isset($_SESSION["oturum_id"]) ? $_SESSION["oturum_id"] : null; if ($oturum_id) { ?>
+			<a href="<?php echo profil_link_getir($oturum_id); ?>" class="mk-top-link"><i class="ion-person"></i> <?php echo htmlspecialchars(getir("uyeler","ad_soyad",$oturum_id),ENT_QUOTES,'UTF-8'); ?></a>
+			<a href="<?php echo ozel_url("cikis-yap"); ?>" class="mk-top-link" title="<?php echo _LANG("nav_logout"); ?>"><i class="ion-power"></i></a>
+			<?php } else { ?>
+			<a href="<?php echo ozel_url("giris-yap"); ?>" class="mk-top-link"><?php echo _LANG("nav_login"); ?> / <?php echo _LANG("nav_register"); ?></a>
+			<?php } ?>
+			<a href="<?php echo ozel_url("ilan-ekle"); ?>" class="mk-post-btn"><?php echo _LANG("nav_free_post"); ?></a>
 		</div>
 	</div>
 </div>
-<?php if ($sticky_header==1) { ?></div><?php } ?>
+<header class="visible-md visible-lg mk-header">
+	<div class="container mk-header-inner">
+		<div class="mk-logo">
+			<a href="<?php echo site_url(); ?>">
+				<?php
+				$mk_logo = tema_ayar("logo_dark");
+				if (!$mk_logo) { $mk_logo = "/uploads/images/jaayquick-logo-dark.png"; }
+				?>
+				<img src="<?php echo $mk_logo; ?>" alt="JaayQuick">
+				<span class="mk-logo-tag"><?php echo _LANG('mk_logo_tagline'); ?></span>
+			</a>
+		</div>
+		<nav class="mk-nav">
+			<a href="<?php echo site_url(); ?>" class="mk-nav-link<?php echo (browser_url()==site_url() ? ' active' : ''); ?>"><i class="ion-home"></i> <?php echo _LANG('mk_nav_home'); ?></a>
+			<div class="dropdown mk-nav-dropdown">
+				<a href="#" class="mk-nav-link dropdown-toggle" data-toggle="dropdown"><i class="ion-grid"></i> <?php echo _LANG('mk_nav_categories'); ?> <i class="ion-chevron-down mk-caret"></i></a>
+				<ul class="dropdown-menu mk-cat-dropdown">
+					<?php
+					$mk_nav_kat = mysqli_query($baglan,"select id,baslik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc limit 12");
+					while ($mk_nk = mysqli_fetch_array($mk_nav_kat)) {
+						$mk_nk_id = $mk_nk["id"];
+						$mk_nk_baslik = _DIL_BASLIK($mk_nk["baslik"], $mk_nk_id, "kategori");
+						echo '<li><a href="'.kategori_link_getir($mk_nk_id).'">'.htmlspecialchars($mk_nk_baslik,ENT_QUOTES,'UTF-8').'</a></li>';
+					}
+					?>
+				</ul>
+			</div>
+			<a href="<?php echo ozel_url("ilanlarim"); ?>" class="mk-nav-link"><i class="ion-compose"></i> <?php echo _LANG("nav_my_ads"); ?></a>
+			<a href="<?php echo ozel_url("mesajlarim"); ?>" class="mk-nav-link"><i class="ion-chatboxes"></i> <?php echo _LANG("nav_my_messages"); ?></a>
+			<a href="<?php echo ozel_url("favori-ilanlarim"); ?>" class="mk-nav-link"><i class="ion-heart"></i> <?php echo _LANG("nav_my_favorites"); ?></a>
+		</nav>
+		<div class="mk-header-actions">
+			<button type="button" class="mk-icon-btn" data-toggle="modal" data-target="#ara_modal" aria-label="<?php echo _LANG('title_search'); ?>"><i class="ion-search"></i></button>
+			<?php if ($oturum_id) {
+				$mk_msj = mysqli_num_rows(mysqli_query($baglan,"select id from mesajlar where kime='$oturum_id' and okundu='0'"));
+				$mk_bld = mysqli_num_rows(mysqli_query($baglan,"select id from bildirimler where uye_id='$oturum_id' and okundu='0' and tip='1'"));
+				$mk_resim = uye_bilgi("profil_gorseli",$oturum_id);
+			?>
+			<a href="<?php echo ozel_url("mesajlarim"); ?>" class="mk-icon-btn" aria-label="<?php echo _LANG('nav_my_messages'); ?>"><i class="ion-chatbox"></i><?php if ($mk_msj>0) { ?><span class="mk-badge"><?php echo $mk_msj; ?></span><?php } ?></a>
+			<a href="<?php echo ozel_url("bildirimlerim"); ?>" class="mk-icon-btn" aria-label="<?php echo _LANG('title_notifications'); ?>"><i class="ion-ios-bell"></i><?php if ($mk_bld>0) { ?><span class="mk-badge"><?php echo $mk_bld; ?></span><?php } ?></a>
+			<a href="<?php echo profil_link_getir($oturum_id); ?>" class="mk-avatar" aria-label="<?php echo _LANG('nav_my_profile'); ?>"><?php if ($mk_resim) { ?><img src="<?php echo thumbnail_url("50_50",$mk_resim); ?>" alt=""><?php } else { ?><i class="ion-person"></i><?php } ?></a>
+			<?php } else { ?>
+			<a href="<?php echo ozel_url("giris-yap"); ?>" class="mk-icon-btn" aria-label="<?php echo _LANG('nav_login'); ?>"><i class="ion-person"></i></a>
+			<?php } ?>
+		</div>
+	</div>
 </header>
-<div class="kampanya-band">
-	<div class="container">
-		<span class="kampanya-metin"><?php echo _LANG('campaign_band_text'); ?></span>
-		<a class="kampanya-btn" href="<?php echo ozel_url("ilan-ekle"); ?>"><?php echo _LANG('nav_free_post'); ?></a>
-	</div>
-</div>
 <div class="visible-sm visible-xs">
 	<div class="mobil_header">
 		<div class="container">
@@ -292,7 +256,10 @@ if (!$site_header) {
 					<a href="<?php echo site_url(); ?>"><img src="<?php $header_logo=tema_ayar("logo_light"); if (!$header_logo) { $header_logo=tema_ayar("logo"); } echo $header_logo; ?>" alt="JaayQuick" class="img-responsive img-center mobil_logo"/></a>
 				</div>
 				<div class="col-xs-8 text-center" <?php if ($mbmt) {echo "style='margin-top:".$mbmt."px';";} ?>>
-					<button type="button" class="pull-right" id="mmu_buton" href="#mmu_panel" aria-label="Account menu"><i class="ion-person-stalker mr0"></i></button>
+					<div class="mk-mob-actions">
+						<button type="button" data-toggle="modal" data-target="#ara_modal" aria-label="<?php echo _LANG('title_search'); ?>"><i class="ion-search mr0"></i></button>
+						<button type="button" id="mmu_buton" href="#mmu_panel" aria-label="Account menu"><i class="ion-person-stalker mr0"></i></button>
+					</div>
 				</div>
 			</div>
 		</div>
