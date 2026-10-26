@@ -120,3 +120,4 @@ npm-debug.log*
 .phpunit.result.cache
 /build/
 /dist/
+.aider*
