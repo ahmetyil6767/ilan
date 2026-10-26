@@ -3026,6 +3026,11 @@ $boyutlar = array_unique($boyutlar);
 						// Otomatik boyutlandırma (resize option varsa)
 						if (isset($secenekler['resize']) && is_array($secenekler['resize']) && count($secenekler['resize']) >= 2) {
 							$resim->bestFit($secenekler['resize'][0], $secenekler['resize'][1]);
+							// Beyaz zemin oluştur ve resmi ortala (aspectratio modu)
+							$zemin = new claviska\SimpleImage();
+							$zemin->fromNew($secenekler['resize'][0], $secenekler['resize'][1], '#fff');
+							$zemin->overlay($resim, 'center center');
+							$resim = $zemin;
 						}
 
 						if (@$filtre == 1) {
