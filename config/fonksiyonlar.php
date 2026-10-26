@@ -3023,6 +3023,11 @@ $boyutlar = array_unique($boyutlar);
 						$resim = new claviska\SimpleImage();
 						$resim->fromFile($hedef);
 
+						// Otomatik boyutlandırma (resize option varsa)
+						if (isset($secenekler['resize']) && is_array($secenekler['resize']) && count($secenekler['resize']) >= 2) {
+							$resim->bestFit($secenekler['resize'][0], $secenekler['resize'][1]);
+						}
+
 						if (@$filtre == 1) {
 							$resim->contrast(-8)->brighten(4);
 						}

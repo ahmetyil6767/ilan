@@ -87,6 +87,9 @@ if ($get_liste) {
 				if ($eb_gecerli_boyut) {
 					$secenekler["cikti"]=$eb_gecerli_boyut;
 				}
+				if (isset($x["resize"]) && is_array($x["resize"])) {
+					$secenekler["resize"]=$x["resize"];
+				}
 				$resim_dizisi=(isset($_FILES[$eb_name]) and is_array($_FILES[$eb_name])) ? $_FILES[$eb_name] : array();
 				$resim_adi=(isset($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 				if ($resim_adi!="") {

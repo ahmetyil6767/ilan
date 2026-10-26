@@ -620,7 +620,8 @@ function autonumeric() {
 $panel_icerik_sol_alt_kod[]=autonumeric();
 
 $slider_options=array(
-	array("tip"=>"upload","id"=>"gorsel","baslik"=>_LANG('p_gorsel'),"aciklama"=>"Görsel boyutları bileşen tercihlerine göre değişiklik göstermektedir. Bileşenler bölümünden tam boyutları kontrol edebilirsiniz."),
+	array("tip"=>"upload","id"=>"gorsel","baslik"=>_LANG('p_gorsel'),"aciklama"=>"Görsel boyutları bileşen tercihlerine göre değişiklik göstermektedir. Bileşenler bölümünden tam boyutları kontrol edebilirsiniz.","boyutlar"=>array("892_250","609_250"),"resize"=>array(892,250)),
+
 	array("tip"=>"text","id"=>"url","baslik"=>"URL"),
 );	
 $liste["slider"]=array("id"=>"slider","baslik"=>"Slider","baslik_cogul"=>_LANG('tx_slider_gorselleri'),"ayarlar"=>$slider_options);
