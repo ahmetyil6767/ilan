@@ -1,0 +1,21 @@
+Modern Marketplace Temasi
+========================
+
+Bu tema, JaayQuick ilan platformunun mevcut is mantigini koruyan,
+ikinci bir gorunum secenegidir. Tema dosyalari temalar/modernmarketplace
+klasorunde tutulur; eski tema temalar/jaayquick klasorunde korunur.
+
+Renkler:
+- Lacivert: #082B55
+- Koyu lacivert: #052044
+- Turuncu: #FF7900
+- Beyaz: #FFFFFF
+- Acik gri: #F5F7FA
+- Kenarlik: #DDE5EF
+- Metin: #102B4E
+
+Tema etkinlestirme: lpanel -> Temalar -> Modern Marketplace -> Bu Temayi Kullan.
+Geri donus: lpanel -> Temalar -> Standart Tema -> Bu Temayi Kullan.
+
+Tum ilanlar, uyeler, kategoriler, favoriler ve ayarlar ortaktir. Tema
+degisikligi yalnızca sunum katmanini (sablon ve CSS) degistirir.

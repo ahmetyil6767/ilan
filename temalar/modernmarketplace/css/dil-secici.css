@@ -1,0 +1,446 @@
+/*
+ * Ust bar araclari: ust serit + para birimi / dil secicileri.
+ *
+ * Masaustunde .sticky'nin ilk cocugu olan ".ust_serit" su parcalari
+ * tasir (bkz. header.php):
+ *   - solda hizli baglantilar (nasil calisir, guvenlik, yardim, iletisim)
+ *   - sagda konum (Gambiya bayragi + "The Gambia"), e-posta ve para
+ *     birimi + dil secicilerini tasiyan yuvarlak "bar_araclar" kutusu
+ *
+ * Kutu buzlu cam gorunumundedir: yarim saydam beyaz zemin + ince
+ * parlak kenar; lacivert zemin uzerinde butonlari yumusakca ayirir.
+ * Dropdown acilinca beyaz menu kutuya asili kalir; aktif secim yesil
+ * tik ve vurgulu satir ile isaretlenir.
+ *
+ * FontAwesome 4.7'de fa-usd/fa-eur/fa-gbp olmadigi icin birim
+ * isaretleri sembol olarak ($, €, £, D) basilir.
+ *
+ * Mobilde serit yoktur; seciciler .mobil_araclar_satir icinde ayri
+ * bir satirda gorunur.
+ */
+
+/* ------------------------------------------------------------ kutu */
+.bar_araclar {
+	position: absolute;
+	top: 16px;
+	right: 0;
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	padding: 3px;
+	background: rgba(255, 255, 255, .10);
+	border: 1px solid rgba(255, 255, 255, .18);
+	border-radius: 24px;
+	box-shadow: 0 1px 3px rgba(4, 18, 40, .18), inset 0 1px 0 rgba(255, 255, 255, .10);
+	z-index: 30;
+}
+
+/* ------------------------------------------------------------ ust serit
+ *
+ * Masaustunde serit, .sticky katmaninin ILK cocugu olarak akista durur
+ * (header.php -> .ust_serit): solda hizli baglantilar, sagda konum +
+ * e-posta ve secici kutusu. Kutu artik absolute degil; boylece logolu
+ * satirla cakismasi mumkun degil. Serit .sticky icinde oldugu icin
+ * jquery.sticky.js header'i yapistirdiginda birlikte gelir.
+ *
+ * Arka planina header lacivertinin uzerine ince bir koyuluk serpilir
+ * ve altina kil kadar parlak bir cizgi konur; serit boylece logolu
+ * satirdan zarifce ayrilir.
+ */
+header .ust_serit {
+	background: rgba(0, 0, 0, .18);
+	border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+header .ust_serit_ic {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	min-height: 40px;
+}
+
+header .ust_serit .bar_araclar {
+	position: relative;
+	top: auto;
+	right: auto;
+	z-index: 40;
+}
+
+/* Sol: hizli baglantilar — nokta ayracli ince linkler */
+header ul.ust_serit_linkler {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+header ul.ust_serit_linkler li {
+	display: flex;
+	align-items: center;
+}
+
+header ul.ust_serit_linkler li + li:before {
+	content: "";
+	display: block;
+	width: 3px;
+	height: 3px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .32);
+	margin: 0 12px;
+}
+
+header ul.ust_serit_linkler li a {
+	color: rgba(255, 255, 255, .78);
+	font-size: 12.5px;
+	font-weight: 500;
+	letter-spacing: .01em;
+	line-height: 1.2;
+	padding: 3px 0;
+	transition: color .15s ease;
+}
+
+header ul.ust_serit_linkler li a:hover,
+header ul.ust_serit_linkler li a:focus {
+	color: #fff;
+}
+
+/* Sag: konum, e-posta ve secici kutusu */
+header .ust_serit_sag {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex: 0 0 auto;
+}
+
+header .ust_serit_konum {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: rgba(255, 255, 255, .85);
+	font-size: 12.5px;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+header .ust_konum_bayrak {
+	width: 18px;
+	height: 12px;
+	border-radius: 2px;
+	display: block;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, .28);
+}
+
+header .ust_serit_eposta {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: rgba(255, 255, 255, .72);
+	font-size: 12.5px;
+	font-weight: 500;
+	text-decoration: none;
+	white-space: nowrap;
+	transition: color .15s ease;
+}
+
+header .ust_serit_eposta i {
+	font-size: 13px;
+	opacity: .85;
+}
+
+header .ust_serit_eposta:hover,
+header .ust_serit_eposta:focus {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* Ince ayrac */
+.bar_araclar .bar_ayrac {
+	display: block;
+	width: 1px;
+	height: 18px;
+	background: rgba(255, 255, 255, .20);
+	margin: 0 2px;
+}
+
+.bar_araclar .birim_secici,
+.bar_araclar .dil_secici { position: relative; display: inline-block; }
+
+/* ------------------------------------------------------------ buton */
+.bar_araclar .arac_buton {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: transparent;
+	border: 0;
+	color: rgba(255, 255, 255, .92);
+	border-radius: 20px;
+	padding: 6px 11px;
+	font-family: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	letter-spacing: .02em;
+	line-height: 1;
+	cursor: pointer;
+	transition: background .18s ease, color .18s ease, transform .12s ease;
+	white-space: nowrap;
+	outline: 0;
+}
+.bar_araclar .arac_buton:hover,
+.bar_araclar .arac_buton:focus {
+	background: rgba(255, 255, 255, .22);
+	color: #fff;
+	outline: 0;
+}
+/* Menu acikken buton secili kalsin */
+.bar_araclar .birim_secici.open > .arac_buton,
+.bar_araclar .dil_secici.open > .arac_buton {
+	background: rgba(255, 255, 255, .22);
+	color: #fff;
+}
+.bar_araclar .arac_buton:active { transform: translateY(1px); }
+
+/* Birim sembolu ve bayrak */
+.arac_simge {
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1;
+	opacity: .95;
+	min-width: 11px;
+	text-align: center;
+}
+.arac_bayrak {
+	display: inline-flex;
+	align-items: center;
+	line-height: 1;
+}
+/* SVG bayrak: 20x13, kenari yuvarlatilmis, ince kenar */
+.bayrak_svg {
+	width: 20px;
+	height: 13px;
+	border-radius: 2px;
+	display: block;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, .35);
+}
+
+/* Ok */
+.arac_ok {
+	opacity: .55;
+	flex: 0 0 auto;
+	transition: transform .18s ease;
+}
+.bar_araclar .arac_buton:hover .arac_ok { opacity: .9; }
+
+/* ------------------------------------------------------------ dropdown */
+.bar_araclar .dropdown-menu.arac_menu {
+	min-width: 178px;
+	margin-top: 8px;
+	padding: 5px;
+	border: 0;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 12px 34px rgba(4, 18, 40, .28), 0 2px 8px rgba(4, 18, 40, .12);
+	left: auto;
+	right: 0;
+	opacity: 0;
+	transform: translateY(-6px);
+	transition: opacity .16s ease, transform .16s ease;
+	overflow: hidden;
+}
+.bar_araclar .open > .dropdown-menu.arac_menu {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.arac_menu li a {
+	position: relative;
+	display: flex !important;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 12px;
+	margin: 1px 0;
+	border-radius: 7px;
+	color: #1e293b;
+	font-size: 13.5px;
+	line-height: 1.3;
+	cursor: pointer;
+	transition: background .13s ease, color .13s ease;
+}
+.arac_menu li a:hover,
+.arac_menu li a:focus { background: #eef4fb; color: #0b2b5b; text-decoration: none; }
+
+/* Aktif secim: kapali renk zemin yerine vurgulu kenar cizgisi */
+.arac_menu li a.aktif {
+	background: #0b2b5b;
+	color: #fff;
+	font-weight: 600;
+}
+.arac_menu li a.aktif:hover { background: #061a38; color: #fff; }
+
+/* Menu icerik ogeleri */
+.arac_menu_simge {
+	flex: 0 0 15px;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	color: #0b2b5b;
+}
+.arac_menu li a.aktif .arac_menu_simge { color: #fff; }
+
+.arac_menu_bayrak {
+	flex: 0 0 22px;
+	display: inline-flex;
+	align-items: center;
+	line-height: 1;
+}
+.arac_menu_bayrak .bayrak_svg {
+	width: 22px;
+	height: 15px;
+	box-shadow: 0 0 0 1px rgba(15, 23, 42, .18);
+}
+
+.arac_menu_ad {
+	flex: 1;
+	white-space: nowrap;
+}
+
+.arac_menu_kod {
+	flex: 0 0 auto;
+	font-size: 10.5px;
+	font-weight: 700;
+	letter-spacing: .05em;
+	color: #64748b;
+	background: #f1f5f9;
+	border-radius: 4px;
+	padding: 2px 5px;
+}
+.arac_menu li a.aktif .arac_menu_kod { color: #0b2b5b; background: #fff; }
+
+/* Yesil tik */
+.arac_menu_tick {
+	flex: 0 0 12px;
+	color: #22c55e;
+}
+.arac_menu li a.aktif .arac_menu_tick { color: #4ade80; }
+
+/* ------------------------------------------------------------ RTL */
+.bar_araclar .dil_secici_rtl .arac_ok { transform: scaleX(-1); }
+.bar_araclar .dil_secici_rtl + .arac_menu,
+.bar_araclar .dil_secici_rtl .dropdown-menu.arac_menu { right: auto; left: 0; }
+
+/* ------------------------------------------------------------ dar ekran
+ *
+ * Once "991px altinda tamamen gizle" kurali vardi; bu yuzden dar
+ * bir masaustu penceresinde ve her telefonda seciciler HIC gorunmuyordu.
+ * Artilde gizlenmiyor, sadece daralıyor: ikon + kod kalir, isim duser.
+ */
+@media (max-width: 1199px) {
+	.bar_araclar { top: 12px; }
+	.bar_araclar .arac_buton { padding: 5px 9px; gap: 4px; }
+	.bar_araclar .arac_menu_ad { font-size: 13px; }
+	header .ust_serit_ic { gap: 10px; }
+	header ul.ust_serit_linkler li a { font-size: 12px; }
+	header ul.ust_serit_linkler li + li:before { margin: 0 9px; }
+	header .ust_serit_eposta { display: none; }
+}
+
+/* ------------------------------------------------------------ mobil satir
+ *
+ * header.php'de .mobil_araclar_satir icinde tek bir satir daha var
+ * (profil butonunun altinda). Masaustunda gizli, telefonda gorunur.
+ * Taban kural medya sorgusundan ONCE gelmeli: sonra gelirse
+ * (onceki denemede oldugu gibi) gizleme kurali gosterimi yener.
+ */
+.mobil_araclar_satir {
+	display: none;
+	text-align: center;
+	margin-top: 8px;
+}
+.mobil_araclar_satir .dropdown-menu.arac_menu {
+	left: 50% !important;
+	right: auto !important;
+	transform: translateX(-50%) translateY(-6px);
+}
+.mobil_araclar_satir .birim_secici.open .dropdown-menu.arac_menu,
+.mobil_araclar_satir .dil_secici.open .dropdown-menu.arac_menu {
+	transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 991px) {
+	/*
+	 * Masaustu barindaki .bar_araclar absolute konumlanir ve 991px
+	 * altinda header "visible-md visible-lg" ile zaten gizlenir.
+	 * Mobilde seciciler ayri bir satirda durdugu icin absolute
+	 * olmaktan cikip akisa doner.
+	 */
+	.mobil_araclar_satir { display: block; }
+	.mobil_araclar_satir .bar_araclar {
+		position: static;
+		display: inline-flex;
+		gap: 0;
+		padding: 2px;
+	}
+	.bar_araclar .arac_buton { padding: 5px 8px; font-size: 12px; }
+	.bar_araclar .bayrak_svg { width: 17px; height: 11px; }
+	.bar_araclar .arac_simge { font-size: 12px; min-width: 9px; }
+	.bar_araclar .bar_ayrac { height: 15px; }
+}
+
+/* ------------------------------------------------------------ eski dil secici (header disinda baska yerde kullanilirsa)
+ * dil-secici.php eski class isimlerini de destekler. */
+.dil_secici { position: relative; display: inline-block; }
+.dil_secici_buton {
+	background: transparent;
+	border: 1px solid rgba(255, 255, 255, .28);
+	color: #fff;
+	border-radius: 3px;
+	padding: 5px 10px;
+	font-size: 13px;
+	line-height: 1.4;
+	transition: .15s;
+}
+.dil_secici_buton:hover, .dil_secici_buton:focus {
+	background: rgba(255, 255, 255, .12);
+	border-color: rgba(255, 255, 255, .5);
+	outline: 0;
+}
+.dil_secici_buton .dil_secici_ad { margin: 0 5px; font-weight: 600; }
+.dil_secici_buton .ion-earth { font-size: 14px; margin-right: 3px; }
+
+.dil_secici_menu {
+	min-width: 150px;
+	padding: 4px 0;
+	margin-top: 5px;
+	border-radius: 4px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, .18);
+}
+.dil_secici_menu li a {
+	padding: 7px 14px;
+	color: #0f172a;
+	font-size: 13px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.dil_secici_menu li a:hover, .dil_secici_menu li a:focus { background: #f2f6fc; color: #0b2b5b; }
+.dil_secici_menu li a.aktif { background: #0b2b5b; color: #fff; font-weight: 600; }
+.dil_secici_menu li a.aktif:hover { background: #061a38; color: #fff; }
+
+.dil_bayrak {
+	display: inline-block;
+	min-width: 26px;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .03em;
+	color: #0b2b5b;
+	background: #eaf0f9;
+	border-radius: 3px;
+	padding: 1px 4px;
+}
+.dil_secici_menu li a.aktif .dil_bayrak { color: #0b2b5b; background: #fff; }
+
+.dil_secici_rtl .dil_secici_buton .ion-earth { margin-right: 0; margin-left: 4px; }
+.dil_secici_rtl .dil_secici_menu li a { justify-content: flex-start; }

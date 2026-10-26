@@ -1,0 +1,20 @@
+{
+  "brand": "jaayquick.com",
+  "colors": {
+    "navy_primary": "#0B2545",
+    "quick_green": "#7BB31A",
+    "gambia_red": "#DF1623",
+    "gambia_blue": "#0047AB",
+    "gambia_green": "#3A7D44",
+    "transit_orange": "#F28C28",
+    "pure_white": "#FFFFFF"
+  },
+  "fonts": {
+    "primary": "Montserrat, sans-serif",
+    "secondary": "Poppins, sans-serif"
+  },
+  "slogans": [
+    "The Gambia's Fast Marketplace",
+    "Buy & Sell Instantly"
+  ]
+}

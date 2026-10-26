@@ -1,0 +1,65 @@
+/*
+ * Arapça (RTL) duzeltmeleri.
+ * Yalnizca lang=ar oldugunda yuklenir (header.php).
+ *
+ * Tema Bootstrap 3 uzerine kurulu ve taban olarak soldan saga
+ * tasarlanmis: float'lar, margin/padding'ler ve ikon yonleri hep LTR
+ * varsayiyor. Burada genel kurallarla duzeltilir; bilesen bazli ozel
+ * bir duzeltme gerekirse .ozel sinifiyla eklenmeli.
+ */
+
+/* --- yazi hizalamasi --- */
+body, .container, p, li, td, th, label, h1, h2, h3, h4, h5, h6,
+input, select, textarea, button, .panel, .panel-body, .panel-heading {
+	text-align: right;
+}
+input[type=checkbox], input[type=radio] {margin-right: 6px; margin-left: 0;}
+
+/* --- bootstrap yon yardimcilari --- */
+.pull-right {float: left !important;}
+.pull-left  {float: right !important;}
+.text-right  {text-align: left !important;}
+.text-left   {text-align: right !important;}
+.text-center {text-align: center !important;}
+
+/* --- bootstrap bosluk yardimcilari (yalnizca yatay) --- */
+.ml-auto {margin-left: 0 !important; margin-right: auto !important;}
+.mr-auto {margin-right: 0 !important; margin-left: auto !important;}
+.pull-right + .mr0 {margin-right: 0 !important;}
+
+/* --- ikon yonleri --- */
+.caret, .ion-arrow-right-b, .ion-arrow-left-b,
+.ion-chevron-right, .ion-chevron-left,
+.fa-arrow-right, .fa-arrow-left, .fa-chevron-right, .fa-chevron-left {
+	transform: scaleX(-1);
+	display: inline-block;
+}
+
+/* --- listeler --- */
+ul, ol {padding-right: 20px; padding-left: 0;}
+.ana_menu, .dropdown-menu {text-align: right;}
+
+/* --- formlar --- */
+.form-horizontal .control-label {text-align: right;}
+.input-group-addon:first-child {border-right: 0; border-left: 1px solid #ccc; border-radius: 0 4px 4px 0;}
+.input-group-addon:last-child  {border-left: 0; border-right: 1px solid #ccc; border-radius: 4px 0 0 4px;}
+.input-group .form-control:first-child {border-radius: 0 4px 4px 0;}
+.input-group .form-control:last-child  {border-radius: 4px 0 0 4px;}
+
+/* --- tablo sutunlari --- */
+.table th, .table td {text-align: right;}
+
+/* --- gorunum yardimcilari --- */
+.hidden-xs, .visible-sm, .visible-md, .visible-lg {}
+
+/* --- baslik/menu bosluklari --- */
+.header_link, .menu li a {padding-left: 6px; padding-right: 6px;}
+
+/* --- lpanel ve panel ici kenar bosluklari --- */
+.col-md-*, .col-sm-*, .col-xs-*, .col-lg-* {}
+
+/* --- dropdown hizalamasi --- */
+.dropdown-menu {right: 0; left: auto;}
+
+/* --- arapca icin sayisal biçim --- */
+[dir=rtl] .fiyat, [dir=rtl] .tablo_tl {direction: ltr; text-align: right;}

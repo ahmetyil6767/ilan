@@ -33,6 +33,25 @@ if ($islem=="etkinlestir") {
 				}
 			}
 		}
+		// Yeni temada eksik ayarları (logo, iletişim, kur, footer başlıkları vb.) eski temadan kopyala
+		if ($tema!=$mevcut_tema and $mevcut_tema) {
+			$prefix_old=$mevcut_tema."-";
+			$prefix_new=$tema."-";
+			$copy_q=mysqli_prepare($baglan,"select anahtar,deger from ayarlar where anahtar like ?");
+			$like_old=$prefix_old."%";
+			mysqli_stmt_bind_param($copy_q,"s",$like_old);
+			mysqli_stmt_execute($copy_q);
+			$copy_res=mysqli_stmt_get_result($copy_q);
+			while ($crow=mysqli_fetch_array($copy_res)) {
+				$old_key=$crow["anahtar"];
+				$suffix=substr($old_key,strlen($prefix_old));
+				$new_key=$prefix_new.$suffix;
+				$exists=mysqli_num_rows(mysqli_query($baglan,"select id from ayarlar where anahtar='".mysqli_real_escape_string($baglan,$new_key)."'"));
+				if ($exists==0) {
+					ayar_guncelle($new_key,$crow["deger"]);
+				}
+			}
+		}
 		yonlendir("temalar.php");		
 	}
 }
@@ -282,6 +301,41 @@ $panel_sablon=ayar_getir("panel_sablon");
 				echo "</div>"; } else { if ($islem!="ayar") { ?>
 				<h3 class="pull-left bolum-baslik">TEMALAR</h3>
 				<div class="clearfix mb20"></div>
+				<div class="row mk-theme-cards" style="margin-bottom:20px;">
+				<?php
+				// Tema kartlari (onizleme + aktif rozet)
+				rewinddir($dizini_ac);
+				while (($tc = readdir($dizini_ac)) !== false) {
+					if ($tc=="." or $tc==".." or $tc=="index.html") { continue; }
+					if (!file_exists("../$temalar_dizini/$tc/info.php")) { continue; }
+					include("../$temalar_dizini/$tc/info.php");
+					$tc_baslik=$bilgi["baslik"];
+					$tc_aciklama=$bilgi["aciklama"];
+					$tc_aktif = (ayar_getir("tema")==$tc);
+					$tc_onizleme="../$temalar_dizini/$tc/img/onizleme.png";
+					$tc_onizleme_url = file_exists("../$temalar_dizini/$tc/img/onizleme.png") ? (site_url()."/$temalar_dizini/$tc/img/onizleme.png") : "";
+				?>
+					<div class="col-md-25 col-sm-25 col-xs-50" style="margin-bottom:15px;">
+						<div class="panel panel-default" style="<?php echo $tc_aktif?'border:2px solid #FF7900;':''; ?>">
+							<div class="panel-body" style="padding:10px;">
+								<?php if ($tc_onizleme_url) { ?>
+								<img src="<?php echo $tc_onizleme_url; ?>" alt="<?php echo $tc_baslik; ?>" class="img-responsive" style="border:1px solid #DDE5EF;border-radius:6px;margin-bottom:8px;">
+								<?php } else { ?>
+								<div style="height:120px;background:#F5F7FA;border:1px solid #DDE5EF;border-radius:6px;margin-bottom:8px;display:flex;align-items:center;justify-content:center;color:#7a8aa6;"><?php echo _LANG('mk_no_preview'); ?></div>
+								<?php } ?>
+								<h4 style="margin:0 0 4px;"><?php echo $tc_baslik; ?> <?php if ($tc_aktif) { ?><span class="label label-success"><?php echo _LANG('mk_active_theme'); ?></span><?php } ?></h4>
+								<p style="font-size:12px;color:#7a8aa6;margin:0 0 8px;"><?php echo $tc_aciklama; ?></p>
+								<?php if (!$tc_aktif) { ?>
+								<a href="temalar.php?islem=etkinlestir&tema=<?php echo $tc; ?>" class="btn btn-xs btn-primary"><?php echo _LANG("p_etkinlestir"); ?></a>
+								<?php } else { ?>
+								<a href="temalar.php?tema=<?php echo $tc; ?>&islem=ayar" class="btn btn-xs btn-success"><i class="fa fa-cogs"></i> <?php echo _LANG('p_ayarlar'); ?></a>
+								<?php } ?>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				</div>
+				<?php rewinddir($dizini_ac); ?>
 				<div class="table-responsive">
 					<table id="listele_table" class="table table-bordered table-hover" data-order='[[ 0, "asc" ]]' data-page-length='15'>
 						<thead>

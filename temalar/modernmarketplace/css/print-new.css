@@ -1,0 +1,24 @@
+body {width:980px;margin:0 !important;padding:0 !important;-webkit-print-color-adjust: exact !important;}
+#arsiv {padding:15px;}
+#arsiv .baslik {border-bottom:1px solid #ccc;}
+#arsiv .baslik h1 {font-size:30px;margin:0;padding:0;margin-bottom:8px;font-weight:700;}
+#arsiv .baslik .satir {font-size:24px;margin-bottom:8px;}
+#arsiv #ust {margin-bottom:20px;}
+#arsiv #sol {float:left;width:530px;margin-right:20px;}
+#arsiv #sag {float:right;width:400px;}
+ul.adres {list-style:none;margin:0;padding:0;display:block;clear:both;font-size:18px;}
+ul.adres li {float:left;margin-right:16px;color:#777;}
+ul.adres li:after {position:relative;content:"/";right:-8px;top:0;color:#aaa;}
+ul.adres li:last-child:after {display:none;}
+.clear {clear:both;}
+.fiyat {margin-top:4px !important;font-size:24px;font-weight:700 !important;}
+img {max-width:100%;height:auto;}
+.mb15 {margin-bottom:15px;}
+table {font-size:20px;}
+table td, table th {border:0 !important;padding:4px 0 !important;font-weight:400 !important;}
+table th {font-weight:700 !important;}
+.aciklama {font-size:16px;border:1px dashed #ccc;padding:20px;margin-top:10px;text-align:left !important;}
+.iletisim {font-size:16px;border:1px dashed #ccc;padding:15px;}
+.iletisim .ad_soyad {font-size:22px;background:#eee;border-bottom:1px solid #ccc;padding:5px 10px;margin-bottom:10px;}
+.iletisim .satir {font-weight:600;}
+.header {padding:20px 15px;font-size:44px;font-weight:bold;margin-bottom:25px;text-align:center;}

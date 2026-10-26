@@ -26,15 +26,15 @@ $resim=resim_getir("530_393");
 $kategoriler=kategori_getir($id,"kategori");
 //print_r($kategoriler);
 $kat1=$kategoriler[0];
-if (kat1) {
+if ($kat1) {
 	$kat1_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat1), $kat1, "kategori");
 }
 $kat2=$kategoriler[1];
-if (kat2) {
+if ($kat2) {
 	$kat2_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat2), $kat2, "kategori");
 }
 $kat3=$kategoriler[2];
-if (kat3) {
+if ($kat3) {
 	$kat3_baslik=_DIL_BASLIK(getir("kategoriler","baslik",$kat3), $kat3, "kategori");
 }
 $kat4=$kategoriler[3];
