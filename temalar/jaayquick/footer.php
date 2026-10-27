@@ -75,11 +75,6 @@ $footer_5_baslik=tema_ayar("footer_5_baslik");
 
 <?php echo tema_ayar("footer_metni"); ?>
 
-<?php $online_odeme=tema_ayar("online_odeme"); if ($online_odeme=="aktif" and tema_ayar("odeme_sistemi")=="iyzico") { ?>
-<img src="<?php echo tema_dizini(); ?>/img/logo-pack.png" alt="" class="img-responsive" style="margin-left:auto;margin-right:auto;margin-top:20px;" />
-<?php } ?>
-
-
 </div>
 </footer>
 <?php if ($oturum_id and tema_ayar("mobil_fixed_ekle_buton")==1) { ?>
