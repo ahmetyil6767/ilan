@@ -149,11 +149,11 @@ body.mk-theme img { max-width: 100%; }
 
 /* ===== FOOTER ===== */
 .mk-theme footer { background: var(--mk-navy-dark); color: #C7D2E2; padding: 12px 0 8px; margin-top: 10px; }
-.mk-theme footer .baslik { color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.mk-theme footer .baslik { color: #fff; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
 .mk-theme footer a { color: #C7D2E2; }
 .mk-theme footer a:hover { color: var(--mk-orange); text-decoration: none; }
 .mk-theme footer ul { list-style: none; padding: 0; margin: 0; }
-.mk-theme footer ul li { margin-bottom: 8px; font-size: 13px; }
+.mk-theme footer ul li { margin-bottom: 2px; font-size: 12px; }
 .mk-theme footer .buton { background: rgba(255,255,255,.07); color: #fff; border-radius: 8px; padding: 4px 8px; display: inline-block; margin: 2px 0; font-size: 12px; }
 .mk-theme footer .iletisim .buton:hover { background: var(--mk-orange); }
 .mk-theme footer .iletisim { border-top: 1px solid rgba(255,255,255,.12); margin-top: 2px; padding-top: 2px; }

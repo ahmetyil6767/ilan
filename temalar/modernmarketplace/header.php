@@ -19,7 +19,7 @@ require_once ROOT_DIR . '/config/seo.php';
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/js/trumbowyg/ui/trumbowyg.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/sidr.bare.min.css"/>
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/style.css?v=20261036"/>
-<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/theme-modern.css?v=20261026"/>
+<link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/theme-modern.css?v=20261027b"/>
 <?php 
 // Load RTL CSS for Arabic language
 if (_DIL_RTL_MI()) {
