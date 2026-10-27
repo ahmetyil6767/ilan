@@ -164,7 +164,7 @@ body.mk-theme img { max-width: 100%; }
 .mk-fb-sep { color: #54677F; }
 
 /* Kolonlar: kolonlar arası ince ışık çizgisi */
-.mk-footer-col { border-inline-start: 1px solid rgba(255,255,255,.07); padding-inline-start: 22px; min-width: 0; }
+.mk-footer-col { border-inline-start: 1px solid rgba(216,178,110,.15); padding-inline-start: 22px; min-width: 0; }
 
 /* Kolon başlığı: altın/bronz bar */
 .mk-fc .baslik { display: inline-block; padding: 7px 22px; margin: 0 0 14px; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .10em; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.55); background: linear-gradient(180deg, #8A5C28 0%, #4A3011 60%, #2A1909 100%); border: 1px solid rgba(226,178,105,.75); border-radius: 6px; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.55), 0 4px 12px rgba(0,0,0,.45), 0 8px 18px rgba(201,141,66,.12); }
