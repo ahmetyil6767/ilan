@@ -158,7 +158,9 @@ body.mk-theme img { max-width: 100%; }
 .mk-theme footer .iletisim .buton:hover { background: var(--mk-orange); }
 .mk-theme footer .iletisim { border-top: 1px solid rgba(255,255,255,.12); margin-top: 1px; padding-top: 1px; }
 
-.mk-footer-brand { color: #C7D2E2; margin-bottom: 2px; }
+.mk-footer-top { display: flex; align-items: flex-start; gap: 24px; padding-bottom: 4px; }
+.mk-footer-brand { color: #C7D2E2; margin-bottom: 0; flex: 0 0 auto; min-width: 120px; }
+.mk-footer-cols { flex: 1 1 auto; }
 .mk-footer-brand img { max-height: 20px; margin-bottom: 1px; }
 .mk-footer-brand .tagline { font-size: 9px; color: #9FB0C9; margin-bottom: 0; }
 .mk-footer-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 2px; padding-top: 2px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 10px; color: #9FB0C9; flex-wrap: wrap; }

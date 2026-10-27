@@ -6,70 +6,71 @@ if ($footer_genis) {echo "<div class='container' style='margin-top:15px;'>$foote
 </main>
 <footer>
 <div class="container">
-<div class="mk-footer-brand">
-	<?php $mk_f_logo = tema_ayar("logo_light"); if (!$mk_f_logo) { $mk_f_logo = "/uploads/images/jaayquick-logo-light.png"; } ?>
-	<a href="<?php echo site_url(); ?>"><img src="<?php echo $mk_f_logo; ?>" alt="JaayQuick"></a>
-	<div class="tagline"><?php echo _LANG('mk_logo_tagline'); ?></div>
-</div>
-<div class="mk-footer-cols">
-<?php
-global $baglan;
-$site_telefon=tema_ayar("site_telefon");
-$site_email=tema_ayar("site_email");
-$facebook_url=tema_ayar("facebook");
-$twitter_url=tema_ayar("twitter");
-$instagram_url=tema_ayar("instagram");
-?>
-	<div class="mk-fc">
-		<div class="baslik"><?php echo _LANG('mk_footer_quick_links'); ?></div>
-		<ul>
-			<li><a href="<?php echo site_url(); ?>"><?php echo _LANG('mk_nav_home'); ?></a></li>
-			<li><a href="<?php echo site_url(); ?>#kategoriler"><?php echo _LANG('mk_view_all_categories'); ?></a></li>
-			<li><a href="<?php echo ozel_url("ilanlarim"); ?>"><?php echo _LANG("nav_my_ads"); ?></a></li>
-			<li><a href="<?php echo ozel_url("favori-ilanlarim"); ?>"><?php echo _LANG("nav_my_favorites"); ?></a></li>
-			<li><a href="<?php echo ozel_url("mesajlarim"); ?>"><?php echo _LANG("nav_my_messages"); ?></a></li>
-			<?php if (isset($_SESSION["oturum_id"]) && $_SESSION["oturum_id"]) { ?>
-			<li><a href="<?php echo ozel_url("cikis-yap"); ?>"><?php echo _LANG("nav_logout"); ?></a></li>
-			<?php } else { ?>
-			<li><a href="<?php echo ozel_url("giris-yap"); ?>"><?php echo _LANG("nav_login"); ?> / <?php echo _LANG("nav_register"); ?></a></li>
-			<?php } ?>
-		</ul>
+<div class="mk-footer-top">
+	<div class="mk-footer-brand">
+		<?php $mk_f_logo = tema_ayar("logo_light"); if (!$mk_f_logo) { $mk_f_logo = "/uploads/images/jaayquick-logo-light.png"; } ?>
+		<a href="<?php echo site_url(); ?>"><img src="<?php echo $mk_f_logo; ?>" alt="JaayQuick"></a>
+		<div class="tagline"><?php echo _LANG('mk_logo_tagline'); ?></div>
 	</div>
-	<div class="mk-fc">
-		<div class="baslik"><?php echo _LANG('mk_footer_categories'); ?></div>
-		<ul>
-			<?php
-			$mk_fkat = mysqli_query($baglan,"select id,baslik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc limit 5");
-			while ($mk_fk = mysqli_fetch_array($mk_fkat)) {
-				$mk_fk_id = $mk_fk["id"];
-				$mk_fk_baslik = _DIL_BASLIK($mk_fk["baslik"], $mk_fk_id, "kategori");
-				echo '<li><a href="'.kategori_link_getir($mk_fk_id).'">'.htmlspecialchars($mk_fk_baslik,ENT_QUOTES,'UTF-8').'</a></li>';
-			}
-			?>
-		</ul>
-	</div>
-	<div class="mk-fc">
-		<div class="baslik"><?php echo _LANG('mk_footer_support'); ?></div>
-		<ul>
-			<li><a href="<?php echo link_getir(1); ?>"><?php echo _DIL_BASLIK(getir("kategoriler","baslik",1),1,"kategori") ? _DIL_BASLIK(getir("icerik","baslik",1),1,"sayfa") : ''; ?></a></li>
-			<li><a href="<?php echo link_getir(3); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",3),3,"sayfa"); ?></a></li>
-			<li><a href="<?php echo link_getir(10); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",10),10,"sayfa"); ?></a></li>
-			<li><a href="<?php echo link_getir(13); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",13),13,"sayfa"); ?></a></li>
-			<li><a href="<?php echo link_getir(15); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",15),15,"sayfa"); ?></a></li>
-		</ul>
-	</div>
-	<div class="mk-fc mk-fc-social">
-		<div class="baslik"><?php echo _LANG('mk_footer_follow'); ?></div>
-		<div class="mk-social-row">
-			<?php $facebook_url=tema_ayar("facebook"); $twitter_url=tema_ayar("twitter"); $instagram_url=tema_ayar("instagram"); $site_whatsapp=tema_ayar("site_whatsapp"); ?>
-			<?php if ($facebook_url) { ?><a href="<?php echo $facebook_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Facebook"><i class="fa fa-facebook"></i></a><?php } ?>
-			<?php if ($twitter_url) { ?><a href="<?php echo $twitter_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Twitter"><i class="fa fa-twitter"></i></a><?php } ?>
-			<?php if ($instagram_url) { ?><a href="<?php echo $instagram_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Instagram"><i class="fa fa-instagram"></i></a><?php } ?>
-			<?php if ($site_whatsapp) { ?><a href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a><?php } ?>
+	<div class="mk-footer-cols">
+	<?php
+	global $baglan;
+	$site_telefon=tema_ayar("site_telefon");
+	$site_email=tema_ayar("site_email");
+	$facebook_url=tema_ayar("facebook");
+	$twitter_url=tema_ayar("twitter");
+	$instagram_url=tema_ayar("instagram");
+	$site_whatsapp=tema_ayar("site_whatsapp");
+	?>
+		<div class="mk-fc">
+			<div class="baslik"><?php echo _LANG('mk_footer_quick_links'); ?></div>
+			<ul>
+				<li><a href="<?php echo site_url(); ?>"><?php echo _LANG('mk_nav_home'); ?></a></li>
+				<li><a href="<?php echo site_url(); ?>#kategoriler"><?php echo _LANG('mk_view_all_categories'); ?></a></li>
+				<li><a href="<?php echo ozel_url("ilanlarim"); ?>"><?php echo _LANG("nav_my_ads"); ?></a></li>
+				<li><a href="<?php echo ozel_url("favori-ilanlarim"); ?>"><?php echo _LANG("nav_my_favorites"); ?></a></li>
+				<li><a href="<?php echo ozel_url("mesajlarim"); ?>"><?php echo _LANG("nav_my_messages"); ?></a></li>
+				<?php if (isset($_SESSION["oturum_id"]) && $_SESSION["oturum_id"]) { ?>
+				<li><a href="<?php echo ozel_url("cikis-yap"); ?>"><?php echo _LANG("nav_logout"); ?></a></li>
+				<?php } else { ?>
+				<li><a href="<?php echo ozel_url("giris-yap"); ?>"><?php echo _LANG("nav_login"); ?> / <?php echo _LANG("nav_register"); ?></a></li>
+				<?php } ?>
+			</ul>
 		</div>
-		<?php if ($site_telefon) { ?><div class="mk-fc-contact"><i class="ion-iphone"></i> <?php echo $site_telefon; ?></div><?php } ?>
-		<?php if ($site_email) { ?><div class="mk-fc-contact"><i class="ion-email"></i> <?php echo $site_email; ?></div><?php } ?>
-		<?php if ($site_whatsapp) { ?><div class="mk-fc-contact"><i class="fa fa-whatsapp"></i> <?php echo $site_whatsapp; ?></div><?php } ?>
+		<div class="mk-fc">
+			<div class="baslik"><?php echo _LANG('mk_footer_categories'); ?></div>
+			<ul>
+				<?php
+				$mk_fkat = mysqli_query($baglan,"select id,baslik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc limit 4");
+				while ($mk_fk = mysqli_fetch_array($mk_fkat)) {
+					$mk_fk_id = $mk_fk["id"];
+					$mk_fk_baslik = _DIL_BASLIK($mk_fk["baslik"], $mk_fk_id, "kategori");
+					echo '<li><a href="'.kategori_link_getir($mk_fk_id).'">'.htmlspecialchars($mk_fk_baslik,ENT_QUOTES,'UTF-8').'</a></li>';
+				}
+				?>
+			</ul>
+		</div>
+		<div class="mk-fc">
+			<div class="baslik"><?php echo _LANG('mk_footer_support'); ?></div>
+			<ul>
+				<li><a href="<?php echo link_getir(1); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",1),1,"sayfa"); ?></a></li>
+				<li><a href="<?php echo link_getir(3); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",3),3,"sayfa"); ?></a></li>
+				<li><a href="<?php echo link_getir(10); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",10),10,"sayfa"); ?></a></li>
+				<li><a href="<?php echo link_getir(13); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",13),13,"sayfa"); ?></a></li>
+				<li><a href="<?php echo link_getir(15); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",15),15,"sayfa"); ?></a></li>
+			</ul>
+		</div>
+		<div class="mk-fc mk-fc-social">
+			<div class="baslik"><?php echo _LANG('mk_footer_follow'); ?></div>
+			<div class="mk-social-row">
+				<?php if ($facebook_url) { ?><a href="<?php echo $facebook_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Facebook"><i class="fa fa-facebook"></i></a><?php } ?>
+				<?php if ($twitter_url) { ?><a href="<?php echo $twitter_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Twitter"><i class="fa fa-twitter"></i></a><?php } ?>
+				<?php if ($instagram_url) { ?><a href="<?php echo $instagram_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Instagram"><i class="fa fa-instagram"></i></a><?php } ?>
+				<?php $site_whatsapp=tema_ayar("site_whatsapp"); if ($site_whatsapp) { ?><a href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a><?php } ?>
+			</div>
+			<?php if ($site_telefon) { ?><div class="mk-fc-contact"><i class="ion-iphone"></i> <?php echo $site_telefon; ?></div><?php } ?>
+			<?php if ($site_email) { ?><div class="mk-fc-contact"><i class="ion-email"></i> <?php echo $site_email; ?></div><?php } ?>
+		</div>
 	</div>
 </div>
 
@@ -106,42 +107,35 @@ $instagram_url=tema_ayar("instagram");
 	</form>
   </div>
 </div>
-
 <div id="mm_panel" class="mm">
 	<ul class="ana_menu">
 		<li><a href="<?php echo ozel_url("acil-acil"); ?>"><i class="ion-android-alarm-clock" style="background:<?php echo @$ana_renk; ?>;"></i><?php echo _LANG('mobile_menu_urgent'); ?></a></li>
 		<li><a href="<?php echo ozel_url("fiyati-dusenler"); ?>"><i class="ion-arrow-graph-down-right" style="background:<?php echo @$ana_renk; ?>;"></i><?php echo _LANG("listing_price_drop"); ?></a></li>
 		<li><a href="<?php echo ozel_url("vitrin-ilanlari"); ?>"><i class="ion-podium" style="background:<?php echo @$ana_renk; ?>;"></i><?php echo _LANG("sidebar_featured_all"); ?></a></li>
 		<?php 
-		global $baglan;
-		@$kategori_iptal=tema_ayar("kategori_iptal");
-		if (@$kategori_iptal) {
-			$kategori_iptal=rtrim($kategori_iptal,",");
-			$kategori_iptal_sql=" and id not in ($kategori_iptal)";
-		} else {
-			$kategori_iptal_sql=null;
-		}
+		$kategori_iptal=tema_ayar("kategori_iptal");
+		$kategori_iptal=rtrim($kategori_iptal,",");
+		$kategori_iptal_sql="";
+		if ($kategori_iptal) {$kategori_iptal_sql=" and id not in ($kategori_iptal)";}
 		$kategori_siralama=tema_ayar("ilan_ekle_kategori_siralama");
 		if ($kategori_siralama=="baslik_a_z") {
 			$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by baslik asc");
 		} else if ($kategori_siralama=="icerik_sayisi") {
-			$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by icerik desc, baslik");
+			$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql order by icerik desc, baslik asc");
 		} else {
 			$kategori_sql=mysqli_query($baglan,"select * from kategoriler where tip='ilan' and ust_kategori='0' $kategori_iptal_sql");
 		}
-		while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) { 
-		$kategori_id=$kategori_dizi["id"];
-		$kategori_baslik=$kategori_dizi["baslik"];
-		$kategori_ikon=kategori_bilgi("ikon",$kategori_id);
-		$kategori_ikon_bg=kategori_bilgi("ikon_bg",$kategori_id);
-		$kategori_link=kategori_link_getir($kategori_id);
-		if (!$kategori_ikon) {$kategori_ikon="ion-search";}
+		while ($kategori_dizi=mysqli_fetch_array($kategori_sql)) {
+			$kategori_id=$kategori_dizi["id"];
+			$kategori_baslik=_DIL_BASLIK($kategori_dizi["baslik"], $kategori_id, "kategori");
+			$kategori_ikon=kategori_bilgi("ikon",$kategori_id);
+			if (!$kategori_ikon) {$kategori_ikon="ion-folder";}
+			$kategori_link=kategori_link_getir($kategori_id);
 		?>
-		<li><a href="<?php echo $kategori_link; ?>"><i class="<?php echo $kategori_ikon; ?>" style="background:<?php echo $kategori_ikon_bg; ?> !important;"></i><?php echo _DIL_BASLIK($kategori_baslik, $kategori_id, 'kategori'); ?></a></li>
+		<li><a href="<?php echo $kategori_link; ?>"><i class="<?php echo $kategori_ikon; ?>" style="background:<?php echo @$ana_renk; ?>;"></i><?php echo $kategori_baslik; ?></a></li>
 		<?php } ?>
 	</ul>
 </div>
-
 <div id="mmu_panel" class="mm">
 	<?php 
 	@$oturum_id=$_SESSION["oturum_id"];
@@ -188,23 +182,3 @@ $instagram_url=tema_ayar("instagram");
 	</ul>
 	<?php } ?>
 </div>
-
-<div style="display:none;">
-<?php echo tema_ayar("footer_kod"); ?>
-</div>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/lightbox.min.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/jquery.slides.min.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/notify.min.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/jquery.mask.min.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/jquery.sticky.js"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/main.js?v=41"></script>
-<script type="text/javascript" src="<?php echo tema_dizini(); ?>/js/jquery.sidr.min.js"></script>
-<?php tema_foot(); ?>
-<script>
-(function(){var o=new MutationObserver(function(m){m.forEach(function(x){x.addedNodes.forEach(function(n){if(n&&n.nodeType===1){if(n.classList&&n.classList.contains('lb-close'))n.setAttribute('href','#');if(n.querySelectorAll){n.querySelectorAll('.lb-close').forEach(function(e){e.setAttribute('href','#');});}}});});});if(document.body)o.observe(document.body,{childList:true,subtree:true});})();
-</script>
-</body>
-</html>
