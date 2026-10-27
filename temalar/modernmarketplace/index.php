@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 if(count(get_included_files())==1) {die();}
 @$mesaj=$_GET["m"];
 @$page=$_GET["p"];

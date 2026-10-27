@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if(count(get_included_files())==1) {die();}
 $limit_politikasi=limit_politikasi();
 if (strstr(browser_url(), "/$admin_dizini/")) {

@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 include_once("../../loader.php");
 include_once("../../eklentiler/favori_icerikler/eklenti.php");
 include_once("../../eklentiler/mesajlasma/eklenti.php");

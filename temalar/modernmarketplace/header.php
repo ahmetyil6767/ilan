@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 if(count(get_included_files())==1) {die();}
 global $baglan;
 if (@$_POST["ara_buton"]) {search_yonlendir();}
