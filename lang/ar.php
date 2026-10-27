@@ -3523,4 +3523,7 @@ return array(
 	'mk_footer_categories' => 'الفئات',
 	'mk_footer_support' => 'الدعم',
 	'mk_footer_follow' => 'تابعنا',
+	'mk_footer_social' => 'التواصل الاجتماعي',
+	'mk_footer_my_account' => 'حسابي',
+	'mk_footer_ad_post' => 'مركز نشر الإعلانات',
 );

@@ -3547,4 +3547,7 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'mk_footer_categories' => 'Kategoriler',
 	'mk_footer_support' => 'Destek',
 	'mk_footer_follow' => 'Bizi Takip Edin',
+	'mk_footer_social' => 'Sosyal',
+	'mk_footer_my_account' => 'Hesabım',
+	'mk_footer_ad_post' => 'İlan Yayınlama Merkezi',
 );

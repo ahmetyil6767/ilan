@@ -6,75 +6,74 @@ if ($footer_genis) {echo "<div class='container' style='margin-top:15px;'>$foote
 </main>
 <footer>
 <div class="container">
-<div class="mk-footer-brand">
-	<?php $mk_f_logo = tema_ayar("logo_light"); if (!$mk_f_logo) { $mk_f_logo = "/uploads/images/jaayquick-logo-light.png"; } ?>
-	<a href="<?php echo site_url(); ?>"><img src="<?php echo $mk_f_logo; ?>" alt="JaayQuick"></a>
-	<div class="tagline"><?php echo _LANG('mk_logo_tagline'); ?></div>
-</div>
-<div class="mk-footer-cols">
-<?php
-global $baglan;
-$site_telefon=tema_ayar("site_telefon");
-$site_email=tema_ayar("site_email");
-$facebook_url=tema_ayar("facebook");
-$twitter_url=tema_ayar("twitter");
-$instagram_url=tema_ayar("instagram");
-?>
-	<div class="mk-fc">
+<div class="mk-footer-grid">
+	<?php global $baglan; $site_telefon=tema_ayar("site_telefon"); $site_email=tema_ayar("site_email"); $site_whatsapp=tema_ayar("site_whatsapp"); $facebook_url=tema_ayar("facebook"); $twitter_url=tema_ayar("twitter"); $instagram_url=tema_ayar("instagram"); ?>
+	<div class="mk-footer-brand">
+		<?php $mk_f_logo = tema_ayar("logo_light"); if (!$mk_f_logo) { $mk_f_logo = "/uploads/images/jaayquick-logo-light.png"; } ?>
+		<a href="<?php echo site_url(); ?>"><img src="<?php echo $mk_f_logo; ?>" alt="JaayQuick"></a>
+		<div class="tagline"><?php echo _LANG('mk_logo_tagline'); ?></div>
+	</div>
+
+	<div class="mk-fc mk-footer-col">
 		<div class="baslik"><?php echo _LANG('mk_footer_quick_links'); ?></div>
 		<ul>
-			<li><a href="<?php echo site_url(); ?>"><?php echo _LANG('mk_nav_home'); ?></a></li>
-			<li><a href="<?php echo site_url(); ?>#kategoriler"><?php echo _LANG('mk_view_all_categories'); ?></a></li>
-			<li><a href="<?php echo ozel_url("ilanlarim"); ?>"><?php echo _LANG("nav_my_ads"); ?></a></li>
-			<li><a href="<?php echo ozel_url("favori-ilanlarim"); ?>"><?php echo _LANG("nav_my_favorites"); ?></a></li>
-			<li><a href="<?php echo ozel_url("mesajlarim"); ?>"><?php echo _LANG("nav_my_messages"); ?></a></li>
+			<li><a href="<?php echo site_url(); ?>"><i class="ion-home"></i><?php echo _LANG('mk_nav_home'); ?></a></li>
+			<li><a href="<?php echo site_url(); ?>#kategoriler"><i class="ion-grid"></i><?php echo _LANG('mk_view_all_categories'); ?></a></li>
+			<li><a href="<?php echo (isset($_SESSION["oturum_id"]) && $_SESSION["oturum_id"]) ? profil_link_getir($_SESSION["oturum_id"]) : ozel_url("giris-yap"); ?>"><i class="ion-person"></i><?php echo _LANG('mk_footer_my_account'); ?></a></li>
+			<li><a href="<?php echo ozel_url("favori-ilanlarim"); ?>"><i class="ion-android-favorite"></i><?php echo _LANG("nav_my_favorites"); ?></a></li>
+			<li><a href="<?php echo ozel_url("mesajlarim"); ?>"><i class="ion-email"></i><?php echo _LANG("nav_my_messages"); ?></a></li>
+			<li><a href="<?php echo ozel_url("ilan-ekle"); ?>"><i class="ion-compose"></i><?php echo _LANG('mk_footer_ad_post'); ?></a></li>
 			<?php if (isset($_SESSION["oturum_id"]) && $_SESSION["oturum_id"]) { ?>
-			<li><a href="<?php echo ozel_url("cikis-yap"); ?>"><?php echo _LANG("nav_logout"); ?></a></li>
+			<li><a href="<?php echo ozel_url("cikis-yap"); ?>"><i class="ion-log-out"></i><?php echo _LANG("nav_logout"); ?></a></li>
 			<?php } else { ?>
-			<li><a href="<?php echo ozel_url("giris-yap"); ?>"><?php echo _LANG("nav_login"); ?> / <?php echo _LANG("nav_register"); ?></a></li>
+			<li><a href="<?php echo ozel_url("giris-yap"); ?>"><i class="ion-log-in"></i><?php echo _LANG("nav_login"); ?> / <?php echo _LANG("nav_register"); ?></a></li>
 			<?php } ?>
 		</ul>
 	</div>
-	<div class="mk-fc">
+
+	<div class="mk-fc mk-footer-col">
 		<div class="baslik"><?php echo _LANG('mk_footer_categories'); ?></div>
 		<ul>
 			<?php
-			$mk_fkat = mysqli_query($baglan,"select id,baslik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc limit 5");
+			$mk_fkat = mysqli_query($baglan,"select id,baslik from kategoriler where tip='ilan' and ust_kategori='0' order by icerik desc, baslik asc limit 7");
 			while ($mk_fk = mysqli_fetch_array($mk_fkat)) {
 				$mk_fk_id = $mk_fk["id"];
+				$mk_fk_ikon = kategori_bilgi("ikon",$mk_fk_id);
+				if (!$mk_fk_ikon) { $mk_fk_ikon = "ion-folder"; }
 				$mk_fk_baslik = _DIL_BASLIK($mk_fk["baslik"], $mk_fk_id, "kategori");
-				echo '<li><a href="'.kategori_link_getir($mk_fk_id).'">'.htmlspecialchars($mk_fk_baslik,ENT_QUOTES,'UTF-8').'</a></li>';
+				echo '<li><a href="'.kategori_link_getir($mk_fk_id).'"><i class="'.htmlspecialchars($mk_fk_ikon,ENT_QUOTES,'UTF-8').'"></i>'.htmlspecialchars($mk_fk_baslik,ENT_QUOTES,'UTF-8').'</a></li>';
 			}
 			?>
 		</ul>
 	</div>
-	<div class="mk-fc">
+
+	<div class="mk-fc mk-footer-col">
 		<div class="baslik"><?php echo _LANG('mk_footer_support'); ?></div>
 		<ul>
-			<li><a href="<?php echo link_getir(1); ?>"><?php echo _DIL_BASLIK(getir("kategoriler","baslik",1),1,"kategori") ? _DIL_BASLIK(getir("icerik","baslik",1),1,"sayfa") : ''; ?></a></li>
-			<li><a href="<?php echo link_getir(3); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",3),3,"sayfa"); ?></a></li>
-			<li><a href="<?php echo link_getir(10); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",10),10,"sayfa"); ?></a></li>
-			<li><a href="<?php echo link_getir(13); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",13),13,"sayfa"); ?></a></li>
-			<li><a href="<?php echo link_getir(15); ?>"><?php echo _DIL_BASLIK(getir("icerik","baslik",15),15,"sayfa"); ?></a></li>
+			<?php
+			$mk_destek = array(1=>'ion-information-circled',3=>'ion-ios-telephone',10=>'ion-help-circled',13=>'ion-document',15=>'fa fa-shield',16=>'ion-pricetags');
+			foreach ($mk_destek as $mk_ds_id=>$mk_ds_ikon) {
+				$mk_ds_baslik = _DIL_BASLIK(getir("icerik","baslik",$mk_ds_id),$mk_ds_id,"sayfa");
+				if (!$mk_ds_baslik) { continue; }
+				echo '<li><a href="'.link_getir($mk_ds_id).'"><i class="'.htmlspecialchars($mk_ds_ikon,ENT_QUOTES,'UTF-8').'"></i>'.htmlspecialchars($mk_ds_baslik,ENT_QUOTES,'UTF-8').'</a></li>';
+			}
+			?>
 		</ul>
 	</div>
-	<div class="mk-fc mk-fc-social">
+
+	<div class="mk-fc mk-fc-social mk-footer-col">
 		<div class="baslik"><?php echo _LANG('mk_footer_follow'); ?></div>
+		<?php if ($site_telefon) { ?><div class="mk-fc-contact"><i class="ion-ios-telephone"></i><span><?php echo $site_telefon; ?></span></div><?php } ?>
+		<?php if ($site_email) { ?><a class="mk-fc-contact" href="mailto:<?php echo htmlspecialchars($site_email,ENT_QUOTES,'UTF-8'); ?>"><i class="ion-email"></i><span><?php echo htmlspecialchars($site_email,ENT_QUOTES,'UTF-8'); ?></span></a><?php } ?>
+		<?php if ($site_whatsapp) { ?><a class="mk-fc-contact" href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>" target="_blank" rel="noopener"><i class="fa fa-whatsapp"></i><span><?php echo $site_whatsapp; ?></span></a><?php } ?>
+		<?php if ($facebook_url || $twitter_url || $instagram_url) { ?><div class="mk-social-label"><?php echo _LANG('mk_footer_social'); ?></div><?php } ?>
 		<div class="mk-social-row">
-			<?php $facebook_url=tema_ayar("facebook"); $twitter_url=tema_ayar("twitter"); $instagram_url=tema_ayar("instagram"); $site_whatsapp=tema_ayar("site_whatsapp"); ?>
-			<?php if ($facebook_url) { ?><a href="<?php echo $facebook_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Facebook"><i class="fa fa-facebook"></i></a><?php } ?>
-			<?php if ($twitter_url) { ?><a href="<?php echo $twitter_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Twitter"><i class="fa fa-twitter"></i></a><?php } ?>
-			<?php if ($instagram_url) { ?><a href="<?php echo $instagram_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Instagram"><i class="fa fa-instagram"></i></a><?php } ?>
-			<?php if ($site_whatsapp) { ?><a href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a><?php } ?>
+			<?php if ($instagram_url) { ?><a href="<?php echo htmlspecialchars($instagram_url,ENT_QUOTES,'UTF-8'); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Instagram"><i class="fa fa-instagram"></i></a><?php } ?>
+			<?php if ($facebook_url) { ?><a href="<?php echo htmlspecialchars($facebook_url,ENT_QUOTES,'UTF-8'); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Facebook"><i class="fa fa-facebook"></i></a><?php } ?>
+			<?php if ($twitter_url) { ?><a href="<?php echo htmlspecialchars($twitter_url,ENT_QUOTES,'UTF-8'); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Twitter"><i class="fa fa-twitter"></i></a><?php } ?>
 		</div>
-		<?php if ($site_telefon) { ?><div class="mk-fc-contact"><i class="ion-iphone"></i> <?php echo $site_telefon; ?></div><?php } ?>
-		<?php if ($site_email) { ?><div class="mk-fc-contact"><i class="ion-email"></i> <?php echo $site_email; ?></div><?php } ?>
-		<?php if ($site_whatsapp) { ?><div class="mk-fc-contact"><i class="fa fa-whatsapp"></i> <?php echo $site_whatsapp; ?></div><?php } ?>
 	</div>
 </div>
-
-<?php echo tema_ayar("footer_metni"); ?>
-
 <div class="mk-footer-bottom">
 	<span>© <?php echo date('Y'); ?> Jaayquick.com. <?php echo _LANG('mk_all_rights'); ?></span>
 	<span><?php echo _LANG('mk_local_marketplace'); ?> <span class="flag">🇬🇲</span></span>

@@ -3569,4 +3569,7 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'mk_footer_categories' => 'Categories',
 	'mk_footer_support' => 'Support',
 	'mk_footer_follow' => 'Follow Us',
+	'mk_footer_social' => 'Social',
+	'mk_footer_my_account' => 'My Account',
+	'mk_footer_ad_post' => 'Ad Posting Center',
 );
