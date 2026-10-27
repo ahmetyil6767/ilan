@@ -61,47 +61,16 @@ $instagram_url=tema_ayar("instagram");
 	<div class="mk-fc mk-fc-social">
 		<div class="baslik"><?php echo _LANG('mk_footer_follow'); ?></div>
 		<div class="mk-social-row">
-			<?php $facebook_url=tema_ayar("facebook"); $twitter_url=tema_ayar("twitter"); $instagram_url=tema_ayar("instagram"); ?>
+			<?php $facebook_url=tema_ayar("facebook"); $twitter_url=tema_ayar("twitter"); $instagram_url=tema_ayar("instagram"); $site_whatsapp=tema_ayar("site_whatsapp"); ?>
 			<?php if ($facebook_url) { ?><a href="<?php echo $facebook_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Facebook"><i class="fa fa-facebook"></i></a><?php } ?>
 			<?php if ($twitter_url) { ?><a href="<?php echo $twitter_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Twitter"><i class="fa fa-twitter"></i></a><?php } ?>
 			<?php if ($instagram_url) { ?><a href="<?php echo $instagram_url; ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="Instagram"><i class="fa fa-instagram"></i></a><?php } ?>
+			<?php if ($site_whatsapp) { ?><a href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>" target="_blank" rel="noopener" class="mk-social-btn" aria-label="WhatsApp"><i class="fa fa-whatsapp"></i></a><?php } ?>
 		</div>
 		<?php if ($site_telefon) { ?><div class="mk-fc-contact"><i class="ion-iphone"></i> <?php echo $site_telefon; ?></div><?php } ?>
 		<?php if ($site_email) { ?><div class="mk-fc-contact"><i class="ion-email"></i> <?php echo $site_email; ?></div><?php } ?>
+		<?php if ($site_whatsapp) { ?><div class="mk-fc-contact"><i class="fa fa-whatsapp"></i> <?php echo $site_whatsapp; ?></div><?php } ?>
 	</div>
-</div>
-<div class="iletisim" <?php $footer_menuleri=tema_ayar("footer_menuleri"); if ($footer_menuleri==2) {echo "style='border-top:0;'";} ?>>
-<div class="baslik"><?php echo _LANG('p_bize_ulasin'); ?></div>
-<div class="row">
-    <?php
-    $site_telefon=tema_ayar("site_telefon");
-    $site_email=tema_ayar("site_email");
-    $site_whatsapp=tema_ayar("site_whatsapp");
-    $facebook_url=tema_ayar("facebook");
-    $twitter_url=tema_ayar("twitter");
-    $instagram_url=tema_ayar("instagram");
-    $play_store_url=tema_ayar("play_store");
-    $apple_store_url=tema_ayar("apple_store");
-    ?>
-	<div class="col-md-27">
-		<?php if ($site_telefon) { ?><a href="tel:+<?php echo tel_uluslararasi($site_telefon); ?>"><div class="buton tel"><i class="ion-iphone"></i><?php echo $site_telefon; ?></div></a><?php } ?>
-		<?php if ($site_email) { ?><a href="mailto:<?php echo $site_email; ?>"><div class="buton email"><i class="ion-email"></i><?php echo $site_email; ?></div></a><?php } ?>
-		<?php if ($site_whatsapp) { ?><a href="https://wa.me/<?php echo tel_uluslararasi($site_whatsapp); ?>"><div class="buton whatsapp"><i class="fa fa-whatsapp"></i><?php echo _LANG('footer_whatsapp_support'); ?>: <?php echo $site_whatsapp; ?></div></a><?php } ?>
-	</div>
-	<div class="col-md-15 sosyal">
-		<div class="pull-right">
-			<?php if ($facebook_url) { ?><a href="<?php echo $facebook_url; ?>" class="buton facebook"><i class="fa fa-facebook"></i></a><?php } ?>
-			<?php if ($twitter_url) { ?><a href="<?php echo $twitter_url; ?>" class="buton twitter"><i class="fa fa-twitter"></i></a><?php } ?>
-			<?php if ($instagram_url) { ?><a href="<?php echo $instagram_url; ?>" class="buton instagram"><i class="fa fa-instagram"></i></a><?php } ?>
-		</div>
-	</div>
-</div>
-
-<div class="text-center">
-    <?php if ($play_store_url) { ?><a href="<?php echo $play_store_url; ?>" target="_blank"><img src="<?php echo tema_dizini(); ?>/img/play-store.png" alt="Google Play" style="width:150px;height:auto;margin-right:5px;"></a><?php } ?>
-    <?php if ($apple_store_url) { ?><a href="<?php echo $apple_store_url; ?>" target="_blank"><img src="<?php echo tema_dizini(); ?>/img/apple-store.png" alt="App Store" style="width:150px;height:auto;"></a><?php } ?>
-</div>
-
 </div>
 
 <?php echo tema_ayar("footer_metni"); ?>
