@@ -143,6 +143,9 @@ body.mk-theme img { max-width: 100%; }
 .mk-app p { margin: 0 0 12px; font-size: 13px; color: var(--mk-muted); max-width: 560px; }
 .mk-app-badges { display: flex; gap: 10px; }
 .mk-app-badges img { height: 40px; width: auto; }
+.mk-app-qr { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.mk-app-qr img { border-radius: 8px; background: #fff; padding: 6px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.mk-app-qr span { font-size: 11px; color: var(--mk-muted); font-weight: 600; }
 
 /* ===== FOOTER ===== */
 .mk-theme footer { background: var(--mk-navy-dark); color: #C7D2E2; padding: 38px 0 16px; margin-top: 34px; }

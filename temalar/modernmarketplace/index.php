@@ -386,7 +386,7 @@ function mk_kartlar($where_sql, $limit=5, $etiket='') {
 	<?php
 	$mk_play=tema_ayar("play_store");
 	$mk_apple=tema_ayar("apple_store");
-	if ($mk_play or $mk_apple) {
+	// Uygulama şeridi: QR her zaman, mağaza rozetleri ayar varsa
 	?>
 	<!-- MOBILE APP -->
 	<section class="mk-app">
@@ -398,8 +398,11 @@ function mk_kartlar($where_sql, $limit=5, $etiket='') {
 				<?php if ($mk_apple) { ?><a href="<?php echo $mk_apple; ?>" target="_blank" rel="noopener"><img src="<?php echo tema_dizini(); ?>/img/apple-store.png" alt="App Store"></a><?php } ?>
 			</div>
 		</div>
+		<div class="mk-app-qr">
+			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url()); ?>" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
+			<span><?php echo _LANG('mk_scan_visit'); ?></span>
+		</div>
 	</section>
-	<?php } ?>
 
 	<?php bilesen_alani("anasayfa"); ?>
 
