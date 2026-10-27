@@ -3784,4 +3784,8 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'mk_hero_title_main' => 'Achetez, vendez, échangez',
 	'mk_hero_title_accent' => 'en Gambie',
 	'mk_cta_fast' => 'Rapide • Facile • Gratuit',
+	'mk_footer_quick_links' => 'Liens rapides',
+	'mk_footer_categories' => 'Catégories',
+	'mk_footer_support' => 'Support',
+	'mk_footer_follow' => 'Suivez-nous',
 );

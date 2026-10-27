@@ -3565,4 +3565,8 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'mk_hero_title_main' => 'Buy, Sell, Trade',
 	'mk_hero_title_accent' => 'in The Gambia',
 	'mk_cta_fast' => 'Fast • Easy • Free',
+	'mk_footer_quick_links' => 'Quick Links',
+	'mk_footer_categories' => 'Categories',
+	'mk_footer_support' => 'Support',
+	'mk_footer_follow' => 'Follow Us',
 );

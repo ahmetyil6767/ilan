@@ -3519,4 +3519,8 @@ return array(
 	'mk_hero_title_main' => 'اشترِ وبع وتبادل',
 	'mk_hero_title_accent' => 'في غامبيا',
 	'mk_cta_fast' => 'سريع • سهل • مجاني',
+	'mk_footer_quick_links' => 'روابط سريعة',
+	'mk_footer_categories' => 'الفئات',
+	'mk_footer_support' => 'الدعم',
+	'mk_footer_follow' => 'تابعنا',
 );

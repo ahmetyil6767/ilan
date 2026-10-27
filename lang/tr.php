@@ -3543,4 +3543,8 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'mk_hero_title_main' => 'Al, Sat, Takas Yap',
 	'mk_hero_title_accent' => 'Gambiya\'da',
 	'mk_cta_fast' => 'Hızlı • Kolay • Ücretsiz',
+	'mk_footer_quick_links' => 'Hızlı Bağlantılar',
+	'mk_footer_categories' => 'Kategoriler',
+	'mk_footer_support' => 'Destek',
+	'mk_footer_follow' => 'Bizi Takip Edin',
 );
