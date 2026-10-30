@@ -8,19 +8,19 @@
 
 ## Site haritası
 
-- [Ana sayfa](http://ilan/): Tüm ilanlar, marka kutucukları, filtreler
-- [Araçlar](http://ilan/2/vasita): Vasıta, yedek parça, ikinci el, iş makineleri
-- [Emlak](http://ilan/1/emlak): Konut, işyeri, arsa, bina, devremülk
-- [İş ilanları](http://ilan/8/is-ilanlari): İş ilanları ve yardımcı arayanlar
-- [Hizmetler](http://ilan/6/ustalar-ve-hizmetler): Ustalar ve hizmetler
-- [Mağazalar](http://ilan/sayfa/magazalar/): Mağaza listesi
-- [İlan ver](http://ilan/sayfa/ilan-ekle/): Ücretsiz ilan verme
-- [Giriş yap](http://ilan/sayfa/giris-yap/) / [Üye ol](http://ilan/sayfa/kayit-ol/)
-- [Hakkımızda](http://ilan/sayfa/hakkimizda-1) · [İletişim](http://ilan/sayfa/iletisim-3)
-- [Güvenli E-Ticaret](http://ilan/sayfa/guvenli-e-ticaret-11) ·
-  [Güvenli Alışveriş İpuçları](http://ilan/sayfa/guvenli-alisveris-ipuclari-12)
-- [Kullanım Koşulları](http://ilan/sayfa/kullanim-kosullari-13) ·
-  [Gizlilik Politikası](http://ilan/sayfa/gizlilik-politikasi-15)
+- [Ana sayfa](https://jaayquick.com/): Tüm ilanlar, marka kutucukları, filtreler
+- [Araçlar](https://jaayquick.com/2/vasita): Vasıta, yedek parça, ikinci el, iş makineleri
+- [Emlak](https://jaayquick.com/1/emlak): Konut, işyeri, arsa, bina, devremülk
+- [İş ilanları](https://jaayquick.com/8/is-ilanlari): İş ilanları ve yardımcı arayanlar
+- [Hizmetler](https://jaayquick.com/6/ustalar-ve-hizmetler): Ustalar ve hizmetler
+- [Mağazalar](https://jaayquick.com/sayfa/magazalar/): Mağaza listesi
+- [İlan ver](https://jaayquick.com/sayfa/ilan-ekle/): Ücretsiz ilan verme
+- [Giriş yap](https://jaayquick.com/sayfa/giris-yap/) / [Üye ol](https://jaayquick.com/sayfa/kayit-ol/)
+- [Hakkımızda](https://jaayquick.com/sayfa/hakkimizda-1) · [İletişim](https://jaayquick.com/sayfa/iletisim-3)
+- [Güvenli E-Ticaret](https://jaayquick.com/sayfa/guvenli-e-ticaret-11) ·
+  [Güvenli Alışveriş İpuçları](https://jaayquick.com/sayfa/guvenli-alisveris-ipuclari-12)
+- [Kullanım Koşulları](https://jaayquick.com/sayfa/kullanim-kosullari-13) ·
+  [Gizlilik Politikası](https://jaayquick.com/sayfa/gizlilik-politikasi-15)
 
 ## Bilgi
 

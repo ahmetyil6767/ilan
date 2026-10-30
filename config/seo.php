@@ -65,27 +65,33 @@ function seo_json_ld() {
     $json = '';
     
     // Organization - Her sayfada
+    // Sosyal medya linkleri (ayarlar tablosundan; boşsa eklenmez)
+    $same_as = array();
+    foreach (array('facebook','twitter','instagram') as $sosyal_anahtar) {
+        $sosyal_url = tema_ayar($sosyal_anahtar);
+        if ($sosyal_url) { $same_as[] = $sosyal_url; }
+    }
     $org = array(
         '@context' => 'https://schema.org',
         '@type' => 'Organization',
         'name' => $site_name,
         'url' => $site_url,
         'logo' => $site_url . '/' . ltrim(tema_ayar('logo'), '/'),
-        'sameAs' => array(
-            'https://www.facebook.com/' . strtolower($site_name),
-            'https://twitter.com/' . strtolower($site_name),
-        ),
         'address' => array(
             '@type' => 'PostalAddress',
             'addressCountry' => 'GM',
         ),
-        'contactPoint' => array(
-            '@type' => 'ContactPoint',
-            'telephone' => '+220-267-7408',
-            'contactType' => 'customer service',
-            'availableLanguage' => array('English', 'French', 'Arabic'),
-        ),
     );
+    if (!empty($same_as)) { $org['sameAs'] = $same_as; }
+    $site_telefon = tema_ayar('site_telefon');
+    if ($site_telefon) {
+        $org['contactPoint'] = array(
+            '@type' => 'ContactPoint',
+            'telephone' => '+' . tel_uluslararasi($site_telefon),
+            'contactType' => 'customer service',
+            'availableLanguage' => array('Turkish', 'English', 'French', 'Arabic'),
+        );
+    }
     $json .= '<script type="application/ld+json">' . json_encode($org, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . '</script>' . "\n";
     
     // WebSite - Arama kutusu

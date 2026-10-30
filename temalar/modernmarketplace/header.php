@@ -10,6 +10,9 @@ require_once ROOT_DIR . '/config/seo.php';
 <meta charset="UTF-8">
 <title><?php echo meta_title(); ?></title>
 <meta name="description" content="<?php echo meta_description(); ?>">
+<meta name="theme-color" content="#082B55" />
+<meta name="msapplication-TileColor" content="#082B55" />
+<link rel="apple-touch-icon" href="<?php echo tema_ayar('favicon') ? tema_ayar('favicon') : '/uploads/images/jaayquick-favicon.ico'; ?>" />
 <meta name="google-site-verification" content="google673bba54dc6bca9d" />
 <meta name="msvalidate.01" content="ae87be9ee765c8a2" />
 <link rel="stylesheet" href="<?php echo tema_dizini(); ?>/css/bootstrap.min.css"/>
@@ -49,6 +52,9 @@ if ($site_font=="Work Sans") { ?>
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="<?php echo ayar_getir('site_baslik'); ?>" />
 <meta property="og:locale" content="<?php echo _DIL_HTML_LANG(); ?>" />
+<?php foreach (array('tr','en','fr','ar') as $alt_dil) { if ($alt_dil !== aktif_dil()) { ?>
+<meta property="og:locale:alternate" content="<?php echo $alt_dil === 'ar' ? 'ar_AR' : ($alt_dil === 'fr' ? 'fr_FR' : ($alt_dil === 'en' ? 'en_US' : 'tr_TR')); ?>" />
+<?php } } ?>
 <meta property="og:title" content="<?php echo meta_title(); ?>" />
 <meta property="og:description" content="<?php echo meta_description(); ?>" />
 <?php if (strstr($script_name,"icerik.php")) {@$id=$_GET["id"]; $og_url=link_getir($id); $og_image=thumbnail("full",$id); ?>
@@ -68,6 +74,7 @@ if ($site_font=="Work Sans") { ?>
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="<?php echo meta_title(); ?>" />
 <meta name="twitter:description" content="<?php echo meta_description(); ?>" />
+<?php if ($og_image) { ?><meta name="twitter:image" content="<?php echo e($og_image); ?>" /><?php } ?>
 <?php echo seo_hreflang_tags(); ?>
 <?php $sayfa=@$_GET["sayfa"]; if ($sayfa>1) { ?>
 <meta name="robots" content="noindex">
