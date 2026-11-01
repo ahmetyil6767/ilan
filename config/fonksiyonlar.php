@@ -999,14 +999,14 @@ function thumbnail_url($boyut, $image_url, $mevcut_boyut = NULL, $url_kontrol = 
 
 	if ($url_kontrol) {
 		if (url_kontrol($son_url)) {
-			return $son_url;
+			return webp_url($son_url);
 		}
 		else {
 			return false;
 		}
 	}
 	else {
-		return $son_url;
+		return webp_url($son_url);
 	}
 }
 
@@ -1026,11 +1026,11 @@ function icerik_thumbnail_url($boyut, $yazi_id, $tip)
 
 	if ($image_url != '') {
 		if ($boyut == 'full') {
-			return $image_url;
+			return webp_url($image_url);
 		}
 		else {
 			$thumb_url = bosluk_donustur(thumbnail_url($boyut, $image_url));
-			return $thumb_url;
+			return webp_url($thumb_url);
 		}
 	}
 }
