@@ -148,6 +148,8 @@ if (isset($_SESSION["oturum_id"])) {
 	$oturum_id=$_SESSION["oturum_id"];
 	$oturum_ad_soyad=uye_ad_soyad_getir($oturum_id);
 	@$oturum_site_url=$_SESSION["oturum_site_url"];
+	// Favori fiyat-dususu kontrolu (saatte 1 kez)
+	if (function_exists('favori_fiyat_kontrol')) { favori_fiyat_kontrol($oturum_id); }
 	if ($oturum_site_url and site_url()!=$oturum_site_url) {
 		session_destroy();
 		yonlendir(site_url());

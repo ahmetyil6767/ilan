@@ -3721,4 +3721,66 @@ function satici_puan_vermis_mi($satici_id, $uye_id)
 	mysqli_stmt_close($s);
 	return $var;
 }
+/*
+ * Favori fiyat-dususu bildirimi.
+ * Kullanici favoriye ekledigi ilanin fiyati dustugunde e-posta gonderir.
+ */
+function favori_fiyat_kontrol($uye_id)
+{
+	global $baglan;
+	$uye_id = (int)$uye_id;
+	if ($uye_id < 1) { return; }
+	// Throttle: oturum basina 1 saatte bir
+	if (isset($_SESSION['favori_fiyat_kontrol_ts']) && (time() - (int)$_SESSION['favori_fiyat_kontrol_ts']) < 3600) {
+		return;
+	}
+	$_SESSION['favori_fiyat_kontrol_ts'] = time();
+
+	// Favori ilanlari getir
+	$s = mysqli_prepare($baglan, "select id from favoriler where uye_id=?");
+	mysqli_stmt_bind_param($s, "i", $uye_id);
+	mysqli_stmt_execute($s);
+	$res = mysqli_stmt_get_result($s);
+	$favoriler = array();
+	while ($r = mysqli_fetch_assoc($res)) { $favoriler[] = (int)$r['id']; }
+	mysqli_stmt_close($s);
+
+	if (empty($favoriler)) { return; }
+
+	$uye_email = getir("uyeler", "email_adresi", $uye_id);
+	$uye_ad = getir("uyeler", "ad_soyad", $uye_id);
+	$mail_baslik = tema_ayar("mail_baslik");
+	if (!$mail_baslik) { $mail_baslik = "JaayQuick"; }
+
+	foreach ($favoriler as $icerik_id) {
+		$eski_fiyat_str = uye_bilgi("favori_fiyat_" . $icerik_id, $uye_id);
+		$yeni_fiyat_str = ekstra_bilgi_getir('fiyat', $icerik_id, 'ilan');
+		if ($eski_fiyat_str === null || $eski_fiyat_str === '' || $yeni_fiyat_str === null || $yeni_fiyat_str === '') {
+			// Ilk kez: fiyati kaydet
+			if ($yeni_fiyat_str !== null && $yeni_fiyat_str !== '') {
+				uye_bilgi_guncelle('favori_fiyat_' . $icerik_id, $yeni_fiyat_str, $uye_id);
+			}
+			continue;
+		}
+		$eski = (float)str_replace(',', '.', (string)$eski_fiyat_str);
+		$yeni = (float)str_replace(',', '.', (string)$yeni_fiyat_str);
+		if ($yeni > 0 && $yeni < $eski) {
+			// Fiyat dustu -> e-posta gonder
+			$ilan_baslik = _DIL_BASLIK(getir("icerik", "baslik", $icerik_id), $icerik_id, "sayfa");
+			$ilan_url = link_getir($icerik_id);
+			$ileti = "<p>Merhaba <strong>" . htmlspecialchars($uye_ad, ENT_QUOTES, 'UTF-8') . "</strong></p>";
+			$ileti .= "<p>Favorilerinize eklediğiniz <strong>" . htmlspecialchars($ilan_baslik, ENT_QUOTES, 'UTF-8') . "</strong> ilanının fiyatı düştü.</p>";
+			$ileti .= "<p>Eski fiyat: " . $eski_fiyat_str . " → Yeni fiyat: " . $yeni_fiyat_str . "</p>";
+			$ileti .= "<p><a href=\"" . $ilan_url . "\">İlanı görüntüle</a></p>";
+			if ($uye_email) {
+				auto_mail_add($uye_ad, $uye_email, "Favori ilanınızın fiyatı düştü - " . $mail_baslik, $ileti);
+			}
+			// Guncel fiyati kaydet
+			uye_bilgi_guncelle('favori_fiyat_' . $icerik_id, $yeni_fiyat_str, $uye_id);
+		} elseif ($yeni != $eski && $yeni > 0) {
+			// Fiyat degisti (artis) -> sadece kaydet
+			uye_bilgi_guncelle('favori_fiyat_' . $icerik_id, $yeni_fiyat_str, $uye_id);
+		}
+	}
+}
 ?>

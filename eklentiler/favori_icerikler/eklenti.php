@@ -23,6 +23,11 @@ function favori_ekle($icerik_id,$uye_id=null) {
 		$tarih=tarih_saat();
 			$ekle=mysqli_query($baglan,"insert into favoriler set id='$icerik_id', uye_id='$uye_id', tarih='$tarih'");
 			if ($ekle) {
+				// Favori fiyatini kaydet (fiyat dususu bildirimi icin)
+				$fiyat = ekstra_bilgi_getir('fiyat', $icerik_id, 'ilan');
+				if ($fiyat !== null && $fiyat !== '') {
+					uye_bilgi_guncelle('favori_fiyat_' . (int)$icerik_id, $fiyat, $uye_id);
+				}
 				return true;
 			} else {
 				return false;
