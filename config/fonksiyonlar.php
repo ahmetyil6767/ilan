@@ -3676,4 +3676,49 @@ function csrf_require()
 		exit();
 	}
 }
+/*
+ * Satici derecelendirme (rating) yardimcilari.
+ */
+function satici_puan_ortalama($satici_id)
+{
+	global $baglan;
+	$satici_id = (int)$satici_id;
+	if ($satici_id < 1) { return 0; }
+	$s = mysqli_prepare($baglan, "select avg(puan) from derecelendirmeler where satici_id=?");
+	mysqli_stmt_bind_param($s, "i", $satici_id);
+	mysqli_stmt_execute($s);
+	mysqli_stmt_bind_result($s, $ort);
+	mysqli_stmt_fetch($s);
+	mysqli_stmt_close($s);
+	return $ort ? round((float)$ort, 1) : 0;
+}
+
+function satici_puan_sayisi($satici_id)
+{
+	global $baglan;
+	$satici_id = (int)$satici_id;
+	if ($satici_id < 1) { return 0; }
+	$s = mysqli_prepare($baglan, "select count(*) from derecelendirmeler where satici_id=?");
+	mysqli_stmt_bind_param($s, "i", $satici_id);
+	mysqli_stmt_execute($s);
+	mysqli_stmt_bind_result($s, $say);
+	mysqli_stmt_fetch($s);
+	mysqli_stmt_close($s);
+	return (int)$say;
+}
+
+function satici_puan_vermis_mi($satici_id, $uye_id)
+{
+	global $baglan;
+	$satici_id = (int)$satici_id;
+	$uye_id = (int)$uye_id;
+	if ($satici_id < 1 || $uye_id < 1) { return false; }
+	$s = mysqli_prepare($baglan, "select id from derecelendirmeler where satici_id=? and uye_id=? limit 1");
+	mysqli_stmt_bind_param($s, "ii", $satici_id, $uye_id);
+	mysqli_stmt_execute($s);
+	mysqli_stmt_store_result($s);
+	$var = mysqli_stmt_num_rows($s) > 0;
+	mysqli_stmt_close($s);
+	return $var;
+}
 ?>

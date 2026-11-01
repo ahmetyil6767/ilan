@@ -64,6 +64,7 @@ tema_header(); ?>
 				<div class="panel-body">
 					<?php if ($toplam_ilan>0) { 
 						echo _LANG('profile_listing_count', array($ad_soyad, $toplam_ilan));
+echo " <span style='color:#FF7900;margin-left:8px;'>" . str_repeat('★', (int)round(satici_puan_ortalama($id))) . str_repeat('☆', 5 - (int)round(satici_puan_ortalama($id))) . " (" . satici_puan_sayisi($id) . ")</span>";
 					} else {
 						echo _LANG('profile_no_listings', array($ad_soyad));
 					} ?>

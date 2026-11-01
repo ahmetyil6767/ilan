@@ -658,6 +658,21 @@ tema_header(); ?>
 						</div>						
 						<?php }	?>
 						
+						<!-- Satici derecelendirme -->
+						<?php
+						$satici_ort = satici_puan_ortalama($yazar);
+						$satici_say = satici_puan_sayisi($yazar);
+						?>
+						<div class="text-center mt10">
+							<div style="font-size:14px;color:#FF7900;">
+								<?php for ($si=1;$si<=5;$si++) { echo $si <= round($satici_ort) ? '★' : '☆'; } ?>
+								<span style="color:#666;font-size:12px;">(<?php echo $satici_say; ?>)</span>
+							</div>
+							<?php if ($oturum_id && $oturum_id != $yazar && !satici_puan_vermis_mi($yazar,$oturum_id)) { ?>
+							<a id="puanla_buton" data-toggle="modal" data-target="#puanla" class="c_pointer" style="font-size:12px;"><i class="ion-star"></i> Değerlendir</a>
+							<?php } ?>
+						</div>
+						
 						<?php if ((tema_ayar("mobil_fixed_iletisim")!=2) and isset($cep_tel) and $cep_tel!="") { ?>
 						<div class="mobil_fixed_iletisim visible-xs">
 							<div class="iletisim_bilgi"><i class="fa fa-user"></i></i>İlan sahibi: <?php echo getir("uyeler","ad_soyad",$yazar); ?> (<?php echo $magaza_adi; ?>)</div>
@@ -712,6 +727,21 @@ tema_header(); ?>
 							<a href="<?php echo ozel_url("giris-yap"); ?>?m=1"><?php echo _LANG("s_ilan_sahibine_mesaj"); ?></a>
 						</div>						
 						<?php }	?>
+						
+						<!-- Satici derecelendirme -->
+						<?php
+						$satici_ort = satici_puan_ortalama($yazar);
+						$satici_say = satici_puan_sayisi($yazar);
+						?>
+						<div class="text-center mt10">
+							<div style="font-size:14px;color:#FF7900;">
+								<?php for ($si=1;$si<=5;$si++) { echo $si <= round($satici_ort) ? '★' : '☆'; } ?>
+								<span style="color:#666;font-size:12px;">(<?php echo $satici_say; ?>)</span>
+							</div>
+							<?php if ($oturum_id && $oturum_id != $yazar && !satici_puan_vermis_mi($yazar,$oturum_id)) { ?>
+							<a id="puanla_buton" data-toggle="modal" data-target="#puanla" class="c_pointer" style="font-size:12px;"><i class="ion-star"></i> Değerlendir</a>
+							<?php } ?>
+						</div>
 						
 						<?php if ((tema_ayar("mobil_fixed_iletisim")!=2) and isset($cep_tel) and $cep_tel!="") { ?>
 						<div class="mobil_fixed_iletisim visible-xs">
@@ -843,7 +873,7 @@ tema_header(); ?>
 	</form>
   </div>
 </div>
-<?php if ($video_url) { 
+<!-- Satici degerlendirme modali --><div class="modal fade" id="puanla" tabindex="-1" role="dialog" aria-labelledby="puanla">  <div class="modal-dialog" role="document">	<form id="puanla_form" action="" method="post" onsubmit="return false;">    <div class="modal-content">      <div class="modal-header">        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        <h4 class="modal-title">Satıcıyı Değerlendir</h4>      </div>      <div class="modal-body">		<div class="form-group">			<label>Puan</label>			<select class="form-control" name="puan" required>				<option value="5">5 - Mükemmel</option>				<option value="4">4 - İyi</option>				<option value="3">3 - Orta</option>				<option value="2">2 - Zayıf</option>				<option value="1">1 - Kötü</option>			</select>		</div>		<div class="form-group">			<label>Yorum (isteğe bağlı)</label>			<textarea class="form-control" name="yorum" rows="3"></textarea>			<input type="hidden" name="satici_id" value="<?php echo $yazar; ?>">		</div>      </div>      <div class="modal-footer">        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>        <button type="submit" class="btn btn-warning"><i class="ion-star"></i> Gönder</button>      </div>    </div>	</form>  </div></div><script>$("body").on("submit","#puanla_form",function(){	$.ajax({		type:"post",		url:"<?php echo tema_dizini(); ?>/ajax.php?islem=satici_puanla",		data:$("#puanla_form").serialize(),		success:function(cevap){			var r = JSON.parse(cevap.replace(/^\uFEFF/,""));			if (r.ok) { location.reload(); }			else { alert(r.msg || "Hata"); }		}	});	return false;});</script><?php if ($video_url) { 
 $video_id=youtube_video_id($video_url);
 ?>
 <!-- Video Modal -->

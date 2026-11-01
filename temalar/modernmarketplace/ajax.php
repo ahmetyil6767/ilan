@@ -1426,3 +1426,37 @@ if ($islem=="sikayet_gonder") {
 	echo '<div class="alert alert-success autoclose">Şikayetiniz alındı. İncelenecektir.</div>';
 	exit();
 }
+
+if ($islem=="satici_puanla") {
+	header('Content-Type: application/json');
+	$satici_id = isset($_POST["satici_id"]) ? (int)$_POST["satici_id"] : 0;
+	$puan = isset($_POST["puan"]) ? (int)$_POST["puan"] : 0;
+	$yorum = isset($_POST["yorum"]) ? trim((string)$_POST["yorum"]) : '';
+	$uye_id = isset($_SESSION["oturum_id"]) ? (int)$_SESSION["oturum_id"] : 0;
+	if ($uye_id < 1 || $satici_id < 1 || $puan < 1 || $puan > 5) {
+		echo json_encode(array("ok"=>false,"msg"=>"Eksik bilgi"));
+		exit();
+	}
+	if ($satici_id === $uye_id) {
+		echo json_encode(array("ok"=>false,"msg"=>"Kendinizi puanlayamazsiniz"));
+		exit();
+	}
+	global $baglan;
+	$tarih_saat = tarih_saat();
+	$var = satici_puan_vermis_mi($satici_id, $uye_id);
+	if ($var) {
+		$s = mysqli_prepare($baglan, "update derecelendirmeler set puan=?, yorum=?, tarih_saat=? where satici_id=? and uye_id=?");
+		mysqli_stmt_bind_param($s, "issii", $puan, $yorum, $tarih_saat, $satici_id, $uye_id);
+	} else {
+		$s = mysqli_prepare($baglan, "insert into derecelendirmeler (satici_id, uye_id, puan, yorum, tarih_saat) values (?,?,?,?,?)");
+		mysqli_stmt_bind_param($s, "iiiss", $satici_id, $uye_id, $puan, $yorum, $tarih_saat);
+	}
+	if ($s) {
+		mysqli_stmt_execute($s);
+		mysqli_stmt_close($s);
+	}
+	$uye_ad = getir("uyeler", "ad_soyad", $uye_id);
+	bildirim_ekle(sprintf("Yeni degerlendirme: %s size %d yildiz verdi.", $uye_ad, $puan), $satici_id, 1);
+	echo json_encode(array("ok"=>true));
+	exit();
+}
