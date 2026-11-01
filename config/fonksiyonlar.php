@@ -2475,6 +2475,16 @@ function resim_yukle($file, $klasor, $boyutlandir = NULL, $cikti = NULL, $orijin
 		if ($icerik_dogrulama === false) {
 			$kontrol = 0;
 		}
+		// MIME tipi beyaz liste kontrolu (uzanti + icerik + MIME)
+		if ($kontrol == 1 && function_exists('finfo_open')) {
+			$finfo = finfo_open(FILEINFO_MIME_TYPE);
+			$mime = $finfo ? finfo_file($finfo, (string)$resim_dizisi['tmp_name']) : '';
+			if ($finfo) { finfo_close($finfo); }
+			$izinli_mime = array('image/jpeg','image/png','image/gif','image/webp');
+			if (!in_array($mime, $izinli_mime, true)) {
+				$kontrol = 0;
+			}
+		}
 
 		if (!$klasor) {
 			$klasor = 'images';
@@ -2568,17 +2578,28 @@ function resim_yukle($file, $klasor, $boyutlandir = NULL, $cikti = NULL, $orijin
 function sil($url)
 {
 	if (empty($url)) { return false; }
-	$ayir = explode('/uploads/', $url);
-	if (count($ayir) < 2 || empty($ayir[1])) { return false; }
-	$resim_adi = $ayir[1];
-	$tam_yol = ROOT_DIR . ('/uploads/' . $resim_adi);
-	if (is_file($tam_yol)) {
-		$sil = unlink($tam_yol);
-		if ($sil) {
-			return true;
-		}
-	}
-	return false;
+	// URL'den /uploads/ sonrasini al (case-insensitive)
+	$pos = stripos((string)$url, '/uploads/');
+	if ($pos === false) { return false; }
+	$resim_adi = substr((string)$url, $pos + strlen('/uploads/'));
+	// URL-decode edilmis traversal denemelerini de yakala
+	$resim_adi = urldecode($resim_adi);
+	// Path traversal / null byte / klasor gecisi korumasi
+	if ($resim_adi === '' || strpos($resim_adi, "\0") !== false) { return false; }
+	$resim_adi = str_replace('\\', '/', $resim_adi);
+	if (strpos($resim_adi, '../') !== false || strpos($resim_adi, '..') !== false) { return false; }
+	$resim_adi = ltrim($resim_adi, '/');
+	if ($resim_adi === '' || strpos($resim_adi, '/') === 0) { return false; }
+	$uploads_dir = realpath(ROOT_DIR . '/uploads');
+	if ($uploads_dir === false) { return false; }
+	$tam_yol = ROOT_DIR . '/uploads/' . $resim_adi;
+	$tam_yol_real = realpath($tam_yol);
+	// Cozumlenen yol uploads/ dizini icinde mi? (path traversal engeli)
+	if ($tam_yol_real === false) { return false; }
+	if (strpos($tam_yol_real, $uploads_dir . DIRECTORY_SEPARATOR) !== 0) { return false; }
+	if (!is_file($tam_yol_real)) { return false; }
+	$sil = unlink($tam_yol_real);
+	return (bool)$sil;
 }
 
 function galeri_id($offset = NULL)
