@@ -57,3 +57,13 @@ RewriteRule ^404 404.php [L]
 # LoadModule php_module) .htaccess'ta bir handler tanimlamak gerekmiyor ve
 # php72 handler'i tanimli olmadigi icin PHP dosyalari islenemez hale geliyordu.
 # Vhost kendi <FilesMatch "\.php$"> SetHandler satiri ile islemeyi sagliyor.
+# Hassas config dosyalarina dogrudan erisimi engelle
+<FilesMatch "^(db\.php|yapilandir\.php)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+  </IfModule>
+</FilesMatch>
