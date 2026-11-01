@@ -121,3 +121,6 @@ npm-debug.log*
 /build/
 /dist/
 .aider*
+
+# Stray binaries
+*.exe
