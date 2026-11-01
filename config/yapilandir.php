@@ -121,6 +121,14 @@ if (@$toplam_yorum>0) {
 	}
 	$jaayquickpanel_menu[]=array("baslik"=>"Yorumlar $yeni_yorum_badge","url"=>"yorumlar.php","ikon"=>"comments","sira"=>20);	
 }
+@$toplam_sikayet=mysqli_num_rows(mysqli_query($baglan,"select * from sikayetler"));
+if (@$toplam_sikayet>0) {
+	$yeni_sikayet=mysqli_num_rows(mysqli_query($baglan,"select * from sikayetler where durum='0'"));
+	if ($yeni_sikayet>0) {
+		$yeni_sikayet_badge="<div class='badge'>$yeni_sikayet</div>";
+	}
+	$jaayquickpanel_menu[]=array("baslik"=>"Şikayetler $yeni_sikayet_badge","url"=>"sikayetler.php","ikon"=>"flag","sira"=>21);
+}
 $hizli_linkler=array(
 array("baslik"=>_LANG('y_tum_yazilar'),"url"=>"icerik.php?tip=yazi","ikon"=>"pencil","sira"=>20),
 array("baslik"=>_LANG('y_yeni_yazi'),"url"=>"icerik.php?tip=yazi&islem=ekle","ikon"=>"plus","sira"=>10),

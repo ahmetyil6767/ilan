@@ -745,6 +745,7 @@ if (mysqli_num_rows(mysqli_query($baglan,"SHOW TABLES LIKE '%kayitlar%'"))==0) {
     
 }
 
+if (!function_exists('resim_getir')) {
 function resim_getir($boyut=null,$icerik_id=null) {
 	if (!$boyut) {
 		$boyut="full";
@@ -757,6 +758,7 @@ function resim_getir($boyut=null,$icerik_id=null) {
 		$resim_url=tema_dizini()."/img/yok/$boyut.png";
 	}
 	return $resim_url;
+}
 }
 
 $bilesen_alani[]=array("id"=>"anasayfa_sidebar","baslik"=>"Anasayfa Sidebar","aciklama"=>_LANG('tx_anasayfa_sol_menu_alani_menu_ve_reklam_alanlar'),"resim"=>tema_dizini()."/img/bilesen/anasayfa_sidebar.png");

@@ -1400,3 +1400,28 @@ if ($islem=="mk_favori") {
 	exit();
 }
 
+if ($islem=="sikayet_gonder") {
+	header('Content-Type: application/json');
+	$icerik_id = isset($_GET["ilan_id"]) ? (int)$_GET["ilan_id"] : (isset($_POST["ilan_id"]) ? (int)$_POST["ilan_id"] : 0);
+	$mesaj = isset($_POST["mesaj"]) ? trim((string)$_POST["mesaj"]) : '';
+	$ad_soyad = isset($_POST["ad_soyad"]) ? trim((string)$_POST["ad_soyad"]) : '';
+	$uye_id = isset($_SESSION["oturum_id"]) ? (int)$_SESSION["oturum_id"] : 0;
+	if ($icerik_id < 1 || $mesaj === '') {
+		echo '<div class="alert alert-danger autoclose">Lütfen şikayet sebebinizi belirtiniz.</div>';
+		exit();
+	}
+	global $baglan;
+	$tarih_saat = tarih_saat();
+	$neden = mb_substr($mesaj, 0, 100);
+	$s = mysqli_prepare($baglan, "insert into sikayetler (icerik_id, uye_id, neden, aciklama, tarih_saat, durum) values (?,?,?,?,?,0)");
+	if ($s) {
+		mysqli_stmt_bind_param($s, "iisss", $icerik_id, $uye_id, $neden, $mesaj, $tarih_saat);
+		mysqli_stmt_execute($s);
+		mysqli_stmt_close($s);
+	}
+	// Admin bildirimi
+	$ilan_baslik = _DIL_BASLIK(getir("icerik","baslik",$icerik_id), $icerik_id, "sayfa");
+	bildirim_ekle(sprintf(_LANG('b_yeni_sikayet_bildirimi'), $ilan_baslik), 0, 0);
+	echo '<div class="alert alert-success autoclose">Şikayetiniz alındı. İncelenecektir.</div>';
+	exit();
+}
