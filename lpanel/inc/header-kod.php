@@ -16,8 +16,10 @@
 <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css"/>
 <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/ckeditor/ckeditor.js"></script>
-<script>window.__ckLang = '<?php echo aktif_dil(); ?>'; if (typeof CKEDITOR !== 'undefined') { CKEDITOR.config.language = window.__ckLang; }</script>
+<!-- Summernote WYSIWYG (CKEditor yerine - MIT lisansli, ucretsiz) -->
+<link rel="stylesheet" href="js/summernote/summernote.min.css">
+<script src="js/summernote/summernote.min.js"></script>
+<script src="js/summernote/summernote-tr-TR.min.js"></script>
 <link href="js/fileuploader/jquery.fileuploader.css" media="all" rel="stylesheet">
 <script src="js/fileuploader/jquery.fileuploader.min.js" type="text/javascript"></script>
 <script src="js/fileuploader/custom.js" type="text/javascript"></script>

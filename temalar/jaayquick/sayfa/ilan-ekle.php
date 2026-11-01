@@ -232,7 +232,9 @@ $secili_yol=array_reverse($secili_yol);
 $secili_yol_json=json_encode($secili_yol, JSON_UNESCAPED_UNICODE);
 
 tema_header(); ?>
-<style>
+<link rel="stylesheet" href="<?php echo site_url(); ?>/lpanel/js/summernote/summernote.min.css">
+<script src="<?php echo site_url(); ?>/lpanel/js/summernote/summernote.min.js"></script>
+<script src="<?php echo site_url(); ?>/lpanel/js/summernote/summernote-tr-TR.min.js"></script><style>
 .wiz-progress { display:flex; justify-content:space-between; margin:0 0 24px; padding:0; list-style:none; position:relative; }
 .wiz-progress::before { content:''; position:absolute; top:18px; left:0; right:0; height:3px; background:#e6eaf2; z-index:0; }
 .wiz-progress li { position:relative; z-index:1; text-align:center; flex:1; }
@@ -525,7 +527,7 @@ tema_header(); ?>
 								<div class="form-section-title"><i class="fa fa-align-left"></i> <?php echo _LANG('post_description'); ?></div>
 								<div class="form-group">
 									<label for="icerik"><?php echo _LANG('post_description'); ?> <span style="color:#e74c3c;">*</span></label>
-									<textarea class="form-control ckeditor" id="icerik" name="icerik" rows="10" required><?php echo @htmlspecialchars($_POST['icerik']); ?></textarea>
+									<textarea class="form-control" id="icerik" name="icerik" rows="10" required><?php echo @htmlspecialchars($_POST['icerik']); ?></textarea>
 								</div>
 							</div>
 							
@@ -956,7 +958,9 @@ function validateStep(n){
 		var baslik = document.getElementById('baslik').value.trim();
 		if (!baslik) { alert('<?php echo _LANG('msj_baslik_gerekli'); ?>'); document.getElementById('baslik').focus(); return false; }
 		var icerik = '';
-		if (window.CKEDITOR && CKEDITOR.instances && CKEDITOR.instances.icerik) { icerik = CKEDITOR.instances.icerik.getData(); }
+		var icerik = '';
+		if (window.jQuery && jQuery('#icerik').summernote) { icerik = jQuery('#icerik').summernote('code'); }
+		else { var ta = document.getElementById('icerik'); if (ta) icerik = ta.value; }
 		else { var ta = document.getElementById('icerik'); if (ta) icerik = ta.value; }
 		if (!icerik || !icerik.replace(/<[^>]*>/g,'').trim()) { alert('<?php echo _LANG('msj_icerik_gerekli'); ?>'); return false; }
 	}
@@ -985,7 +989,7 @@ function iletisimDegisti(val) {
 	else { $('#ozel_iletisim_alan').hide(); }
 }
 $(document).ready(function() {
-	paraBirimiDegisti($('#para_birimi').val());
+	if (jQuery('#icerik').length) { jQuery('#icerik').summernote({ height: 250, lang: 'tr-TR' }); }	paraBirimiDegisti($('#para_birimi').val());
 	iletisimDegisti($('#iletisim').val());
 });
 </script>

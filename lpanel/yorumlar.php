@@ -191,8 +191,8 @@ $yorum_sayisi=mysqli_num_rows($sql);
 					<?php form_elemani("text","email_adresi",_LANG('p_email_adresi'),bilgi_getir("yorumlar","ad_soyad",$id)); ?>
 					<?php textarea_olustur(null,"yorum","Yorum",bilgi_getir("yorumlar","yorum",$id),5); ?>
 					<script>
-					CKEDITOR.replace( 'yorum', {
-						customConfig: '/custom/ckeditor_mini.js'
+					$(document).ready(function(){
+						$('#yorum').summernote({ height: 200, lang: 'tr-TR' });
 					});
 					</script>
 					<?php select_olustur("durum","Durum",array(array("deger"=>0,"baslik"=>"Pasif"),array("deger"=>1,"baslik"=>"Aktif")),bilgi_getir("yorumlar","durum",$id)); ?>
