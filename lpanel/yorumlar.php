@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$islem=$_GET["islem"];
 @$id=$_GET["id"];
@@ -115,6 +116,7 @@ $yorum_sayisi=mysqli_num_rows($sql);
 			<h3 class="pull-left bolum-baslik"><?php echo _LANG('p_yorumlar_k'); ?></h3>
 			<?php if ($datatable==0) { ?>			
 			<form class="form-inline pull-right kayit_goster visible-md visible-lg" action="" method="post">
+<?php echo csrf_field(); ?>
 			  <div class="form-group">
 				<input type="text" class="form-control input-sm nofocus" id="kayit" name="kacarli" placeholder="<?php echo _LANG('p_listeleme_adedi'); ?>">
 			  </div>
@@ -184,6 +186,7 @@ $yorum_sayisi=mysqli_num_rows($sql);
 				<div class="panel-heading"><?php echo _LANG('p_yorum_guncelle'); ?></a></div>
 				<div class="panel-body">
 				<form method="post" action="">
+<?php echo csrf_field(); ?>
 					<?php form_elemani("text","ad_soyad",_LANG('p_ad_soyad'),bilgi_getir("yorumlar","ad_soyad",$id)); ?>
 					<?php form_elemani("text","email_adresi",_LANG('p_email_adresi'),bilgi_getir("yorumlar","ad_soyad",$id)); ?>
 					<?php textarea_olustur(null,"yorum","Yorum",bilgi_getir("yorumlar","yorum",$id),5); ?>

@@ -8,6 +8,7 @@ if (!$oturum_id) {
 
 @$buton=mysqli_real_escape_string($baglan,$_POST["buton"]);
 if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 	$isaret=$_POST["isaret"];
 	if ($buton=="okundu") {
 		foreach($isaret as $yaz => $x) {
@@ -37,7 +38,8 @@ tema_header(); ?>
 			<?php include("temalar/$aktif_tema/inc/alert.php"); ?>
 			<?php if ($bildirim_sayisi==0) {echo "<div class='alert alert-danger'><?php echo _LANG('s_bildirim_bulunamadi'); ?></div>";} else { ?>
 			<form action="" method="post">
-			<div class="panel panel-default jaayquick with_footer">
+<?php echo csrf_field(); ?>
+<div class="panel panel-default jaayquick with_footer">
 				<div class="panel-body" style="padding:0 !important;">
 					<table class="table table-default table-hover profil padding" style="margin-bottom:0;">
 						<thead>

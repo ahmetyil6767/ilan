@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$id=$_GET["id"];
 @$ayar=$_GET["ayar"];
@@ -244,6 +245,7 @@ $sql=mysqli_query($baglan,"select * from ayarlar");
 				<?php if ($tab_sayisi==0) {echo "<div class='panel-heading'>" . _LANG("p_site_ayarlari") . "</div>"; } ?>
 				<div class="panel-body">
 				<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 				<?php
 				echo "<div class='tab-content'>";
 				$tab_say=1;
@@ -373,6 +375,7 @@ $sql=mysqli_query($baglan,"select * from ayarlar");
 			<a href="ayarlar.php?gorunum=klasik" class="btn btn-default"><?php echo _LANG('p_klasik_gorunum'); ?></a>	
 			<?php if ($datatable==0) { ?>			
 			<form class="form-inline pull-right kayit_goster visible-md visible-lg" action="" method="post">
+<?php echo csrf_field(); ?>
 			  <div class="form-group">
 				<input type="text" class="form-control input-sm nofocus" id="kayit" name="kacarli" placeholder="<?php echo _LANG("p_listeleme_adedi"); ?>">
 			  </div>
@@ -385,6 +388,7 @@ $sql=mysqli_query($baglan,"select * from ayarlar");
 					<div class="panel-heading"><?php echo _LANG('p_ayar_ekle'); ?></div>
 					<div class="panel-body">
 					<form method="post" action="">
+<?php echo csrf_field(); ?>
 						<?php form_elemani("text","anahtar",_LANG('p_anahtar')); ?>
 						<?php form_elemani("text","deger",_LANG('p_deger')); ?>
 						<?php form_buton("buton",_LANG('p_ayar_ekle_k')); ?>
@@ -396,6 +400,7 @@ $sql=mysqli_query($baglan,"select * from ayarlar");
 					<div class="panel-heading"><?php echo _LANG('p_ayar_guncelle'); ?></div>
 					<div class="panel-body">
 					<form method="post" action="">
+<?php echo csrf_field(); ?>
 						<?php form_elemani("text","anahtar",_LANG('p_anahtar'),$ayar,null,"disabled"); ?>
 						<?php form_elemani("text","deger",_LANG('p_deger'),ayar_getir($ayar)); ?>
 						<?php form_buton("buton",_LANG('p_ayar_guncelle_k')); ?>

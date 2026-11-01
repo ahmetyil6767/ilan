@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 // Debug removed
 $l_say=count($liste);
@@ -438,6 +439,7 @@ if ($panel_sablon=="fullwidth") {
 					<div class="row">
 						<div class="col-md-20">
 						<form action="" method="post" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 <input type="hidden" name="liste" value="<?php echo htmlspecialchars($get_liste); ?>">
 							<div class="panel panel-default">
 							<div class="panel-heading"><?php if ($liste_baslik) {echo $liste_baslik;} else {echo _LANG('p_oge');} ?> <?php echo _LANG('p_ekle'); ?></div>
@@ -594,6 +596,7 @@ if ($panel_sablon=="fullwidth") {
 							$sira=mysqli_fetch_array(mysqli_query($baglan,"select * from listeler where l_id='$id'"))["sira"];
 							?>
 							<form action="" method="post" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 <input type="hidden" name="liste" value="<?php echo htmlspecialchars($get_liste); ?>">
 							<div class="panel panel-default">
 								<div class="panel-heading"><?php if ($liste_baslik) {echo "$liste_baslik";} ?> #<?php echo $id; ?><?php echo _LANG('p_sira_ek'); ?> <?php echo $sira; ?></div>

@@ -45,6 +45,8 @@ if ($kat) {
 
 // FORM ���?LEMLER��
 if ($buton==_LANG('tx_ilani_kaydet') or $buton==_LANG('tx_ilani_yayinla') or $buton==_LANG('tx_hemen_yayinla')) {
+	// CSRF dogrulamasi
+	if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); yonlendir(ozel_url("ilan-ekle").($kat ? "?kat=$kat" : "")); exit(); }
 	@$baslik=trim($_POST["baslik"]);
 	@$icerik=addslashes($_POST["icerik"]);
 	@$kategori_dizisi=$_POST["kategori"];
@@ -471,6 +473,7 @@ tema_header(); ?>
 					</ul>
 					
 					<form action="" method="post" enctype="multipart/form-data" id="ilan_form">
+					<?php echo csrf_field(); ?>
 						
 						<!-- STEP 1: Kategori -->
 						<div class="wiz-step active" data-step="1">

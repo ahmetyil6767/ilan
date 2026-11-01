@@ -61,6 +61,7 @@ tema_header(); ?>
 				</div>
 				<div class="panel-body">
 					<?php if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 						if ($_POST["ad_soyad"]) {
 							guncelle("uyeler","ad_soyad",$_POST["ad_soyad"],$oturum_id);
 						}
@@ -149,7 +150,8 @@ tema_header(); ?>
 					
 					
 					<form action="" method="post">
-					<div class="tab-content">
+<?php echo csrf_field(); ?>
+<div class="tab-content">
 						<div role="tabpanel" class="tab-pane fade in active" id="bilgiler">
 						
 						<?php 

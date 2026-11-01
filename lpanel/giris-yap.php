@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 if (@$_SESSION["yonetici_id"]) {
 	if (yonetici_mi($_SESSION["yonetici_id"])!=true) {
 		session_destroy();
@@ -262,6 +263,7 @@ if ($logout==1) {
 					if (time()-@$_SESSION["son_deneme"]>30) {						
 				?>
 				<form method="post" action="">
+<?php echo csrf_field(); ?>
 					<div class="field">
 						<label><?php echo _LANG("login_kimlik"); ?></label>
 						<div class="input-wrap">

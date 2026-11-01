@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$islem=$_GET["islem"];
 @$menu=$_GET["menu"];
@@ -363,6 +364,7 @@ if ($panel_sablon=="fullwidth") {
 				<div class="panel-heading"><?php echo _LANG('p_menu_olustur'); ?></div>
 				<div class="panel-body">
 				<form method="post" action="">
+<?php echo csrf_field(); ?>
 					<?php form_elemani("text","menu_baslik",_LANG('p_menu_title_label'),null,null,null,"required"); ?>
 					<?php $tema_menuleri_ayar[]=array("deger"=>"","baslik"=>_LANG('p_select')); select_olustur("menu_pozisyon",_LANG('p_menu_position'),$tema_menuleri_ayar,$menu); ?>
 					<?php form_buton("buton",_LANG('p_menu_create'),"primary"); ?>
@@ -381,6 +383,7 @@ if ($panel_sablon=="fullwidth") {
 						<div class="panel-heading"><?php echo _LANG('p_ozel_link'); ?></div>
 						<div class="panel-body">
 						<form method="post" action="">
+<?php echo csrf_field(); ?>
 							<?php form_elemani("text","baslik",_LANG('p_link_title')); ?>
 							<?php form_elemani("text","url",_LANG('p_url')); ?>
 							<div class="form-group">
@@ -434,6 +437,7 @@ if ($panel_sablon=="fullwidth") {
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="icerik_<?php echo is_array($tip_name) ? implode(", ", $tip_name) : $tip_name; ?>">
 								<form method="post" action="">
+<?php echo csrf_field(); ?>
 								<div class="multiple_checkbox_group">
 									<?php
 									$sql=mysqli_query($baglan,"select * from icerik where tip='$tip_name' order by baslik asc");
@@ -486,7 +490,8 @@ if ($panel_sablon=="fullwidth") {
 								$sql=mysqli_query($baglan,"select * from kategoriler where tip='$tip_kategori_name' and sinif='kategori' order by baslik asc");
 								$toplam=mysqli_num_rows($sql);
 								if ($toplam<250) { ?>
-								<form method="post" action="">								
+								<form method="post" action="">
+<?php echo csrf_field(); ?>								
 								<div class="multiple_checkbox_group">
 									<?php 
 									while ($dizi=mysqli_fetch_array($sql)) {
@@ -548,6 +553,7 @@ if ($panel_sablon=="fullwidth") {
 							if ($toplam<250) {
 							?>
 								<form method="post" action="">
+<?php echo csrf_field(); ?>
 								<div class="multiple_checkbox_group">
 									<?php
 																
@@ -608,6 +614,7 @@ if ($panel_sablon=="fullwidth") {
 						<div class="panel-heading"><?php echo _LANG('p_link_guncelle'); ?></div>
 						<div class="panel-body">
 						<form method="post" action="">
+<?php echo csrf_field(); ?>
 							<?php form_elemani("text","baslik",_LANG('p_link_title'),$guncelle_baslik); ?>
 							<?php form_elemani("text","url",_LANG('p_url'),$guncelle_url); ?>
 							<div class="form-group">
@@ -635,6 +642,7 @@ if ($panel_sablon=="fullwidth") {
 					</div>
 				<?php } ?>
 			<form action="" method="post">
+<?php echo csrf_field(); ?>
 					<div class="panel panel-default">
 						<div class="panel-heading"><?php echo is_array($menu) ? implode(", ", $menu) : $menu; ?></div>
 						<?php if ($link_sayisi==0) {echo "<div class='panel-body'>" . _LANG('p_no_links') . "</div>";} else { ?>
@@ -687,6 +695,7 @@ if ($panel_sablon=="fullwidth") {
 				</form>
 				<div class="well well_jaayquick">
 					<form action="" method="post">
+<?php echo csrf_field(); ?>
 						<?php form_elemani("text","menu_baslik",_LANG('p_menu_title_label'),$menu,null,null,"required"); ?>
 						<?php $tema_menuleri_ayar[]=array("deger"=>"","baslik"=>_LANG('p_select')); select_olustur("menu_pozisyonu",_LANG('p_menu_position'),$tema_menuleri_ayar,menu_pozisyonu($menu_id)); ?>
 						<?php form_buton("menu_pozisyonu_guncelle_buton",_LANG('p_guncelle'),"primary"); ?>

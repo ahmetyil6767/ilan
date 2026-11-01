@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$sil=$_GET["sil"];
 @$tip=$_GET["tip"];
@@ -121,6 +122,7 @@ $toplam=mysqli_num_rows($sql);
 			<?php if ($toplam>0) { ?><a href="bildirimler.php?islem=tumunu_sil" class="btn btn-danger" onclick="return confirm('<?php echo _LANG("p_bildirim_tum_sil_onay"); ?>')"><i class="fa fa-trash"></i><?php echo _LANG('p_tumunu_sil'); ?></a><?php } ?>
 			<?php if ($datatable==0) { ?>			
 			<form class="form-inline pull-right kayit_goster visible-md visible-lg" action="" method="post">
+<?php echo csrf_field(); ?>
 			  <div class="form-group">
 				<input type="text" class="form-control input-sm nofocus" id="kayit" name="kacarli" placeholder="<?php echo _LANG('p_listeleme_adedi'); ?>"
 			  </div>
@@ -160,6 +162,7 @@ $toplam=mysqli_num_rows($sql);
 			<?php if ($toplam>0) { ?><a href="bildirimler.php?tip=hata&&tip=hata&islem=tumunu_sil" class="btn btn-danger" onclick="return confirm('<?php echo _LANG("p_hata_rapor_tum_sil_onay"); ?>')"><?php echo _LANG('p_tumunu_sil'); ?></a><?php } ?>
 			<?php if ($datatable==0 and $toplam>0) { ?>			
 				<form class="form-inline pull-right kayit_goster visible-md visible-lg" action="" method="post">
+<?php echo csrf_field(); ?>
 				  <div class="form-group">
 					<input type="text" class="form-control input-sm nofocus" id="kayit" name="kacarli" placeholder="<?php echo _LANG('p_listeleme_adedi'); ?>"
 				  </div>

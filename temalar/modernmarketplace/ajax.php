@@ -9,6 +9,7 @@ $islem=isset($_GET["islem"])?$_GET["islem"]:null;
 if (!strstr(ref_url(),site_url())) {
 	die("Hata: Erisim engellendi.");
 }
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["csrf_token"]) && !csrf_verify()) { echo json_encode(array("ok"=>false,"msg"=>"CSRF")); exit(); }
 if (!$islem) {
 	die("Hata");
 }

@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 $tip=isset($_GET["tip"])?$_GET["tip"]:"";
 if ($tip=="") {$tip="yazi";}
@@ -959,6 +960,7 @@ if ($toplu_buton) {
 			
 			<?php if ($datatable==0 and $toplam>0) { ?>
 			<form class="form-inline pull-right kayit_goster visible-md visible-lg" action="" method="post">
+<?php echo csrf_field(); ?>
 			  <div class="form-group">
 				<input type="text" class="form-control input-sm nofocus" id="kayit" name="kacarli" placeholder="<?php echo _LANG('p_listeleme_adedi'); ?>>
 			  </div>
@@ -1042,6 +1044,7 @@ if ($toplu_buton) {
 			<?php } ?>
 			<?php if ($icerik_sayisi>0) { ?>
 			<form action="" method="post">
+<?php echo csrf_field(); ?>
 			<div class="table-responsive">
 			<table id="listele_table" class="table table-bordered table-hover" data-order='[[<?php echo $datatable_sirala; ?>,"<?php echo $datatable_sirala_tip; ?>"]]' data-page-length='15'>
 				<thead>
@@ -1194,6 +1197,7 @@ if ($toplu_buton) {
 			<?php jaayquick(@$panel_icerik_ust_kod); ?>
 			<div class="row">
 			<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 				<div class="<?php echo $icerik_sol_div; ?>">
 					<?php jaayquick(@$panel_icerik_sol_kod); ?>
 							<?php if ($tip_baslik_yok!="1") {form_elemani("text","baslik",$tip_baslik,@$baslik,null,null,1); } ?>
@@ -1622,6 +1626,7 @@ if ($toplu_buton) {
 			<?php jaayquick(@$panel_icerik_ust_kod); ?>
 			<div class="row">
 			<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 				<input type="submit" name="buton" style="display:none;" value="default">
 				<div class="<?php echo $icerik_sol_div; ?>">
 					<?php jaayquick(@$panel_icerik_sol_kod); ?>

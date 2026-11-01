@@ -8,6 +8,7 @@ if (!$oturum_id) {
 
 $buton=$_POST["buton"];
 if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 	$mevcut_gorsel=uye_bilgi("profil_gorseli",$oturum_id);
 	$file=$_FILES["gorsel"];
 	
@@ -87,6 +88,7 @@ tema_header(); ?>
 			<div class="panel panel-default jaayquick with_footer">
 				<div><?php echo _LANG('hb_profil_gorseli_yukle'); ?></div>
 				<form action="" method="post" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 				<div class="panel-body">
 					<p><?php echo _LANG('hb_yukleyeceginiz_profil_gorseli_en_az_150px_geni'); ?></p>
 

@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$id=$_GET["id"];
 @$islem=$_GET["islem"];
@@ -382,6 +383,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 			<?php if ($_SESSION["oturum_yetki"]=="admin") { ?><a href="uyeler.php?islem=ekle" class="btn btn-primary"><?php echo _LANG('p_uye_ekle_k'); ?></a><?php } ?>
 			<?php if ($datatable==0) { ?>			
 			<form class="form-inline pull-right kayit_goster visible-md visible-lg" action="" method="post">
+<?php echo csrf_field(); ?>
 			  <div class="form-group">
 				<input type="text" class="form-control input-sm nofocus" id="kayit" name="kacarli" placeholder="<?php echo _LANG("p_listeleme_adedi"); ?>">
 			  </div>
@@ -537,6 +539,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 			<a href="uyeler.php" class="btn btn-default"><?php echo _LANG('p_uyeler'); ?></a>
 			<div class="clearfix mb20"></div>
 			<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<?php form_elemani("text","ad_soyad",_LANG('p_ad_soyad'),@$ad_soyad,null,null,"required"); ?>
@@ -711,6 +714,7 @@ $sql=mysqli_query($baglan,"select * from uyeler order by id desc");
 			<a href="uyeler.php" class="btn btn-default"><?php echo _LANG('p_uyeler_anasayfa'); ?></a>
 			<div class="clearfix mb20"></div>
 			<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 			<div class="panel panel-default">
 				<div class="panel-heading"><?php echo bilgi_getir("uyeler","ad_soyad",$id); ?></div>
 				<div class="panel-body">

@@ -16,6 +16,19 @@ $ciz = 'C:/Users/yilma/AppData/Local/Temp/opencode/panel_test_cierez.txt';
 
 function istek($url, $post = null, $ciz = null)
 {
+	global $baglan;
+	// CSRF token: POST islemlerinde token otomatik alinir
+	if ($post !== null) {
+		$ch0 = curl_init($url);
+		$opt0 = array(CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => false, CURLOPT_TIMEOUT => 20);
+		if ($ciz) { $opt0[CURLOPT_COOKIEJAR] = $ciz; $opt0[CURLOPT_COOKIEFILE] = $ciz; }
+		curl_setopt_array($ch0, $opt0);
+		$h0 = (string)curl_exec($ch0);
+		curl_close($ch0);
+		if (preg_match('/name="csrf_token" value="([^"]+)"/', $h0, $m0)) {
+			$post = $post . '&csrf_token=' . urlencode($m0[1]);
+		}
+	}
 	$ch = curl_init($url);
 	$opt = array(CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => false, CURLOPT_TIMEOUT => 40);
 	if ($ciz) { $opt[CURLOPT_COOKIEJAR] = $ciz; $opt[CURLOPT_COOKIEFILE] = $ciz; }
@@ -43,8 +56,12 @@ function sonuc($ad, $basarili, $detay = '')
 }
 $gecen = 0; $kalan = 0;
 
-/* --- giris --- */
-list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', 'kullanici=info%40jaayquick.com&parola=JaayQuick%232026&buton=1', $ciz);
+/* --- giris (CSRF token al) --- */
+list($gkod, $gh) = istek('http://ilan/lpanel/giris-yap.php', null, $ciz);
+preg_match('/name="csrf_token" value="([^"]+)"/', $gh, $m);
+$csrf = isset($m[1]) ? $m[1] : '';
+$login_post = 'kullanici=info%40jaayquick.com&parola=JaayQuick%232026&buton=1&csrf_token=' . urlencode($csrf);
+list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', $login_post, $ciz);
 echo "Panel girisi: HTTP $kod " . ($kod == 302 ? "(basarili)" : "(BASARISIZ)") . "\n\n";
 if ($kod != 302) { die("giris basarisiz - test durduruldu\n"); }
 

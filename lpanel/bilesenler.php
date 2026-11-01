@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$islem=$_GET["islem"];
 @$ekle_buton=$_POST["ekle_buton"];
@@ -266,6 +267,7 @@ if ($panel_sablon=="fullwidth") {
 										<div class="col-md-41">
 										<?php if (count($bilesen)>0) { ?>
 											<form action="" method="post">
+<?php echo csrf_field(); ?>
 												<div class="input-group">
 												  <select name="bilesen_<?php echo $alan_value; ?>" class="form-control">
 													<?php foreach ($bilesen as $x) {$bilesen_value=$x["id"]; $bilesen_baslik=$x["baslik"]; ?>
@@ -293,6 +295,7 @@ if ($panel_sablon=="fullwidth") {
 			<div class="clearfix mb20"></div>
 			<div class="row">
 				<form action="" method="post" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 				<div class="col-md-30">
 					<div class="panel panel-default">
 						<div class="panel-heading"><?php echo _LANG('p_bilesen_alani_k'); ?> <?php echo $bilesen_alani; ?></div>

@@ -25,6 +25,7 @@ if ($ilan_id) {
 @$guncelim=$_POST["guncelim"];
 
 if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 	if ($anasayfa_vitrini) {
 		$dopingler[]="anasayfa_vitrini";
 		$tutar+=$anasayfa_vitrini;
@@ -189,7 +190,8 @@ tema_header();
 			
 			<?php if ($ilan_id) { ?>
 			<form action="" method="post">
-			<div class="row">
+<?php echo csrf_field(); ?>
+<div class="row">
 				<div class="col-md-30" id="doping_ekle">
 					<div class="row">
 						<div class="col-md-21">

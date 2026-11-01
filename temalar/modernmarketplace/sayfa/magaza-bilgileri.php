@@ -20,6 +20,7 @@ if (!$id) {
 }
 @$buton=mysqli_real_escape_string($baglan,strip_tags($_POST["buton"]));
 if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 	$baslik=mysqli_real_escape_string($baglan,strip_tags($_POST["baslik"]));
 	$hakkinda=mysqli_real_escape_string($baglan,strip_tags($_POST["hakkinda"]));
 	$fb_url=mysqli_real_escape_string($baglan,strip_tags($_POST["fb_url"]));
@@ -53,12 +54,13 @@ tema_header(); ?>
 	<div class="panel-heading"><?php echo _LANG("mb_panel_magaza_bilgileri"); ?></div>
 				<div class="panel-body">
 					<?php if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 						yonlendir(ozel_url("magaza-bilgileri"));
 					}
 					?>
 					<form action="" method="post">
-			
-						<?php 
+<?php echo csrf_field(); ?>
+<?php 
 						$baslik=getir("magazalar","baslik",$id);
 						$hakkinda=magaza_bilgi("hakkinda",$id);
 						$magaza_tel=magaza_bilgi("magaza_tel",$id);

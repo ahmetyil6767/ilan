@@ -18,7 +18,12 @@ function istek($url, $ciz, $post = null, $dil = null)
 	return array($kod, $h);
 }
 
-list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', $ciz, 'kullanici=info%40jaayquick.com&parola=JaayQuick%232026&buton=1');
+// CSRF token almak icin once giris sayfasini GET ile cek
+list($gkod, $gh) = istek('http://ilan/lpanel/giris-yap.php', $ciz);
+preg_match('/name="csrf_token" value="([^"]+)"/', $gh, $m);
+$csrf = isset($m[1]) ? $m[1] : '';
+$login_post = 'kullanici=info%40jaayquick.com&parola=JaayQuick%232026&buton=1&csrf_token=' . urlencode($csrf);
+list($kod, $h) = istek('http://ilan/lpanel/giris-yap.php', $ciz, $login_post);
 echo "giris: HTTP $kod\n\n";
 
 $diller = array('tr' => 'Türkçe', 'en' => 'English', 'fr' => 'Français', 'ar' => 'العربية');

@@ -42,6 +42,7 @@ tema_header(); ?>
 	<div class="panel-heading"><?php echo _LANG("su_panel_yeni_sifre"); ?></div>
 					<?php
 					if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 						$uye_mevcut_mu=uye_mevcut_mu($email_adresi);
 						if ($uye_mevcut_mu==1) {
 							$uye_id=uye_id_getir($email_adresi);
@@ -69,8 +70,8 @@ tema_header(); ?>
 					?>
 				<div class="panel-body giris_form gradient" style="padding:30px !important;">
 				<form action="" method="post">
-
-					<div class="form-group">
+<?php echo csrf_field(); ?>
+<div class="form-group">
 						<label for="parola">Parola</label>
 						<input type="password" class="form-control" id="parola" name="parola" placeholder="Parola">
 					</div>
@@ -91,6 +92,7 @@ tema_header(); ?>
 	<div class="panel-heading"><?php echo _LANG("su_panel_sifremi_unuttum"); ?></div>
 					<?php
 					if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 						$uye_mevcut_mu=uye_mevcut_mu($email_adresi);
 						if ($uye_mevcut_mu==1) {
 							$uye_id=uye_id_getir($email_adresi);
@@ -118,8 +120,8 @@ tema_header(); ?>
 					?>
 				<div class="panel-body giris_form gradient" style="padding:30px !important;">
 				<form action="" method="post">
-
-	<p><?php echo _LANG("su_eposta_girin"); ?></p>
+<?php echo csrf_field(); ?>
+<p><?php echo _LANG("su_eposta_girin"); ?></p>
 					<div class="form-group">
 						<label for="email_adresi"><?php echo _LANG('p_email_adresi'); ?></label>
 						<input type="email" class="form-control" id="email_adresi" name="email_adresi" placeholder="<?php echo _LANG('p_email_adresi'); ?>" required>

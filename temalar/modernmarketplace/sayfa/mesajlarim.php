@@ -136,6 +136,7 @@ tema_header(); ?>
 							}	else {	
 					?>
 					<form id="mesaj_gonder_form" action="" method="post" onsubmit="return false;">
+<?php echo csrf_field(); ?>
 						<input type="hidden" class="form-control" id="mesaj_sayisi" value="<?php echo mesaj_sayisi($gorusme_id); ?>" />
 						<input type="hidden" class="form-control" name="kime" value="<?php echo $diger_uye_id; ?>" />
 						<div class="input-group ara">

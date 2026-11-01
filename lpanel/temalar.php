@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 if(file_exists("../$temalar_dizini")) {
 $dizini_ac = opendir("../$temalar_dizini"); 
@@ -416,6 +417,7 @@ $panel_sablon=ayar_getir("panel_sablon");
 						<?php if ($tab_sayisi==0) {echo "<div class='panel-heading'>$tema_baslik</div>"; } ?>
 						<div class="panel-body">
 						<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 						<?php
 						// Desteklenen dilleri al
 						global $desteklenen_diller;

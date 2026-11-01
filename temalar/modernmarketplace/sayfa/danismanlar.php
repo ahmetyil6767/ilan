@@ -23,6 +23,7 @@ if (!$id) {
 if ($islem=="ekle") {
 	$buton=mysqli_real_escape_string($baglan,$_POST["buton"]);
 	if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 		$email_adresi=mysqli_real_escape_string($baglan,$_POST["email_adresi"]);
 		$parola=mysqli_real_escape_string($baglan,$_POST["parola"]);
 		
@@ -153,7 +154,8 @@ tema_header(); ?>
 						<div class="col-md-25">						
 
 							<form action="" method="post">
-							<?php form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"E-posta Adresi","gerekli"=>1,"aciklama"=>_LANG('s_temsilci_eposta'))); ?>
+<?php echo csrf_field(); ?>
+<?php form_group(array("tip"=>"text","id"=>"email_adresi","baslik"=>"E-posta Adresi","gerekli"=>1,"aciklama"=>_LANG('s_temsilci_eposta'))); ?>
 							<?php form_group(array("tip"=>"password","id"=>"parola","baslik"=>"Parola","gerekli"=>1,"aciklama"=>_LANG('s_danisman_sifre'))); ?>
 							<?php form_buton("buton",_LANG('tx_danisman_ekle'),"primary"); ?>
 							</form>

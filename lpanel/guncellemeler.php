@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 
 function guncelleme_paketi_sil() {
@@ -164,6 +165,7 @@ $yazilim_bilgisi_versiyon=ayar("versiyon");
 			<div class="clearfix mb20"></div>
 			<?php if ($yazilim_bilgisi_garanti==1) { ?>
 			<form action="" method="post" id="form">
+<?php echo csrf_field(); ?>
 				
 				<?php if ($paket_id) { ?>
 				<div class="table-responsive">

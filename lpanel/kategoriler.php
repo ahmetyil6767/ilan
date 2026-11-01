@@ -1,5 +1,6 @@
 <?php
 include("../loader.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST" && !csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header("Location: " . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : site_url())); exit(); }
 yonetici_degilse_yonlendir($oturum_id,ayar_getir("site_url")."/$admin_dizini/giris-yap.php");
 @$tip=$_GET["tip"];
 @$islem=$_GET["islem"];
@@ -372,6 +373,7 @@ if ($islem=="sil") {
 					
 					<?php if ($kategori_ekle_stil==1) { ?>
 					<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 						<div class="panel panel-default">
 							<div class="panel-heading"><?php echo $sinif_baslik; ?> <?php echo _LANG('p_ekle'); ?></div>
 							<div class="panel-body">
@@ -560,6 +562,7 @@ if ($islem=="sil") {
 					</div>
 					<?php } ?>
 					<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 						<div class="panel panel-default">
 							<div class="panel-heading"><?php if (!$get_alt) {echo "Ana $sinif_baslik ekle";} else {echo "Alt $sinif_baslik ekle";} ?></div>
 							<div class="panel-body">
@@ -942,6 +945,7 @@ if ($islem=="sil") {
 			<div class="clearfix mb20"></div>			
 
 				<form method="post" action="" enctype="multipart/form-data">
+<?php echo csrf_field(); ?>
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<?php form_elemani("text","baslik",_LANG('p_baslik'),$kategori_baslik,null,null,"required"); ?>

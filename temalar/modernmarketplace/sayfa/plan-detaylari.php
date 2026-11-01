@@ -13,6 +13,7 @@ if (!$oturum_id) {
 
 @$buton=mysqli_real_escape_string($baglan,$_POST["buton"]);
 if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 	$paket=mysqli_real_escape_string($baglan,$_POST["paket"]);
 	$tarih_saat=tarih_saat();
 	$paket_tutar=liste_bilgi("ucret",$paket);
@@ -125,7 +126,8 @@ tema_header(); ?>
 						<div><?php echo _LANG('hb_plan_yukselt'); ?></div>
 						<div class="panel-body">
 							<form action="" method="post">
-							<?php 
+<?php echo csrf_field(); ?>
+<?php 
 							$paket_seciniz_sql=mysqli_query($baglan,"select l_id from listeler where tip='uyelik_paketleri'");
 							while ($paket_seciniz_dizi=mysqli_fetch_array($paket_seciniz_sql)) {
 								$paket_id=$paket_seciniz_dizi["l_id"];

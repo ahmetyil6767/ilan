@@ -170,7 +170,8 @@ tema_header(); ?>
 	<div class="modal fade" id="durum_guncelle" tabindex="-1" role="dialog" aria-labelledby="durum_guncelle">
 	  <div class="modal-dialog" role="document">
 		<form id="durum_guncelle_form" action="" method="post">
-		<div class="modal-content">
+<?php echo csrf_field(); ?>
+<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><?php echo _LANG("s_durum_guncelle"); ?></h4>
@@ -313,7 +314,8 @@ tema_header(); ?>
 	<div class="modal fade" id="alici_onay" tabindex="-1" role="dialog" aria-labelledby="alici_onay">
 	  <div class="modal-dialog modal-sm" role="document">
 		<form id="alici_onay_form" action="" method="post">
-		<div class="modal-content noselect">
+<?php echo csrf_field(); ?>
+<div class="modal-content noselect">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<h4 class="modal-title" id="myModalLabel"><?php echo _LANG("s_alici_onayi"); ?></h4>
@@ -346,7 +348,8 @@ tema_header(); ?>
 		<div class="panel-body" style="padding:0;">
 
 		<form action="" method="post">
-		<div class="tab-content">
+<?php echo csrf_field(); ?>
+<div class="tab-content">
 		<?php if ($online_odeme=="aktif") {  ?>
 			<div role="tabpanel" class="tab-pane fade in active" id="online_odeme" style="padding:15px;">
 				
@@ -354,6 +357,7 @@ tema_header(); ?>
 				
 				$buton=$_POST["buton"];
 				if ($buton) {
+						if (!csrf_verify()) { $_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger'); header('Location: ' . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url())); exit(); }
 					if ($_POST["tc_no"]) {
 						uye_bilgi_guncelle("tc_no",trim(mysqli_real_escape_string($baglan,strip_tags($_POST["tc_no"]))),$oturum_id);
 					}
@@ -381,7 +385,8 @@ tema_header(); ?>
 					<div class="col-md-20">
 						<div class="tamamla" style="border:5px solid #eee;padding:15px;">
 							<form action="" method="post">
-								<?php if (!$uye_tc_no) {form_group(array("tip"=>"text","id"=>"tc_no","baslik"=>_LANG("s_tc_no"),"deger"=>$uye_tc_no,"gerekli"=>1));} ?>
+<?php echo csrf_field(); ?>
+<?php if (!$uye_tc_no) {form_group(array("tip"=>"text","id"=>"tc_no","baslik"=>_LANG("s_tc_no"),"deger"=>$uye_tc_no,"gerekli"=>1));} ?>
 								<?php if (!$uye_adres) {form_group(array("tip"=>"textarea","id"=>"adres","baslik"=>"Adres","satir"=>3,"deger"=>$uye_adres,"aciklama"=>_LANG('s_kargo_fatura_adresi'),"gerekli"=>1));} ?>				
 								<?php if (!$uye_il) {
 									$il_secenekleri[]=array("deger"=>null,"baslik"=>_LANG('filter_select'));
@@ -776,7 +781,8 @@ tema_header(); ?>
 <div class="modal fade" id="odeme_bildirimi" tabindex="-1" role="dialog" aria-labelledby="odeme_bildirimi">
   <div class="modal-dialog" role="document">
 	<form id="odeme_bildirimi_form" action="" method="post">
-    <div class="modal-content">
+<?php echo csrf_field(); ?>
+<div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel"><?php echo _LANG("order_notify"); ?></h4>
