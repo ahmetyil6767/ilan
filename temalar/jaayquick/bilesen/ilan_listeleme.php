@@ -187,7 +187,7 @@ function klasik_listeleme($id) {
 		<div class="<?php echo $col_yaz; ?>">
 			<div class="liste <?php if ($listeleme_stil=="Alternatif") {echo "alternatif";} ?>">
 				<a href="<?php echo $ilan_link; ?>" title="<?php echo $ilan_baslik; ?>" class="r_ust">
-					<img src="<?php echo $ilan_resim; ?>" alt="<?php echo $ilan_baslik; ?>" class="img-responsive"/>
+					<img loading="lazy" src="<?php echo $ilan_resim; ?>" alt="<?php echo $ilan_baslik; ?>" class="img-responsive"/>
 					<?php if ($fiyat_goster=="Evet" and $fiyat and bilgi("sahiplendirme",$ilan_id)!=1 and bilgi("gorusulur",$ilan_id)!=1) {echo "<div class='fiyat_layer visible-md visible-lg'>$fiyat</div>";} ?>
 				</a>
 				<h3><a href="<?php echo $ilan_link; ?>" title="<?php echo $ilan_baslik; ?>"><?php echo $ilan_baslik; ?></a></h3>

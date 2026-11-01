@@ -93,7 +93,7 @@ if ($liste=="son") {
 		<div class="<?php echo $col_yaz; ?>">
 			<div class="liste prelative">
 				<a href="<?php echo $magaza_link; ?>" title="<?php echo $magaza_baslik; ?>" class="r_ust">
-					<img src="<?php echo $magaza_resim; ?>" alt="<?php echo $magaza_baslik; ?>" class="img-responsive"/>
+					<img loading="lazy" src="<?php echo $magaza_resim; ?>" alt="<?php echo $magaza_baslik; ?>" class="img-responsive"/>
 				</a>
 				<h3 class="pabsolute bottom left magaza_bilesen_baslik"><a href="<?php echo $magaza_link; ?>" title="<?php echo $magaza_baslik; ?>"><?php echo $magaza_baslik; ?></a></h3>
 			</div>

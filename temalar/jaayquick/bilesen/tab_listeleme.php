@@ -109,7 +109,7 @@ function tab_listeleme($id) {
 						<div class="<?php echo $col_yaz; ?>">
 							<div class="liste">
 								<a href="<?php echo $ilan_link; ?>" title="<?php echo $ilan_baslik; ?>" class="r_ust">
-									<img src="<?php echo $ilan_resim; ?>" alt="<?php echo $ilan_baslik; ?>" style="<?php echo $max_height; ?>;width:auto;" class="img-responsive"/>
+									<img loading="lazy" src="<?php echo $ilan_resim; ?>" alt="<?php echo $ilan_baslik; ?>" style="<?php echo $max_height; ?>;width:auto;" class="img-responsive"/>
 									<?php if ($fiyat_goster=="Evet" and $fiyat) {echo "<div class='fiyat_layer'>$fiyat</div>";} ?>
 								</a>
 								<h3><a href="<?php echo $ilan_link; ?>" title="<?php echo $ilan_baslik; ?>"><?php echo $ilan_baslik; ?></a></h3>

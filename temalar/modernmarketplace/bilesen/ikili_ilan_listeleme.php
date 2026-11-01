@@ -149,7 +149,7 @@ function ikili_listeleme($id) {
 			<div class="satir_link c_pointer liste yatay" data-href="<?php echo $ilan_link; ?>">
 			    <div class="row">
 			        <div class="col-md-12 col-xs-12" style="padding-right:3px;">
-                        <img src="<?php echo $ilan_resim; ?>" alt="<?php echo $ilan_baslik; ?>" class="img-responsive"/>
+                        <img loading="lazy" src="<?php echo $ilan_resim; ?>" alt="<?php echo $ilan_baslik; ?>" class="img-responsive"/>
                     </div>
 			        <div class="col-md-30 col-xs-30" style="position:relative;height:83px;">
                         <h3><?php echo $ilan_baslik; ?></h3>
