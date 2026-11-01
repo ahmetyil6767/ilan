@@ -2518,6 +2518,10 @@ function resim_yukle($file, $klasor, $boyutlandir = NULL, $cikti = NULL, $orijin
 		$resim_url = $site_url . ('/uploads/' . $klasor . '/') . $resim_adi;
 		$yukle = move_uploaded_file($kaynak, $hedef);
 		chmod($hedef, 438);
+		// WebP surumu olustur (varsa GD webp destegi)
+		if ($yukle && function_exists('webp_donustur')) {
+			webp_donustur($hedef, $hedef);
+		}
 
 		if ($optimize) {
 			include_once $admin_dizini . '/js/ImageResize.php';
@@ -3782,5 +3786,49 @@ function favori_fiyat_kontrol($uye_id)
 			uye_bilgi_guncelle('favori_fiyat_' . $icerik_id, $yeni_fiyat_str, $uye_id);
 		}
 	}
+}
+/*
+ * WebP donusum yardimcilari.
+ * GD webp destegi varsa gorsel WebP formatina donusturulur; orijinal
+ * dosya korunur, .webp surumu yaninda olusturulur.
+ */
+function webp_donustur($kaynak, $hedef, $kalite = 80)
+{
+	if (!function_exists('imagewebp')) { return false; }
+	if (!file_exists($kaynak)) { return false; }
+	$uzanti = strtolower(pathinfo($kaynak, PATHINFO_EXTENSION));
+	switch ($uzanti) {
+		case 'jpg':
+		case 'jpeg':
+			$img = @imagecreatefromjpeg($kaynak);
+			break;
+		case 'png':
+			$img = @imagecreatefrompng($kaynak);
+			if ($img) { imagealphablending($img, true); imagesavealpha($img, true); }
+			break;
+		case 'gif':
+			$img = @imagecreatefromgif($kaynak);
+			break;
+		case 'webp':
+			return true; // zaten webp
+		default:
+			return false;
+	}
+	if (!$img) { return false; }
+	$webp_hedef = preg_replace('/\.[^.]+$/', '.webp', $hedef);
+	$sonuc = imagewebp($img, $webp_hedef, (int)$kalite);
+	imagedestroy($img);
+	return $sonuc && file_exists($webp_hedef);
+}
+
+function webp_url($url)
+{
+	if (!$url) { return $url; }
+	$webp_url = preg_replace('/\.(jpg|jpeg|png|gif)(\?.*)?$/i', '.webp$2', $url);
+	// Dosya var mi kontrol et (lokal yol)
+	$yol = str_replace(site_url(), ROOT_DIR, $webp_url);
+	$yol = str_replace('//', '/', $yol);
+	if (file_exists($yol)) { return $webp_url; }
+	return $url;
 }
 ?>
