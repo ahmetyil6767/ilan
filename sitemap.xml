@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>http://ilan/sitemap_pages.xml</loc>
+		<lastmod>2026-11-01</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>http://ilan/sitemap_categories.xml</loc>
+		<lastmod>2026-11-01</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>http://ilan/sitemap_stores.xml</loc>
+		<lastmod>2026-11-01</lastmod>
+	</sitemap>
+	<sitemap>
+		<loc>http://ilan/sitemap_ads.xml</loc>
+		<lastmod>2026-11-01</lastmod>
+	</sitemap>
+</sitemapindex>
