@@ -198,7 +198,7 @@ $(function(){
 		$.ajax({
 			type:"post",
 			url:"<?php echo tema_dizini(); ?>/ajax.php?islem=favorilerden_kaldir",
-			data:{'id':ilan_id},
+			data:{'id':ilan_id,'csrf_token':'<?php echo csrf_token(); ?>'},
 			success:function(cevap){
 				$("#favori_"+ilan_id).fadeOut(500);
 			}

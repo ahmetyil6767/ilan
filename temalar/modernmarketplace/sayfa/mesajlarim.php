@@ -199,7 +199,7 @@ $(function(){
 			$.ajax({
 				type:"post",
 				url:"<?php echo tema_dizini(); ?>/ajax.php?islem=gorusme_sil",
-				data:{'gorusme_id':gorusme_id},
+				data:{'gorusme_id':gorusme_id,'csrf_token':'<?php echo csrf_token(); ?>'},
 				success:function(cevap){
 					$("#gorusme-"+gorusme_id).fadeOut(500);
 				}
@@ -213,7 +213,7 @@ $(function(){
 			$.ajax({
 				type:"post",
 				url:"<?php echo tema_dizini(); ?>/ajax.php?islem=gorusme_sil",
-				data:{'gorusme_id':gorusme_id,'tip':2},
+				data:{'gorusme_id':gorusme_id,'tip':2,'csrf_token':'<?php echo csrf_token(); ?>'},
 				success:function(cevap){
 					window.location = "<?php echo ozel_url('mesajlarim'); ?>";
 				}

@@ -2087,7 +2087,7 @@ function vitrin_gorseli_update() {
 					$.ajax({
 						type:"post",
 						url:"'.$tema_dizini.'/ajax.php?islem=vitrin_degistir",
-						data:{"resim_url":galeri_full_url,"icerik_id":icerik_id},
+						data:{"resim_url":galeri_full_url,"icerik_id":icerik_id,"csrf_token":"'.csrf_token().'"},
 						success:function(cevap){
 							$("#mevcut-vitrin-gorseli").attr("src",galeri_buyuk_url);
 							alert(cevap);

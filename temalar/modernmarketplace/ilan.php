@@ -993,7 +993,7 @@ $(function(){
 	$.ajax({
 		type:"post",
 		url:"<?php echo tema_dizini(); ?>/ajax.php?islem=galeri_sira_bilgi",
-		data:{'galeri_id':<?php echo @$galeri_id_getir; ?>,'icerik_id':<?php echo $id; ?>},
+		data:{'galeri_id':<?php echo @$galeri_id_getir; ?>,'icerik_id':<?php echo $id; ?>,'csrf_token':'<?php echo csrf_token(); ?>'},
 		success:function(cevap){
 			$("#galeri_sira_bilgi").html(cevap);
 		}
@@ -1004,7 +1004,7 @@ $(function(){
 		$.ajax({
 			type:"post",
 			url:"<?php echo tema_dizini(); ?>/ajax.php?islem=galeri_sira_bilgi",
-			data:{'galeri_id':galeri_id,'icerik_id':<?php echo $id; ?>},
+			data:{'galeri_id':galeri_id,'icerik_id':<?php echo $id; ?>,'csrf_token':'<?php echo csrf_token(); ?>'},
 			success:function(cevap){
 				$("#galeri_sira_bilgi").html(cevap);
 			}
@@ -1038,7 +1038,7 @@ $(function(){
 		$.ajax({
 			type:"post",
 			url:"<?php echo tema_dizini(); ?>/ajax.php?islem=favorilere_ekle",
-			data:{'id':<?php echo $id; ?>},
+			data:{'id':<?php echo $id; ?>,'csrf_token':'<?php echo csrf_token(); ?>'},
 			success:function(cevap){
 				$("#mesaj_kutusu .alert").hide();
 				$("#mesaj_kutusu").append(cevap);
@@ -1049,7 +1049,7 @@ $(function(){
 		$.ajax({
 			type:"post",
 			url:"<?php echo tema_dizini(); ?>/ajax.php?islem=favorilerden_kaldir",
-			data:{'id':<?php echo $id; ?>},
+			data:{'id':<?php echo $id; ?>,'csrf_token':'<?php echo csrf_token(); ?>'},
 			success:function(cevap){
 				$("#mesaj_kutusu .alert").hide();
 				$("#mesaj_kutusu").append(cevap);
