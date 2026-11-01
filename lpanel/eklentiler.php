@@ -22,7 +22,7 @@ if ($islem=="etkinlestir") {
 		include("../$eklentiler_dizini/$eklenti/ayar.php");
 		foreach ($eklenti_ayarlari as $yaz => $x) {
 			$eb_name=($x["id"] ?? '');
-			$eb_standart=$x["standart"];
+			$eb_standart = $x["standart"] ?? '';
 			if ($eb_standart) {
 				ayar_guncelle($eklenti."-".$eb_name,$eb_standart);
 			}
