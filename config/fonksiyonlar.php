@@ -3628,4 +3628,52 @@ $admin_dizini = admin_dizini();
 yazilim_bilgisi();
 copyright();
 
+/*
+ * CSRF korumasi (Cross-Site Request Forgery).
+ *
+ * Oturum baslangicinda uretilen tek kullanımlık token, her POST formuna
+ * gizli alan olarak eklenir ve sunucu tarafinda dogrulanir. Token
+ * sabit-zamanlı karsilastirma ile kontrol edilir (timing attack onlemi).
+ *
+ * Kullanim:
+ *   Formda : <?php echo csrf_field(); ?>
+ *   Handler'da: if (!csrf_verify()) { ... reddet ... }
+ */
+function csrf_token()
+{
+	if (empty($_SESSION['csrf_token'])) {
+		if (function_exists('random_bytes')) {
+			$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+		} else {
+			$_SESSION['csrf_token'] = md5(uniqid((string)mt_rand(), true));
+		}
+	}
+	return (string)$_SESSION['csrf_token'];
+}
+
+function csrf_field()
+{
+	return '<input type="hidden" name="csrf_token" value="' . htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') . '" />';
+}
+
+function csrf_verify($token = null)
+{
+	if ($token === null) {
+		$token = isset($_POST['csrf_token']) ? (string)$_POST['csrf_token'] : (isset($_SERVER['HTTP_X_CSRF_TOKEN']) ? (string)$_SERVER['HTTP_X_CSRF_TOKEN'] : '');
+	}
+	if (empty($_SESSION['csrf_token']) || $token === '') {
+		return false;
+	}
+	return hash_equals((string)$_SESSION['csrf_token'], (string)$token);
+}
+
+function csrf_require()
+{
+	if (!csrf_verify()) {
+		$_SESSION['mesaj'] = array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.', 'danger');
+		$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url();
+		header('Location: ' . $referer);
+		exit();
+	}
+}
 ?>

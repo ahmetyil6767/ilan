@@ -12,6 +12,13 @@ if ($oturum_id) {
 @$parola=mysqli_real_escape_string($baglan,$_POST["parola"]);
 @$oturum_acik=mysqli_real_escape_string($baglan,$_POST["oturum_acik"]);
 
+// CSRF dogrulamasi (POST islemi ise)
+if ($buton && !csrf_verify()) {
+	$_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger');
+	yonlendir(ozel_url("giris-yap"));
+	exit();
+}
+
 tema_header(); ?>
 <div class="container mt50 giris">
 	<div class="row">
@@ -87,7 +94,7 @@ tema_header(); ?>
 					?>
 				<div class="panel-body giris_form gradient" style="padding:30px !important;">
 				<form action="" method="post">
-
+					<?php echo csrf_field(); ?>
 					<div class="form-group">
 						<label for="email_adresi"><?php echo _LANG('login_kimlik'); ?> <span style="color:#e74c3c;margin-left:3px;">*</span></label>
 						<input type="text" class="form-control" id="email_adresi" name="email_adresi" placeholder="<?php echo _LANG('login_kimlik'); ?>" required>

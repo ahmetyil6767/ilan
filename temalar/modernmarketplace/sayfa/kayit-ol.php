@@ -11,6 +11,13 @@ $kurumsal_uyelik=tema_ayar("kurumsal_uyelik");
 @$parola=mysqli_real_escape_string($baglan,$_POST["parola"]);
 @$uyelik_tip=mysqli_real_escape_string($baglan,$_POST["uyelik_tip"]);
 @$cep_tel=mysqli_real_escape_string($baglan,$_POST["cep_tel"]);
+
+// CSRF dogrulamasi
+if ($buton && !csrf_verify()) {
+	$_SESSION["mesaj"]=array('Güvenlik doğrulaması başarısız. Lütfen sayfayı yenileyip tekrar deneyin.','danger');
+	yonlendir(ozel_url("kayit-ol"));
+	exit();
+}
 @$sirket=mysqli_real_escape_string($baglan,$_POST["sirket"]);
 @$tc_no=mysqli_real_escape_string($baglan,$_POST["tc_no"]);
 @$firma_adi=mysqli_real_escape_string($baglan,$_POST["firma_adi"]);
@@ -122,7 +129,8 @@ $uye_mevcut_mu = ($email_adresi !== '' && $email_adresi !== null) ? uye_mevcut_m
 					}
 				} ?>					
 				<div class="panel-body giris_form kayit gradient" style="padding:30px !important;">
-					<form action="" method="post">	
+					<form action="" method="post">
+					<?php echo csrf_field(); ?>	
 					<?php if ($kurumsal_uyelik=="acik") { ?>
 					<div class="form-group">
 						<label for="uyelik_tip"><?php echo _LANG("s_uyelik_turu"); ?></label>

@@ -45,7 +45,7 @@ if ($stil==1) {
 			$gorsel=liste_bilgi("gorsel",$slider_id);
 			$url=liste_bilgi("url",$slider_id);
 			if ($url) {$cikti.="<a href='$url'>";}
-			$cikti.="<img loading="lazy" src='$gorsel' class='img-responsive' alt=''>";
+			$cikti.="<img src='$gorsel' loading='lazy' class='img-responsive' alt=''>";
 			if ($url) {$cikti.="</a>";}
 			echo $cikti;
 			$cikti=null;
@@ -64,7 +64,7 @@ if ($stil==1) {
 					$gorsel=liste_bilgi("gorsel",$slider_id);
 					$url=liste_bilgi("url",$slider_id);
 					if ($url) {$cikti.="<a href='$url'>";}
-					$cikti.="<img loading="lazy" src='$gorsel' class='img-responsive' alt=''>";
+					$cikti.="<img src='$gorsel' loading='lazy' class='img-responsive' alt=''>";
 					if ($url) {$cikti.="</a>";}
 					echo $cikti;
 					$cikti=null;
@@ -76,7 +76,7 @@ if ($stil==1) {
 			<?php 
 			if ($reklam_img) {
 				if ($reklam_url) {$kod.="<a href='$reklam_url'>";}
-				$kod.="<img loading="lazy" src='$reklam_img' class='img-responsive' alt='' />";
+				$kod.="<img loading='lazy' src='$reklam_img' class='img-responsive' alt='' />";
 				if ($reklam_url) {$kod.="</a>";}
 			} else {
 				$kod=$reklam_kodu;
