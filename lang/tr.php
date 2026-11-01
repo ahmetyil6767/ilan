@@ -3550,4 +3550,6 @@ Api anahtarı almak için <a href="https://console.cloud.google.com/google/maps-
 	'mk_footer_social' => 'Sosyal',
 	'mk_footer_my_account' => 'Hesabım',
 	'mk_footer_ad_post' => 'İlan Yayınlama Merkezi',
+	'msj_email_dogrulama_basarili' => 'E-posta adresiniz doğrulandı. Giriş yapabilirsiniz.',
+	'msj_email_dogrulama_basarisiz' => 'Doğrulama bağlantısı geçersiz veya süresi dolmuş.',
 );

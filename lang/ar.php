@@ -3526,4 +3526,6 @@ return array(
 	'mk_footer_social' => 'التواصل الاجتماعي',
 	'mk_footer_my_account' => 'حسابي',
 	'mk_footer_ad_post' => 'مركز نشر الإعلانات',
+	'msj_email_dogrulama_basarili' => 'تم التحقق من بريدك الإلكتروني. يمكنك الآن تسجيل الدخول.',
+	'msj_email_dogrulama_basarisiz' => 'رابط التحقق غير صالح أو منتهي الصلاحية.',
 );

@@ -3572,4 +3572,6 @@ To get an API key, <a href="https://console.cloud.google.com/google/maps-apis/" 
 	'mk_footer_social' => 'Social',
 	'mk_footer_my_account' => 'My Account',
 	'mk_footer_ad_post' => 'Ad Posting Center',
+	'msj_email_dogrulama_basarili' => 'Your email address has been verified. You can now log in.',
+	'msj_email_dogrulama_basarisiz' => 'The verification link is invalid or has expired.',
 );

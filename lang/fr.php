@@ -3791,4 +3791,6 @@ Pour obtenir une clé API, <a href="https://console.cloud.google.com/google/maps
 	'mk_footer_social' => 'Social',
 	'mk_footer_my_account' => 'Mon compte',
 	'mk_footer_ad_post' => 'Centre de publication',
+	'msj_email_dogrulama_basarili' => 'Votre adresse e-mail a été vérifiée. Vous pouvez maintenant vous connecter.',
+	'msj_email_dogrulama_basarisiz' => 'Le lien de vérification est invalide ou a expiré.',
 );
