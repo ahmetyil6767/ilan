@@ -19,7 +19,7 @@ if ($buton) {
 		$url=url_olustur($ad_soyad);
 	}
 	$email_adresi=trim(isset($_POST["email_adresi"])?$_POST["email_adresi"]:"");$cep_tel=trim(isset($_POST["cep_tel"])?$_POST["cep_tel"]:"");
-	$parola=$_POST["parola"];
+	$parola=$_POST["parola"] ?? '';
 	if ($parola) {
 		$parola_kripto=parola_sakla($parola);
 	} else if (!$parola and $islem=="ekle"){
@@ -200,7 +200,7 @@ if ($buton) {
 		// v2 resim upload remove güncellemesi bitti.
 		
 		$_SESSION["mesaj"]=array(_LANG('p_adi_ile_uye_guncellendi'), array($ad_soyad),"success");
-		$aktif_tab=$_POST["aktif_tab"];
+		$aktif_tab=$_POST["aktif_tab"] ?? '';
 		if ($aktif_tab) {
 			yonlendir("uyeler.php?islem=guncelle&id=$id&tab=$aktif_tab");
 		} else {

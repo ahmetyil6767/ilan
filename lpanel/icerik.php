@@ -216,7 +216,7 @@ if ($buton or $buton_yayinla) {
 			ekstra_bilgi_guncelle("custom_url",$custom_url,$eklenen_id,$tip);
 		}
 		if ($tip_gorsel==1 or $tip_gorsel=="") {
-			$resim_dizisi=$_FILES["resim_jaayquick"];
+			$resim_dizisi=$_FILES["resim_jaayquick"] ?? null;
 			$resim_adi=(isset($resim_dizisi["name"]) and is_array($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 			if ($resim_adi!="") {
 				$resim_url=yukle($resim_dizisi,array("dizin"=>"$tip_gorsel_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
@@ -226,7 +226,7 @@ if ($buton or $buton_yayinla) {
 			}
 		}
 		if ($tip_galeri==1 or $tip_galeri=="") {
-			$resim_dizisi=$_FILES["jaayquick_galeri"]; 
+			$resim_dizisi=$_FILES["jaayquick_galeri"] ?? null; 
 			$resim_sayisi=(is_array($resim_dizisi) and isset($resim_dizisi["name"])) ? count($resim_dizisi["name"]) : 0;		
 			$yuklenenler=yukle($resim_dizisi,array("dizin"=>"$tip_galeri_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
 			if (is_array($yuklenenler) and count($yuklenenler)>0) {
@@ -251,7 +251,7 @@ if ($buton or $buton_yayinla) {
 		if ($durum==1) {
 			yonlendir("icerik.php?tip=$tip");		
 		} else {
-			$aktif_tab=$_POST["aktif_tab"];
+			$aktif_tab=$_POST["aktif_tab"] ?? '';
 			if ($aktif_tab) {
 				yonlendir("icerik.php?tip=$tip&islem=guncelle&id=$eklenen_id&tab=$aktif_tab");
 			} else {
@@ -413,7 +413,7 @@ if ($buton or $buton_yayinla) {
 			}
 		}	
 		if ($tip_gorsel==1 or $tip_gorsel=="") {
-			$resim_dizisi=$_FILES["resim_jaayquick"];
+			$resim_dizisi=$_FILES["resim_jaayquick"] ?? null;
 			$resim_adi=(isset($resim_dizisi["name"]) and is_array($resim_dizisi["name"])) ? $resim_dizisi["name"] : ''; if (is_array($resim_adi)) { $resim_adi = isset($resim_adi[0]) ? $resim_adi[0] : ''; }
 			if ($resim_adi!="") {
 				$resim_url=yukle($resim_dizisi,array("dizin"=>"$tip_gorsel_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
@@ -431,7 +431,7 @@ if ($buton or $buton_yayinla) {
 		}
 		
 		if ($tip_galeri==1 or $tip_galeri=="") {
-			$resim_dizisi=$_FILES["jaayquick_galeri"]; 
+			$resim_dizisi=$_FILES["jaayquick_galeri"] ?? null; 
 			$resim_sayisi=(is_array($resim_dizisi) and isset($resim_dizisi["name"])) ? count($resim_dizisi["name"]) : 0;		
 			$yuklenenler=yukle($resim_dizisi,array("dizin"=>"$tip_galeri_dizin","boyutlar"=>$tip_resim_boyutlandir,"filtre"=>1));
 			if (is_array($yuklenenler) and count($yuklenenler)>0) {
@@ -505,7 +505,7 @@ if ($buton or $buton_yayinla) {
 			} else {
 				bildirim_ekle(_LANG('p_bild_icerik_guncellendi_plain', array($oturum_ad_soyad,$icerik_link,$baslik)), $oturum_id, 0);
 			}	
-			$aktif_tab=$_POST["aktif_tab"];
+			$aktif_tab=$_POST["aktif_tab"] ?? '';
 			if ($aktif_tab) {
 				yonlendir("icerik.php?tip=$tip&islem=guncelle&id=$id&tab=$aktif_tab");
 			} else {

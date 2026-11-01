@@ -275,7 +275,7 @@ if ($buton) {
 			
 			$_SESSION["mesaj"]=array(_LANG('p_adi_ile_kategori_guncellendi'), array($baslik),"success");
 			$aktif_tab=$_POST["aktif_tab"];
-			$ust_kategori=$_GET["alt"];
+			$ust_kategori=$_GET["alt"] ?? null;
 			if ($aktif_tab) {
 				yonlendir("kategoriler.php?tip=$tip&sinif=$sinif_name&islem=guncelle&id=$id&tab=$aktif_tab");
 			} else {
@@ -880,7 +880,7 @@ if ($islem=="sil") {
 						<tbody>
 						
 						<?php 
-						@$ust_kategori=$_GET["alt"];
+						@$ust_kategori=$_GET["alt"] ?? null;
 						if (!@$ust_kategori) {
 							$ust_kategori=0;
 						} ?>
