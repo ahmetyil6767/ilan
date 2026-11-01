@@ -49,6 +49,12 @@ ini_set('date.timezone', "Europe/Istanbul");
 // Db Connect
 if (file_exists(ROOT_DIR."/config/db.php")) {
 	require(ROOT_DIR."/config/db.php");
+	// Ortam degiskenleri (env) varsa onlar onceliklidir; db.php yedek olarak kalir.
+	// Bu sayede kimlik bilgileri kaynak kodda acikca yazilmak zorunda kalmaz.
+	if (getenv('DB_HOST')) { $host = getenv('DB_HOST'); }
+	if (getenv('DB_NAME')) { $veritabani = getenv('DB_NAME'); }
+	if (getenv('DB_USER')) { $kullanici = getenv('DB_USER'); }
+	if (getenv('DB_PASS') !== false) { $parola = getenv('DB_PASS'); }
 	if (@$host and @$kullanici and @$veritabani) {
 		/* Connect'ten ONCE rapor kapatilir: PHP 8.1+ varsayilan strict modda
 		   baglanti hatasini exception olarak firlatiyor; 7.2 davranisi

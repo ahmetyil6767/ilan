@@ -6,10 +6,16 @@
  *   1. Bu dosyayi "db.php" adıyla kopyalayin.
  *   2. Asagidaki degerleri kendi sunucunuza gore duzenleyin.
  *
+ * ALTERNATIF (onerilen): Ortam degiskenleri (environment variables) kullanin.
+ *   DB_HOST, DB_NAME, DB_USER, DB_PASS tanimliysa db.php'deki degerler
+ *   gecersiz kilinir ve kimlik bilgileri kaynak kodda acikca yazilmaz.
+ *   Apache/Nginx: SetEnv DB_HOST localhost / SetEnv DB_NAME jaayquick ...
+ *   cPanel: MultiPHP INI Editor veya .htaccess SetEnv satirlari.
+ *
  * NOT: db.php dosyasi .gitignore icinde yer alir ve repoya ASLA eklenmez.
  */
-$host='localhost';
-$veritabani='VERITABANI_ADI';
-$kullanici='KULLANICI_ADI';
-$parola='PAROLA';
+$host = getenv('DB_HOST') ?: 'localhost';
+$veritabani = getenv('DB_NAME') ?: 'VERITABANI_ADI';
+$kullanici = getenv('DB_USER') ?: 'KULLANICI_ADI';
+$parola = (getenv('DB_PASS') !== false) ? getenv('DB_PASS') : 'PAROLA';
 ?>
