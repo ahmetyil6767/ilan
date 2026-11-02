@@ -399,11 +399,15 @@ function mk_kartlar($where_sql, $limit=5, $etiket='') {
 				<a href="<?php echo site_url(); ?>/jaayquick.apk" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:#0E7C66;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin-top:6px;">&#128241; Download APK (Android)</a>
 			</div>
 		</div>
-		<div class="mk-app-qr">
-			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url()); ?>" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
-			<span><?php echo _LANG('mk_scan_visit'); ?></span>
-			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url().'/jaayquick.apk'); ?>" alt="Download APK" width="110" height="110" style="margin-top:8px;">
-			<span>Download APK</span>
+		<div class="mk-app-qr" style="display:flex;flex-direction:row;gap:16px;align-items:flex-start;flex-wrap:wrap;">
+			<div style="text-align:center;">
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url()); ?>" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
+				<span style="display:block;margin-top:4px;"><?php echo _LANG('mk_scan_visit'); ?></span>
+			</div>
+			<div style="text-align:center;">
+				<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url().'/jaayquick.apk'); ?>" alt="Download APK" width="110" height="110">
+				<span style="display:block;margin-top:4px;">Download APK</span>
+			</div>
 		</div>
 	</section>
 
