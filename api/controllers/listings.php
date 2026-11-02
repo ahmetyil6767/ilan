@@ -122,8 +122,8 @@ function api_ilan_where_listesi(&$bagla, $sadece_yayinda = true)
 
 	// fiyat araligi: yalniz GMD kayitlari (usd/eur/gbp dogrudan karsilastirilamaz)
 	$fiyat_sayisal = "(REPLACE(REPLACE(IFNULL(e_f.deger,''),'.',''),',','.')+0)";
-	$fiyat_min = isset($girdi['price_min']) and $girdi['price_min'] !== '' ? (float)$girdi['price_min'] : null;
-	$fiyat_max = isset($girdi['price_max']) and $girdi['price_max'] !== '' ? (float)$girdi['price_max'] : null;
+	$fiyat_min = isset($girdi['price_min']) && $girdi['price_min'] !== '' ? (float)$girdi['price_min'] : null;
+	$fiyat_max = isset($girdi['price_max']) && $girdi['price_max'] !== '' ? (float)$girdi['price_max'] : null;
 	if ($fiyat_min !== null or $fiyat_max !== null) {
 		$parcalar[] = "(e_pb.deger='gmd' OR e_pb.deger IS NULL OR e_pb.deger='')";
 		if ($fiyat_min !== null) {
