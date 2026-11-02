@@ -396,10 +396,11 @@ function mk_kartlar($where_sql, $limit=5, $etiket='') {
 			<div class="mk-app-badges">
 				<?php if ($mk_play) { ?><a href="<?php echo $mk_play; ?>" target="_blank" rel="noopener"><img src="<?php echo tema_dizini(); ?>/img/play-store.png" alt="Google Play"></a><?php } ?>
 				<?php if ($mk_apple) { ?><a href="<?php echo $mk_apple; ?>" target="_blank" rel="noopener"><img src="<?php echo tema_dizini(); ?>/img/apple-store.png" alt="App Store"></a><?php } ?>
+				<a href="<?php echo site_url(); ?>/jaayquick.apk" target="_blank" rel="noopener" style="display:inline-block;padding:10px 16px;background:#0E7C66;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin-top:6px;">&#128241; Download APK (Android)</a>
 			</div>
 		</div>
 		<div class="mk-app-qr">
-			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=http%3A%2F%2Filan" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
+			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url()); ?>" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
 			<span><?php echo _LANG('mk_scan_visit'); ?></span>
 		</div>
 	</section>
