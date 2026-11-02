@@ -388,10 +388,23 @@ function api_ekstra($anahtar, $icerik_id)
 	return tirnak_ekle($deger);
 }
 
-/** Ekstra bilgiyi ilan tipine yaz (site okuma konvansiyonu: tip='ilan') */
+/** Ekstra bilgiyi ilan tipine yaz (site okuma konvansiyonu: tip='ilan').
+ *  Not: ekstra_bilgi_guncelle() kullanilmaz cinku store_result'siz num_rows
+ *  bu PHP kurulumunda 0 dondurdugu icin kopya satir uretir. */
 function api_ekstra_yaz($anahtar, $deger, $icerik_id)
 {
-	ekstra_bilgi_guncelle($anahtar, $deger, $icerik_id, 'ilan');
+	global $baglan;
+	$icerik_id = (int)$icerik_id;
+	if ($icerik_id < 1 or $anahtar === '') {
+		return false;
+	}
+	$adet = (int)api_sorgu_deger('select count(*) from ekstra_bilgi where anahtar=? and id=? and tip=?', array($anahtar, $icerik_id, 'ilan'));
+	if ($adet > 0) {
+		api_sorgu('update ekstra_bilgi set deger=? where anahtar=? and id=? and tip=?', array($deger, $anahtar, $icerik_id, 'ilan'));
+		return true;
+	}
+	api_sorgu('insert into ekstra_bilgi set anahtar=?, deger=?, id=?, tip=?', array($anahtar, $deger, $icerik_id, 'ilan'));
+	return true;
 }
 
 /** Resim referansindan gecerli boyut URL'si uretir */

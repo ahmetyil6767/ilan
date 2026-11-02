@@ -49,8 +49,19 @@ $rota   = '';
 $argv_degerleri = PHP_SAPI === 'cli' ? (isset($argv) ? $argv : array()) : array();
 
 if (PHP_SAPI === 'cli' and isset($argv_degerleri[1])) {
-	// CLI smoke testleri icin: php api/index.php "/listings" GET
-	$rota = $argv_degerleri[1];
+	// CLI smoke testleri icin: php api/index.php "/listings?per_page=3" GET
+	$cli_rota = (string)$argv_degerleri[1];
+	$soru = strpos($cli_rota, '?');
+	if ($soru !== false) {
+		parse_str(substr($cli_rota, $soru + 1), $cli_get);
+		if (is_array($cli_get)) {
+			foreach ($cli_get as $ck => $cv) {
+				$_GET[$ck] = $cv;
+			}
+		}
+		$cli_rota = substr($cli_rota, 0, $soru);
+	}
+	$rota = $cli_rota;
 	if (isset($argv_degerleri[2])) {
 		$yontem = strtoupper($argv_degerleri[2]);
 	}
@@ -76,39 +87,40 @@ if (count($parcalar) === 0) {
 $birinci = $parcalar[0];
 $ikinci  = isset($parcalar[1]) ? $parcalar[1] : null;
 
+// Controller dosyalarinin HEPSI yuklenir (yalnizca fonksiyon tanimi icerirler);
+// controller'lar birbirinin yardimci fonksiyonlarini kullanabilir
+require __DIR__ . '/controllers/auth.php';
+require __DIR__ . '/controllers/listings.php';
+require __DIR__ . '/controllers/categories.php';
+require __DIR__ . '/controllers/messages.php';
+require __DIR__ . '/controllers/favorites.php';
+
 switch ($birinci) {
 	case 'auth':
-		require __DIR__ . '/controllers/auth.php';
 		api_auth_rute($yontem, $ikinci);
 		break;
 
 	case 'listings':
-		require __DIR__ . '/controllers/listings.php';
 		api_listings_rute($yontem, $ikinci);
 		break;
 
 	case 'categories':
-		require __DIR__ . '/controllers/categories.php';
 		api_kategoriler();
 		break;
 
 	case 'regions':
-		require __DIR__ . '/controllers/categories.php';
 		api_bolgeler();
 		break;
 
 	case 'districts':
-		require __DIR__ . '/controllers/categories.php';
 		api_ilceler($girdi);
 		break;
 
 	case 'messages':
-		require __DIR__ . '/controllers/messages.php';
 		api_messages_rute($yontem);
 		break;
 
 	case 'favorites':
-		require __DIR__ . '/controllers/favorites.php';
 		api_favorites_rute($yontem, $ikinci);
 		break;
 
