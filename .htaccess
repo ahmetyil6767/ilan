@@ -19,6 +19,10 @@ ErrorDocument 404 /404.php
 Options -MultiViews
 RewriteEngine On
 
+# REST API (mobil uygulama) - /api/... api/index.php dosyasina yonlendirilir
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^api/?(.*)$ api/index.php?route=$1 [QSA,L]
+
 # HTTPS yonlendirmesi (localhost gelistirme ortaminda devre disi)
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} !^(ilan|localhost|127\.0\.0\.1)(:|$) [NC]

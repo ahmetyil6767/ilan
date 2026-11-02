@@ -380,6 +380,7 @@ function ekstra_bilgi_guncelle($anahtar, $yeni_deger, $id, $tip = 'yazi')
 	$say_sorgu = mysqli_prepare($baglan, 'select * from ekstra_bilgi where anahtar=? and id=? and tip=?');
 	mysqli_stmt_bind_param($say_sorgu, 'sis', $anahtar, $id_int, $tip);
 	mysqli_stmt_execute($say_sorgu);
+	mysqli_stmt_store_result($say_sorgu); // num_rows guarantisiz olursa 0 dondurdugu icin kopya satir uretir
 	$say = mysqli_stmt_num_rows($say_sorgu);
 	mysqli_stmt_close($say_sorgu);
 

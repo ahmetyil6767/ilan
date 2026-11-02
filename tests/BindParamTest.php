@@ -99,7 +99,14 @@ foreach ($dosyalar as $p) {
 		$tipler = trim($argumanlar[1], '"\'');
 		$degiskenler = array_slice($argumanlar, 2);
 		$adet = count($degiskenler);
-		if (strlen($tipler) !== $adet) {
+		/* spread sozdizimi (...$dizi) durumunda tip basina ref gecildigi
+		 * varsayilir; strlen($tipler) literal metnin uzunlugudur, yanlis alarmlar.
+		 * Boyle cagrilari dogru kabul edip atla. */
+		$spread_var = false;
+		foreach ($degiskenler as $deg) {
+			if (strpos($deg, '...') === 0) { $spread_var = true; }
+		}
+		if ($tipler !== '$tipler' and !$spread_var and strlen($tipler) !== $adet) {
 			$hata++;
 			echo "  [HATA] $rel\n";
 			echo "         tipler: '$tipler' (" . strlen($tipler) . ") | degisken: $adet\n";
