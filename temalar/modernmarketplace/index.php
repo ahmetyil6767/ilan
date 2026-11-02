@@ -399,7 +399,7 @@ function mk_kartlar($where_sql, $limit=5, $etiket='') {
 			</div>
 		</div>
 		<div class="mk-app-qr">
-			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=<?php echo urlencode(site_url()); ?>" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
+			<img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=http%3A%2F%2Filan" alt="<?php echo _LANG('mk_scan_visit'); ?>" width="110" height="110">
 			<span><?php echo _LANG('mk_scan_visit'); ?></span>
 		</div>
 	</section>
