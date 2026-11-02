@@ -25,6 +25,9 @@ RewriteCond %{HTTP_HOST} !^(ilan|localhost|127\.0\.0\.1)(:|$) [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 RewriteCond %{REQUEST_FILENAME} !-f
+# REST API (mobil uygulama) - /api/... api/index.php dosyasina yonlendirilir
+RewriteRule ^api/?(.*)$ api/index.php?route=$1 [QSA,L]
+
 # Sayfa rotalari (temiz URL'ler - /sayfa/ olmadan)
 RewriteRule ^(login|register|forgot-password|profile-update|my-profile|urgent|price-drops|featured-ads|get-ads|stores|last-48-hours|last-1-week|last-1-month|about-us|contact|posting-rules|terms-of-use|privacy-policy|advertising|faq|how-to-open-store|store-requirements|corporate-store-packages|profile)/?$ index.php?p=$1 [QSA,L]
 

@@ -142,6 +142,7 @@ Tema ayarları `tema_ayar("anahtar")` ile okunur; API anahtarları de oradan gel
 | `lpanel/` | Yönetim paneli. `admin_dizini` ayarıyla adı değiştirilebilir (varsayılan `lpanel`) |
 | `temalar/jaayquick/` | Aktif tema + `bilesen/` + `panel/` (tema içi yönetim) + `iyzico/` (pasif SDK) |
 | `eklentiler/` | Eklenti modülleri (auto_mail, xml_sitemap, mysql_yedek, favoriler...) |
+| `api/` | Mobil istemci (jaayquick-mobile) REST köprüsü: auth/listings/categories/messages/favorites. `loader.php` yerine slim bootstrap kullanır (bkz. `api/README.md`) |
 | `uploads/` | Kullanıcı yüklemeleri. PHP çalıştırma `.htaccess` ile kapalı. |
 | `SQL/` | Şema/dump + `SQL/yedekler/` (otomatik + manuel yedekler) |
 | `tests/` | Otomatik testler |
