@@ -343,6 +343,28 @@ function api_listings_detail($id)
 	$ilan = api_ilan_dizisi($kayit, false);
 	$ilan['seller']['phone'] = api_uye_telefonu((int)$kayit['yazar']);
 
+	// ozellikler (features) + teknik ozellikler: tum ekstra_bilgi satirlarindan
+	$internal = array('fiyat','para_birimi','gorsel','il','ilce','koordinat','magaza','teknik_ozellikler','iletisim','fiyat_dustu');
+	$features = array();
+	$teknik = array();
+	foreach (api_sorgu_satirlar('select anahtar, deger from ekstra_bilgi where id=? and tip=?', array($id, 'ilan')) as $ek) {
+		$anahtar = (string)$ek['anahtar'];
+		$deger = trim((string)$ek['deger']);
+		if ($deger === '' or $deger === null) { continue; }
+		if ($anahtar === 'teknik_ozellikler') {
+			preg_match_all('/\(([^)]+)\)/', $deger, $eslesen);
+			foreach ($eslesen[1] as $t) {
+				$t = trim($t);
+				if ($t !== '') { $teknik[] = $t; }
+			}
+			continue;
+		}
+		if (in_array($anahtar, $internal, true)) { continue; }
+		$features[] = array('key' => $anahtar, 'value' => $deger);
+	}
+	$ilan['features'] = $features;
+	$ilan['technical_features'] = $teknik;
+
 	api_basari(array('data' => $ilan));
 }
 
